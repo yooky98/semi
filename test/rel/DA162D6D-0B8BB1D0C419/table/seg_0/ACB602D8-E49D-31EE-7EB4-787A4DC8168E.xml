@@ -1,0 +1,318 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="ACB602D8-E49D-31EE-7EB4-787A4DC8168E" schemaObject="3E4D6D07-8F36-FF22-8098-40F6A0EBFE8A" name="EMPLOYEE">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>EMPLOYEE</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[사원]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="EMP_ID" id="8A88C229-F5EE-6386-563F-049FEF48666F">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>EMP_ID</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[사원번호]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>3 BYTE</dataTypeSize>
+<ownDataTypeParameters>3 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EMP_NAME" id="02C1BB63-777B-E175-512A-6F81AA26B051">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>EMP_NAME</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[직원명]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EMP_NO" id="9E92C52D-30F9-2A24-E4F3-EAAA42BF30A2">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>EMP_NO</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[주민등록번호]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>14 BYTE</dataTypeSize>
+<ownDataTypeParameters>14 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EMAIL" id="BE877D44-34E3-850A-3089-B73E9DA42F1F">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>EMAIL</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[이메일]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25 BYTE</dataTypeSize>
+<ownDataTypeParameters>25 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PHONE" id="6D8BED69-164D-A6C5-5215-2003D2E705CB">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>PHONE</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[전화번호]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12 BYTE</dataTypeSize>
+<ownDataTypeParameters>12 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DEPT_CODE" id="86C8F945-62F6-564C-7080-751332263F8E">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>DEPT_CODE</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[부서코드]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>2 BYTE</dataTypeSize>
+<ownDataTypeParameters>2 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C8993EE9-CF1E-A6B5-5EDE-C70D8DD9A3B5" referredColumn="63CF668D-D8DE-3FD5-055C-D77C7768C253"/>
+</associations>
+</Column>
+<Column name="JOB_CODE" id="4A827583-8007-8E25-3806-E554A1BF776E">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>JOB_CODE</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[직급코드]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>2 BYTE</dataTypeSize>
+<ownDataTypeParameters>2 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SAL_LEVEL" id="DFF5BE3B-8211-4003-A6D3-6DE32788E4CF">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>SAL_LEVEL</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[급여등급]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>2 BYTE</dataTypeSize>
+<ownDataTypeParameters>2 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SALARY" id="F158DC33-26D8-22AF-8D2B-9B43AA59A7D1">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>SALARY</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[급여]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<constraintName>SYS_C007250</constraintName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="SALARY &gt; 0"/>
+<implementationDef dbType="Oracle Database 11g" definition="SALARY &gt; 0"/>
+</checkConstraint>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="BONUS" id="C8D794DC-5B8F-2D8B-3A81-D40690A6C0AE">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>BONUS</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[보너스율]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MANAGER_ID" id="954FCA15-59C8-8AC2-5277-F444A7ACB03E">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>MANAGER_ID</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[관리자사번]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>3 BYTE</dataTypeSize>
+<ownDataTypeParameters>3 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="HIRE_DATE" id="7E7462FA-144A-F8EB-FBB0-2BB0123955D3">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>HIRE_DATE</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[입사일]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ENT_DATE" id="AC051221-00A5-7D6E-3504-E53CBC90434E">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>ENT_DATE</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[퇴사일]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ENT_YN" id="96F2C946-934E-2C37-8556-7AD94F5597C2">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>ENT_YN</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[재직여부]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<constraintName>SYS_C007249</constraintName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 BYTE</dataTypeSize>
+<checkConstraint>
+<implementationDef dbType="Generic Constraint" definition="ENT_YN = &apos;Y&apos; OR ENT_YN = &apos;N&apos;"/>
+<implementationDef dbType="Oracle Database 11g" definition="ENT_YN = &apos;Y&apos; OR ENT_YN = &apos;N&apos;"/>
+</checkConstraint>
+<defaultValue>&apos;N&apos;</defaultValue>
+<ownDataTypeParameters>1 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="6AC2BF5B-2541-D621-9F91-A6D681B2EAD4" name="EMPLOYEE_PK">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>EMPLOYEE_PK</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8A88C229-F5EE-6386-563F-049FEF48666F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DF263173-AB7F-D331-BB79-D8109FCE27E5" schemaObject="3E4D6D07-8F36-FF22-8098-40F6A0EBFE8A" name="EMPLOYEE_EMP_NO_UN">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>SYS_C007251</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9E92C52D-30F9-2A24-E4F3-EAAA42BF30A2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="24938606-CF07-4919-1AE7-E4DE6DC113EB" schemaObject="3E4D6D07-8F36-FF22-8098-40F6A0EBFE8A" name="엔터티1_PK">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>엔터티1_PK</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8A88C229-F5EE-6386-563F-049FEF48666F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A1323AB6-4C70-99C0-157D-2B7B53D6AC90" name="SYS_C007245">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="86C8F945-62F6-564C-7080-751332263F8E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="66C3C896-C438-365B-D07B-72C3CD86F36A" name="SYS_C007247">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4A827583-8007-8E25-3806-E554A1BF776E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6077AF03-2F7E-2168-BA40-6A1522C98965" name="SYS_C007248">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DFF5BE3B-8211-4003-A6D3-6DE32788E4CF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

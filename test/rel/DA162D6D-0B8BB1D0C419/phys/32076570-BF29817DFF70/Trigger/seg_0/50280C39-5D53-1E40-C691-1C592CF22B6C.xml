@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="TRG_01" directorySegmentName="seg_0" id="50280C39-5D53-1E40-C691-1C592CF22B6C">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>TRG_01</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<actions>INSERT</actions>
+<body><![CDATA[BEGIN
+        DBMS_OUTPUT.PUT_LINE('신입사원이 입사했습니다');
+END;
+]]></body>
+<triggerTime>AFTER</triggerTime>
+<owner>00F4D71F-82A8-E50B-24B0-B7664AF22724</owner>
+<scope>FOR EACH STATEMENT</scope>
+<table>ACB602D8-E49D-31EE-7EB4-787A4DC8168E</table>
+</TriggerOraclev10g>

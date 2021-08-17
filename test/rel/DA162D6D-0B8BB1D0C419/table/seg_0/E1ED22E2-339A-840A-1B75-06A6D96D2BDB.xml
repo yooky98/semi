@@ -1,0 +1,100 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E1ED22E2-339A-840A-1B75-06A6D96D2BDB" schemaObject="3E4D6D07-8F36-FF22-8098-40F6A0EBFE8A" name="DEPARTMENT">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>DEPARTMENT</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[부서]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="DEPT_ID" id="63CF668D-D8DE-3FD5-055C-D77C7768C253">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>DEPARTMENT</sourceObjSchema>
+<sourceObjName>DEPT_ID</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[부서코드]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>2 BYTE</dataTypeSize>
+<ownDataTypeParameters>2 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DEPT_TITLE" id="75EBE22A-BF30-F903-5842-C75129131C74">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>DEPARTMENT</sourceObjSchema>
+<sourceObjName>DEPT_TITLE</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[부서명]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>35 BYTE</dataTypeSize>
+<ownDataTypeParameters>35 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LOCATION_ID" id="A5117E70-D2D2-0275-85D6-02DAD448E26A">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>DEPARTMENT</sourceObjSchema>
+<sourceObjName>LOCATION_ID</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<commentInRDBMS><![CDATA[지역코드]]></commentInRDBMS>
+<ownerDesignName>test</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>2 BYTE</dataTypeSize>
+<ownDataTypeParameters>2 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0F05495E-1CD7-A775-A997-383F30E3A0CC" name="DEPARTMENT_PK">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>DEPARTMENT_PK</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="63CF668D-D8DE-3FD5-055C-D77C7768C253"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FF281FC9-7ABE-2995-3232-3A6810520AE2" schemaObject="3E4D6D07-8F36-FF22-8098-40F6A0EBFE8A" name="엔터티1_PK2">
+<sourceConnName>EMPLOYEE</sourceConnName>
+<sourceObjSchema>EMPLOYEE</sourceObjSchema>
+<sourceObjName>엔터티1_PK2</sourceObjName>
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="63CF668D-D8DE-3FD5-055C-D77C7768C253"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1A1EE297-523E-5638-FBC3-3AB234D46476" name="SYS_C007246">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A5117E70-D2D2-0275-85D6-02DAD448E26A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

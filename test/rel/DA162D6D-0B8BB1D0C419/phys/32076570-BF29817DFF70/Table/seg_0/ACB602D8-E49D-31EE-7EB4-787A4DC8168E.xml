@@ -1,0 +1,140 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="EMPLOYEE" directorySegmentName="seg_0" id="ACB602D8-E49D-31EE-7EB4-787A4DC8168E">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<schemaObject>3E4D6D07-8F36-FF22-8098-40F6A0EBFE8A</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>1E51805A-E761-60B2-5401-551830914944</segment>
+<tableSpace>A13C89DC-6740-D05D-F6BD-D34C9DEA2062</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="EMP_NAME" id="02C1BB63-777B-E175-512A-6F81AA26B051">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="JOB_CODE" id="4A827583-8007-8E25-3806-E554A1BF776E">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PHONE" id="6D8BED69-164D-A6C5-5215-2003D2E705CB">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="HIRE_DATE" id="7E7462FA-144A-F8EB-FBB0-2BB0123955D3">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="DEPT_CODE" id="86C8F945-62F6-564C-7080-751332263F8E">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="EMP_ID" id="8A88C229-F5EE-6386-563F-049FEF48666F">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MANAGER_ID" id="954FCA15-59C8-8AC2-5277-F444A7ACB03E">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ENT_YN" id="96F2C946-934E-2C37-8556-7AD94F5597C2">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<defaultValue>&apos;N&apos;</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="EMP_NO" id="9E92C52D-30F9-2A24-E4F3-EAAA42BF30A2">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ENT_DATE" id="AC051221-00A5-7D6E-3504-E53CBC90434E">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="EMAIL" id="BE877D44-34E3-850A-3089-B73E9DA42F1F">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="BONUS" id="C8D794DC-5B8F-2D8B-3A81-D40690A6C0AE">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SAL_LEVEL" id="DFF5BE3B-8211-4003-A6D3-6DE32788E4CF">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SALARY" id="F158DC33-26D8-22AF-8D2B-9B43AA59A7D1">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="엔터티1_PK" id="24938606-CF07-4919-1AE7-E4DE6DC113EB">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<schemaObject>3E4D6D07-8F36-FF22-8098-40F6A0EBFE8A</schemaObject>
+<segment>0542268A-08DB-5F86-64BA-0E4E6013A7A5</segment>
+<tableSpace>A13C89DC-6740-D05D-F6BD-D34C9DEA2062</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C007248" id="6077AF03-2F7E-2168-BA40-6A1522C98965">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C007247" id="66C3C896-C438-365B-D07B-72C3CD86F36A">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C007245" id="A1323AB6-4C70-99C0-157D-2B7B53D6AC90">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="EMPLOYEE_PK" id="6AC2BF5B-2541-D621-9F91-A6D681B2EAD4">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<segment>0542268A-08DB-5F86-64BA-0E4E6013A7A5</segment>
+<tableSpace>A13C89DC-6740-D05D-F6BD-D34C9DEA2062</tableSpace>
+<existingIndex>24938606-CF07-4919-1AE7-E4DE6DC113EB</existingIndex>
+<indexSegment>0542268A-08DB-5F86-64BA-0E4E6013A7A5</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+<uniqueKeys>
+<UniqueKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UniqueOraclev10g" name="EMPLOYEE_EMP_NO_UN" id="DF263173-AB7F-D331-BB79-D8109FCE27E5">
+<createdBy>yoo</createdBy>
+<createdTime>2021-08-17 11:39:47 UTC</createdTime>
+<ownerDesignName>test</ownerDesignName>
+<schemaObject>3E4D6D07-8F36-FF22-8098-40F6A0EBFE8A</schemaObject>
+<segment>0542268A-08DB-5F86-64BA-0E4E6013A7A5</segment>
+<tableSpace>A13C89DC-6740-D05D-F6BD-D34C9DEA2062</tableSpace>
+<indexSegment>0542268A-08DB-5F86-64BA-0E4E6013A7A5</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</UniqueKey>
+</uniqueKeys>
+</TableProxyOraclev11g>
