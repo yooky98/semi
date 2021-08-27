@@ -18,7 +18,7 @@ public class ProductDao {
 private Properties prop = new Properties();
 	
 	public ProductDao() {
-		String fileName = ProductDao.class.getResource("/sql/notice/product-query.properties").getPath();
+		String fileName = ProductDao.class.getResource("/sql/product/product-query.properties").getPath();
 		System.out.println("fileName   " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
@@ -32,7 +32,7 @@ private Properties prop = new Properties();
 	
 	}
 
-	public ArrayList<Product> selectThList(Connection conn) {
+	public ArrayList<Product> selectPrList(Connection conn) {
 		ArrayList<Product> list = new ArrayList<Product>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -45,18 +45,16 @@ private Properties prop = new Properties();
 		
 		
 		String sql = prop.getProperty("selectPrList");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			
+						
 			while(rset.next()) {
 				Product p = new Product();
-				
+
 				p.setProdName(rset.getString("PROD_NAME"));
 				p.setProdPrice(rset.getInt("PROD_PRICE"));
 				p.setTitleImg(rset.getString("CHANGE_NAME"));
-				
 				
 				list.add(p);
 			}
@@ -68,7 +66,8 @@ private Properties prop = new Properties();
 			close(pstmt);
 			close(rset);
 		}
-		
+		System.out.println(list.get(0).getTitleImg());
+		System.out.println(list.get(1).getTitleImg());
 		return list;
 	}
 }
