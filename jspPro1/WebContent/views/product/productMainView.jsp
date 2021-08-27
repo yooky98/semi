@@ -10,7 +10,6 @@
 <title>product_mainView</title>
 <link href='https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap' rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-detect-breakpoint/src/bootstrap-detect-breakpoint.js"></script>
 	<style>
 			html, body, div, span,h1, h2, p, a, form, article, section {
 				margin: 0;
@@ -254,9 +253,10 @@
 	</style>
 	</head>
 	<body class="is-preload">
+	<%-- <%@ include file="../common/menubar.jsp" %> --%>
 		<!-- Wrapper -->
 			<div id="wrapper">
-
+	
 				<!-- Header -->
 					<!-- <header id="header">
 					
@@ -311,65 +311,7 @@
 									</a>
 								</article> --%>
 								
-								
-								
-								
-								<article>
-									<span class="image">
-										<img src="images/flower1.PNG" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>제품 2</h2>
-										<div class="content">
-											<p>제품 2의 설명입니다.</p>
-										</div>
-									</a>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/flower2.PNG" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>제품 3</h2>
-										<div class="content">
-											<p>제품 3의 설명입니다.</p>
-										</div>
-									</a>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/flower3.PNG" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>제품 4</h2>
-										<div class="content">
-											<p>제품 4의 설명입니다.</p>
-										</div>
-									</a>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/flower4.PNG" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>제품 5</h2>
-										<div class="content">
-											<p>제품 5의 설명입니다.</p>
-										</div>
-									</a>
-								</article>
-								<article>
-									<span class="image">
-										<img src="images/flower5.PNG" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>제품 6</h2>
-										<div class="content">
-											<p>제품 6의 설명입니다.</p>
-										</div>
-									</a>
-								</article>
-								
+							
 							</section>
 						</div>
 					</div>
