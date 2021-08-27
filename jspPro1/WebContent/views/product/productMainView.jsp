@@ -282,11 +282,26 @@
 							<!-- for문 돌려서 등록된 제품만큼 가져오기 -->
 							<section class="tiles">
 								
-							
-							
-								<article>
+								<%for(Product p : list){ %>
+									<article>
 									<span class="image">
-										<img src="images/city1.PNG" alt="" />
+										<img src="<%=request.getContextPath() %>/resources/images/<%=p.getTitleImg() %>" alt="" />
+									</span>
+									<a href="generic.html">
+										<h2><%=p.getProdName() %></h2>
+										<div class="content">
+											<p><%=p.getProdPrice() %>원</p>
+										</div>
+									</a>
+								</article> 
+
+
+
+								<%} %>					
+									
+								<%-- <article>
+									<span class="image">
+										<img src="<%=request.getContextPath() %>/resources/images/city1.PNG" alt="" />
 									</span>
 									<a href="generic.html">
 										<h2>제품 1</h2>
@@ -294,7 +309,8 @@
 											<p>제품 1의 설명입니다.</p>
 										</div>
 									</a>
-								</article>
+								</article> --%>
+								
 								
 								
 								
