@@ -9,6 +9,8 @@ public class Product {
 	private int prodAmount;
 	private String prodStatus;
 	
+	private String titleImg;
+	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
@@ -80,6 +82,15 @@ public class Product {
 	public void setProdStatus(String prodStatus) {
 		this.prodStatus = prodStatus;
 	}
+	
+	public String getTitleImg() {
+		return titleImg;
+	}
+	
+	public void setTitleImg(String titleImg) {
+		this.titleImg = titleImg;
+	}
+
 
 	@Override
 	public String toString() {
