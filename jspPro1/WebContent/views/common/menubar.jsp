@@ -65,25 +65,40 @@
 		<div
 			class="container-fluid d-flex justify-content-between align-items-center">
 
-			<h1 class="logo"><a href="index.jsp">Giftree</a></h1>
+			<h1 class="logo"><a href="<%=contextPath%>/index.jsp">Giftree</a></h1>
 			
 			<!-- Uncomment below if you prefer to use an image logo -->
 			<!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
 			<nav class="nav-menu d-lg-block collapse" id="nav-menu">
 				<ul class="nav">
-					<li class="active"><a href="index.jsp">Home</a></li>
-					<li><a href="#">shop</a></li>
+					<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
+					<li><a href="<%=contextPath%>/list.pr">shop</a></li>
 					<li><a href="#">compaign</a></li>
-					<li><a href="#">brand</a></li>
+					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">brand</a></li>
 					<li><a href="#">faq</a></li>
 				</ul>
 			</nav>
 
 			<div class="nav-menu">
 				<ul>
-					<li><a href="#">login</a></li>
-					<li><a href="#">sign up</a></li>
+					<% if(loginUser == null) {%>
+				
+					<li><a href="<%=contextPath%>/views/member/login.jsp">login</a></li>
+					<li><a href="<%=contextPath%>/views/member/join.jsp">sign up</a></li>
+					
+					<%}else if(loginUser.getUserName().equals("admin")){ %>
+					
+					<li><a href="#"><%=loginUser.getUserName() %></a></li>
+					<li><a href="#">adminpage</a></li>
+					
+					<%}else{ %>
+					
+					<li><a href="#"><%=loginUser.getUserName() %></a></li>
+					<li><a href="#">mypage</a></li>
+					<li><a href="#">cart</a></li>
+					
+					<%} %>
 				</ul>
 			</div>
 
@@ -96,8 +111,8 @@
 
 		<nav class="nav-menu d-lg-none collapse" id="navbar-menu-2">
 			<ul class="nav">
-				<li class="active"><a href="index.jsp">Home</a></li>
-				<li><a href="#">shop</a></li>
+				<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
+				<li><a href="<%=contextPath%>/list.pr">shop</a></li>
 				<li><a href="#">compaign</a></li>
 				<li><a href="#">brand</a></li>
 				<li><a href="#">faq</a></li>
