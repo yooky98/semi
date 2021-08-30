@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MYPAGE</title>
+<title>Insert title here</title>
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
  <!-- Latest compiled and minified CSS -->
@@ -19,12 +19,6 @@
     aside{
         background: rgb(239, 240, 227);
     }
-
-    section{
-    /* background:skyblue; */
-    text-align:center;
-    
-    }
     
     .mainSection{
     	padding-top: 90px;
@@ -34,16 +28,12 @@
     	
     }
     
-    .card{
-        display: inline-block;
-    }
-
 </style>
 
 </head>
 <body>
 
-<%@ include file="../common/menubar.jsp" %>
+<%@ include file="/views/common/menubar.jsp" %>
 
 	<div class="container-fluid">
 
@@ -60,9 +50,44 @@
 			</aside>
 
 			<section class="col-sm-10">
-				<div class="card col-sm-4 maypageCard">후원한 나무</div>
-				<div class="card col-sm-4 maypageCard">보유 포인트</div>
+				<h4>1:1문의</h4>
+				<hr>
+
+				<table class="qnaTable">
+					<tr>
+						<td>userId</td>
+						<td>2020-01-01</td>
+						<td>수정/삭제</td>
+					</tr>
+
+					<tr>
+						<td>문의 유형</td>
+						<td colspan="2">배송문의 드립니다</td>
+					</tr>
+
+					<tr>
+						<td colspan="3">언제쯤 배송되나요?</td>
+					</tr>
+					
+					<tr>
+						<td colspan="3" height=10px></td>
+					</tr>
+
+					<tr>
+						<td>답변</td>
+						<td colspan="2">2020-01-02</td>
+					</tr>
+
+					<tr>
+						<td colspan="3">내용</td>
+					</tr>
+				</table>
+				<hr>
+				
+				
+				<button onclick="">문의 작성</button>
 			</section>
+			
 		</div>
 	</div>
 

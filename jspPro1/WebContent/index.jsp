@@ -27,7 +27,7 @@
 			data-aos="zoom-in" data-aos-delay="100">
 			<h1>Giftree</h1>
 			<h2>나에게 주는, 지구에게 주는 선물</h2>
-			<a href="about.html" class="btn-about">반려나무 입양하러 가기</a>
+			<a href="<%=contextPath%>/list.pr" class="btn-about">반려나무 입양하러 가기</a>
 		</div>
 	</section>
 	<!-- End Hero -->
