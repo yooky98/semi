@@ -33,7 +33,7 @@
 </head>
 <body>
 
-<%@ include file="/views/common/menubar.jsp" %>
+
 
 	<div class="container-fluid">
 
