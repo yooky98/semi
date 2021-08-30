@@ -10,252 +10,12 @@
 <title>product_mainView</title>
 <link href='https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap' rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<style>
-			html, body, div, span,h1, h2, p, a, form, article, section {
-				margin: 0;
-				padding: 0;
-				border: 0;
-				font-size: 100%;
-				font: inherit;
-				vertical-align: baseline;
-			}
-
-			article, section {
-				display: block;
-			}
-
-			body {
-				background:	rgb(239, 240, 227);
-			}
-
-			header p {
-				margin-top: -1em;
-			}
-		
-			h2{
-				font-weight: 900;
-				line-height: 1.5;
-				margin: 0 0 2em 0;
-				text-transform: uppercase;
-				letter-spacing: 0.35em;
-			}
-
-			h2 a{
-				color: inherit;
-			}
-
-			h2 {
-				font-size: 1.1em;
-			}
-
-			body, input, select, textarea {
-				color: #585858;
-				font-family: 'Gowun Batang', serif;
-				font-size: 16pt;
-				font-weight: 300;
-				line-height: 1.75;
-			}
-
-			.tiles {
-				display: flex;
-				flex-wrap: wrap;
-				position: relative; 
-				margin: -2.5em 0 0 -2.5em;
-				margin-top: 2em;
-			}
-
-			.tiles article {
-				transition: transform 0.5s ease, opacity 0.5s ease;
-				position: relative;
-				width: calc(33.33333% - 2.5em);
-				margin: 2.5em 0 0 2.5em;
-			}
-
-			.tiles article > .image {
-				transition: transform 0.5s ease;
-				position: relative;
-				display: block;
-				width: 100%;
-				border-radius: 4px;
-				overflow: hidden;
-			}
-
-			.tiles article > .image img {
-				display: block;
-				width: 100%;
-			}
-
-			.tiles article > .image:before {
-				pointer-events: none;
-				transition: background-color 0.5s ease, opacity 0.5s ease;
-				content: '';
-				display: block;
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				z-index: 1;
-				opacity: 0.15;
-			}
-
-			.tiles article > a {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				/* 글씨 색 변하는 속도 */
-				transition: background-color 0.5s ease, transform 0.5s ease;
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				padding: 1em;
-				border-radius: 4px;
-				border-bottom: 0;
-				color: #ffffff;
-				text-align: center;
-				text-decoration: none;
-				z-index: 3;
-			}
-
-			.tiles article > a > :last-child {
-				margin: 0;
-			}
-
-			.tiles article > a:hover {
-				color: #ffffff !important;
-			}
-
-			.tiles article > a h2 {
-				margin: 0;
-			}
-
-			.tiles article > a .content {
-				transition: max-height 0.5s ease, opacity 0.5s ease;
-				width: 100%;
-				max-height: 0;
-				line-height: 1.5;
-				margin-top: 0.35em;
-				opacity: 0;
-			}
-
-			.tiles article > a .content > :last-child {
-				margin-bottom: 0;
-			}
-
-			.tiles article > .image:before {
-				background-color: black;
-			}
-
-			/* 마우스 올렸을때 확대관련 */
-			body:not(.is-touch) .tiles article:hover > .image {
-				transform: scale(1.1);
-			}
-			/* 확대 했을때 색상과 투명도 */
-			body:not(.is-touch) .tiles article:hover > .image:before {
-				background-color: black;
-				opacity: 0.55;
-			}
-
-			/* 상세 설명 글자관련 */
-			body:not(.is-touch) .tiles article:hover .content { 
-				max-height: 15em;
-				opacity: 1;
-			}
-
-			/* 이너의 사이즈 조절 */
-			#wrapper > * > .inner {
-				width: 100%;
-				max-width: 68em;
-				margin: 0 auto;
-				padding: 0 2.5em;
-			}
-
-			/* 반응형 */
-			@media screen and (max-width: 1680px) {
-
-				body, input, select, textarea {
-					font-size: 14pt;
-				}
-
-			}
-
-			@media screen and (max-width: 1280px) {
-			
-				body, input, select, textarea {
-					font-size: 12pt;
-				}
-			
-				.tiles {
-					margin: -1.25em 0 0 -1.25em;
-				}
-
-				.tiles article {
-					width: calc(33.33333% - 1.25em);
-					margin: 1.25em 0 0 1.25em;
-				}
-
-			}
-
-			@media screen and (max-width: 980px) {
-			
-				.tiles {
-					margin: -2.5em 0 0 -2.5em;
-				}
-
-				.tiles article {
-					width: calc(50% - 2.5em);
-					margin: 2.5em 0 0 2.5em;
-				}
-
-			}
-
-			@media screen and (max-width: 736px) {
-
-				.tiles {
-					margin: -1.25em 0 0 -1.25em;
-				}
-
-				.tiles article {
-					width: calc(50% - 1.25em);
-					margin: 1.25em 0 0 1.25em;
-				}
-
-				.tiles article:hover > .image {
-					transform: scale(1.0);
-				}
-
-				#wrapper > * > .inner {
-					padding: 0 1.25em;
-				}
-
-			}
-
-			@media screen and (max-width: 480px) {
-			
-				html, body {
-					min-width: 320px;
-				}
-
-				.tiles {
-					margin: 0;
-				}
-
-				.tiles article {
-					width: 100%;
-					margin: 1.25em 0 0 0;
-				}
-			
-			}
-
-	</style>
-	</head>
-	<body class="is-preload">
+<link href="<%=request.getContextPath() %>/resources/css/productMainViewStyle.css" rel="stylesheet">
+</head>
+<body class="is-preload">
 	<%-- <%@ include file="../common/menubar.jsp" %> --%>
 		<!-- Wrapper -->
-			<div id="wrapper">
+	<div id="wrapper">
 	
 				<!-- Header -->
 					<!-- <header id="header">
@@ -269,35 +29,36 @@
 					</nav> -->
 
 				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<header>
-								<h1>상품 메인이고, 이 자리는 메뉴자리입니다 이 부분엔 menubar가 들어옵니다.<br>
-									해야할 일 <br>
-									사진 끌어오기, 제품 정보 끌어오기, 사진과 제품 연결하기, detail이 아닌 price 보여주기
-									클릭 했을 때 상품 detailview로 이동하기
-								</h1>
+		<div id="main">
+			<div class="inner">
+				<header>
+					<h1>상품 메인이고, 이 자리는 메뉴자리입니다 이 부분엔 menubar가 들어옵니다.<br>
+						해야할 일 <br>
+						사진 끌어오기, 제품 정보 끌어오기, 사진과 제품 연결하기, detail이 아닌 price 보여주기
+						클릭 했을 때 상품 detailview로 이동하기
+					</h1>
 								
-							</header>
-							<!-- for문 돌려서 등록된 제품만큼 가져오기 -->
-							<section class="tiles">
+				</header>
+						<!-- for문 돌려서 등록된 제품만큼 가져오기 -->
+				<section class="tiles">
 								
-								<%for(Product p : list){ %>
-									<article>
-									<span class="image">
-										<img src="<%=request.getContextPath() %>/resources/images/<%=p.getTitleImg() %>" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2><%=p.getProdName() %></h2>
-										<div class="content">
-											<p><%=p.getProdPrice() %>원</p>
-										</div>
-									</a>
-								</article> 
+					<%for(Product p : list){ %>
+						<article>
+							<span class="image">
+								<img src="<%=request.getContextPath() %>/resources/images/<%=p.getTitleImg() %>" alt="" />
+							</span>
+							<!-- 히든으로 제품번호 넘겨서 해당 제품 띄우기 -->
+							<a href="<%=request.getContextPath() %>/detail.pr">
+								<h2><%=p.getProdName() %></h2>
+								<div class="content">
+									<p><%=p.getProdPrice() %>원</p>
+								</div>
+							</a>
+						</article> 
 
 
 
-								<%} %>					
+					<%} %>					
 									
 								<%-- <article>
 									<span class="image">
@@ -312,15 +73,15 @@
 								</article> --%>
 								
 							
-							</section>
-						</div>
-					</div>
+				</section>
+			</div>
+		</div>
 
 				<!-- Footer -->
 					<!-- <footer id="footer">
 				
 					</footer> -->
 
-			</div>
-	</body>
+	</div>
+</body>
 </html>
