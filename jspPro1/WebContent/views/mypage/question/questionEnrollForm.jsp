@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MYPAGE</title>
+<title>Insert title here</title>
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
  <!-- Latest compiled and minified CSS -->
@@ -19,12 +19,6 @@
     aside{
         background: rgb(239, 240, 227);
     }
-
-    section{
-    /* background:skyblue; */
-    text-align:center;
-    
-    }
     
     .mainSection{
     	padding-top: 90px;
@@ -34,16 +28,12 @@
     	
     }
     
-    .card{
-        display: inline-block;
-    }
-
 </style>
 
 </head>
 <body>
 
-<%@ include file="../common/menubar.jsp" %>
+<%@ include file="/views/common/menubar.jsp" %>
 
 	<div class="container-fluid">
 
@@ -60,9 +50,29 @@
 			</aside>
 
 			<section class="col-sm-10">
-				<div class="card col-sm-4 maypageCard">후원한 나무</div>
-				<div class="card col-sm-4 maypageCard">보유 포인트</div>
+				<h4>1:1문의</h4>
+				<hr>
+				
+				<form class="qnaEnroll" method="post" action="">
+	                <select name="qnaCategory">
+	                    <option value="">문의유형</option>
+	                    <option value="">상품문의</option>
+	                    <option value="">배송문의</option>
+	                    <option value="">주문관련</option>
+	                    <option value="">기타</option>
+	                </select>
+	                <input name="qnaTitle" type="text" placeholder="제목">
+	
+	                <div>
+	                    <textarea name="qnaContent" placeholder="내용을 입력해 주세요" style="resize:none;"></textarea>
+	                </div>
+	
+	                <button type="submit">작성</button>
+	                <button type="reset">취소</button>
+            	</form>
+
 			</section>
+			
 		</div>
 	</div>
 

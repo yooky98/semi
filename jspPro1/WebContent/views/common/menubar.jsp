@@ -15,19 +15,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
+
 
 <!-- icon -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
        
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style>
 	header a:hover {
@@ -62,8 +54,7 @@
 
 	<header id="header" class="fixed-top">
 
-		<div
-			class="container-fluid d-flex justify-content-between align-items-center">
+		<div class="container-fluid d-flex justify-content-between align-items-center">
 
 			<h1 class="logo"><a href="<%=contextPath%>/index.jsp">Giftree</a></h1>
 			
@@ -75,8 +66,11 @@
 					<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 					<li><a href="<%=contextPath%>/list.pr">shop</a></li>
 					<li><a href="#">compaign</a></li>
-					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">brand</a></li>
-					<li><a href="#">faq</a></li>
+					<li><a href="#">brand</a></li>
+					<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
+					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
+					<li><a href="#">adminpage</a></li>
+					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
 				</ul>
 			</nav>
 
@@ -95,7 +89,7 @@
 					<%}else{ %>
 					
 					<li><a href="#"><%=loginUser.getUserName() %></a></li>
-					<li><a href="#">mypage</a></li>
+					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
 					<li><a href="#">cart</a></li>
 					
 					<%} %>
