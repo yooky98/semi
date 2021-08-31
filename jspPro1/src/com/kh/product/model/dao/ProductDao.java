@@ -29,6 +29,13 @@ private Properties prop = new Properties();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+//		PROD_NO
+//		PROD_NAME
+//		PROD_DETAIL
+//		PROD_CATEGORY
+//		PROD_PRICE
+//		PROD_AMOUNT
+//		PROD_STATUS
 	
 	}
 
@@ -66,8 +73,43 @@ private Properties prop = new Properties();
 			close(pstmt);
 			close(rset);
 		}
-		System.out.println(list.get(0).getTitleImg());
-		System.out.println(list.get(1).getTitleImg());
+//		System.out.println(list.get(0).getTitleImg());
+//		System.out.println(list.get(1).getTitleImg());
 		return list;
+	}
+
+	public Product selectProduct(Connection conn, int pNo) {
+		Product p = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+				
+//		selectProduct= SELECT PROD_NAME, PROD_DETAIL, PROD_PRICE, PROD_AMOUNT FROM PRODUCT WHERE PROD_STATUS = 'Y' AND PROD_NO = ?  
+		
+		String sql = prop.getProperty("selectProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				p = new Product();
+				
+				p.setProdName(rset.getString("PROD_NAME"));
+				p.setProdDetail(rset.getString("PROD_DETAIL"));
+				p.setProdPrice(rset.getInt("PROD_PRICE"));
+				p.setProdAmount(rset.getInt("PROD_AMOUNT"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return p;
 	}
 }

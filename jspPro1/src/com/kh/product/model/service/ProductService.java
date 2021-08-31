@@ -19,4 +19,13 @@ public class ProductService {
 		return list;
 	}
 
+	public Product selectProduct(int pNo) {
+		Connection conn = getConnection();
+		Product p = new ProductDao().selectProduct(conn, pNo);
+		
+		close(conn);
+		
+		return p;
+	}
+
 }
