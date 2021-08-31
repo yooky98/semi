@@ -10,7 +10,14 @@ public class FAQ {
 	public FAQ() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	public FAQ(String fAQType, String fAQQues, String fAQAns) {
+		super();
+		FAQType = fAQType;
+		FAQQues = fAQQues;
+		FAQAns = fAQAns;
+	}
+	
 	public FAQ(int fAQNo, String fAQType, String fAQQues, String fAQAns) {
 		super();
 		FAQNo = fAQNo;
@@ -54,7 +61,7 @@ public class FAQ {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString();
+		return "FAQ -> [FAQNo : " + FAQNo + ", FAQType : " + FAQType + ", FAQQues : " + FAQQues + ", FAQAns : " + FAQAns + " ]";
 	}
 	
 }
