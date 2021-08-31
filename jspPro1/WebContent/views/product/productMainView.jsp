@@ -48,7 +48,9 @@
 								<img src="<%=request.getContextPath() %>/resources/images/<%=p.getTitleImg() %>" alt="" />
 							</span>
 							<!-- 히든으로 제품번호 넘겨서 해당 제품 띄우기 -->
-							<a href="<%=request.getContextPath() %>/detail.pr">
+							<%-- <input type="hidden" name="writer" value="<%= p.getProdNo() %>"> --%>
+							<%-- <a href="<%=request.getContextPath() %>/detail.pr"> --%>
+							<a class="productImg">
 								<h2><%=p.getProdName() %></h2>
 								<div class="content">
 									<p><%=p.getProdPrice() %>원</p>
@@ -59,7 +61,14 @@
 
 
 					<%} %>					
-									
+					<script>
+						$(function(){
+							$(".productImg").click(function(){
+								var pNo = $(this).children().eq(0).val();
+								location.href= "<%=request.getContextPath() %>/detail.pr?pNo=" + pNo;
+							});
+						});
+					</script>
 								<%-- <article>
 									<span class="image">
 										<img src="<%=request.getContextPath() %>/resources/images/city1.PNG" alt="" />

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.product.model.service.ProductService;
+import com.kh.product.model.vo.Product;
+
 /**
  * Servlet implementation class ProductDetailServlet
  */
@@ -28,8 +31,19 @@ public class ProductDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/product/productDetailView.jsp");
-		view.forward(request, response);
+		int pNo = Integer.parseInt(request.getParameter("pNo"));
+		
+		Product p = new ProductService().selectProduct(pNo);
+		
+		if(p!=null) {
+			request.setAttribute("p", p);
+			RequestDispatcher view = request.getRequestDispatcher("views/product/productDetailView.jsp");
+			view.forward(request, response);
+		} else {
+			request.setAttribute("msg", "제품 상세보기에 실패함");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
 	}
 
 	/**

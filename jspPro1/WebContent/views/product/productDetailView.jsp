@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.product.model.vo.*"%>
 <%
 	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
+	Product p = (Product)request.getAttribute("p");
 %>
 <!DOCTYPE html>
 <html>
@@ -41,12 +42,12 @@
 				</header>
 				<section id="thumbnails">
 					<!-- article별 for문 돌려서 리스트 가져오기 -->
-					<%for(Product p : list){ %>
+					<%for(Product pl : list){ %>
 						<article>
 							<a class="thumbnail" href="images/fulls/01.jpg" data-position="left center"><img src="images/thumbs/01.jpg" alt="" /></a>
-							<h2><%=p.getProdName() %></h2> 
-								<!-- '<' 추가해야함 -->
-							<p><%=p.getProdDetail() %></p>
+							<h2><%=pl.getProdName() %></h2> 
+								
+							<p><%=pl.getProdDetail() %></p>
 						</article>
 					<%} %>	
 
