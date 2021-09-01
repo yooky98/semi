@@ -1,6 +1,6 @@
 package com.kh.cart.model.vo;
 
-public class cartList {
+public class Cart {
 
 	private int cartNo; //장바구니 번호
 	private String userId; //회원 아이디
@@ -9,8 +9,17 @@ public class cartList {
 	private String forestName; //숲이름
 	
 	
-	public cartList() { }
+	public Cart() { }
+	
 
+	public Cart(int cartNo, String userId, int prodNo, int cartAmount, String forestName) {
+		super();
+		this.cartNo = cartNo;
+		this.userId = userId;
+		this.prodNo = prodNo;
+		this.cartAmount = cartAmount;
+		this.forestName = forestName;
+	}
 
 	public int getCartNo() {
 		return cartNo;
@@ -64,7 +73,7 @@ public class cartList {
 
 	@Override
 	public String toString() {
-		return "cartList [cartNo=" + cartNo + ", userId=" + userId + ", prodNo=" + prodNo + ", cartAmount=" + cartAmount
+		return "Cart [cartNo=" + cartNo + ", userId=" + userId + ", prodNo=" + prodNo + ", cartAmount=" + cartAmount
 				+ ", forestName=" + forestName + "]";
 	} 
 	
