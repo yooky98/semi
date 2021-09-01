@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+.tbody {
+	background:	rgb(239, 240, 227);
+ 	text-align: center;
+}
+.userbox{
+	margin : 30px;
+}
+.userform{
+	font-weight : 700;
+	width: 400px;
+	height: 40px;
+	font-size: 20px;
+	border-radius: 5px;	
+	border : 1px solid grey;
+}
+.usertable{
+	width: 500px;
+	margin: auto;
+	border-spacing: 0 20px
+}
+.btn{
+	width: 400px;
+	height: 50px;
+	font-size: 20px;
+	background:	rgb(158, 164, 107);
+	font-weight : 700;
+	color: white;
+	border-radius: 5px;
+	border : none;
+	cursor: pointer;
+}
+.btnCheck{
+	margin-top:5px;
+	width: 400px;
+	height: 40px;
+	font-size: 20px;
+	background:	rgb(158, 164, 107);
+	font-weight : 700;
+	color: white;
+	border-radius: 5px;
+	border : none;
+	cursor: pointer;
+}
+.usertitle{
+	font-weight : 700;
+	font-size: 30px;
+}
+.gender{
+	font-weight : 700;
+	font-size: 20px;
+}
+.genderradio{
+	width:25px;height:25px;border:1px;
+}
+
