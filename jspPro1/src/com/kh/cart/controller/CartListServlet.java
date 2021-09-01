@@ -1,11 +1,16 @@
 package com.kh.cart.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.cart.model.service.CartService;
+import com.kh.cart.model.vo.Cart;
 
 /**
  * Servlet implementation class CartListServlet
@@ -26,7 +31,12 @@ public class CartListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/cart/cartList.jsp").forward(request, response);
+		
+		String userId = ((Cart)request.getSession().getAttribute("loginUser")).getUserId(); //음..
+
+		ArrayList<Cart> list = new CartService().selectCartList(userId);		
+		request.setAttribute("list", list);
+		
 	}
 
 	/**
