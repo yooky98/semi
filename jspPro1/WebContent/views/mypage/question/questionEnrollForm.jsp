@@ -55,11 +55,11 @@
 				
 				<form class="qnaEnroll" method="post" action="">
 	                <select name="qnaCategory">
-	                    <option value="">문의유형</option>
-	                    <option value="">상품문의</option>
-	                    <option value="">배송문의</option>
-	                    <option value="">주문관련</option>
-	                    <option value="">기타</option>
+	                    <option value="" >문의유형</option>
+	                    <option value="10">상품문의</option>
+	                    <option value="20">배송문의</option>
+	                    <option value="30">주문관련</option>
+	                    <option value="40">기타</option>
 	                </select>
 	                <input name="qnaTitle" type="text" placeholder="제목">
 	

@@ -54,14 +54,20 @@
 					<li><a href="#">주문내역 조회</a></li>
 					<li><a href="#">위시 리스트</a></li>
 					<li><a href="#">리뷰 관리</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/question/questionListView.jsp">1:1 문의</a></li>
-					<li><a href="#">참여 캠페인</a></li>
+					<li><a href="<%=request.getContextPath()%>/list.que">1:1 문의</a></li>
+					<li><a href="<%=request.getContextPath()%>/views/campaign/campaignMypageView.jsp">참여 캠페인</a></li>
 				</ul>
 			</aside>
 
 			<section class="col-sm-10">
-				<div class="card col-sm-4 maypageCard">후원한 나무</div>
-				<div class="card col-sm-4 maypageCard">보유 포인트</div>
+				<div class="card col-sm-4 maypageCard">
+					후원한 나무
+					<div class="tree">10 그루</div>
+				</div>
+				<div class="card col-sm-4 maypageCard">
+					보유 포인트
+					<div class="point">100</div>
+				</div>
 			</section>
 		</div>
 	</div>

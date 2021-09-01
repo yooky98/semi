@@ -1,16 +1,21 @@
 package com.kh.question.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.question.model.service.QuesService;
+import com.kh.question.model.vo.QNA;
+
 /**
  * Servlet implementation class QnaListServlet
  */
-@WebServlet("/list.qe")
+@WebServlet("/list.que")
 public class QuestionListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,9 +31,23 @@ public class QuestionListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getSession().getAttribute("loginUser").getUserId();
 		
+//		String userId = request.getSession().getAttribute("loginUser").getUserId();
 		
+		String userId = "user01";
+		
+		ArrayList<QNA> qnaList = new QuesService().selectQuesList(userId);
+		
+		if(qnaList != null) {
+			request.setAttribute("qnaList", qnaList);
+		}else {
+			request.setAttribute("msg", "문의사항이 없습니다.");
+		}
+		
+		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
+		System.out.println(qnaList);
+		
+//		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
 		
 	}
 

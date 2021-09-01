@@ -65,12 +65,12 @@
 				<ul class="nav">
 					<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 					<li><a href="<%=contextPath%>/list.pr">shop</a></li>
-					<li><a href="#">compaign</a></li>
+					<li><a href="<%=contextPath%>/views/campaign/campaignListView.jsp">compaign</a></li>
 					<li><a href="#">brand</a></li>
 					<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
 					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
 					<li><a href="#">adminpage</a></li>
-					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
+					<li><a href="<%=request.getContextPath() %>/views/cart/cartListView.jsp">cart</a></li>
 				</ul>
 			</nav>
 
