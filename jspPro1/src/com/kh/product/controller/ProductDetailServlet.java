@@ -1,6 +1,7 @@
 package com.kh.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,15 +33,22 @@ public class ProductDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pNo = Integer.parseInt(request.getParameter("pNo"));
-		
+
 		Product p = new ProductService().selectProduct(pNo);
+		ArrayList<Product> list = new ProductService().selectPrList();
 		
-		if(p!=null) {
+		
+		if(p!=null && list!=null) {
+			request.setAttribute("list", list);
 			request.setAttribute("p", p);
 			RequestDispatcher view = request.getRequestDispatcher("views/product/productDetailView.jsp");
 			view.forward(request, response);
-		} else {
+		} else if(p==null){
 			request.setAttribute("msg", "제품 상세보기에 실패함");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		} else {
+			request.setAttribute("msg", "제품 리스트 가져오기에 실패함");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}

@@ -44,12 +44,11 @@ private Properties prop = new Properties();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-//		selectPrList=SELECT PROD_NAME, PROD_PRICE, CHANGE_NAME
+//		selectPrList=SELECT *
 //				FROM PRODUCT JOIN(SELECT * FROM ATTACHMENT
 //				WHERE FILE_NO IN(
 //					SELECT FILE_NO FROM ATTACHMENT)) ON (REF_PNO = PROD_NO)
 //				WHERE PRODUCT.PROD_STATUS='Y' ORDER BY PROD_NO DESC
-		
 		
 		String sql = prop.getProperty("selectPrList");
 		try {
@@ -59,7 +58,10 @@ private Properties prop = new Properties();
 			while(rset.next()) {
 				Product p = new Product();
 
+				p.setProdNo(rset.getInt("PROD_NO"));
 				p.setProdName(rset.getString("PROD_NAME"));
+				p.setProdDetail(rset.getString("PROD_DETAIL"));
+				p.setProdCategory(rset.getString("PROD_CATEGORY"));
 				p.setProdPrice(rset.getInt("PROD_PRICE"));
 				p.setTitleImg(rset.getString("CHANGE_NAME"));
 				

@@ -10,10 +10,12 @@
 <title>product_mainView</title>
 <link href='https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap' rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <link href="<%=request.getContextPath() %>/resources/css/productMainViewStyle.css" rel="stylesheet">
 </head>
 <body class="is-preload">
-	<%-- <%@ include file="../common/menubar.jsp" %> --%>
+	<%@ include file="../common/menubar.jsp" %>
 		<!-- Wrapper -->
 	<div id="wrapper">
 	
@@ -48,9 +50,9 @@
 								<img src="<%=request.getContextPath() %>/resources/images/<%=p.getTitleImg() %>" alt="" />
 							</span>
 							<!-- 히든으로 제품번호 넘겨서 해당 제품 띄우기 -->
-							<%-- <input type="hidden" name="writer" value="<%= p.getProdNo() %>"> --%>
 							<%-- <a href="<%=request.getContextPath() %>/detail.pr"> --%>
 							<a class="productImg">
+								<input type="hidden" value="<%= p.getProdNo() %>">
 								<h2><%=p.getProdName() %></h2>
 								<div class="content">
 									<p><%=p.getProdPrice() %>원</p>
@@ -65,6 +67,7 @@
 						$(function(){
 							$(".productImg").click(function(){
 								var pNo = $(this).children().eq(0).val();
+								console.log(pNo);
 								location.href= "<%=request.getContextPath() %>/detail.pr?pNo=" + pNo;
 							});
 						});
