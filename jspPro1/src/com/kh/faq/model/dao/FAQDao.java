@@ -18,7 +18,7 @@ public class FAQDao {
 	
 	public FAQDao() {
 		String fileName = FAQDao.class.getResource("/sql/faq/faq-query.properties").getPath();
-		System.out.println("fileName   " + fileName);
+		//System.out.println("fileName : " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
