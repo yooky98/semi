@@ -1,7 +1,6 @@
 package com.kh.question.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.question.model.service.QuesService;
-import com.kh.question.model.vo.QNA;
 
 /**
- * Servlet implementation class QnaListServlet
+ * Servlet implementation class QuestionDeleteServlet
  */
-@WebServlet("/list.que")
-public class QuestionListServlet extends HttpServlet {
+@WebServlet("/delete.que")
+public class QuestionDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionListServlet() {
+    public QuestionDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +30,17 @@ public class QuestionListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String userId = request.getSession().getAttribute("loginUser");
+		int qno = Integer.parseInt(request.getParameter("qno"));
 		
-		String userId = "user01";
+		int result = new QuesService().deleteQuestion(qno);
 		
-		ArrayList<QNA> qnaList = new QuesService().selectQuesList(userId);
-		
-		
-		if(qnaList != null) {
-			request.setAttribute("qnaList", qnaList);
+		if(result > 0) {
+			request.getSession().setAttribute("msg", "문의가 삭제되었습니다.");
 		}else {
-			request.setAttribute("message", "문의사항이 없습니다.");
+			request.getSession().setAttribute("msg", "문의 삭제에 실패하였습니다.");
 		}
 		
-		if(qnaList.isEmpty()) {
-			request.setAttribute("message", "문의사항이 없습니다.");
-		}
-		
-		
-		System.out.println(qnaList == null);
-		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
-		
-//		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
+		response.sendRedirect("list.que");
 		
 	}
 

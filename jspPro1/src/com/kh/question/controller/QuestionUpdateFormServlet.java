@@ -1,7 +1,6 @@
 package com.kh.question.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.kh.question.model.service.QuesService;
 import com.kh.question.model.vo.QNA;
 
 /**
- * Servlet implementation class QnaListServlet
+ * Servlet implementation class QuestionUpdateFormServlet
  */
-@WebServlet("/list.que")
-public class QuestionListServlet extends HttpServlet {
+@WebServlet("/updateForm.que")
+public class QuestionUpdateFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionListServlet() {
+    public QuestionUpdateFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +31,19 @@ public class QuestionListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String userId = request.getSession().getAttribute("loginUser");
+		int qno = Integer.parseInt(request.getParameter("qno"));
 		
-		String userId = "user01";
+		QNA qna = new QuesService().selectQuestion(qno);
 		
-		ArrayList<QNA> qnaList = new QuesService().selectQuesList(userId);
-		
-		
-		if(qnaList != null) {
-			request.setAttribute("qnaList", qnaList);
+		if(qna != null) {
+			request.setAttribute("qna", qna);
+			request.getRequestDispatcher("views/mypage/question/questionUpdateForm.jsp").forward(request, response);
 		}else {
-			request.setAttribute("message", "문의사항이 없습니다.");
+			request.getSession().setAttribute("msg", "문의사항 조회에 실패했습니다.");
+			response.sendRedirect("list.que");
 		}
 		
-		if(qnaList.isEmpty()) {
-			request.setAttribute("message", "문의사항이 없습니다.");
-		}
-		
-		
-		System.out.println(qnaList == null);
-		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
-		
-//		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
+		System.out.println("qna" + qna);
 		
 	}
 

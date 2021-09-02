@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.question.model.vo.QNA"%>
 <%
 	ArrayList<QNA> qnaList = (ArrayList<QNA>)request.getAttribute("qnaList");
-
-	
+	String message = (String)request.getAttribute("message");
 
 %>
 <!DOCTYPE html>
@@ -36,6 +35,7 @@
     
 </style>
 
+
 </head>
 <body>
 
@@ -58,53 +58,72 @@
 			<section class="col-sm-10">
 				<h4>1:1문의</h4>
 				<hr>
-
-				
-				
 					<%if(qnaList.isEmpty()) {%>
 						
-						<div><%=request.getAttribute("msg")%></div>
+						<div><%=message%></div>
 						
 					<%}else{%>
 						<% for(QNA qna : qnaList){ %>
 						
-					<table class="qnaTable">	
-					<tr>
-						<td><%= %></td>
-						<td>2020-01-01</td>
-						<td><a href="<%=request.getContextPath()%>/views/mypage/question/questionUpdateForm.jsp">수정</a>/<a href="#">삭제</a></td>
-					</tr>
-
-					<tr>
-						<td><%=  %></td>
-						<td colspan="2">배송문의 드립니다</td>
-					</tr>
-
-					<tr>
-						<td colspan="3">언제쯤 배송되나요?</td>
-					</tr>
-					
-					<tr>
-						<td colspan="3" height=10px></td>
-					</tr>
-
-					<tr>
-						<td>답변</td>
-						<td colspan="2">2020-01-02</td>
-					</tr>
-
-					<tr>
-						<td colspan="3">내용</td>
-					</tr>
-				</table>
-				<hr>
+						<table class="qnaTable">	
+						<tr>
+							<td><%=qna.getUserId() %></td>
+							<td><%=qna.getQuesDate() %></td>
+							
+							<% if(qna.getAnsDate() == null) {%>
+								<td><a href="<%=contextPath%>/updateForm.que?qno=<%=qna.getQuesNo()%>">수정</a>/<a class="delete" href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a></td>
+							<%}else{ %>
+								<td><a class="delete" href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a></td>
+							<%} %>
+						
+						</tr>
+	
+						<tr>
+							<td><%=qna.getQuesCategory()%></td>
+							<td colspan="2"><%=qna.getQuesTitle()%></td>
+						</tr>
+	
+						<tr>
+							<td colspan="3"><%=qna.getQuesContent()%></td>
+						</tr>
+						
+						<tr>
+							<td colspan="3" height=10px></td>
+						</tr>
+	
+						<%if(qna.getAnsDate()!=null){ %>
+							<tr>
+								<td><b>답변</b></td>
+								<td colspan="2"><%=qna.getAnsDate() %></td>
+							</tr>
+		
+							<tr>
+								<td colspan="3"><%=qna.getAnsContent() %></td>
+							</tr>
+						<%} %>
+						</table>
+						<hr>
+					<%} %>
 				<%} %>
-
 				<button onclick="location.href='<%=request.getContextPath()%>/views/mypage/question/questionEnrollForm.jsp'">문의 작성</button>
 			</section>
 			
 		</div>
 	</div>
+	
+<%-- 
+<script>
+	$(function(){
+		$("#delete").click(function(){
+			var val = confirm("정말 삭제하시겠습니까?");
+			
+			if(val){
+				locaton.href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>";
+			}
+		})
+	})
+
+</script> --%>
 
 </body>
 </html>

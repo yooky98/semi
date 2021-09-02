@@ -1,7 +1,6 @@
 package com.kh.question.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.kh.question.model.service.QuesService;
 import com.kh.question.model.vo.QNA;
 
 /**
- * Servlet implementation class QnaListServlet
+ * Servlet implementation class QuestionEnrollServlet
  */
-@WebServlet("/list.que")
-public class QuestionListServlet extends HttpServlet {
+@WebServlet("/enroll.que")
+public class QuestionEnrollFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionListServlet() {
+    public QuestionEnrollFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,29 +31,25 @@ public class QuestionListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String userId = request.getSession().getAttribute("loginUser");
+//		String UserId = request.getSession().getAttribute("loginUser").getUser_id;
 		
 		String userId = "user01";
 		
-		ArrayList<QNA> qnaList = new QuesService().selectQuesList(userId);
+		String qnaTitle = request.getParameter("qnaTitle");
+		String qnaContent = request.getParameter("qnaContent").replaceAll("\n", "<br>");
+		String qnaCategory = request.getParameter("qnaCategory");
 		
+		QNA qna = new QNA(qnaTitle, qnaContent, qnaCategory, userId);
 		
-		if(qnaList != null) {
-			request.setAttribute("qnaList", qnaList);
+		int result = new QuesService().insertQuestion(qna);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("msg", "문의가 등록되었습니다.");
 		}else {
-			request.setAttribute("message", "문의사항이 없습니다.");
+			request.getSession().setAttribute("msg", "문의 등록에 실패하였습니다.");
 		}
 		
-		if(qnaList.isEmpty()) {
-			request.setAttribute("message", "문의사항이 없습니다.");
-		}
-		
-		
-		System.out.println(qnaList == null);
-		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
-		
-//		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
-		
+		response.sendRedirect("list.que");
 	}
 
 	/**

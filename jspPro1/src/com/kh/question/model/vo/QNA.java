@@ -31,7 +31,22 @@ public class QNA {
 	}
 
 
-
+	public QNA(String quesTitle, String quesContent, String quesCategory, String userId) {
+		super();
+		this.quesTitle = quesTitle;
+		this.quesContent = quesContent;
+		this.quesCategory = quesCategory;
+		this.userId = userId;
+	}
+	
+	
+	public QNA(int quesNo, String quesTitle, String quesContent, String quesCategory) {
+		super();
+		this.quesNo = quesNo;
+		this.quesTitle = quesTitle;
+		this.quesContent = quesContent;
+		this.quesCategory = quesCategory;
+	}
 
 
 	public String getQuesCategory() {

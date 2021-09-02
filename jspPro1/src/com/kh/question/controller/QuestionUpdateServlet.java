@@ -1,28 +1,23 @@
 package com.kh.question.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.question.model.service.QuesService;
-import com.kh.question.model.vo.QNA;
-
 /**
- * Servlet implementation class QnaListServlet
+ * Servlet implementation class QuestionUpdateServlet
  */
-@WebServlet("/list.que")
-public class QuestionListServlet extends HttpServlet {
+@WebServlet("/update.que")
+public class QuestionUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionListServlet() {
+    public QuestionUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +27,7 @@ public class QuestionListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String userId = request.getSession().getAttribute("loginUser");
 		
-		String userId = "user01";
-		
-		ArrayList<QNA> qnaList = new QuesService().selectQuesList(userId);
-		
-		
-		if(qnaList != null) {
-			request.setAttribute("qnaList", qnaList);
-		}else {
-			request.setAttribute("message", "문의사항이 없습니다.");
-		}
-		
-		if(qnaList.isEmpty()) {
-			request.setAttribute("message", "문의사항이 없습니다.");
-		}
-		
-		
-		System.out.println(qnaList == null);
-		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
-		
-//		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
 		
 	}
 
