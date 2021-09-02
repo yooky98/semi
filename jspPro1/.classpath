@@ -8,11 +8,16 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/BackEnd/cookieSessionPro/WebContent/WEB-INF/lib/ojdbc6.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_291">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/yoo/Downloads/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/yoo/Downloads/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/yoo/Downloads/lombok-1.18.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/yoo/Downloads/cos-20.08/lib/cos.jar"/>
+	<classpathentry kind="lib" path="C:/Users/yoo/Downloads/google-http-client-gson-1.39.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/yoo/Downloads/ojdbc6.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
