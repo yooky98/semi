@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.question.model.vo.QNA" %>
+<% 
+
+	QNA qna = (QNA)request.getAttribute("qna");
+
+%>   
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,10 +67,9 @@
 	                    <option value="30">주문관련</option>
 	                    <option value="40">기타</option>
 	                </select>
-	                <input name="qnaTitle" type="text" placeholder="제목">
-	
+	                <input name="qnaTitle" type="text" value=" <%= qna.getQuesTitle() %>">
 	                <div>
-	                    <textarea name="qnaContent" placeholder="내용을 입력해 주세요" style="resize:none;"></textarea>
+	                    <textarea name="qnaContent" style="resize:none;"><%= qna.getQuesContent() %></textarea>
 	                </div>
 	
 	                <button type="submit">수정</button>

@@ -23,4 +23,43 @@ public class QuesService {
 		return qnaList;
 	}
 
+	public int insertQuestion(QNA qna) {
+		Connection conn = getConnection();
+		
+		int result = new QuesDao().insertQuestion(conn, qna);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public int deleteQuestion(int qno) {
+		Connection conn = getConnection();
+		
+		int result = new QuesDao().deleteQuestion(conn, qno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public QNA selectQuestion(int qno) {
+		Connection conn = getConnection();
+		
+		QNA qna = new QuesDao().selectQuestion(conn, qno);
+		
+		close(conn);
+		return qna;
+	}
+
 }

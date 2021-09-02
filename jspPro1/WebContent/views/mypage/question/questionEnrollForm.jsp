@@ -53,7 +53,7 @@
 				<h4>1:1문의</h4>
 				<hr>
 				
-				<form class="qnaEnroll" method="post" action="">
+				<form class="qnaEnroll" method="post" action="<%=request.getContextPath()%>/enroll.que">
 	                <select name="qnaCategory">
 	                    <option value="" >문의유형</option>
 	                    <option value="10">상품문의</option>
