@@ -7,9 +7,7 @@ import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
-import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.dao.UserDao;
-import com.kh.member.model.vo.Member;
 import com.kh.member.model.vo.UserVO;
 
 public class UserService {
@@ -44,6 +42,12 @@ public class UserService {
 		Connection conn = getConnection();
 		String result = dao.loginCheck(conn,  user_id);   //9. dao에서 담긴 result가 넘어온다 
 		return result;
+	}
+	
+	public UserVO getUser(String user_id) { 
+		Connection conn = getConnection();
+		
+		return dao.getUser(conn,  user_id);
 	}
 	
 	

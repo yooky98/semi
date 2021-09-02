@@ -1,19 +1,19 @@
-package com.kh.member.model.errorCheck;
+package com.kh.member.model.Validation;
 
 import java.util.regex.Pattern;
 
 import com.kh.member.model.service.UserService;
 import com.kh.member.model.vo.UserVO;
 
-public class ErrorCheck {
+public class Validation {
 	boolean regCheck = false;
 	String msg = "";
 	UserService us;
-	public ErrorCheck() {
+	public Validation() {
 		us = new UserService();
 	}
 	
-	public String errorMsg(UserVO vo) {
+	public String validationMsg(UserVO vo) {
 		if(us.idCheck(vo)!=0){
 			msg = "존재하는 아이디입니다.";
 			return msg;
