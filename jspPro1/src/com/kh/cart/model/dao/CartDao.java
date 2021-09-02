@@ -74,4 +74,9 @@ public class CartDao {
 		return list;
 	}
 
+	public int insertCart(Connection conn, Cart c) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

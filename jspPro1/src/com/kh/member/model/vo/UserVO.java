@@ -28,6 +28,10 @@ public class UserVO {
 		this.enroll = enroll;
 		this.point = point;
 	}
+	public UserVO() {
+		
+	
+	}
 
 	public UserVO(String user_id, String user_pw,String user_pwCheck, String user_name, String user_no, String gender, 
 			String address, String phone, String email ) {

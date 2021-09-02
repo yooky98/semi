@@ -412,23 +412,31 @@ section {
 
 
 
-html, body, div, span, h1, h2, p, a,
-img, var, i, form, label, article, header, section{
+
+
+
+/* =============================================== */
+
+html, body, div, span, h1, h2, p, a, img, var,
+i, form, label, article, header, section, select, option{
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;}
+	vertical-align: baseline;
+	font-family: 'Gowun Batang', serif;
+	word-break: keep-all;
+}
 
 article, header, section {
-	display: block;}
+	display: block;	
+}
 
 body {
 	line-height: 1;
 }
 
-input, textarea {
+input, select, textarea {
 	appearance: none;
 }
 
@@ -438,11 +446,6 @@ input, textarea {
 			min-width: 320px;
 		}
 
-	}
-
-	body.is-preload-0 *, body.is-preload-0 *:before, body.is-preload-0 *:after {
-		animation: none !important;
-		transition: none !important;
 	}
 
 	html {
@@ -482,15 +485,15 @@ input, textarea {
 
 	body {
 		background-color: rgb(239, 240, 227);
-		color: #aaa;
+		color: gray;
 	}
 
-	body, input, textarea {
+	body, input, select, textarea {
 		font-family: "Roboto", Helvetica, sans-serif;
 		font-weight: 400;
 		line-height: 1.65;
-		font-size: 1em;
-		color: #aaa;
+		font-size: 1.1em;
+		color: gray;
 	}
 
 	a {
@@ -519,7 +522,7 @@ input, textarea {
 		}
 
 	h2 {
-		font-size: 1.25em;
+		font-size: 1.2em;
 	}
 
 	hr {
@@ -666,3 +669,74 @@ input, textarea {
 			}
 
 		}
+		
+/* Button */
+
+button
+{
+	appearance: none;
+	transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, color 0.25s ease-in-out;
+	background-color: white;
+	border-radius: 4px;
+	border: solid 1px #ccc;
+	color: #555;
+	cursor: pointer;
+	display: inline-block;
+	line-height: 1;
+	padding: 0.75em 1.5em;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+button:hover {
+	border-color: rgb(158, 164, 107);
+	color: rgb(158, 164, 107);
+}
+
+form {
+		margin: 0 0 1.25em 0;
+}
+
+
+select,
+input[type="text"] {
+		appearance: none;
+		background-color: white;
+		border-radius: 4px;
+		border: solid 1px #ccc;
+		color: black;
+		outline: 0;
+		padding: 0 0.75em;
+		text-decoration: none;
+		margin:5px;
+		font-family: 'Gowun Batang', serif;
+	}
+	
+select{
+	width: 100%;
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' preserveAspectRatio='none' viewBox='0 0 40 40'%3E%3Cpath d='M9.4,12.3l10.4,10.4l10.4-10.4c0.2-0.2,0.5-0.4,0.9-0.4c0.3,0,0.6,0.1,0.9,0.4l3.3,3.3c0.2,0.2,0.4,0.5,0.4,0.9 c0,0.4-0.1,0.6-0.4,0.9L20.7,31.9c-0.2,0.2-0.5,0.4-0.9,0.4c-0.3,0-0.6-0.1-0.9-0.4L4.3,17.3c-0.2-0.2-0.4-0.5-0.4-0.9 c0-0.4,0.1-0.6,0.4-0.9l3.3-3.3c0.2-0.2,0.5-0.4,0.9-0.4S9.1,12.1,9.4,12.3z' fill='%23ccc' /%3E%3C/svg%3E");
+	background-size: 1.25rem;
+	background-repeat: no-repeat;
+	background-position: calc(100% - 1rem) center;
+	height: 2em;
+	padding-right: 2.75em;
+	text-overflow: ellipsis;
+	
+}
+		
+select:focus,
+input[type="text"]:focus{
+	border-color: rgb(158, 164, 107);
+	color : rgb(158, 164, 107);
+}
+
+select option {
+	color: black;
+	background: #fff;
+}
+
+i, .thumbnail{
+	cursor: pointer;
+}
+	

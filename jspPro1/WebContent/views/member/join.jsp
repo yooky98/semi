@@ -6,6 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
+
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
  function sample4_execDaumPostcode() {
@@ -65,13 +75,17 @@
         }).open();
     }
 </script>
+
+
 <link href="<%=request.getContextPath() %>/resources/css/user.css" rel="stylesheet">
 
 </head>
 	
 <body class = "tbody" >
-	<span class="usertitle">회원가입</span>
+
+<%@ include file="../common/menubar.jsp"%>
 	<div class = "userbox">
+	<span class="usertitle">회원가입</span>
 	<table></table>
 	<form method ="post" action = "<%=request.getContextPath() %>/user?command=join">
 	<table class="usertable" style="border-spacing: 0 5px;">
@@ -95,7 +109,8 @@
 	<tr><td><input class="userform" type = "text" name = "phone" maxlength="13" placeholder="전화번호"></td></tr>
 	<tr><td><input class="userform" type = "text" name = "email" maxlength="20" placeholder="이메일"></td></tr>
 	</table>
-<input type = "submit" value = "회원가입" class = "btn">
+	<br>
+<input type = "submit" value = "회원가입" class = "userbtn">
 </form>
 </div>
 

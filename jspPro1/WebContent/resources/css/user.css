@@ -5,6 +5,7 @@
  	text-align: center;
 }
 .userbox{
+	padding-top : 100px;
 	margin : 30px;
 }
 .userform{
@@ -16,11 +17,12 @@
 	border : 1px solid grey;
 }
 .usertable{
+	border-collapse: separate;
 	width: 500px;
 	margin: auto;
-	border-spacing: 0 20px
+	border-spacing: 0 5px
 }
-.btn{
+.userbtn{
 	width: 400px;
 	height: 50px;
 	font-size: 20px;

@@ -3,10 +3,12 @@
     
 <%@ page import="com.kh.member.model.vo.UserVO" %>
     <%
+
     	UserVO loginUser = (UserVO)session.getAttribute("loginUser");
     	
 		String msg = (String)session.getAttribute("msg");
     
+
     	String contextPath = request.getContextPath();
     %>
 <!DOCTYPE html>
