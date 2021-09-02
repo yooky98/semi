@@ -20,7 +20,7 @@ public class UserDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	public UserDao() {
-		String fileName = MemberDao.class.getResource("/sql/member/user-query.properties").getPath();
+		String fileName = UserDao.class.getResource("/sql/member/user-query.properties").getPath();
 		System.out.println("fileName   " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
@@ -108,4 +108,41 @@ public class UserDao {
 		return result;   //8. result가 리턴값에 담겨서 다시 돌아간다.  아이디가 없을경우 ""로 처리된다
 	}
 
+	public UserVO getUser(Connection conn, String user_id) {
+		UserVO vo = new UserVO();  
+		String sql = prop.getProperty("getUser"); 
+		try {
+			pstmt = conn.prepareStatement(sql);  
+			
+			pstmt.setString(1, user_id);     
+			
+						
+			rs = pstmt.executeQuery();
+		
+			
+			if(rs.next()) {    
+			
+				vo.setUser_id(rs.getString(1));
+				vo.setUser_pw(rs.getString(2));
+				vo.setUser_name(rs.getString(3));
+				vo.setUser_no(rs.getString(4));
+				vo.setGender(rs.getString(5));
+				vo.setAddress(rs.getString(6));
+				vo.setPhone(rs.getString(7));
+				vo.setEmail(rs.getString(8));
+				vo.setEnroll(rs.getString(9));
+				vo.setPoint(rs.getInt(10));
+				
+				return vo;
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return vo;   
+	}
 }

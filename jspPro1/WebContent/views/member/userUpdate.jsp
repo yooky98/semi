@@ -76,26 +76,25 @@
     }
 </script>
 
-
+<%@ page import="com.kh.member.model.vo.UserVO" %>
 <link href="<%=request.getContextPath() %>/resources/css/user.css" rel="stylesheet">
-
+<%UserVO loginUser1 = (UserVO)request.getAttribute("loginUser"); %>
 </head>
 	
 <body class = "tbody" >
 
 <%@ include file="../common/menubar.jsp"%>
 	<div class = "userbox">
-	<span class="usertitle">회원가입</span>
+	<span class="usertitle">내 정보</span>
 	<table></table>
-	<form method ="post" action = "<%=request.getContextPath() %>/user?command=join">
+	<form method ="post" action = "<%=request.getContextPath() %>/user?command=userUpdate">
 	<table class="usertable" style="border-spacing: 0 5px;">
-	<tr><td><input class="userform" type = "text" name = "user_id" maxlength="20" placeholder="아이디"> 
+	<tr><td><input class="userform" type = "text" name = "user_id" maxlength="20" placeholder="아이디" value ="<%=loginUser1.getUser_id() %>"> 
 	<input type="button" class = "btnCheck" onclick="idCheck()" value="중복확인"></td></tr>
     <tr><td><input class="userform" type = "password" name = "user_pw" maxlength="20" placeholder="비밀번호"></td></tr>
- 	<tr><td><input class="userform" type = "password" name = "user_pwCheck" maxlength="20" placeholder="비밀번호 확인"></td></tr>
-	<tr><td><input class="userform" type = "text" name = "user_name" maxlength="20" placeholder="이름"></td></tr>
-	<tr><td><input class="userform" style="width:189px;" type = "text" name = "user_no" maxlength="6" placeholder="주민번호 앞자리"> - 
-	<input class="userform" style="width:189px;" type = "text" name = "user_no1" maxlength="7" placeholder="주민번호 뒷자리"></td></tr>
+	<tr><td><input class="userform" type = "text" name = "user_name" maxlength="20"  disabled value = "<%=loginUser1.getUser_name() %>"></td></tr>
+	<tr><td><input class="userform" style="width:189px;" type = "text" name = "user_no" maxlength="6" placeholder="주민번호 앞자리" disabled value = "<%=loginUser1.getUser_no().substring(0,6)%>"> - 
+	<input class="userform" style="width:189px;" type = "text" name = "user_no1" maxlength="7" value="*******" disabled ></td></tr>
 	<tr><td><input class="genderradio" style="width:50px;" type='radio' name='gender' value='M' /><span class="gender">남자</span>
 	<input class="genderradio" style="width:50px;" type='radio' name='gender' value='F' /><span class="gender">여자</span></td></tr>
 	<tr><td><input class="userform" type="text" id="sample4_postcode" name="userPost" placeholder="우편번호"></td></tr>
@@ -110,7 +109,7 @@
 	<tr><td><input class="userform" type = "text" name = "email" maxlength="20" placeholder="이메일"></td></tr>
 	</table>
 	<br>
-<input type = "submit" value = "회원가입" class = "userbtn">
+<input type = "submit" value = "정보 수정" class = "userbtn">
 </form>
 </div>
 
