@@ -19,31 +19,16 @@
 		<!-- Wrapper -->
 	<div id="wrapper">
 	
-				<!-- Header -->
-					<!-- <header id="header">
-					
-					</header> -->
-
-				<!-- Menu -->
-					<!-- <nav id="menu">
-
-
-					</nav> -->
-
 				<!-- Main -->
-		<div id="main">
+		<div id="main" style = user-select:none>
 			<div class="inner">
-				<header>
-					<h1>상품 메인이고, 이 자리는 메뉴자리입니다 이 부분엔 menubar가 들어옵니다.<br>
-						해야할 일 <br>
-						사진 끌어오기, 제품 정보 끌어오기, 사진과 제품 연결하기, detail이 아닌 price 보여주기
-						클릭 했을 때 상품 detailview로 이동하기
-					</h1>
-								
-				</header>
-						<!-- for문 돌려서 등록된 제품만큼 가져오기 -->
+				<br>
+				<br>
+				<input type="search" id = "search" name="search" onkeyup="searchData();">
+				<br>		
+				<br>
 				<section class="tiles">
-								
+					<!-- for문 돌려서 등록된 제품만큼 가져오기 -->
 					<%for(Product p : list){ %>
 						<article>
 							<span class="image">
@@ -71,18 +56,14 @@
 								location.href= "<%=request.getContextPath() %>/detail.pr?pNo=" + pNo;
 							});
 						});
+						
+						function searchData(){
+							if (window.event.keyCode == 13) {
+								alert($("#search").val());
+					        }
+						};
 					</script>
-								<%-- <article>
-									<span class="image">
-										<img src="<%=request.getContextPath() %>/resources/images/city1.PNG" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>제품 1</h2>
-										<div class="content">
-											<p>제품 1의 설명입니다.</p>
-										</div>
-									</a>
-								</article> --%>
+						
 								
 							
 				</section>
