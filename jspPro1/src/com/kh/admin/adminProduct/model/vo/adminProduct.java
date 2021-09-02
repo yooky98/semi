@@ -28,6 +28,7 @@ public class adminProduct {
 		this.titleImg = titleImg;
 	}
 	
+	//SELECT(리스트 조회)
 	public adminProduct(int prodNo, String prodName, String prodCategory, int prodPrice, int prodAmount) {
 		super();
 		this.prodNo = prodNo;
@@ -36,11 +37,16 @@ public class adminProduct {
 		this.prodPrice = prodPrice;
 		this.prodAmount = prodAmount;
 	}
-	
-	//오버로딩 생성자 추후 생성
-	
 
-	
+	//UPDATE(수정)
+	public adminProduct(String prodName, String prodDetail, String prodCategory, int prodPrice, int prodAmount) {
+		super();
+		this.prodName = prodName;
+		this.prodDetail = prodDetail;
+		this.prodCategory = prodCategory;
+		this.prodPrice = prodPrice;
+		this.prodAmount = prodAmount;
+	}
 
 	public int getProdNo() {
 		return prodNo;
