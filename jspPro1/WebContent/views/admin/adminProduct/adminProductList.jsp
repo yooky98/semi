@@ -129,17 +129,29 @@ section {
 									<td><%=list.get(i).getProdName()%></td>
 									<td><%=list.get(i).getProdPrice()%></td>
 									<td><%=list.get(i).getProdAmount()%></td>
-									<td>
-										<button id="modifyProduct" onclick="">수 정</button>
-										<button id="deleteProduct" onclick="">삭 제</button>
+									<td>										
+										<button id="modifyProduct" onclick="updateProd<%=i%>();">수 정</button>
+										<button id="deleteProduct" onclick="deleteProd();">삭 제</button>
+										<form action="" id="postForm" method="post">
+											<input type="hidden" name="prodNo" value="<%= list.get(i).getProdNo() %>">
+										</form>
+										<script>
+											function updateProd<%=i%>(){
+												$("#postForm").attr("action", "<%=request.getContextPath()%>/updateProdForm.ad");
+												$("#postForm").submit();
+											}
+										</script>
 									</td>
+									
 								</tr>
 								<%
 									}
 								%>
+								
 							<%
 								}
 							%>
+							
 						</tbody>
 					</table>
 				</div>

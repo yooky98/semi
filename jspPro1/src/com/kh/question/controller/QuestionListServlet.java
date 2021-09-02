@@ -32,20 +32,26 @@ public class QuestionListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String userId = request.getSession().getAttribute("loginUser").getUserId();
+//		String userId = request.getSession().getAttribute("loginUser");
 		
 		String userId = "user01";
 		
 		ArrayList<QNA> qnaList = new QuesService().selectQuesList(userId);
 		
+		
 		if(qnaList != null) {
 			request.setAttribute("qnaList", qnaList);
 		}else {
-			request.setAttribute("msg", "문의사항이 없습니다.");
+			request.setAttribute("message", "문의사항이 없습니다.");
 		}
 		
+		if(qnaList.isEmpty()) {
+			request.setAttribute("message", "문의사항이 없습니다.");
+		}
+		
+		
+		System.out.println(qnaList == null);
 		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
-		System.out.println(qnaList);
 		
 //		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
 		

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.errorCheck.ErrorCheck;
+import com.kh.member.model.Validation.Validation;
 import com.kh.member.model.service.UserService;
 import com.kh.member.model.vo.UserVO;
 
@@ -18,11 +18,11 @@ import com.kh.member.model.vo.UserVO;
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserService us;
-	ErrorCheck er;
+	Validation vd;
 	public UserServlet() {
 		super();
 		us = new UserService();
-		er = new ErrorCheck();
+		vd = new Validation();
 	}
 
 	protected void processing(HttpServletRequest request, HttpServletResponse response  )
@@ -32,9 +32,12 @@ public class UserServlet extends HttpServlet {
 			join(request, response );
 		}else if(request.getParameter("command").equals("login")){
 			login(request, response);
+		}else if(request.getParameter("command").equals("logout")){
+			logout(request, response);
+		}else if(request.getParameter("command").equals("userUpdate")){
+		userUpdate(request, response);
 		}
 	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response  )
 			throws ServletException, IOException {
 		processing(request, response);
@@ -61,7 +64,7 @@ public class UserServlet extends HttpServlet {
 
 		UserVO vo = new UserVO(user_id, user_pw, user_pwCheck, user_name, user_no, gender, address, phone, email);
 
-		String msg = er.errorMsg(vo);
+		String msg = vd.validationMsg(vo);
 		
 		if(!msg.equals("")){
 				request.setAttribute("msg", msg);
@@ -82,7 +85,7 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 	protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
 		String user_id = request.getParameter("user_id"); //1로그인화면에서 사용자에게 받은 아이디와 비밀번호
 		String user_pw = request.getParameter("user_pw");
 
@@ -98,11 +101,31 @@ public class UserServlet extends HttpServlet {
 			view.forward(request, response);
 		}else {  //12 위에 조건을 타지 않은경우 로그인에 성공한 것이다 메인으로 보낸다
 			HttpSession session = request.getSession();
-			session.setAttribute("user_id", user_id);
+			UserVO vo = us.getUser(user_id);
+			session.setAttribute("loginUser", vo);
+			System.out.println(vo.getAddress());
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			view.forward(request, response);
+			
 		}
 	
+		
+	}
+	
+	protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+		view.forward(request, response);
+		
+	}
+
+	protected void userUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String user_id = request.getParameter("user_id");
+		UserVO vo = us.getUser(user_id);
+		request.setAttribute("loginUser", vo);
+		RequestDispatcher view = request.getRequestDispatcher("views/member/userUpdate.jsp");
+		view.forward(request, response);
 		
 	}
 

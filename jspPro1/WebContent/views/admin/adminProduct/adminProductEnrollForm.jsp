@@ -11,8 +11,6 @@ aside {
 	background-color: yellowgreen;
 }
 
-
-
 #adminWorkArea {
 	height: 800px;
 }
@@ -98,12 +96,15 @@ section {
 					<br>
 					<form id="productEnrollForm" action="enrollProduct.ad" method="post" onsubmit="" enctype="multipart/form-data"> <%-- onsubmit에 빈칸 관련 함수 작성할 것 --%>
 						<table border="1" style="border: 2px solid black">
-							<tr>
+							<%--
+								<tr>
 								<th><label for="prodNo"></label>상품 코드 :</th>
 								<td><input id="prodNo" type="text" name="prodNo"
 									placeholder="ex) A12345"></td>
 								<th>이미지 등록</th>
 							</tr>
+							 --%>
+							
 							<tr>
 								<th><label for="prodCategory"></label>카테고리 :</th>
 								<td><select name="prodCategory" id="prodCategory">
@@ -112,6 +113,8 @@ section {
 										<option value="중형">중형</option>
 										<option value="소형">소형</option>
 								</select></td>
+								<th>이미지 등록</th>
+								<%-- 코드가 없어졌기 때문에 테이블에서 한 칸씩 내려감
 								<td id="prodPictureArea" rowspan="5">
 									<div id="prodPicture">
 										<img id="titleImg" width="400px" height="400px"
@@ -123,26 +126,39 @@ section {
 											onchange="loadImg(this);">
 									</div>
 								</td>
+								 --%>
+								
 							</tr>
 							<tr>
 								<th><label for="prodName">상품명 : </label></th>
 								<td><input id="prodName" type="text" name="prodName"
-									placeholder="ex) 천연 가습기, 아디안텀"></td>
+									placeholder="ex) 천연 가습기, 아디안텀" required></td>
+								<td id="prodPictureArea" rowspan="4">
+									<div id="prodPicture">
+										<img id="titleImg" width="400px" height="400px"
+											style="background-color: gray;">
+
+									</div>
+									<div id="fileArea">
+										<input type="file" name="titleImgFile" id="titleImgFile"
+											accept="image/*" onchange="loadImg(this);" required>
+									</div>
+								</td>
 							</tr>
 							<tr>
 								<th><label for="prodPrice">상품 가격 : </label></th>
 								<td><input id="prodPrice" type="text" name="prodPrice"
-									placeholder="ex) 120,000"></td>
+									placeholder="ex) 120,000" required numberOnly></td>
 							</tr>
 							<tr>
 								<th><label for="prodAmount">재고 수량 : </label></th>
 								<td><input id="prodAmount" type="text" name="prodAmount"
-									placeholder="ex) 30"></td>
+									placeholder="ex) 30" required numberOnly></td>
 							</tr>
 							<tr>
 								<th><label for="prodDetail">상세 정보 : </label></th>
 								<td><textarea name="prodDetail" id="prodDetail" cols="50"
-										rows="10" style="resize: none;" placeholder="상세정보를 입력하세요."></textarea>
+										rows="10" style="resize: none;" placeholder="상세정보를 입력하세요." required></textarea>
 								</td>
 							</tr>
 						</table>
@@ -150,7 +166,7 @@ section {
 						<br>
 						<div class="btns" align="center">
 							<button type="button" onclick="goList();" style="margin-right: 100px; width: 150px;">취 소</button>
-							<button type="submit" style="margin-left: 100px; width: 150px;">확
+							<button type="submit" onclick="checkFile();" style="margin-left: 100px; width: 150px;">확
 								인</button>
 						</div>
 					</form>
@@ -159,16 +175,17 @@ section {
 			</section>
 		</div>
 	</div>
-
+	
 	<script>
+		//취소 버튼 클릭 시 다시 제품 관리 페이지로 이동
 		function goList(){
 			location.href="<%=request.getContextPath()%>/prodList.ad";
 		}
-		
+		//input 버튼 안보이게 설정
 		$(function() {
 			$("#fileArea").hide();
 		});
-		
+		//img를 클릭 시 input이 작동되게 설정
 		$("#titleImg").click(function() {
 			$("#titleImgFile").click();
 		});
@@ -184,11 +201,26 @@ section {
 					console.log(e);
 					$("#titleImg").attr("src", e.target.result);
 				}
-			}
-			;
+			}			
 
 		}
+		
+		//상품 가격, 재고 수량은 정규식으로 숫자만 입력할 수 있게함
+		$("input:text[numberOnly]").on("keyup", function(){
+            $(this).val($(this).val().replace(/[^0-9]/g,""));
+        });
+		//이미지 파일 미등록 시 등록하라는 알림 나오게 설정
+		function checkFile(){
+			var file = $("#titleImgFile").val();
+            //console.log(file)
+            if(file == ""){
+                alert("이미지를 등록하세요.")
+                return false;
+            }
+		}
+		
 	</script>
+	
 
 	<%@ include file="/views/common/footer.jsp"%>
 </body>

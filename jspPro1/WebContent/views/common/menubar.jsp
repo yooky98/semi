@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="com.kh.member.model.vo.Member" %>
+<%@ page import="com.kh.member.model.vo.UserVO" %>
     <%
-    	Member loginUser = (Member)session.getAttribute("loginUser");
+
+    	UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+    	
+		String msg = (String)session.getAttribute("msg");
     
-    	String msg = (String)session.getAttribute("msg");
-    			
+
     	String contextPath = request.getContextPath();
     %>
 <!DOCTYPE html>
@@ -27,30 +29,18 @@
 	}
 </style>
 
+<script>
+	$(function(){
+		var msg = "<%=msg %>";
+		if(msg != "null"){
+			alert(msg);
+			<%session.removeAttribute("msg");%>
+		}
+	})
+</script>
+
 </head>
 <body>
-
-<!--  
-	<div class= "loginArea">
-		<% if(loginUser == null){ %>
-			<div class ="btns" align="center">
-				
-				<button id = "loginBtn" type="submit">로그인</button>
-			    <button id = "enrollBtn" type="button" onclick="enrollPage();">회원가입</button>
-			</div>
-		
-		<%}else{ %>
-		<div id = "userInfo">
-				<b style = "color:white;"><%=loginUser.getUserName() %> 님 </b> 의 방문을 환영합니다.
-				<br><br>
-				<div class ="btns" align="center">
-					<a href = "<%=request.getContextPath() %>/mypage.me">마이페이지</a>
-					<a href = "<%=request.getContextPath() %>/logout.me">로그아웃</a>
-				</div>
-			
-			</div>
-			<%} %>
-	</div> -->
 
 	<header id="header" class="fixed-top">
 
@@ -69,7 +59,7 @@
 					<li><a href="#">brand</a></li>
 					<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
 					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
-					<li><a href="#">adminpage</a></li>
+					<li><a href="<%=request.getContextPath() %>/prodList.ad">adminpage</a></li>
 					<li><a href="<%=request.getContextPath() %>/views/cart/cartListView.jsp">cart</a></li>
 				</ul>
 			</nav>
@@ -81,16 +71,17 @@
 					<li><a href="<%=contextPath%>/views/member/login.jsp">login</a></li>
 					<li><a href="<%=contextPath%>/views/member/join.jsp">sign up</a></li>
 					
-					<%}else if(loginUser.getUserName().equals("admin")){ %>
+					<%}else if(loginUser.getUser_id().equals("admin")){ %>
 					
-					<li><a href="#"><%=loginUser.getUserName() %></a></li>
+					<li><a href="#"><%=loginUser.getUser_name() %></a></li>
 					<li><a href="#">adminpage</a></li>
 					
 					<%}else{ %>
 					
-					<li><a href="#"><%=loginUser.getUserName() %></a></li>
+					<li><a href="#"><%=loginUser.getUser_name() %></a></li>
 					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
 					<li><a href="#">cart</a></li>
+					<li><a href="<%=request.getContextPath() %>/user?command=logout">logout</a></li>
 					
 					<%} %>
 				</ul>

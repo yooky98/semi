@@ -468,7 +468,7 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 				flex-wrap: wrap;
 				position: relative; 
 				margin: -2.5em 0 0 -2.5em;
-				margin-top: 2em;
+				margin-top: 1em;
 			}
 
 			.tiles article {
@@ -476,6 +476,7 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 				position: relative;
 				width: calc(33.33333% - 2.5em);
 				margin: 2.5em 0 0 2.5em;
+				cursor: pointer;
 			}
 
 			.tiles article > .image {
@@ -657,3 +658,25 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 			
 			}
 
+input[type="search"] {
+	display: block;
+	appearance: none;
+	background-color: white;
+	border-radius: 4px;
+	border: solid 1px #ccc;
+	color: black;
+	outline: 0;
+	text-decoration: none;
+	float: right;
+	background-image: url("data:image/svg+xml,%3Csvg id='Capa_1' enable-background='new 0 0 512 512' height='512' viewBox='0 0 512 512' width='512' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3ClinearGradient id='SVGID_1_' gradientTransform='matrix(.999 0 0 -.999 -.029 511.625)' gradientUnits='userSpaceOnUse' x1='16.645' x2='456.012' y1='16.238' y2='455.605'%3E%3Cstop offset='0' stop-color='%2300b59c'/%3E%3Cstop offset='1' stop-color='%239cffac'/%3E%3C/linearGradient%3E%3Cg%3E%3Cpath d='m317.096.018c-145.874-2.008-242.564 162.012-171.053 288.204l-129.69 129.69c-49.547 53.468 24.328 127.263 77.737 77.738l129.689-129.69c126.228 71.514 290.211-25.197 288.202-171.055.002-107.46-87.423-194.887-194.885-194.887zm-244.208 474.431c-24.303 22.521-57.847-11.059-35.335-35.335l125.269-125.27c10.223 13.229 22.105 25.112 35.335 35.335zm244.208-114.638c-90.929 0-164.905-73.976-164.905-164.905 8.29-218.468 321.553-218.409 329.81.002 0 90.928-73.976 164.903-164.905 164.903zm0-279.839c-63.374 0-114.934 51.559-114.934 114.934 5.779 152.266 224.113 152.224 229.868-.001-.001-63.374-51.56-114.933-114.934-114.933zm0 199.885c-46.842 0-84.951-38.109-84.951-84.951 4.271-112.544 165.649-112.513 169.902.001 0 46.841-38.109 84.95-84.951 84.95z' fill='url(%23SVGID_1_)'/%3E%3C/g%3E%3C/svg%3E");
+	background-size: 1.25rem;
+	background-repeat: no-repeat;
+	background-position: calc(100% - 0.6rem) center;
+	height: 2em;
+	padding-right: 2.0em;
+	text-overflow: ellipsis;
+}
+input[type="search"]:focus {
+	border-color: rgb(158, 164, 107);
+	color : rgb(158, 164, 107);
+}
