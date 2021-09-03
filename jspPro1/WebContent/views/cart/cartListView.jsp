@@ -25,16 +25,14 @@
         .container{
                  padding: auto;
         }
-        .totalContain{
-                 text-align: center;
-        }
-        .buttonContain{
-                 display: flex;
-                justify-content: center;   
-        }
-        .btn_cart{
-                 text-align: center;
-        }
+        #btn-color1{
+                  border-color: rgb(224, 224, 224);
+                 background-color: rgb(224, 224, 224);
+       }
+       #btn-color2{
+                  border-color: rgb(158, 164, 107);
+                 background-color: rgb(158, 164, 107);
+       }
     </style>
     
 </head>
@@ -73,17 +71,36 @@
           </tr>
         </tbody>
       </table>
-      <div class="totalContain">
-        <div><h5>상품가격 :</h5></div>
-        <div><h5>배송비 : </h5>5만원이상이면 0원</div>
-        <div><h5>결제 금액 : </h5>총가격 나올곳</div>
-      </div>
-      <div class="buttonContain">
-        <div><input type="button" class="btn_cart" id="btn_order" value="주문하기"></div>
-        <div><input type="button" class="btn_cart" id="btn_back" value="쇼핑계속하기"></div>
-      </div>
+    <body>
+    <form class="form-horizontal float-right ">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-8 control-label">상품가격</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputEmail3" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-8 control-label">배송비</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPassword3" >
+          </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-8 control-label">결제 예상금액</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" >
+            </div>
+          </div>
+        <div class="form-group" >
+          <div class="col-sm-offset-2 col-sm-12">
+            <button type="submit" id="btn-color1" >계속 쇼핑하기</button>
+            <button type="submit" id="btn-color2">주문하기</button>
+          </div>
+        </div>
+      </form>
     </div>
-</div>
+
 
 </body>
 </html>
