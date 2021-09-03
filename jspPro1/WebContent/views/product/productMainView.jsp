@@ -22,10 +22,17 @@
 				<!-- Main -->
 		<div id="main" style = user-select:none>
 			<div class="inner">
+				
+				<!-- <input type="search" id = "search" name="search" onkeyup="searchData();"> -->
+				<div class="searchBox">
+					<form>
+						<input type = "text" name = "search" id = "search" placeholder = "검색어를 입력하세요">
+						<input type = "button" id = "btn" value = "제품명">
+					</form>
+				</div>
 				<br>
 				<br>
-				<input type="search" id = "search" name="search" onkeyup="searchData();">
-				<br>		
+				<br>
 				<br>
 				<section class="tiles">
 					<!-- for문 돌려서 등록된 제품만큼 가져오기 -->
@@ -41,13 +48,12 @@
 								<h2><%=p.getProdName() %></h2>
 								<div class="content">
 									<p><%=p.getProdPrice() %>원</p>
+									<input type="hidden" id = "price" value="<%= p.getProdPrice() %>">
 								</div>
 							</a>
 						</article> 
-
-
-
-					<%} %>					
+					<%} %>		
+								
 					<script>
 						$(function(){
 							$(".productImg").click(function(){
@@ -57,11 +63,47 @@
 							});
 						});
 						
-						function searchData(){
+						// 검색기능
+						$(function(){
+							$("#btn").click(function(){
+								if($("#btn").val() == "제품명"){
+									$("#btn").val("가격")
+								}else{
+									$("#btn").val("제품명")
+								}
+							})
+						})
+						
+						$(function(){
+							$("#search").keyup(function(){
+								var k = $(this).val();	
+								// 모든 article 숨기기
+								$("article").hide();
+								
+								if($("#btn").val() == "제품명"){
+									// 제품명으로 조회
+									var temp = $("article > a > h2:contains('"+k+"')");
+									$(temp).parent().parent().show();
+									
+								} else {
+									// 지정가격 이하만 출력
+									var temp = $("article > a > .content > #price");
+
+									for(var i = 0 ; i<temp.length; i++){
+										if(Number(temp.eq(i).val()) <= Number(k)){
+											$(temp.eq(i)).parent().parent().parent().show();
+										}
+									}	
+								}
+							})
+						})
+						
+						//enter키 관련 이벤트
+						/* function searchData(){
 							if (window.event.keyCode == 13) {
 								alert($("#search").val());
 					        }
-						};
+						}; */
 					</script>
 						
 								
