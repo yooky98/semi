@@ -1,7 +1,6 @@
 package com.kh.admin.adminProduct.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.adminProduct.model.service.adminProductService;
-import com.kh.admin.adminProduct.model.vo.adminProduct;
 
 /**
- * Servlet implementation class adminProductListServlet
+ * Servlet implementation class adminProductDeleteServlet
  */
-@WebServlet("/prodList.ad")
-public class adminProductListServlet extends HttpServlet {
+@WebServlet("/deleteProd.ad")
+public class adminProductDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminProductListServlet() {
+    public adminProductDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +30,17 @@ public class adminProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<adminProduct> list = new adminProductService().selectList();		
+		int prodNo = Integer.parseInt(request.getParameter("prodNo"));
+		System.out.println("삭제할 서블릿에서 넘어온 prodNo : " + prodNo);
+		int result = new adminProductService().deleteProduct(prodNo);
+		System.out.println("삭제 result : " + result);
 		
-		request.setAttribute("list", list);
-		System.out.println("list : " + list);
-		
-		request.getRequestDispatcher("views/admin/adminProduct/adminProductList.jsp").forward(request, response);
+		if(result > 0) {
+			response.sendRedirect("prodList.ad");
+		}else {
+			request.setAttribute("msg", "제품 삭제 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 		
 	}
 

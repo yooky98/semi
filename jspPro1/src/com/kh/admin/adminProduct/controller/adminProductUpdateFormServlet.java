@@ -40,15 +40,17 @@ public class adminProductUpdateFormServlet extends HttpServlet {
 		Attachment at = new adminProductService().selectAttachment(prodNo);
 		
 		System.out.println("서블릿prodNo : " + prodNo);
-		//System.out.println("서블릿ap : " + ap + ", prodNo : " + ap.getProdNo());
+		System.out.println("서블릿ap : " + ap);
+		System.out.println("서블릿at : " + at);
+		System.out.println("prodDetail : " + ap.getProdDetail());
 		
 		//전달받은 정보를 수정할 화면으로 넘겨줌
-		if(ap != null) {
+		if(ap != null && at != null) {
 			request.setAttribute("ap", ap);
 			request.setAttribute("at", at);
 			request.getRequestDispatcher("views/admin/adminProduct/adminProductUpdateForm.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "수정할 제품 불러오기 실패");
+			request.setAttribute("msg", "수정할 제품 불러오기 실패\nPRODUCT랑 ATTACHMENT FK맞춰야함");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		

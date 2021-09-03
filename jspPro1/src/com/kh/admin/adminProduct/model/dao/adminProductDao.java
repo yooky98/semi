@@ -147,7 +147,7 @@ public class adminProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		//selectProduct=SELECT PROD_CATEGORY, PROD_NAME, PROD_PRICE, PROD_AMOUNT, PROD_DETAIL FROM PRODUCT WHERE PROD_STATUS = 'Y' AND PROD_NO=?
+		//selectProduct=SELECT PROD_NO, PROD_CATEGORY, PROD_NAME, PROD_PRICE, PROD_AMOUNT, PROD_DETAIL FROM PRODUCT WHERE PROD_STATUS = 'Y' AND PROD_NO=?
 		String sql = prop.getProperty("selectProduct");
 		
 		try {
@@ -167,6 +167,7 @@ public class adminProductDao {
 				
 				ap = new adminProduct();
 				
+				ap.setProdNo(rset.getInt("PROD_NO"));
 				ap.setProdCategory(rset.getString("PROD_CATEGORY"));
 				ap.setProdName(rset.getString("PROD_NAME"));
 				ap.setProdPrice(rset.getInt("PROD_PRICE"));
@@ -193,7 +194,7 @@ public class adminProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		//selectAttachment=SELECT FILE_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH FROM ATTACHMENT WHERE REF_PNO=?
+		//selectAttachment=SELECT FILE_NO, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, REF_PNO FROM ATTACHMENT WHERE REF_PNO=?
 		String sql = prop.getProperty("selectAttachment");
 		
 		try {
@@ -208,6 +209,7 @@ public class adminProductDao {
 				at.setOriginName(rset.getString("ORIGIN_NAME"));
 				at.setChangeName(rset.getString("CHANGE_NAME"));
 				at.setFilePath(rset.getString("FILE_PATH"));
+				at.setRef_pno(rset.getInt("REF_PNO"));
 			}
 			
 			
@@ -220,6 +222,124 @@ public class adminProductDao {
 		}
 		
 		return at;
+	}
+
+	public int updateProduct(Connection conn, adminProduct ap) {
+		
+		System.out.println("수정전ap : " + ap);
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		//updateProduct=UPDATE PRODUCT SET 
+		//PROD_NAME=?, PROD_DETAIL=?, PROD_CATEGORY=?, PROD_PRICE=?, PROD_AMOUNT=? WHERE PROD_NO=?
+		String sql = prop.getProperty("updateProduct");		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, ap.getProdName());
+			pstmt.setString(2, ap.getProdDetail());
+			pstmt.setString(3, ap.getProdCategory());
+			pstmt.setInt(4, ap.getProdPrice());
+			pstmt.setInt(5, ap.getProdAmount());
+			pstmt.setInt(6, ap.getProdNo());
+			
+			result = pstmt.executeUpdate();			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}		
+		
+		System.out.println("수정후ap : " + ap);
+		System.out.println("수정result : " + result);
+		
+		return result;
+	}
+
+	public int updateAttachment(Connection conn, Attachment at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		// #쿼리 나중에 정확하게 수정
+		//updateAttachment=UPDATE ATTACHMENT SET
+		//ORIGIN_NAME=?, CHANGE_NAME=?, FILE_PATH=? WHERE REF_PNO=? AND FILE_NO=?
+
+		String sql = prop.getProperty("updateAttachment");		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			pstmt.setInt(4, at.getRef_pno());
+			pstmt.setInt(5, at.getFileNo());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}	
+		
+		return result;
+	}
+
+	public int deleteProduct(Connection conn, int prodNo) {
+
+		int result =0;
+		PreparedStatement pstmt = null;
+		
+		//상품 삭제는 STATUS를 N으로 변경해서 삭제
+		//deleteProduct=UPDATE PRODUCT SET PROD_STATUS='N' WHERE PROD_NO=?
+		String sql = prop.getProperty("deleteProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, prodNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}	
+		
+		return result;
+	}
+
+	public int deleteAttachment(Connection conn, int ref_pno) {		
+		
+		int result =0;
+		PreparedStatement pstmt = null;
+		
+		//이미지 삭제는 현재 STATUS 컬럼이 없으므로 DELETE문 사용(나중에 변경)
+		//deleteAttachment=DELETE FROM ATTACHMENT WHERE REF_PNO=?
+		String sql = prop.getProperty("deleteAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, ref_pno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}	
+		
+		return result;
 	}
 
 }

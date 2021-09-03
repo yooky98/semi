@@ -4,6 +4,7 @@
 <%
 	adminProduct ap = (adminProduct)request.getAttribute("ap");
 	Attachment at = (Attachment)request.getAttribute("at");
+	
 	String category = ap.getProdCategory();
 	String[] selected = new String[3];
 	
@@ -18,6 +19,8 @@
 		selected[2]="selected";
 		break;
 	}
+	
+	String fileRoute = request.getContextPath() + "/resources/images/" + at.getChangeName();
 %>
 <!DOCTYPE html>
 <html>
@@ -82,6 +85,10 @@ section {
 #prodPicture {
 	border: 1px solid red;
 }
+#prodTable input, #prodTable textarea{
+	border: none;
+}
+
 </style>
 </head>
 <body>
@@ -113,8 +120,11 @@ section {
 				<div class="productEnrollArea">
 					<h3 style="text-align: center;">제품 수정</h3>
 					<br>
-					<form id="productEnrollForm" action="enrollProduct.ad" method="post" onsubmit="" enctype="multipart/form-data"> <%-- onsubmit에 빈칸 관련 함수 작성할 것 --%>
-						<table border="1" style="border: 2px solid black">
+					<form id="productEnrollForm" action="updateProd.ad" method="post" onsubmit="" enctype="multipart/form-data"> <%-- onsubmit에 빈칸 관련 함수 작성할 것 --%>
+						
+						<input type="hidden" name="prodNo" value="<%=ap.getProdNo()%>">
+						<input type="hidden" name="fileNo" value="<%=at.getFileNo()%>">
+						<table style="border: 2px solid black" id="prodTable">
 							
 							
 							<tr>
@@ -125,7 +135,7 @@ section {
 										<option value="중형" <%=selected[1] %>>중형</option>
 										<option value="소형" <%=selected[2] %>>소형</option>
 								</select></td>
-								<th>이미지 등록</th>								
+								<th>기존 이미지(클릭하여 새로 등록하세요.)</th>								
 								
 							</tr>
 							<tr>
@@ -134,10 +144,11 @@ section {
 									placeholder="ex) 천연 가습기, 아디안텀" required></td>
 								<td id="prodPictureArea" rowspan="4">
 									<div id="prodPicture">
-									<% if(at != null){ %>
-										<img id="titleImg" width="400px" height="400px" src="<%=at.getFilePath() %>"
+									
+										
+										<img id="titleImg" width="400px" height="400px" src="<%=fileRoute %>"
 											style="background-color: gray;">
-									<% } %>
+									
 									</div>
 									<div id="fileArea">
 									
@@ -158,11 +169,9 @@ section {
 									placeholder="ex) 30" onfocus="this.select()" required numberOnly></td>
 							</tr>
 							<tr>
-								<th><label for="prodDetail">상세 정보 : </label></th>
+								<th style="vertical-align: top;"><label for="prodDetail">상세 정보 : </label></th>
 								<td><textarea name="prodDetail" id="prodDetail" onfocus="this.select()"
-										cols="50" rows="10" style="resize: none;" placeholder="상세정보를 입력하세요." required>
-										<%=ap.getProdDetail() %>
-										</textarea>
+										cols="50" rows="10" style="resize: none;" placeholder="상세정보를 입력하세요." required><%=ap.getProdDetail() %></textarea>
 								</td>
 							</tr>
 						</table>
