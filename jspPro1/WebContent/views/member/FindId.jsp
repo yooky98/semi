@@ -21,21 +21,19 @@
 <body class = tbody>
 <%@ include file="../common/menubar.jsp"%>
 	<div class = "userbox">
-	<span class="usertitle">로그인</span>
-	<form method="post" action="<%=request.getContextPath() %>/user?command=login">
+	<span class="usertitle">아이디 찾기</span>
+	<form method="post" action="<%=request.getContextPath() %>/user?command=FindId"> 
 	
 	<table class = "usertable">
-	<tr><td><input type = "text" class = "userform" name = "user_id" maxlength="20" placeholder="아이디"></td></tr>  
+	<tr><td><input type = "text" class = "userform" name = "user_name" maxlength="10" placeholder="이름"></td></tr>  
 	
-	<tr><td><input type = "password" class = "userform" name = "user_pw" placeholder="비밀번호"></td> </tr>
+	<tr><td><input type = "text" class = "userform" name = "Email" placeholder="이메일"></td> </tr>
 					
 		</table>
 		
-		<input type = "submit" value = "LOGIN" class = "userbtn">
+		<input type = "submit" value = "아이디 찾기" class = "userbtn">
 	</form>
 	
-	<a href="<%=contextPath%>/views/member/FindId.jsp">아이디 찾기</a><br>
-	<a href="<%=request.getContextPath() %>/user?command=FindPw">비밀번호 찾기</a>
 	</div>
 </body>
 </html>

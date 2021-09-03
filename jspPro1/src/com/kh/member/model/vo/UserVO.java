@@ -32,6 +32,16 @@ public class UserVO {
 		
 	
 	}
+	public UserVO(String user_id, String user_pw,
+			String address, String phone, String email) {
+		
+		this.user_id = user_id;
+		this.user_pw = user_pw;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+
+	}
 
 	public UserVO(String user_id, String user_pw,String user_pwCheck, String user_name, String user_no, String gender, 
 			String address, String phone, String email ) {
