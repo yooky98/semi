@@ -1,5 +1,5 @@
 package com.kh.admin.adminProduct.model.service;
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
@@ -66,6 +66,46 @@ public class adminProductService {
 		close(conn);
 		
 		return at;
+	}
+
+	public int updateProduct(adminProduct ap, Attachment at) {
+		
+		Connection conn = getConnection();
+		
+		int result1 = new adminProductDao().updateProduct(conn, ap);
+		int result2 = 1;
+		
+		if(at != null) {
+			result2 = new adminProductDao().updateAttachment(conn, at);
+		}
+		
+		if(result1*result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1*result2;		
+	}
+
+	public int deleteProduct(int prodNo) {
+
+		Connection conn = getConnection();
+		
+		int result1 = new adminProductDao().deleteProduct(conn, prodNo);
+		int result2 = new adminProductDao().deleteAttachment(conn, prodNo);		
+		
+		if(result1*result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1*result2;	
 	}
 	
 	
