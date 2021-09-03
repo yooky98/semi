@@ -145,4 +145,28 @@ public class UserDao {
 		}
 		return vo;   
 	}
+	public int userUpdate(Connection conn, UserVO vo) {
+		int result = 0 ;
+		String sql = prop.getProperty("userUpdate");
+				
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setString(1, vo.getAddress());
+			pstmt.setString(2, vo.getPhone());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(4, vo.getUser_id());
+			result = pstmt.executeUpdate(); //실패 = 0  성공 = 1
+
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

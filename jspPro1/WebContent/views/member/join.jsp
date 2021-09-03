@@ -110,6 +110,7 @@
 	<tr><td><input class="userform" type = "text" name = "email" maxlength="20" placeholder="이메일"></td></tr>
 	</table>
 	<br>
+	
 <input type = "submit" value = "회원가입" class = "userbtn">
 </form>
 </div>

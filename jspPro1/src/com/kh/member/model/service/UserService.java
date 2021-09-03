@@ -49,6 +49,17 @@ public class UserService {
 		
 		return dao.getUser(conn,  user_id);
 	}
-	
-	
+	public int userUpdate(UserVO vo) {
+		Connection conn = getConnection();
+		int result = dao.userUpdate(conn, vo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
 }
