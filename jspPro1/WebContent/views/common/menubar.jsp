@@ -64,7 +64,7 @@
 				</ul>
 			</nav>
 
-			<div class="nav-menu">
+			<div class="dropdown nav-menu ">
 				<ul>
 					<% if(loginUser == null) {%>
 				
@@ -78,7 +78,14 @@
 					
 					<%}else{ %>
 					
-					<li><a href="#"><%=loginUser.getUser_name() %></a></li>
+					<li><a class="dropdown-toggle" data-toggle="dropdown" ><%=loginUser.getUser_name() %></a>
+					<div class="dropdown-menu">
+      					<a class="dropdown-item" href="#">회원정보 수정</a>
+      					<a class="dropdown-item" href="#">회원 탈퇴</a>
+     					<a class="dropdown-item" href="#">로그아웃</a>
+    				</div>
+					</li>
+
 					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
 					<li><a href="#">cart</a></li>
 					<li><a href="<%=request.getContextPath() %>/user?command=logout">logout</a></li>
