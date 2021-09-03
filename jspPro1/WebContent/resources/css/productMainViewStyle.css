@@ -467,8 +467,8 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 				display: flex;
 				flex-wrap: wrap;
 				position: relative; 
-				margin: -2.5em 0 0 -2.5em;
-				margin-top: 1em;
+				margin: -3.5em 0 0 -7.5em;
+				margin-top: -2em;
 			}
 
 			.tiles article {
@@ -580,6 +580,47 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 				margin: 0 auto;
 				padding: 0 2.5em;
 			}
+			
+.searchBox{
+ 	position: absolute;
+ 	top : 100px;
+ 	right : 5%;
+}
+ 
+input[type="text"],
+input[type="button"]{
+	margin: 0;
+	padding: 0;
+	position: relative;
+	display: inline-block;
+	font-size: 20px;
+	box-sizing: border-box;
+	height: 40px;
+	border:none;
+	outline:none;
+	transition: .5s;
+}
+
+input[type="text"]{
+	padding: 0 25px;
+	border-radius: 25px 0 0 25px;
+	right: -5px;
+}
+
+input[type="button"]{
+	position: relative;
+	border-radius: 0 25px 25px 0;
+	background: rgb(158, 164, 107);
+	width: 90px;
+	color : white;
+}
+
+input[type="button"]:hover{
+	background: rgb(98, 104, 47);
+}
+			
+			
+			
 
 			/* 반응형 */
 			@media screen and (max-width: 1680px) {
@@ -597,7 +638,7 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 				}
 			
 				.tiles {
-					margin: -1.25em 0 0 -1.25em;
+					margin: -0.25em 0 0 -1.25em;
 				}
 
 				.tiles article {
@@ -610,7 +651,7 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 			@media screen and (max-width: 980px) {
 			
 				.tiles {
-					margin: -2.5em 0 0 -2.5em;
+					margin: -0.5em 0 0 -2.5em;
 				}
 
 				.tiles article {
@@ -623,7 +664,7 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 			@media screen and (max-width: 736px) {
 
 				.tiles {
-					margin: -1.25em 0 0 -1.25em;
+					margin: -0.25em 0 0 -1.25em;
 				}
 
 				.tiles article {
@@ -655,10 +696,24 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 					width: 100%;
 					margin: 1.25em 0 0 0;
 				}
+				
+				.searchBox{ 					
+ 					width : 70%;
+				}
+				
+				input[type="text"]{
+					width : 100%;
+					border-radius: 25px 25px 25px 25px;
+				
+				}
+				input[type="button"]{
+					display:none;
+					
+				}
 			
 			}
 
-input[type="search"] {
+/* input[type="search"] {
 	display: block;
 	appearance: none;
 	background-color: white;
@@ -680,3 +735,5 @@ input[type="search"]:focus {
 	border-color: rgb(158, 164, 107);
 	color : rgb(158, 164, 107);
 }
+ */
+ 
