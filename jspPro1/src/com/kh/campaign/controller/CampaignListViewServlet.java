@@ -1,6 +1,7 @@
-package com.kh.question.controller;
+package com.kh.campaign.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.question.model.service.QuesService;
-import com.kh.question.model.vo.QNA;
+import com.kh.campaign.model.service.CampService;
+import com.kh.campaign.model.vo.Campaign;
 
 /**
- * Servlet implementation class QuestionUpdateServlet
+ * Servlet implementation class CampaignListViewServlet
  */
-@WebServlet("/update.que")
-public class QuestionUpdateServlet extends HttpServlet {
+@WebServlet("/list.cam")
+public class CampaignListViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionUpdateServlet() {
+    public CampaignListViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +32,14 @@ public class QuestionUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int qno = Integer.parseInt(request.getParameter("qno"));
-		String qnaCategory = request.getParameter("qnaCategory");
-		String qnaTitle = request.getParameter("qnaTitle");
-		String qnaContent = request.getParameter("qnaContent").replaceAll("\n", "<br>");
+		ArrayList<Campaign> campList = new CampService().selectCampList();
 		
-		QNA qna = new QNA(qno, qnaTitle, qnaContent, qnaCategory);
-		
-		int result = new QuesService().updateQuestion(qna);
-		
-		if(result > 0) {
-			request.getSession().setAttribute("msg", "문의사항 수정이 완료되었습니다.");
+		if(campList != null) {
+			request.setAttribute("campList", campList);
+			request.getRequestDispatcher("views/campaign/campaignListView.jsp").forward(request, response);
 		}else {
-			request.getSession().setAttribute("msg", "문의사항 수정에 실패했습니다.");
+			request.setAttribute("msg", "캠페인 조회 실패");
 		}
-		
-		response.sendRedirect("list.que");
 		
 	}
 

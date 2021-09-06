@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.campaign.model.vo.Campaign"%>
+<%
+
+	ArrayList<Campaign> campList = (ArrayList<Campaign>)request.getAttribute("campList");
+
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,28 +42,24 @@
 
 		<div class="mainSection col-sm-10">
 			<h3>Campaign</h3>
-
 			<hr>
 
-			<h6>강원 산불 피해 복구 숲 조성 캠패인</h6>
+			<%for(Campaign camp : campList) {%>
+			<input type="hidden" value="<%=camp.getCampNO()%>">
+			<h6><%= camp.getCampName() %></h6>
 			<hr>
-
-			<h6>미세먼지 방지 실내 숲 조성 캠패인</h6>
-			<hr>
-			
+			<%} %>
 		</div>
 
 	</div>
 
 <script>
 
-<%--!list.isEmpty()--%>
-<%if(true){%>
+<%if(!campList.isEmpty()){%>
 	$(function(){
 		$(".mainSection>h6").click(function(){
-			var campNo = $(this).val();
-			<%--location.href= "<%=request.getContextPath()%>/?campNo="+campNo;--%>
-			location.href="<%=request.getContextPath()%>/views/campaign/campaignDetailView.jsp";
+			var campNo = $(".mainSection>input").val();
+			location.href= "<%=request.getContextPath()%>/detail.cam?campNo="+campNo;
 		})		
 	})
 <%}%>
