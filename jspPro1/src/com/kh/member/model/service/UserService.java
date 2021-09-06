@@ -62,4 +62,24 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+	public int userDelete(String user_id) {    //3 받아온 아이디와 DB와 연결시켜서 dao 로그인 체크로 넘겨준다
+		Connection conn = getConnection();
+		int result = dao.userDelte(conn, user_id);   //9. dao에서 담긴 result가 넘어온다 
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	public String findId(String user_name, String user_no) {
+		
+		
+		Connection conn = getConnection();
+		String result = dao.findId(conn,  user_name, user_no);   //9. dao에서 담긴 result가 넘어온다 
+		return result;
+	}
+	
 }

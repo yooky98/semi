@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.kh.member.model.vo.Member;
 import com.kh.member.model.vo.UserVO;
 
 public class UserDao {
@@ -168,5 +167,51 @@ public class UserDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	public int userDelte(Connection conn, String user_id) {
+		int result = 0;                          // result 초기화
+		String sql = prop.getProperty("userDelete"); //4쿼리문 작성
+		try {
+			pstmt = conn.prepareStatement(sql);  
+			
+			pstmt.setString(1, user_id);     // 5입력한 id가 쿼리문에 들어가서 작동한다 
+		
+						
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;   //8. result가 리턴값에 담겨서 다시 돌아간다.  아이디가 없을경우 ""로 처리된다
+}
+	public String findId(Connection conn, String user_name, String user_no) {
+		String result = "";                         
+		String sql = prop.getProperty("findId");
+		System.out.println(user_no+"111");
+		try {
+			pstmt = conn.prepareStatement(sql);  
+			
+			pstmt.setString(1, user_name);
+			pstmt.setString(2, user_no);
+						
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {    
+				result = rs.getString(1);  
+			
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;   //8. result가
 	}
 }

@@ -21,22 +21,20 @@
 <body class = tbody>
 <%@ include file="../common/menubar.jsp"%>
 	<div class = "userbox">
-	<span class="usertitle">로그인</span>
-	<form method="post" action="<%=request.getContextPath() %>/user?command=login">
+	<span class="usertitle">회원탈퇴</span>
+	<form method="post" action="<%=request.getContextPath() %>/user?command=userDelete">
 	
 	<table class = "usertable">
-	<tr><td><input type = "text" class = "userform" name = "user_id" maxlength="20" placeholder="아이디"></td></tr>  
-	
+	<tr><td><input type = "text" class = "userform" maxlength="20" value=<%=loginUser.getUser_id()%> disabled></td></tr>  
+	<tr><td><input type="hidden" name="user_id" value=<%=loginUser.getUser_id()%>></td></tr>
 	<tr><td><input type = "password" class = "userform" name = "user_pw" placeholder="비밀번호"></td> </tr>
 					
 		</table>
 		
-		<input type = "submit" value = "LOGIN" class = "userbtn">
+		<input type = "submit"  value = "탈퇴하기" class = "userbtn" onclick = "return confirm('정말 탈퇴 하시겠습니까?')" >
+		
 	</form>
-	<br>
-	<input type="button" class="userbtn"
-	 onclick="window.open('<%=contextPath%>/views/member/findId.jsp', name,'width = 500, height = 300, top = 300, left = 700, location = no')" value="아이디 찾기"><br>
-	<a href="<%=request.getContextPath() %>/user?command=FindPw">비밀번호 찾기</a>
+
 	</div>
 </body>
 </html>

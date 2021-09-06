@@ -98,10 +98,10 @@
 	<input class="userform" style="width:189px;" type = "text" name = "user_no1" maxlength="7" placeholder="주민번호 뒷자리"></td></tr>
 	<tr><td><input class="genderradio" style="width:50px;" type='radio' name='gender' value='M' /><span class="gender">남자</span>
 	<input class="genderradio" style="width:50px;" type='radio' name='gender' value='F' /><span class="gender">여자</span></td></tr>
-	<tr><td><input class="userform" type="text" id="sample4_postcode" name="userPost" placeholder="우편번호"></td></tr>
+	<tr><td><input class="userform" type="text" id="sample4_postcode" name="userPost" placeholder="우편번호" readonly></td></tr>
 	<tr><td><input class="userform" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></td></tr>
-	<tr><td><input class="userform" type="text" id="sample4_roadAddress" name="userAddress"placeholder="도로명주소" size="60"></td></tr>
-	<tr><td><input class="userform" type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="60"></td></tr>
+	<tr><td><input class="userform" type="text" id="sample4_roadAddress" name="userAddress"placeholder="도로명주소" size="60" readonly></td></tr>
+	<tr><td><input class="userform" type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="60"disabled></td></tr>
 	<tr><td><span class="userform" id="guide" style="color:#999;display:none"></span></td></tr>
 	<tr><td><input class="userform" type="text" id="sample4_detailAddress" name="userAddress1" placeholder="상세주소"  size="60" ></td></tr>
 	<tr><td><input class="userform" type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="60" ></td></tr>

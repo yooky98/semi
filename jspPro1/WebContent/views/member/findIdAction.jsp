@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width-device-width,initial-scale=1">
 <title>Insert title here</title>
 <link href="<%=request.getContextPath() %>/resources/css/user.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
@@ -18,25 +19,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
  
 </head>
-<body class = tbody>
-<%@ include file="../common/menubar.jsp"%>
-	<div class = "userbox">
-	<span class="usertitle">로그인</span>
-	<form method="post" action="<%=request.getContextPath() %>/user?command=login">
-	
-	<table class = "usertable">
-	<tr><td><input type = "text" class = "userform" name = "user_id" maxlength="20" placeholder="아이디"></td></tr>  
-	
-	<tr><td><input type = "password" class = "userform" name = "user_pw" placeholder="비밀번호"></td> </tr>
-					
-		</table>
-		
-		<input type = "submit" value = "LOGIN" class = "userbtn">
-	</form>
-	<br>
-	<input type="button" class="userbtn"
-	 onclick="window.open('<%=contextPath%>/views/member/findId.jsp', name,'width = 500, height = 300, top = 300, left = 700, location = no')" value="아이디 찾기"><br>
-	<a href="<%=request.getContextPath() %>/user?command=FindPw">비밀번호 찾기</a>
+<body class = "tbody">
+<% String findId=(String)request.getAttribute("findId"); %>
+	<div class = "userbox" style="margin:auto;text-align:center;padding-top:110px;">
+	<span class="usertitle" style="font-size: 20px;" >회원님의 아이디는 <span style="color:red;font-size: 25px;"><%=findId%></span>입니다.</span><br><br>
 	</div>
 </body>
 </html>

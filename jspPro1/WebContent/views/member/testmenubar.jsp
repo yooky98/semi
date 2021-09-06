@@ -83,6 +83,7 @@
 					<li><a href="#">cart</a></li>
 					<li><a href="<%=request.getContextPath() %>/user?command=logout">logout</a></li>
 					<li><a href="<%=request.getContextPath() %>/views/member/userUpdate.jsp">회원정보</a></li>
+					<li><a href="<%=request.getContextPath() %>/views/member/userDelete.jsp">탈퇴</a></li>
 					
 					<%} %>
 				</ul>
