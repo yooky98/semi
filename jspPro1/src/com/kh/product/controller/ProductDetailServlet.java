@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.UserVO;
 import com.kh.product.model.service.ProductService;
 import com.kh.product.model.vo.Product;
+import com.kh.wish.model.service.WishService;
+import com.kh.wish.model.vo.Wish;
 
 /**
  * Servlet implementation class ProductDetailServlet
@@ -33,7 +36,15 @@ public class ProductDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pNo = Integer.parseInt(request.getParameter("pNo"));
-
+		String userId = "";
+		ArrayList<Wish> w_list = null;
+		
+		// 비회원도 조회할 수 있도록, 찜은 세션에 loginUser가 있을때만 담아옴
+		if(request.getSession().getAttribute("loginUser")!=null) {
+			userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
+			w_list = new WishService().selectWList(userId);
+			request.setAttribute("w_list", w_list);
+		}
 		Product p = new ProductService().selectProduct(pNo);
 		ArrayList<Product> list = new ProductService().selectPrList();
 		

@@ -15,7 +15,7 @@ import com.kh.product.model.vo.Product;
 
 public class ProductDao {
 
-private Properties prop = new Properties();
+	private Properties prop = new Properties();
 	
 	public ProductDao() {
 		String fileName = ProductDao.class.getResource("/sql/product/product-query.properties").getPath();
@@ -98,6 +98,7 @@ private Properties prop = new Properties();
 			if(rset.next()) {
 				p = new Product();
 				
+				p.setProdNo(rset.getInt("PROD_NO"));
 				p.setProdName(rset.getString("PROD_NAME"));
 				p.setProdDetail(rset.getString("PROD_DETAIL"));
 				p.setProdPrice(rset.getInt("PROD_PRICE"));

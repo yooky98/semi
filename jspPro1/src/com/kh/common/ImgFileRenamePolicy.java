@@ -25,7 +25,7 @@ public class ImgFileRenamePolicy implements FileRenamePolicy{
 		int dot = originFileName.lastIndexOf(".");
 		ext = originFileName.substring(dot);				// 가져올 파일의 확장자 부분 잘라오기
 		
-		String newFileName = currentTime + ext;	// = 생성일시 + 랜덤숫자 다섯자리 + 확장자를 합친 새로운 파일명
+		String newFileName = currentTime + ext;	// = 생성일시 + 확장자를 합친 새로운 파일명
 		
 		File renamedFile = new File(originFile.getParent(), newFileName);
 		

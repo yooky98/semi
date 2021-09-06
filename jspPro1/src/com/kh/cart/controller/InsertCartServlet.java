@@ -32,23 +32,24 @@ public class InsertCartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userId = ((Cart) request.getSession().getAttribute("loginUser")).getUserId();
+		String userId = (String)request.getSession().getAttribute("loginUser");
 		
 		int prodNo = Integer.parseInt(request.getParameter("prodNo"));
 		int count = Integer.parseInt(request.getParameter("count"));
 		String forest = request.getParameter("forest");
 		
 		Cart c = new Cart();
-		
 		c.setUserId(userId);
 		c.setProdNo(prodNo);
 		c.setCartAmount(count);
 		c.setForestName(forest);
 		
 		int result = new CartService().insertCart(c);
+		System.out.println("result = " + result );
 		
 		if(result > 0) {
-			
+			request.getSession().setAttribute("msg", "장바구니 담기 성공");
+			response.sendRedirect("list.cart");
 			
 		}else {
 			request.setAttribute("msg", "장바구니 상품담기 실패");

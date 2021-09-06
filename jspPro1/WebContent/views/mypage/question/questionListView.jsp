@@ -32,6 +32,7 @@
     	padding-right: 20px;
     	
     }
+
     
 </style>
 
@@ -55,7 +56,7 @@
 				</ul>
 			</aside>
 
-			<section class="col-sm-10">
+			<section class="qnaContent col-sm-10">
 				<h4>1:1문의</h4>
 				<hr>
 					<%if(qnaList.isEmpty()) {%>
@@ -68,23 +69,22 @@
 						<table class="qnaTable">	
 						<tr>
 							<td><%=qna.getUserId() %></td>
-							<td><%=qna.getQuesDate() %></td>
-							
+							<td><%=qna.getQuesDate() %> &nbsp;
+
 							<% if(qna.getAnsDate() == null) {%>
-								<td><a href="<%=contextPath%>/updateForm.que?qno=<%=qna.getQuesNo()%>">수정</a>/<a class="delete" href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a></td>
-							<%}else{ %>
-								<td><a class="delete" href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a></td>
-							<%} %>
-						
+								<a href="<%=contextPath%>/updateForm.que?qno=<%=qna.getQuesNo()%>">수정</a>/
+							<%}%>
+								<a class="delete" href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a>
+							</td>
 						</tr>
 	
 						<tr>
-							<td><%=qna.getQuesCategory()%></td>
-							<td colspan="2"><%=qna.getQuesTitle()%></td>
+							<td style="padding-right:10px"><b><%=qna.getQuesCategory()%></b></td>
+							<td><%=qna.getQuesTitle()%></td>
 						</tr>
 	
 						<tr>
-							<td colspan="3"><%=qna.getQuesContent()%></td>
+							<td colspan="2" style="padding-top:10px"><%=qna.getQuesContent()%></td>
 						</tr>
 						
 						<tr>
@@ -94,11 +94,11 @@
 						<%if(qna.getAnsDate()!=null){ %>
 							<tr>
 								<td><b>답변</b></td>
-								<td colspan="2"><%=qna.getAnsDate() %></td>
+								<td><%=qna.getAnsDate() %></td>
 							</tr>
 		
 							<tr>
-								<td colspan="3"><%=qna.getAnsContent() %></td>
+								<td colspan="2"><%=qna.getAnsContent() %></td>
 							</tr>
 						<%} %>
 						</table>

@@ -1,6 +1,7 @@
-package com.kh.question.controller;
+package com.kh.wish.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.question.model.service.QuesService;
-import com.kh.question.model.vo.QNA;
+import com.kh.wish.model.service.WishService;
+import com.kh.wish.model.vo.Wish;
 
 /**
- * Servlet implementation class QuestionUpdateServlet
+ * Servlet implementation class WishInsertServlet
  */
-@WebServlet("/update.que")
-public class QuestionUpdateServlet extends HttpServlet {
+@WebServlet("/insert.ws")
+public class WishInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionUpdateServlet() {
+    public WishInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +31,26 @@ public class QuestionUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int pNo = Integer.parseInt(request.getParameter("pNo"));
+		String userId = request.getParameter("userId");
+		// 혹은 여기에서 세션접근해서 가져와도 무관함
+		System.out.println(pNo);
+		Wish w = new Wish();
+		w.setProdNo(pNo);
+		w.setUserID(userId);
 		
-		int qno = Integer.parseInt(request.getParameter("qno"));
-		String qnaCategory = request.getParameter("qnaCategory");
-		String qnaTitle = request.getParameter("qnaTitle");
-		String qnaContent = request.getParameter("qnaContent").replaceAll("\n", "<br>");
+		int result = new WishService().insertWish(w);
 		
-		QNA qna = new QNA(qno, qnaTitle, qnaContent, qnaCategory);
+		PrintWriter out = response.getWriter();
 		
-		int result = new QuesService().updateQuestion(qna);
-		
-		if(result > 0) {
-			request.getSession().setAttribute("msg", "문의사항 수정이 완료되었습니다.");
-		}else {
-			request.getSession().setAttribute("msg", "문의사항 수정에 실패했습니다.");
+		if(result>0) {
+			out.print("success");
+		} else {
+			out.print("fail");
 		}
 		
-		response.sendRedirect("list.que");
-		
+		out.flush();
+		out.close();
 	}
 
 	/**

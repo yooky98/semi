@@ -4,6 +4,16 @@
 
 	QNA qna = (QNA)request.getAttribute("qna");
 
+	String category = qna.getQuesCategory();
+	String[] selected = new String[4];
+	
+	switch(category){
+	case "상품문의": selected[0] = "selected"; break;
+	case "배송문의": selected[1] = "selected"; break;
+	case "주문관련": selected[2] = "selected"; break;
+	case "기타": selected[3] = "selected"; break;
+	}
+	
 %>   
  
 <!DOCTYPE html>
@@ -59,13 +69,14 @@
 				<h4>1:1문의</h4>
 				<hr>
 				
-				<form class="qnaEnroll" method="post" action="">
-	                <select name="qnaCategory">
+				<form class="qnaEnroll" method="post" action="<%=request.getContextPath()%>/update.que" onsubmit="return categoryValidate()">
+					<input name="qno" type="hidden" value="<%=qna.getQuesNo()%>">
+	                <select id="qnaCategory" name="qnaCategory">
 	                    <option value="">문의유형</option>
-	                    <option value="10">상품문의</option>
-	                    <option value="20">배송문의</option>
-	                    <option value="30">주문관련</option>
-	                    <option value="40">기타</option>
+	                    <option value="10" <%= selected[0] %>>상품문의</option>
+	                    <option value="20" <%= selected[1] %>>배송문의</option>
+	                    <option value="30" <%= selected[2] %>>주문관련</option>
+	                    <option value="40" <%= selected[3] %>>기타</option>
 	                </select>
 	                <input name="qnaTitle" type="text" value=" <%= qna.getQuesTitle() %>">
 	                <div>
@@ -80,7 +91,18 @@
 			
 		</div>
 	</div>
+<script>
 
+function categoryValidate(){
+	var categoryVal = $("#qnaCategory").val();
+	
+	if(categoryVal == ""){
+		alert("문의 유형을 선택해 주세요");
+		return false;
+	}
+}
+
+</script>
 
 </body>
 </html>

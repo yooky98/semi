@@ -62,4 +62,19 @@ public class QuesService {
 		return qna;
 	}
 
+	public int updateQuestion(QNA qna) {
+		Connection conn = getConnection();
+		
+		int result = new QuesDao().updateQuestion(conn, qna);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
 }

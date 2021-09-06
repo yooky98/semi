@@ -31,6 +31,7 @@ public class CartDao {
 		}
 	}
 
+	//로그인후 장바구니에 있는 전체 리스트
 	public ArrayList<Cart> selectCartList(Connection conn, String userId) {
 		ArrayList<Cart> list = new ArrayList<Cart>();
 		
@@ -38,12 +39,12 @@ public class CartDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectCartList");
-		//selectCartList=SELECT * FROM CART WHERE USER_ID = ?	
-		//CART_NO
-		//USER_ID
-		//PROD_NO
-		//CART_AMOUNT
-		//FOREST_NAME
+//		selectCartList=SELECT * FROM CART WHERE USER_ID = ?	
+//		CART_NO
+//		USER_ID
+//		PROD_NO
+//		CART_AMOUNT
+//		FOREST_NAME
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
@@ -51,32 +52,54 @@ public class CartDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
+				
 				list.add(
 						new Cart(rset.getInt("CART_NO"),
 								rset.getString("USER_ID"),
 								rset.getInt("PROD_NO"),
 								rset.getInt("CART_AMOUNT"),
 								rset.getString("FOREST_NAME")
-								
 						));
-	
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			System.out.println("cart 테이블  selectCartList 오류메세지임 : " + e.getMessage());
+			System.out.println("cart 테이블  selectCartList 오류메세지 : " + e.getMessage());
 		}finally {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list 확인용 : " + list);
 		return list;
 	}
 
+	//제품페이지에서 장바구니에 담기
 	public int insertCart(Connection conn, Cart c) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertCart");
+//		insertCart=INSERT INTO CART VALUES(CART_SEQ.NEXTVAL,?,?,?,?)
+//		v
+//		PROD_NO
+//		CART_AMOUNT
+//		FOREST_NAME
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getUserId());
+			pstmt.setInt(2, c.getProdNo());
+			pstmt.setInt(3, c.getCartAmount());
+			pstmt.setString(4, c.getForestName());
+			
+		result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

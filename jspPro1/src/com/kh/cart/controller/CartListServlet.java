@@ -3,6 +3,7 @@ package com.kh.cart.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,10 +33,23 @@ public class CartListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userId = ((Cart)request.getSession().getAttribute("loginUser")).getUserId(); //음..
+		String userId = "sunho";
 
 		ArrayList<Cart> list = new CartService().selectCartList(userId);		
-		request.setAttribute("list", list);
+		System.out.println("list 확인용 : " + list);
+	
+		if(list != null) {
+			request.setAttribute("list", list);
+			RequestDispatcher view = request.getRequestDispatcher("views/cart/cartListView.jsp");
+			view.forward(request, response);
+		}else {
+			request.setAttribute("msg", "아이디에 해당하는 장바구니 제품이 없습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+			
+		}
+		
+		
 		
 	}
 
