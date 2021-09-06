@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.product.model.vo.*"%>
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.product.model.vo.*, com.kh.wish.model.vo.*"%>
 <%
 	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
 	Product p = (Product)request.getAttribute("p");
+	ArrayList<Wish> w_list = (ArrayList<Wish>)request.getAttribute("w_list");
 	
 	for(int i = 0 ; i<list.size() ; i++){
 		if(list.get(i).getProdName().equals(p.getProdName())){
@@ -28,13 +29,38 @@
 	
 	#contImg{
 		aspect-ratio:16/9;
+	}	
+
+	.stage {
+  		position: fixed;
+  		top: 95%;
+  		left: 3%;
+  		transform: translate(-50%, -50%);
+	}
+
+
+	.heart {
+  		width: 100px;
+  		height: 100px;
+  		background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  		cursor: pointer;
+  		transition: background-position 1s steps(28);
+  		transition-duration: 0s;
+ 	}
+	
+	.is-active {
+   		transition-duration: 1s;
+   		background-position: -2800px 0;
 	}
 </style>
 </head>
 <body class="is-preload-0 is-preload-1 is-preload-2">
 	<%@ include file="../common/menubar.jsp" %>
+	<div class="stage">
+  		<div class="heart"></div>
+	</div>
 	
-		<form id="cartForm" action="insert.cart" method="post" enctype="multipart/form-data">
+	<form id="cartForm" action="insert.cart" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="prodNo" value="<%= p.getProdNo() %>">
 		
 		<!-- Main -->
@@ -109,16 +135,59 @@
 								$("#num").val(num-1);	
 							}
 							// 총액 관련한 부분 추가해야함.
-						};
+						};					
+					
+					</script>
+					
+					<script type = "text/javascript">
+						$(function(){
+							$("html").dblclick(function() {
+								<% if(loginUser != null){ %>
+									<%-- <%if(w_list)%> --%>
+									var pNo = <%=p.getProdNo() %>;
+									var userId = "<%=loginUser.getUser_id() %>";
+									
+									$.ajax({
+										url:"insert.ws",
+										type:"post",
+										data:{
+											pNo : pNo,
+											userId : userId
+										},
+										
+										success:function(status){
+											if(status == "success"){
+												$(".heart").toggleClass("is-active");
+												alert("찜 목록에 추가되었습니다.");
+											}else if(status == "fail"){
+												$(".heart").toggleClass("is-active");
+												alert("찜 목록에 이미 추가되어 있는 상품입니다.");
+											}
+										},
+										
+										error:function(){
+											console.log("error : 찜");
+										}
+									})
+									
+						    	<% } else { %>
+						    		alert("비회원은 찜을 할 수 없습니다.")
+						   		<% } %> 
+						    });
+						});
 						
-						$("html").dblclick(function() {
-					        alert("찜 목록에 추가되었습니다.");
-					        // 찜 추가하기
-					    });
+						$(function(){
+							$("html").children().dblclick(function(e){
+								// html이 아닌 자식클래스를 더블클릭하면 이벤트 실행 안되게하기
+								e.stopPropagation();
+							});
+						});
 						
-						// html이 아닌 자식클래스를 더블클릭하면 이벤트 실행 안되게하기
-						$("html").children().dblclick(function(e){
-							e.stopPropagation();
+						$(function() {
+							$(".heart").on("click", function() {
+								$(this).toggleClass("is-active");
+								console.log("<%=w_list%>");
+							});
 						});
 								
 					</script>

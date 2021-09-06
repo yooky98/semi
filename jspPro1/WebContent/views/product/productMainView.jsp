@@ -26,7 +26,7 @@
 				<!-- <input type="search" id = "search" name="search" onkeyup="searchData();"> -->
 				<div class="searchBox">
 					<form>
-						<input type = "text" name = "search" id = "search" placeholder = "검색어를 입력하세요">
+						<input type = "text" name = "search" id = "search" placeholder = "검색어를 입력하세요.">
 						<input type = "button" id = "btn" value = "제품명">
 					</form>
 				</div>
@@ -67,9 +67,11 @@
 						$(function(){
 							$("#btn").click(function(){
 								if($("#btn").val() == "제품명"){
-									$("#btn").val("가격")
+									$("#search").attr("placeholder", "입력한 가격 이하의 상품");
+									$("#btn").val("가격");
 								}else{
-									$("#btn").val("제품명")
+									$("#btn").val("제품명");
+									$("#search").attr("placeholder", "검색어를 입력하세요.");
 								}
 							})
 						})
