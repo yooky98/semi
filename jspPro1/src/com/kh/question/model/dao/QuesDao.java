@@ -126,7 +126,7 @@ public class QuesDao {
 			if(rset.next()) {
 				qna = new QNA(rset.getInt("QUES_NO"),
 							  rset.getString("QUES_TITLE"),
-						      rset.getString("QUES_CONTENT"),
+						      rset.getString("QUES_CONTENT").replaceAll("<br>", "\n"),
 						      rset.getString("QUES_CATEGORY_NAME")
 						     );
 			}
@@ -140,6 +140,33 @@ public class QuesDao {
 		}
 		
 		return qna;
+	}
+
+	public int updateQuestion(Connection conn, QNA qna) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql ="UPDATE QNA SET QUES_TITLE=?, QUES_CONTENT=?, QUES_CATEGORY_NO=? WHERE QUES_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, qna.getQuesTitle());
+			pstmt.setString(2, qna.getQuesContent());
+			pstmt.setInt(3, Integer.parseInt(qna.getQuesCategory()));
+			pstmt.setInt(4, qna.getQuesNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+			
+		return result;
 	}
 
 }

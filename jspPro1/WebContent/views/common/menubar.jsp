@@ -20,7 +20,7 @@
 
 
 <!-- icon -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
        
 
 <style>
@@ -55,12 +55,12 @@
 				<ul class="nav">
 					<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 					<li><a href="<%=contextPath%>/list.pr">shop</a></li>
-					<li><a href="<%=contextPath%>/views/campaign/campaignListView.jsp">compaign</a></li>
+					<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
 					<li><a href="#">brand</a></li>
 					<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
 					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
 					<li><a href="<%=request.getContextPath() %>/prodList.ad">adminpage</a></li>
-					<li><a href="<%=request.getContextPath() %>/views/cart/cartListView.jsp">cart</a></li>
+					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
 				</ul>
 			</nav>
 
@@ -73,12 +73,12 @@
 					
 					<%}else if(loginUser.getUser_id().equals("admin")){ %>
 					
-					<li><a href="#"><%=loginUser.getUser_name() %></a></li>
+					<li><a href="#"><%=loginUser.getUser_id() %></a></li>
 					<li><a href="#">adminpage</a></li>
 					
 					<%}else{ %>
 					
-					<li><a class="dropdown-toggle" data-toggle="dropdown" ><%=loginUser.getUser_name() %></a>
+					<li><a class="dropdown-toggle" data-toggle="dropdown" ><%=loginUser.getUser_id() %></a>
 					<div class="dropdown-menu">
       					<a class="dropdown-item" href="#">회원정보 수정</a>
       					<a class="dropdown-item" href="#">회원 탈퇴</a>
