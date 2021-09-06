@@ -97,12 +97,12 @@
 	<tr><td><input class="userform" type = "text" name = "user_name" maxlength="20"  disabled value = "<%=loginUser.getUser_name() %>"></td></tr>
 	<tr><td><input class="userform" style="width:189px;" type = "text" name = "user_no" maxlength="6" placeholder="주민번호 앞자리" disabled value = "<%=loginUser.getUser_no().substring(0,6) %>"> - 
 	<input class="userform" style="width:189px;" type = "text" name = "user_no1" maxlength="7" value="*******" disabled ></td></tr>
-	<tr><td><input class="userform" type="text" id="sample4_postcode" name="userPost" placeholder="우편번호" value = "<%=userAddress[0] %>"></td></tr>
+	<tr><td><input class="userform" type="text" id="sample4_postcode" name="userPost" placeholder="우편번호" value = "<%=userAddress[0] %>" readonly></td></tr>
 	<tr><td><input class="userform" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></td></tr>
-	<tr><td><input class="userform" type="text" id="sample4_roadAddress" name="userAddress"placeholder="도로명주소" size="60"  value = "<%=userAddress[1] %>" ></td></tr>
+	<tr><td><input class="userform" type="text" id="sample4_roadAddress" name="userAddress"placeholder="도로명주소" size="60"  value = "<%=userAddress[1] %>"  readonly></td></tr>
 	<tr><td><input class="userform" type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="60"></td></tr>
 	<tr><td><span class="userform" id="guide" style="color:#999;display:none"></span></td></tr>
-	<tr><td><input class="userform" type="text" id="sample4_detailAddress" name="userAddress1" placeholder="상세주소"  size="60"  value = "<%=userAddress[2] %>"></td></tr>
+	<tr><td><input class="userform" type="text" id="sample4_detailAddress" name="userAddress1" placeholder="상세주소"  size="60"  value = "<%=userAddress[2] %>" ></td></tr>
 	<tr><td><input class="userform" type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="60" ></td></tr>
 	<tr><td><input class="userform" type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="60" ></td></tr>
 	<tr><td><input class="userform" type = "text" name = "phone" maxlength="13" placeholder="전화번호" value = "<%=loginUser.getPhone() %>"></td></tr>

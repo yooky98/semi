@@ -24,8 +24,8 @@ public class Validation {
 		}
 		if (vo.getUser_id().equals("") || vo.getUser_pw().equals("") || vo.getUser_pwCheck().equals("")
 				|| vo.getUser_name().equals("") || vo.getUser_no().equals("") || vo.getUser_no().equals("-")
-				|| vo.getGender().equals("") ||address[0].equals("")|| address[1].equals("")|| address[2].equals("")
-					||vo.getPhone().equals("")	|| vo.getEmail().equals(""))  {
+				|| vo.getGender().equals("") || address.length==0 || address.length==1|| address.length==2
+					||vo.getPhone().equals("")	|| vo.getEmail().equals("") || address[0].equals(""))  {
 			msg = "입력하지 않은 정보가 있습니다";
 			return msg;
 		}
@@ -59,8 +59,10 @@ public class Validation {
 
 		String[] address = vo.getAddress().split("&"); 
 		System.out.println(Arrays.toString(address));
+		System.out.println(address.length);
+		System.out.println(Arrays.toString(address));
 		if (vo.getUser_id().equals("") || vo.getUser_pw().equals("") || 
-				address[0].equals("")|| address[1].equals("")|| address[2].equals("") || vo.getPhone().equals("")
+			address.length==0||	address.length==1|| address.length==2 || address[0].equals("") ||vo.getPhone().equals("")
 			|| vo.getEmail().equals("")) {
 			msg = "입력하지 않은 정보가 있습니다";
 			return msg;
@@ -80,5 +82,6 @@ public class Validation {
 		}					
 		return "";
 	}
+	
 
 }
