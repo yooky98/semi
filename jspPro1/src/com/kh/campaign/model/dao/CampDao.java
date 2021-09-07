@@ -42,28 +42,71 @@ public class CampDao {
 		return campList;
 	}
 
-	/*
-	String sql ="SELECT * FROM CAMPAIGN";
-
-	try {
-		pstmt = conn.prepareStatement(sql);
-		rset = pstmt.executeQuery();
+	public Campaign selectCampaign(Connection conn, int campNo) {
 		
-		while(rset.next()) {
-			campList.add(new Campaign(rset.getInt("CAMP_NO"),
-									  rset.getString("CAMP_NAME"),
-									  rset.getString("CAMP_CONTENT"),
-									  rset.getString("CAMP_LOCATION"),
-									  rset.getDate("CAMP_DATE"),
-									  rset.getInt("CAPACITY")));
+		Campaign camp = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql ="SELECT * FROM CAMPAIGN WHERE CAMP_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, campNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				camp = new Campaign(rset.getInt("CAMP_NO"),
+									rset.getString("CAMP_NAME"),
+									rset.getString("CAMP_CONTENT"),
+									rset.getString("CAMP_LOCATION"),
+									rset.getDate("CAMP_DATE"),
+									rset.getInt("CAPACITY"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
+
+		return camp;
+	}
+
+	public int checkJoin(Connection conn, int campNo, String userId) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} finally {
-		close(rset);
-		close(pstmt);
-	}*/
+		String sql ="SELECT COUNT(*) FROM CAMPJOIN_JOIN WHERE USER_ID=? AND CAMP_NO=? ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, campNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return result;
+	}
+
 	
 }

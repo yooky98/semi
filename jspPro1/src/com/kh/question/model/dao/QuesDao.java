@@ -17,7 +17,7 @@ public class QuesDao {
 
 	public ArrayList<QNA> selectQuesList(Connection conn, String userId) {
 		
-		ArrayList<QNA> qnaList = new ArrayList<QNA>();;
+		ArrayList<QNA> qnaList = new ArrayList<QNA>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -33,13 +33,14 @@ public class QuesDao {
 			while(rset.next()) {
 				
 				QNA qna = new QNA(rset.getInt("QUES_NO"),
+							      rset.getString("USER_ID"),
+								  rset.getString("QUES_CATEGORY_NAME"),
 								  rset.getString("QUES_TITLE"),
 								  rset.getString("QUES_CONTENT"),
 								  rset.getDate("QUES_DATE"),
-								  rset.getString("QUES_CATEGORY_NAME"),
-								  rset.getDate("ANSWER_DATE"),
-								  rset.getString("ANSWER"),
-								  rset.getString("USER_ID"));
+								  rset.getDate("ANS_DATE"),
+								  rset.getString("ANS_CONTENT")
+								  );
 				qnaList.add(qna);
 				System.out.println("qna" + qna);
 			}
@@ -61,15 +62,15 @@ public class QuesDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql ="INSERT INTO QNA VALUES(4, ?, ?, SYSDATE, NULL, NULL, ?, ?)";
+		String sql ="INSERT INTO QNA VALUES(SEQ_QUESNO.NEXTVAL, ?, ?, ?, ?, SYSDATE, NULL, NULL)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, qna.getQuesTitle());
-			pstmt.setString(2, qna.getQuesContent());
-			pstmt.setInt(3, Integer.parseInt(qna.getQuesCategory()));
-			pstmt.setString(4, qna.getUserId());
+			pstmt.setString(1, qna.getUserId());
+			pstmt.setInt(2, Integer.parseInt(qna.getQuesCategory()));
+			pstmt.setString(3, qna.getQuesTitle());
+			pstmt.setString(4, qna.getQuesContent());
 			
 			result = pstmt.executeUpdate();
 			
@@ -147,14 +148,14 @@ public class QuesDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql ="UPDATE QNA SET QUES_TITLE=?, QUES_CONTENT=?, QUES_CATEGORY_NO=? WHERE QUES_NO=?";
+		String sql ="UPDATE QNA SET QUES_CATEGORY_NO=?, QUES_TITLE=?, QUES_CONTENT=?  WHERE QUES_NO=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, qna.getQuesTitle());
-			pstmt.setString(2, qna.getQuesContent());
-			pstmt.setInt(3, Integer.parseInt(qna.getQuesCategory()));
+			pstmt.setInt(1, Integer.parseInt(qna.getQuesCategory()));
+			pstmt.setString(2, qna.getQuesTitle());
+			pstmt.setString(3, qna.getQuesContent());
 			pstmt.setInt(4, qna.getQuesNo());
 			
 			result = pstmt.executeUpdate();

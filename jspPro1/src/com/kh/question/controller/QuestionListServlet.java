@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.UserVO;
 import com.kh.question.model.service.QuesService;
 import com.kh.question.model.vo.QNA;
 
@@ -32,9 +33,7 @@ public class QuestionListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String userId = request.getSession().getAttribute("loginUser");
-		
-		String userId = "user01";
+		String userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
 		
 		ArrayList<QNA> qnaList = new QuesService().selectQuesList(userId);
 		

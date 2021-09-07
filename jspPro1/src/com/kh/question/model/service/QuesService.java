@@ -67,12 +67,6 @@ public class QuesService {
 		
 		int result = new QuesDao().updateQuestion(conn, qna);
 		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
 		close(conn);
 		return result;
 	}
