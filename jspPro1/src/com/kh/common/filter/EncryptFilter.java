@@ -39,10 +39,10 @@ public class EncryptFilter implements Filter {
 
 		request.setAttribute("originPwd", request.getParameter("userPwd"));
 		
-		System.out.println("변겅전 --> "+ request.getParameter("userPwd"));
+		/* System.out.println("변겅전 --> "+ request.getParameter("userPwd")); */
 		
 		EncryptWrapper encRequest = new EncryptWrapper((HttpServletRequest)request);
-		System.out.println("변겅후 --> "+ encRequest.getParameter("userPwd"));
+		/* System.out.println("변겅후 --> "+ encRequest.getParameter("userPwd")); */
 
 		chain.doFilter(encRequest, response);
 	}

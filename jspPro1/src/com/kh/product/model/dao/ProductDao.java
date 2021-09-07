@@ -19,7 +19,7 @@ public class ProductDao {
 	
 	public ProductDao() {
 		String fileName = ProductDao.class.getResource("/sql/product/product-query.properties").getPath();
-		System.out.println("fileName   " + fileName);
+		/* System.out.println("fileName   " + fileName); */
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {

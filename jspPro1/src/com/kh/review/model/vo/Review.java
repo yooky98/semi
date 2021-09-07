@@ -86,5 +86,13 @@ public class Review {
 	public void setReview_regdate(Date review_regdate) {
 		this.review_regdate = review_regdate;
 	}
+
+	@Override
+	public String toString() {
+		return "Review [user_id=" + user_id
+				+ ", review_title=" + review_title + ", review_content=" + review_content
+				+ ", review_star=" + review_star + "]";
+	}
+	
 	
 }
