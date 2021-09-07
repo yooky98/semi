@@ -25,13 +25,13 @@ public class review_DAO {
 			System.out.println("연결성공");
 
 			// SQL 문
-			String sql = "INSERT INTO REVIEW(REVIEW_NUM, USER_ID, REVIEW_GOODS_NAME, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CNT, REVIEW_STAR, REVIEW_BUY_OPT, REVIEW_REGDATE)"
+			String sql = "INSERT INTO REVIEW(REVIEW_NUM, USER_ID, PROD_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CNT, REVIEW_STAR, REVIEW_BUY_OPT, REVIEW_REGDATE)"
 					+ " VALUES(REVIEW_NUM_NEXTVAL, ?, ?, ?, ?, 0, ?, ?, SYSDATE)";
 
 			PreparedStatement psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, review.getUser_id());
-			psmt.setString(2, review.getReview_goods_name());
+			psmt.setString(2, review.getProd_no());
 			psmt.setString(3, review.getReview_title());
 			psmt.setString(4, review.getReview_content());
 			psmt.setInt(5, review.getReview_star());
@@ -66,7 +66,7 @@ public class review_DAO {
 			// 리뷰게시판에 모든 데이터를 불러온다.
 			String sql =  "SELECT * FROM "
 						 + "(SELECT ROWNUM AS RNUM, A1.* FROM "
-					     + "(SELECT REVIEW_NUM, USER_ID, REVIEW_GOODS_NAME, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CNT, REVIEW_STAR, REVIEW_BUY_OPT, REVIEW_REGDATE FROM REVIEW ORDER BY REVIEW_NUM DESC) A1) A2 "
+					     + "(SELECT REVIEW_NUM, USER_ID, PROD_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CNT, REVIEW_STAR, REVIEW_BUY_OPT, REVIEW_REGDATE FROM REVIEW ORDER BY REVIEW_NUM DESC) A1) A2 "
 						 + "WHERE A2.RNUM >= ? and A2.RNUM <=?";
 
 			//Statement stmt = conn.createStatement();
@@ -82,7 +82,7 @@ public class review_DAO {
 
 				int review_num = rs.getInt("REVIEW_NUM"); // 글 번호
 				String user_id = rs.getString("USER_ID"); // 작성자 ID
-				String review_goods_name = rs.getString("REVIEW_GOODS_NAME"); // 상품명
+				String prod_no = rs.getString("PROD_NO"); // 상품명
 				String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
 				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
 				int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
@@ -96,7 +96,7 @@ public class review_DAO {
 
 				review.setReview_num(review_num);
 				review.setUser_id(user_id);
-				review.setReview_goods_name(review_goods_name);
+				review.setProd_no(prod_no);
 				review.setReview_title(review_title);
 				review.setReview_content(review_content);
 				review.setReview_cnt(review_cnt);
@@ -162,7 +162,7 @@ public class review_DAO {
 
 			int review_num = rs.getInt("REVIEW_NUM"); // 글 번호
 			String user_id = rs.getString("USER_ID"); // 작성자 ID
-			String review_goods_name = rs.getString("REVIEW_GOODS_NAME"); // 상품명
+			String prod_no = rs.getString("PROD_NO"); // 상품명
 			String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
 			String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
 			int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
@@ -173,7 +173,7 @@ public class review_DAO {
 
 			review.setReview_num(review_num);
 			review.setUser_id(user_id);
-			review.setReview_goods_name(review_goods_name);
+			review.setProd_no(prod_no);
 			review.setReview_title(review_title);
 			review.setReview_content(review_content);
 			review.setReview_cnt(review_cnt);

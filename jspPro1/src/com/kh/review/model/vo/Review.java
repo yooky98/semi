@@ -6,7 +6,7 @@ public class Review {
 
 	private int review_num; // 글 번호
 	private String user_id; // 작성자 ID
-	private String review_goods_name; // 상품명
+	private String prod_no; // 상품번호
 	private String review_title; // 리뷰 제목
 	private String review_content; // 리뷰 내용
 	private int review_cnt; // 조회수
@@ -31,12 +31,12 @@ public class Review {
 		this.user_id = user_id;
 	}
 
-	public String getReview_goods_name() {
-		return review_goods_name;
+	public String getProd_no() {
+		return prod_no;
 	}
 
-	public void setReview_goods_name(String review_goods_name) {
-		this.review_goods_name = review_goods_name;
+	public void setProd_no(String prod_no) {
+		this.prod_no = prod_no;
 	}
 
 	public String getReview_title() {

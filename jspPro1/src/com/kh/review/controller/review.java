@@ -90,11 +90,11 @@ public class review extends HttpServlet {
 				
 
 		// review.jsp로 이동
-		String site = "../views/review/review.jsp";
+		String site = "../views/mypage/review/review.jsp";
 
 		RequestDispatcher dis = request.getRequestDispatcher(site);
 		dis.forward(request, response);
-
+		
 	}
 
 	/**

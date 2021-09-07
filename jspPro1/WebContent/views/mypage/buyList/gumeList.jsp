@@ -79,9 +79,7 @@
 	            </th>
 	
 	        </tr>
-<%
-		if(order.size() == 0) {
-%>
+
 		<tr align='center'>
 			<td colspan= '5'>
 				주문 내역이 없습니다.

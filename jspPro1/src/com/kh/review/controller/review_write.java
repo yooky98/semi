@@ -43,7 +43,7 @@ public class review_write extends HttpServlet {
 		
 		String user_id = request.getParameter("user_id");
 		String review_title = request.getParameter("review_title");
-		String review_goods_name = request.getParameter("review_goods_name");
+		String prod_no = request.getParameter("prod_no");
 		String review_content = request.getParameter("review_content");
 		int review_buy_opt;
 			if(request.getParameter("review_buy_opt") != null){
@@ -62,7 +62,7 @@ public class review_write extends HttpServlet {
 		// 값 출력 test
 		System.out.println(user_id);
 		System.out.println(review_title);
-		System.out.println(review_goods_name);
+		System.out.println(prod_no);
 		System.out.println(review_content);
 		System.out.println(review_buy_opt);
 		System.out.println(review_star);
@@ -73,7 +73,7 @@ public class review_write extends HttpServlet {
 		
 		review.setUser_id(user_id);
 		review.setReview_title(review_title);
-		review.setReview_goods_name(review_goods_name);
+		review.setProd_no(prod_no);
 		review.setReview_content(review_content);
 		review.setReview_buy_opt(review_buy_opt);
 		review.setReview_star(review_star);
@@ -91,7 +91,7 @@ public class review_write extends HttpServlet {
 		// DB 처리
 		/*
 		 * 
-		 * INSERT INTO REVIEW_TABLE(review_num, user_id, review_goods_name, review_title, review_content, review_cnt, review_star, review_buy_opt, review_regdate)
+		 * INSERT INTO REVIEW_TABLE(review_num, user_id, prod_num, review_title, review_content, review_cnt, review_star, review_buy_opt, review_regdate)
 		   VALUES (review_num.nextval, 'zzzz2222', '이동기', '이동기 구매', '이동기 완전 좋아요!', 0, 4, 1, sysdate);
 		 * 
 		 */
@@ -99,13 +99,13 @@ public class review_write extends HttpServlet {
 		/*
 		Connection conn = DBConnector.getConnection();
 		
-		String sql = "INSERT INTO REVIEW_TABLE(review_num, user_id, review_goods_name, review_title, review_content, review_cnt, review_star, review_buy_opt, review_regdate)"
+		String sql = "INSERT INTO REVIEW_TABLE(review_num, user_id, prod_num, review_title, review_content, review_cnt, review_star, review_buy_opt, review_regdate)"
 				   + " VALUES(review_num.nextval, ?, ?, ?, ?, 0, ?, ?, sysdate)";
 		
 		PreparedStatement psmt = conn.prepareStatement(sql);
 		
 		psmt.setString(1, user_id);
-		psmt.setString(2, review_goods_name);
+		psmt.setString(2, prod_num);
 		psmt.setString(3, review_title);
 		psmt.setString(4, review_content);
 		psmt.setInt(5, review_star);

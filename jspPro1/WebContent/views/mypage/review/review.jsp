@@ -144,7 +144,7 @@
 					<th>#</th>
 					<th>Title</th>
 					<th>ID</th>
-					<th>상품명</th>
+					<th>상품번호</th>
 					<th>구매여부</th>
 					<th>별점</th>
 					<th>작성일</th>
@@ -159,7 +159,7 @@
 					<td>${Review.review_num}</td>
 					<td>${Review.user_id}</td>
 					<td><a data-toggle="modal" data-target="#myModal2" onclick="review_read(${Review.review_num})">${Review.review_title}</a></td>
-					<td>${Review.review_goods_name}</td>
+					<td>${Review.prod_num}</td>
 					
 					<%-- 구매여부 1 : 구매O  0 : 구매X --%>
 					<c:choose>
@@ -270,10 +270,10 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="pwd">상품명:</label>
+							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="review_goods_name"
-									name="review_goods_name" placeholder="상품명">
+								<input type="text" class="form-control" id="prod_num"
+									name="prod_num" placeholder="상품번호">
 							</div>
 						</div>
 						<div class="form-group">

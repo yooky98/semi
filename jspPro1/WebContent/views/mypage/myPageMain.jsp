@@ -53,7 +53,7 @@
 					<li><a href="<%=request.getContextPath()%>/views/mypage/myPageMain.jsp">내 정보</a></li>
 					<li><a href="#">주문내역 조회</a></li>
 					<li><a href="#">위시 리스트</a></li>
-					<li><a href="#">리뷰 관리</a></li>
+					<li><a href="<%=request.getContextPath()%>/views/mypage/review/review.jsp">리뷰 관리</a></li>
 					<li><a href="<%=request.getContextPath()%>/list.que">1:1 문의</a></li>
 					<li><a href="<%=request.getContextPath()%>/views/campaign/campaignMypageView.jsp">참여 캠페인</a></li>
 				</ul>
