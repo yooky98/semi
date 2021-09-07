@@ -40,8 +40,12 @@ public class UserServlet extends HttpServlet {
 			userUpdate(request, response);
 		} else if (request.getParameter("command").equals("findId")) {
 			findId(request, response);
-		}else if (request.getParameter("command").equals("userDelete")) {
+		} else if (request.getParameter("command").equals("userDelete")) {
 			userDelete(request, response);
+		} else if (request.getParameter("command").equals("findPw")) {
+			findPw(request, response);
+		}else if (request.getParameter("command").equals("pwCheck")) {
+			pwCheck(request, response);
 		}
 	}
 
@@ -81,14 +85,12 @@ public class UserServlet extends HttpServlet {
 			int result = us.join(vo);
 			if (result == 1) {
 				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out=response.getWriter();					
-				
-				out.println("<script>alert('로그인페이지로 이동합니다');location.href='views/member/login.jsp';</script>"); 
+				PrintWriter out = response.getWriter();
+
+				out.println("<script>alert('로그인페이지로 이동합니다');location.href='views/member/login.jsp';</script>");
 				out.flush();
 				out.close();
-				
-			
-			
+
 			} else {
 				request.setAttribute("msg", "오류발생 ");
 				RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
@@ -117,7 +119,7 @@ public class UserServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			UserVO vo = us.getUser(user_id);
 			session.setAttribute("loginUser", vo);
-			
+
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			view.forward(request, response);
 
@@ -147,7 +149,7 @@ public class UserServlet extends HttpServlet {
 		UserVO vo = new UserVO(user_id, user_pw, address, phone, email);
 		String pw = us.loginCheck(user_id);
 
-		if (!user_pw.equals(pw)) { 
+		if (!user_pw.equals(pw)) {
 			request.setAttribute("msg", "회원님의 비밀번호가 일치하지 않습니다 ");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
 			view.forward(request, response);
@@ -160,14 +162,14 @@ public class UserServlet extends HttpServlet {
 				view.forward(request, response);
 			} else {
 				int result = us.userUpdate(vo);
-				if (result == 1) {				
+				if (result == 1) {
 					HttpSession session = request.getSession();
 					vo = us.getUser(user_id);
 					session.setAttribute("loginUser", vo);
 					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out=response.getWriter();					
-					
-					out.println("<script>alert('성공적으로 수정되었습니다!');location.href='index.jsp';</script>"); 
+					PrintWriter out = response.getWriter();
+
+					out.println("<script>alert('성공적으로 수정되었습니다!');location.href='index.jsp';</script>");
 					out.flush();
 					out.close();
 
@@ -184,7 +186,6 @@ public class UserServlet extends HttpServlet {
 
 	protected void findId(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		String user_name = request.getParameter("user_name");
 		String user_no = request.getParameter("user_no") + "-" + request.getParameter("user_no1");
 		String findId = us.findId(user_name, user_no);
@@ -196,45 +197,84 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("msg", "아이디와 주민번호가 맞지않습니다 ");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
 			view.forward(request, response);
-		} 
-		
+		}
 
 	}
+
 	protected void userDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String user_id = request.getParameter("user_id");
 		String user_pw = request.getParameter("user_pw");
 		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out=response.getWriter();	
+		PrintWriter out = response.getWriter();
 
-	
 		String pw = us.loginCheck(user_id);
-		if (pw.equals("")) { 
-			out.println("<script>alert('아이디가 존재하지 않습니다');history.back();</script>"); 
+		if (pw.equals("")) {
+			out.println("<script>alert('아이디가 존재하지 않습니다');history.back();</script>");
 			out.flush();
 			out.close();
-		} else if (!user_pw.equals(pw)) { 
-			out.println("<script>alert('비밀번호가 틀렸습니다');history.back();</script>"); 
+		} else if (!user_pw.equals(pw)) {
+			out.println("<script>alert('비밀번호가 틀렸습니다');history.back();</script>");
 			out.flush();
 			out.close();
-		} else { 
+		} else {
 			int result = us.userDelete(user_id);
-			if(result ==1) {
+			if (result == 1) {
 				HttpSession session = request.getSession();
-				session.invalidate();				
-				out.println("<script>alert('성공적으로 탈퇴 되었습니다');location.href='index.jsp';</script>"); 
+				session.invalidate();
+				out.println("<script>alert('성공적으로 탈퇴 되었습니다');location.href='index.jsp';</script>");
 				out.flush();
 				out.close();
-			}else {				
-				out.println("<script>alert('오류 발생');history.back();</script>"); 
+			} else {
+				out.println("<script>alert('오류 발생');history.back();</script>");
 				out.flush();
 				out.close();
 			}
 
-
 		}
 
+	}
 
+	protected void findPw(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String user_name = request.getParameter("user_name");
+		String user_id = request.getParameter("user_id");
+		String user_no = request.getParameter("user_no") + "-" + request.getParameter("user_no1");
+		String findPw = us.findPw(user_name, user_id, user_no);
+		
+		if (!findPw.equals("")) {
+			
+			request.setAttribute("findPw", findPw);
+			RequestDispatcher view = request.getRequestDispatcher("views/member/findPwAction.jsp");
+			view.forward(request, response);
+		} else { 
+			request.setAttribute("msg", "아이디와 주민번호가 맞지않습니다 ");
+			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
+			view.forward(request, response);
+		}
+	}
+	protected void pwCheck(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String user_id = request.getParameter("user_id"); 
+		String user_pw = request.getParameter("user_pw");
+
+		String PwCheck = us.PwCheck(user_id); 
+		System.out.println(PwCheck + " 333");
+		if (!PwCheck.equals(user_pw)) { // 10 만약 아이디가 존재하지 않을경우 반환된 result(비밀번호)는 ""공백이다 = 존재하지 않는 회원이다
+			request.setAttribute("msg", "비밀번호가 일치하지 않입니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
+			view.forward(request, response);					
+		} else { 
+			HttpSession session = request.getSession();
+			UserVO vo = us.getUser(user_id);
+			session.setAttribute("loginUser", vo);
+
+			RequestDispatcher view = request.getRequestDispatcher("views/member/userUpdate1.jsp");
+			view.forward(request, response);
+
+		}
 	}
 
 }

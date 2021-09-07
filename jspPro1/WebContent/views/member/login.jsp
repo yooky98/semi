@@ -35,8 +35,9 @@
 	</form>
 	<br>
 	<input type="button" class="userbtn"
-	 onclick="window.open('<%=contextPath%>/views/member/findId.jsp', name,'width = 500, height = 300, top = 300, left = 700, location = no')" value="아이디 찾기"><br>
-	<a href="<%=request.getContextPath() %>/user?command=FindPw">비밀번호 찾기</a>
+	 onclick="window.open('<%=contextPath%>/views/member/findId.jsp', name,'width = 500, height = 300, top = 300, left = 700, location = no')" value="아이디 찾기"><br><br>
+	<input type="button" class="userbtn"
+	 onclick="window.open('<%=contextPath%>/views/member/findPw.jsp', name,'width = 500, height = 300, top = 300, left = 700, location = no')" value="비밀번호 찾기"><br>
 	</div>
 </body>
 </html>
