@@ -50,7 +50,7 @@ public class adminProductUpdateFormServlet extends HttpServlet {
 			request.setAttribute("at", at);
 			request.getRequestDispatcher("views/admin/adminProduct/adminProductUpdateForm.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "수정할 제품 불러오기 실패\nPRODUCT랑 ATTACHMENT FK맞춰야함");
+			request.getSession().setAttribute("msg", "수정할 제품 불러오기 실패\nPRODUCT랑 ATTACHMENT FK맞춰야함");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		

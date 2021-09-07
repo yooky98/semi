@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>QNA List</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
 aside {
 	padding-top: 100px;
@@ -62,8 +63,8 @@ section {
 						</div>
 						<br> <br>
 						<ul class="list-group">
-							<li class="list-group-item"><a href="#">제품 관리</a></li>
-							<li class="list-group-item"><a href="#">1:1 문의 답변</a></li>
+							<li class="list-group-item"><a href="<%=request.getContextPath()%>/prodList.ad">제품 관리</a></li>
+							<li class="list-group-item"><a href="<%=request.getContextPath()%>/answerList.ad">1:1 문의 답변</a></li>
 							<li class="list-group-item"><a href="#">주문내역 관리</a></li>
 						</ul>
 					</div>
@@ -94,15 +95,52 @@ section {
 								<tr>
 									<td colspan="5">문의가 존재하지 않습니다.</td>
 								</tr>
-								<% } else{ %>
+								<% } else{
+										
+										for(int i=0; i<list.size(); i++){
+											
+											String answerStatus = "";
+											if(list.get(i).getAnsContent() == null){
+												answerStatus = "N";
+											}else{
+												answerStatus = "Y";
+											}
+											
+								%>
 								<tr>
-									<td>1</td>
-									<td>2</td>
-									<td>3</td>
-									<td>4</td>
-									<td>5</td>
+									<td><%= list.get(i).getQuesCategory() %></td>
+									<td><a href="#" id="qnaTitle<%=i+1%>"><%= list.get(i).getQuesTitle() %></a>
+									<form action="" id="qnaNoForm" method="post">
+										<input type="hidden" id="qnaNo" name="qnaNo">
+									</form>
+									
+									<script>
+										$(function(){
+											$("#qnaTitle<%=i+1%>").click(function(){												
+												var qnaNo = <%= list.get(i).getQuesNo() %>;
+												$("#qnaNo").val(qnaNo);
+												
+												$("#qnaNoForm").attr("action", "<%=request.getContextPath()%>/answerForm.ad");
+												$("#qnaNoForm").submit();
+												
+												console.log("qnaNo:"+qnaNo);
+												
+												
+											})
+										})
+											
+										
+									</script>
+									</td>
+									
+									<td><%= list.get(i).getUserId() %></td>
+									<td><%= list.get(i).getQuesDate() %></td>
+									<td><%= answerStatus %></td>
 								</tr>
-								<% } %>
+								
+								<% 
+										}
+									} %>
 							</tbody>
 
 						</table>

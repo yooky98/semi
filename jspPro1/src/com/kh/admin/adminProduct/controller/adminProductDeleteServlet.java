@@ -38,7 +38,7 @@ public class adminProductDeleteServlet extends HttpServlet {
 		if(result > 0) {
 			response.sendRedirect("prodList.ad");
 		}else {
-			request.setAttribute("msg", "제품 삭제 실패");
+			request.getSession().setAttribute("msg", "제품 삭제 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		

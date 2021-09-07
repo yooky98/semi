@@ -82,7 +82,7 @@ section {
 						<br> <br>
 						<ul class="list-group">
 							<li class="list-group-item"><a href="<%=request.getContextPath()%>/prodList.ad">제품 관리</a></li>
-							<li class="list-group-item"><a href="#">1:1 문의 답변</a></li>
+							<li class="list-group-item"><a href="<%=request.getContextPath()%>/answerList.ad">1:1 문의 답변</a></li>
 							<li class="list-group-item"><a href="#">주문내역 관리</a></li>
 						</ul>
 					</div>
