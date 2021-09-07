@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.product.model.vo.*, com.kh.wish.model.vo.*"%>
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.product.model.vo.*, com.kh.wish.model.vo.*, com.kh.review.model.vo.*"%>
 <%
 	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
 	Product p = (Product)request.getAttribute("p");
 	ArrayList<Wish> w_list = (ArrayList<Wish>)request.getAttribute("w_list");
+	ArrayList<Review> r_list = (ArrayList<Review>)request.getAttribute("r_list");
 	
 	for(int i = 0 ; i<list.size() ; i++){
 		if(list.get(i).getProdName().equals(p.getProdName())){
@@ -48,7 +49,7 @@
   		transition-duration: 0s;
  	}
 	
-	.is-active {
+	.on_heart {
    		transition-duration: 1s;
    		background-position: -2800px 0;
 	}
@@ -96,7 +97,13 @@
 				<!-- 여기에 후기 , 혹시 후기가 없다면, 추천상품만 보여주기--> 
 				<header id="detailHeader">
 					<h1>후기</h1>
-
+					<%for(Review r : r_list){ %>
+						<div id = review>
+							<h2><%=r.getReview_title() %></h2> <%=r.getReview_content() %><br>
+							<%=r.getUser_id() %><br>
+							<%=r.getReview_star() %>
+						</div>
+					<%} %>
 				</header>
 
 				<hr>
@@ -116,6 +123,17 @@
 					<%} %>	
 					<br><br><br><br><br><br>
 					<script>
+						$(function(){
+							// 로그인 한 회원이 detailView에 들어왔을 때, 찜목록에서 이미 찜 한 상품이라면 heart on시켜주기
+							<% if(loginUser != null){
+								for(Wish w : w_list){
+									if(w.getProdNo() == p.getProdNo()){%>
+										$(".heart").toggleClass("on_heart");
+									<%}%>
+								<%}%>
+							<%}%>
+						})
+					
 						$(function(){
 							$(".thumbnail").click(function(){
 								var pNo = $(this).children().eq(0).val();
@@ -140,40 +158,43 @@
 					</script>
 					
 					<script type = "text/javascript">
+						function addWish(){
+							<% if(loginUser != null){ %>
+								var pNo = <%=p.getProdNo() %>;
+								var userId = "<%=loginUser.getUser_id() %>";
+								
+								$.ajax({
+									url:"insert.ws",
+									type:"post",
+									data:{
+										pNo : pNo,
+										userId : userId
+									},
+									
+									success:function(status){
+										if(status == "success"){
+											$(".heart").toggleClass("on_heart");
+										}else if(status == "fail"){
+											alert("찜 목록에 이미 추가되어 있는 상품입니다.");
+											// 삭제는 추후 추가
+										}
+									},
+									
+									error:function(){
+										console.log("error : 찜");
+									}
+								})
+							
+					    	<% } else { %>
+						    		alert("비회원은 찜을 할 수 없습니다.")
+				   			<% } %> 
+				  		};
+
+					
 						$(function(){
 							$("html").dblclick(function() {
-								<% if(loginUser != null){ %>
-									<%-- <%if(w_list)%> --%>
-									var pNo = <%=p.getProdNo() %>;
-									var userId = "<%=loginUser.getUser_id() %>";
-									
-									$.ajax({
-										url:"insert.ws",
-										type:"post",
-										data:{
-											pNo : pNo,
-											userId : userId
-										},
-										
-										success:function(status){
-											if(status == "success"){
-												$(".heart").toggleClass("is-active");
-												alert("찜 목록에 추가되었습니다.");
-											}else if(status == "fail"){
-												$(".heart").toggleClass("is-active");
-												alert("찜 목록에 이미 추가되어 있는 상품입니다.");
-											}
-										},
-										
-										error:function(){
-											console.log("error : 찜");
-										}
-									})
-									
-						    	<% } else { %>
-						    		alert("비회원은 찜을 할 수 없습니다.")
-						   		<% } %> 
-						    });
+								addWish();
+							});
 						});
 						
 						$(function(){
@@ -184,11 +205,11 @@
 						});
 						
 						$(function() {
-							$(".heart").on("click", function() {
-								$(this).toggleClass("is-active");
-								console.log("<%=w_list%>");
+							$(".heart").click(function(){
+								addWish();
 							});
 						});
+						
 								
 					</script>
 				</section>

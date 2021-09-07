@@ -35,14 +35,14 @@ public class EncodingFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		System.out.println("=============인코딩 필터 동작 Start=============");
+		/* System.out.println("=============인코딩 필터 동작 Start============="); */
 		if(((HttpServletRequest)request).getMethod().equalsIgnoreCase("post")) {
 			System.out.println("=============post 방식이 요청됨=============");
 			request.setCharacterEncoding("utf-8");
 		}
 		chain.doFilter(request, response);
 		
-		System.out.println("===========서블릿 동작하고 나서 실행=============");
+		/* System.out.println("===========서블릿 동작하고 나서 실행============="); */
 	}
 
 	/**

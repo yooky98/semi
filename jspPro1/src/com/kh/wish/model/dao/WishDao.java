@@ -21,7 +21,6 @@ public class WishDao {
 	
 	public WishDao() {
 		String fileName = WishDao.class.getResource("/sql/wish/wish-query.properties").getPath();
-		System.out.println("fileName   " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -48,6 +47,8 @@ public class WishDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		
@@ -58,8 +59,7 @@ public class WishDao {
 		ArrayList<Wish> w_list = new ArrayList<Wish>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		System.out.println("접속자 아이디: "+userId);
-		
+
 //		selectWList=SELECT PROD_NO FROM WISH WHERE USER_ID = ?
 		
 		String sql = prop.getProperty("selectWList");

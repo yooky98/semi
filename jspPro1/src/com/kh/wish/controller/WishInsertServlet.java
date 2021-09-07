@@ -34,7 +34,6 @@ public class WishInsertServlet extends HttpServlet {
 		int pNo = Integer.parseInt(request.getParameter("pNo"));
 		String userId = request.getParameter("userId");
 		// 혹은 여기에서 세션접근해서 가져와도 무관함
-		System.out.println(pNo);
 		Wish w = new Wish();
 		w.setProdNo(pNo);
 		w.setUserID(userId);
