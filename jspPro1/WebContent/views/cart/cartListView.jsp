@@ -23,6 +23,11 @@
        <!-- Latest compiled JavaScript -->
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+<style>
+	body{
+		background-color: rgb(239, 240, 227);	
+	}
+</style>
 <body>
 
 <%@ include file="/views/common/menubar.jsp" %>
@@ -46,15 +51,26 @@
 				<div calss = "emptyList">
 				<h2>장바구니가 비어있습니다.</h2>
 				</div>
+
 			<%}else{%>
 				<% for(Cart c : list){ %>
                     <tr>
                      	<td></td>
                         <td><%=c.getProdNo()%></td>
-                        <td><%=c.getCartAmount()%></td>
+                      	<td>
+       					<span>
+       					<img src="<%=request.getContextPath()%>/resources/images/plus.png" width=12 height = 12>	
+       					</span>
+                      	<%=c.getCartAmount()%>
+                      	<span>
+       					<img src="<%=request.getContextPath()%>/resources/images/minus.png" width=12 height = 12>	
+       					</span>
+                      	</td>
                         <td><%=c.getForestName()%></td>
                         <td>2500</td>
-                        <td></td>
+                        <td>
+                        <button type="button" class="btn btn-outline-dark">삭제</button>
+                        </td>
                     </tr>
                 	<%}%>
 				 <%}%>

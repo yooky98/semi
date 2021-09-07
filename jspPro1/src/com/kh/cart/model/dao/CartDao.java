@@ -40,6 +40,9 @@ public class CartDao {
 		
 		String sql = prop.getProperty("selectCartList");
 //		selectCartList=SELECT * FROM CART WHERE USER_ID = ?	
+//		selectCartList=SELECT C.CART_NO , C.USER_ID , C.PROD_NO , C.CART_AMOUNT , C.FOREST_NAME , PRODUCT.PROD_NAME , PRODUCT.PROD_PRICE
+//		FROM CART C JOIN PRODUCT ON (CART.PROD_NO = PRODUCT.PROD_NO) WHERE CART.USER_ID = ?
+		
 //		CART_NO
 //		USER_ID
 //		PROD_NO
@@ -59,6 +62,7 @@ public class CartDao {
 								rset.getInt("PROD_NO"),
 								rset.getInt("CART_AMOUNT"),
 								rset.getString("FOREST_NAME")
+							
 						));
 			}
 			
@@ -80,7 +84,8 @@ public class CartDao {
 		
 		String sql = prop.getProperty("insertCart");
 //		insertCart=INSERT INTO CART VALUES(CART_SEQ.NEXTVAL,?,?,?,?)
-//		v
+//		CART_NO
+//		USER_ID
 //		PROD_NO
 //		CART_AMOUNT
 //		FOREST_NAME
@@ -99,7 +104,9 @@ public class CartDao {
 		}finally {
 			close(pstmt);
 		}
+		System.out.println("result = " + result);
 		return result;
+		
 	}
 
 }
