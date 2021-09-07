@@ -39,7 +39,7 @@ public class adminProductUpdateServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			//파일이 저장될 서버의 경로
-			String savePath = request.getServletContext().getRealPath("/resources/images");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/images");
 			
 			//파일 크기(1024*1024=1MB)
 			int fileSize = 1024*1024*15;
@@ -90,7 +90,7 @@ public class adminProductUpdateServlet extends HttpServlet {
 					failedFile.delete();
 				}
 				
-				request.setAttribute("msg", "제품 수정 실패");
+				request.getSession().setAttribute("msg", "제품 수정 실패");
 				
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 				
