@@ -191,7 +191,7 @@ public class UserDao {
 	public String findId(Connection conn, String user_name, String user_no) {
 		String result = "";                         
 		String sql = prop.getProperty("findId");
-		System.out.println(user_no+"111");
+		
 		try {
 			pstmt = conn.prepareStatement(sql);  
 			
@@ -213,5 +213,58 @@ public class UserDao {
 			close(pstmt);
 		}
 		return result;   //8. result가
+	}
+	public String findPw(Connection conn, String user_name, String user_id, String user_no) {
+		String result = "";                         
+		String sql = prop.getProperty("findPw");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);  
+			
+			pstmt.setString(1, user_name);
+			pstmt.setString(2, user_id);
+			pstmt.setString(3, user_no);
+						
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {    
+				result = rs.getString(1);  
+			
+			}
+			System.out.println(result +" ddd");
+			
+		} catch (SQLException e) {
+	
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(result +" 030");
+		return result;   
+		
+	}
+	public String pwCheck(Connection conn, String user_id) {
+		String result = "";                          // result 초기화
+		String sql = prop.getProperty("loginCheck"); //4쿼리문 작성
+		try {
+			pstmt = conn.prepareStatement(sql);  
+			
+			pstmt.setString(1, user_id);     // 5입력한 id가 쿼리문에 들어가서 작동한다 
+		
+						
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {    //6. DB에 ID가 존재할 경우 실행된다
+				result = rs.getString(1);  //7 DB에 입력한 아이디가 존재하면 비밀번호를 result에 담긴다
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;   //8. result
 	}
 }

@@ -82,4 +82,16 @@ public class UserService {
 		return result;
 	}
 	
+	public String findPw(String user_name, String user_id, String user_no) {
+		Connection conn = getConnection();
+		String result = dao.findPw(conn, user_name, user_id, user_no);  
+		return result;
+	}
+	public String PwCheck(String user_id) {
+		Connection conn = getConnection();
+		String result = dao.pwCheck(conn,  user_id);  
+		return result;
+	}
+	
+	
 }
