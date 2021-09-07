@@ -5,31 +5,30 @@ import java.sql.Date;
 public class QNA {
 
 	private int quesNo;
+	private String userId;
+	private String quesCategory; //select 할 때는 카테고리명으로, insert,update 할 때는 카테고리NO로
 	private String quesTitle;
 	private String quesContent;
 	private Date quesDate;
-	private String quesCategory; //select 할 때는 카테고리명으로, insert,update 할 때는 카테고리NO로
 	private Date ansDate;
 	private String ansContent;
-	private String userId;
+	
 	
 	public QNA() {
 	}
-	
 
-	public QNA(int quesNo, String quesTitle, String quesContent, Date quesDate, String quesCategory, Date ansDate,
-			String ansContent, String userId) {
+	public QNA(int quesNo, String userId, String quesCategory, String quesTitle, String quesContent, Date quesDate,
+			Date ansDate, String ansContent) {
 		super();
 		this.quesNo = quesNo;
+		this.userId = userId;
+		this.quesCategory = quesCategory;
 		this.quesTitle = quesTitle;
 		this.quesContent = quesContent;
 		this.quesDate = quesDate;
-		this.quesCategory = quesCategory;
 		this.ansDate = ansDate;
 		this.ansContent = ansContent;
-		this.userId = userId;
 	}
-
 
 	public QNA(String quesTitle, String quesContent, String quesCategory, String userId) {
 		super();

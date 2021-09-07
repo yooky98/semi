@@ -64,7 +64,7 @@
 				</ul>
 			</nav>
 
-			<div class="nav-menu">
+			<div class="dropdown nav-menu ">
 				<ul>
 					<% if(loginUser == null) {%>
 				
@@ -74,14 +74,20 @@
 					<%}else if(loginUser.getUser_id().equals("admin")){ %>
 					
 					<li><a href="#"><%=loginUser.getUser_id() %></a></li>
-					<li><a href="#">adminpage</a></li>
+					<li><a href="<%=request.getContextPath() %>/prodList.ad">adminpage</a></li>
 					
 					<%}else{ %>
 					
-
+					<li><a class="dropdown-toggle" data-toggle="dropdown" ><%=loginUser.getUser_id() %></a>
+					<div class="dropdown-menu">
+      					<a class="dropdown-item" href="<%=contextPath%>/views/member/userUpdate.jsp">회원정보 수정</a>
+      					<a class="dropdown-item" href="<%=contextPath%>/views/member/userDelete.jsp">회원 탈퇴</a>
+     					<a class="dropdown-item" href="<%=request.getContextPath() %>/user?command=logout">로그아웃</a>
+    				</div>
+					</li>
 
 					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
-					<li><a href="#">cart</a></li>
+					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
 					<li><a href="<%=request.getContextPath() %>/user?command=logout">logout</a></li>
 					
 					<%} %>
@@ -99,9 +105,9 @@
 			<ul class="nav">
 				<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 				<li><a href="<%=contextPath%>/list.pr">shop</a></li>
-				<li><a href="#">compaign</a></li>
+				<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
 				<li><a href="#">brand</a></li>
-				<li><a href="#">faq</a></li>
+				<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
 			</ul>
 		</nav>
 

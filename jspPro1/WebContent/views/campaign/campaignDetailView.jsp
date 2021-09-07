@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.campaign.model.vo.Campaign"%>
+<% 
+
+	Campaign camp = (Campaign)request.getAttribute("camp");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
 <!-- Latest compiled and minified CSS -->
@@ -40,26 +47,94 @@
 
 			<hr>
 
-			<h6>강원 산불 피해 복구 숲 조성 캠패인</h6>
+			<h6><%=camp.getCampName()%></h6>
 			<hr>
 
 			<div>
-			<b>장소 :</b> <span>강원도 강릉시 옥계면 산불피해지</span> <b>일시 :</b> <span>2021-08-19</span>
+			<b>장소 :</b> <span><%=camp.getCampLocation() %></span> &nbsp;
+			<b>일시 :</b> <span><%=camp.getCampDate() %></span> &nbsp;
+			<b>참여 가능 인원 :</b> <span><%=camp.getCampCapa() %></span>
 			</div>
 			
 			<!-- 가능하면 신청가능한 인원, 정원 표기 해보기 -->
 			<hr>
 			
-			<div>내용</div>
+			<div><%=camp.getCampContent() %></div>
 			
-			<button onclick="">참여하기</button>
+			<button onclick="check()">참여하기</button>
 			<!-- 회원만 참여하기 가능 로그인확인-->
 			<hr>
 			
 		</div>
 
 	</div>
+	
+<script>
 
+function check(){
+	<%if(loginUser == null){%>
+		alert("로그인이 필요한 서비스입니다.")
+		location.href="<%=contextPath%>/views/member/login.jsp";
+	<%}else{%>
+	
+		var campNo =  <%=camp.getCampNO()%>;
+		$.ajax({
+			url:"join.cam",
+			data: {campNo : campNo},
+			type: "post",
+			success: function(result){
+				if(result == "fail"){
+					alert("이미 참여한 캠페인입니다.")
+				}else{
+					alert("참여가 완료되었습니다.")
+				}
+			},
+			error: function(e){
+				console.log(e);
+			}
+		})
+		
+	<%}%>
+	
+}
+
+<%-- 참여가능 인원 : 참여가능인원 - 참여 인원count(campNo), 회원의 해당 캠페인 참여 여부 확인 --%>	
+
+<%--
+$(function(){
+	$("#joinBtn").click(function(){
+		
+		<%if(loginUser == null){%>
+		alert("로그인이 필요한 서비스입니다.")
+		location.href="<%=contextPath%>/views/member/login.jsp";
+		<%}else{%>
+	
+		var campNo =  <%=camp.getCampNO()%>;
+		$.ajax({
+			url:"join.cam",
+			data: {campNo : campNo},
+			type: "post",
+			success: function(result){
+				if(result == "success"){
+					alert("참여가 완료되었습니다.")
+				}else{
+					alert("이미 참여한 캠페인입니다.")
+				}
+			},
+			error: function(e){
+				console.log(e);
+			}
+		})
+		
+		location.href="<%=contextPath%>/join.cam?campNo="+<%=camp.getCampNO()%>;
+		<%}%>
+		
+		
+	})
+})
+--%>
+
+</script>
 
 </body>
 </html>

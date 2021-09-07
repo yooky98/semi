@@ -23,4 +23,25 @@ public class CampService {
 		return campList;
 	}
 
+
+	public Campaign selectCampaign(int campNo) {
+		
+		Connection conn = getConnection();
+		
+		Campaign camp = new CampDao().selectCampaign(conn, campNo);
+		
+		close(conn);
+		return camp;
+	}
+
+
+	public int checkJoin(int campNo, String userId) {
+		Connection conn = getConnection();
+		
+		int result = new CampDao().checkJoin(conn, campNo, userId);
+		
+		close(conn);
+		return result;
+	}
+
 }
