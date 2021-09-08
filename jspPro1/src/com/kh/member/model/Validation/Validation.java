@@ -51,7 +51,13 @@ public class Validation {
 		if (regCheck == false) {
 			msg = "이메일형식이 아닙니다";			
 			return msg;			
-		}					
+		}
+		String nameCheck = "^[가-힣]*$";
+		regCheck = Pattern.matches(nameCheck, vo.getUser_name());
+		if (regCheck == false) {
+			msg = "이름을 다시 입력해주세요";
+			return msg;
+		}
 		return "";
 		
 	}
