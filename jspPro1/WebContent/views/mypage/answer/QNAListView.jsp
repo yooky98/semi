@@ -7,33 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>QNA List</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<style>
-aside {
-	padding-top: 100px;
-	writing-mode: horizontal-tb;
-	background-color: yellowgreen;
-}
 
+<style>
 section {
 	padding-top: 100px;
 	background-color: skyblue;
-}
-
-#adminWorkArea {
-	height: 800px;
-}
-
-#adminWorkArea>aside>div>div>ul>li {
-	background-color: yellowgreen;
-	text-align: left;
-	padding-left: 50px;
-	border: 0;
-	outline: 0;
-}
-
-#adminPageTitle {
-	text-align: center;
 }
 
 #QNAListDiv {
@@ -54,23 +32,7 @@ section {
 	<div class="container-fluid">
 		<div class="row" id="adminWorkArea">
 
-			<aside class="col-lg-3 col-md-3 col-sm-3 col-3 col-xl-3">
-				<div>
-					<br>
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<h3 class="panel-title" id="adminPageTitle">관리자페이지</h3>
-						</div>
-						<br> <br>
-						<ul class="list-group">
-							<li class="list-group-item"><a href="<%=request.getContextPath()%>/prodList.ad">제품 관리</a></li>
-							<li class="list-group-item"><a href="<%=request.getContextPath()%>/answerList.ad">1:1 문의 답변</a></li>
-							<li class="list-group-item"><a href="#">주문내역 관리</a></li>
-						</ul>
-					</div>
-				</div>
-			</aside>
-
+			<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 
 			<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9">
 

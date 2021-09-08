@@ -21,6 +21,7 @@
 	}
 	
 	String fileRoute = request.getContextPath() + "/resources/images/" + at.getChangeName();
+	String fileName = at.getChangeName();
 %>
 <!DOCTYPE html>
 <html>
@@ -28,27 +29,6 @@
 <meta charset="UTF-8">
 <title>PRODUCT UPDATE PAGE</title>
 <style>
-aside {
-	padding-top: 100px;
-	background-color: yellowgreen;
-}
-
-#adminWorkArea {
-	height: 800px;
-}
-
-#adminWorkArea>aside>div>div>ul>li {
-	background-color: yellowgreen;
-	text-align: left;
-	padding-left: 50px;
-	border: 0;
-	outline: 0;
-}
-
-#adminPageTitle {
-	text-align: center;
-}
-
 section {
 	padding-top: 100px;
 	background-color: skyblue;
@@ -97,22 +77,7 @@ section {
 	<div class="container-fluid">
 		<div class="row" id="adminWorkArea">
 			<%-- 고정 리스트 --%>
-			<aside class="col-lg-3 col-md-3 col-sm-3 col-3 col-xl-3">
-				<div>
-					<br>
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<h3 class="panel-title" id="adminPageTitle">관리자페이지</h3>
-						</div>
-						<br> <br>
-						<ul class="list-group">
-							<li class="list-group-item"><a href="<%=request.getContextPath()%>/prodList.ad">제품 관리</a></li>
-							<li class="list-group-item"><a href="#">1:1 문의 답변</a></li>
-							<li class="list-group-item"><a href="#">주문내역 관리</a></li>
-						</ul>
-					</div>
-				</div>
-			</aside>
+			<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 
 			<%-- 작업 영역 --%>
 			<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9">
@@ -146,8 +111,9 @@ section {
 									<div id="prodPicture">
 									
 										
-										<img id="titleImg" width="400px" height="400px" src="<%=fileRoute %>"
+										<img id="titleImg" width="400px" height="350px" src="<%=fileRoute %>"
 											style="background-color: gray;">
+										<button type="button" style="width:100%">이미지 등록(<%=fileName %>)</button>
 									
 									</div>
 									<div id="fileArea">
@@ -199,7 +165,7 @@ section {
 			$("#fileArea").hide();
 		});
 		//img를 클릭 시 input이 작동되게 설정
-		$("#titleImg").click(function() {
+		$("#prodPicture").click(function() {
 			$("#titleImgFile").click();
 		});
 
@@ -231,6 +197,7 @@ section {
                 return false;
             }
 		}
+		
 		
 	</script>
 	

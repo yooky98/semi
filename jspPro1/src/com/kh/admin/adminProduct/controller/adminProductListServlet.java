@@ -35,7 +35,7 @@ public class adminProductListServlet extends HttpServlet {
 		ArrayList<adminProduct> list = new adminProductService().selectList();		
 		
 		request.setAttribute("list", list);
-		System.out.println("list : " + list);
+		//System.out.println("list : " + list);
 		
 		request.getRequestDispatcher("views/admin/adminProduct/adminProductList.jsp").forward(request, response);
 		

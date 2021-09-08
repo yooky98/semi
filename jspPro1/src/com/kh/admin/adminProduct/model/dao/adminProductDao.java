@@ -19,7 +19,7 @@ public class adminProductDao {
 	
 	public adminProductDao() {
 		String fileName = adminProductDao.class.getResource("/sql/admin/adminProduct/adminProduct-query.properties").getPath();
-		System.out.println("fileName : " + fileName);
+		//System.out.println("fileName : " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -153,7 +153,7 @@ public class adminProductDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, prodNo);
-			System.out.println("다오prodNo : " + prodNo);
+			//System.out.println("다오prodNo : " + prodNo);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -226,7 +226,7 @@ public class adminProductDao {
 
 	public int updateProduct(Connection conn, adminProduct ap) {
 		
-		System.out.println("수정전ap : " + ap);
+		//System.out.println("수정전ap : " + ap);
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -253,8 +253,8 @@ public class adminProductDao {
 			close(pstmt);
 		}		
 		
-		System.out.println("수정후ap : " + ap);
-		System.out.println("수정result : " + result);
+		//System.out.println("수정후ap : " + ap);
+		//System.out.println("수정result : " + result);
 		
 		return result;
 	}
