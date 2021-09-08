@@ -1,61 +1,26 @@
 package com.kh.cart.model.vo;
 
-public class Cart {
+import com.kh.product.model.vo.Product;
+
+public class Cart extends Product{
 
 	private int cartNo; //장바구니 번호
 	private String userId; //회원 아이디
 	private int prodNo; //상품번호
 	private int cartAmount; //주문개수
 	private String forestName; //숲이름
-	private String prodName; //상품이름
-	private int prodPrice;//상품가격
-	
-	
-	public Cart() { }
+	private Product prodList; //제품리스트
 	
 
-	public Cart(int cartNo, String userId, int prodNo, int cartAmount, String forestName) {
+	public Cart(int cartNo, String userId, int prodNo, int cartAmount, String forestName , Product prodList) {
 		super();
 		this.cartNo = cartNo;
 		this.userId = userId;
 		this.prodNo = prodNo;
 		this.cartAmount = cartAmount;
 		this.forestName = forestName;
+		this.prodList =  prodList;
 	}
-	
-
-	public Cart(int cartNo, String userId, int prodNo, int cartAmount, String forestName , String prodName , int prodPrice) {
-		super();
-		this.cartNo = cartNo;
-		this.userId = userId;
-		this.prodNo = prodNo;
-		this.cartAmount = cartAmount;
-		this.forestName = forestName;
-		this.prodName = prodName;
-		this.prodPrice = prodPrice;
-	}
-
-
-
-	public String getProdName() {
-		return prodName;
-	}
-
-
-	public void setProdName(String prodName) {
-		this.prodName = prodName;
-	}
-
-
-	public int getProdPrice() {
-		return prodPrice;
-	}
-
-
-	public void setProdPrice(int prodPrice) {
-		this.prodPrice = prodPrice;
-	}
-
 
 	public int getCartNo() {
 		return cartNo;

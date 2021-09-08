@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.cart.model.vo.Cart , com.kh.product.model.vo.Product"%>
 <%@ page import = "com.kh.product.model.dao.ProductDao" %>
-<%  ArrayList<Cart> list = (ArrayList)request.getAttribute("list"); %>
+<%  ArrayList<Cart> list = (ArrayList)request.getAttribute("list");%>
 <% String message = (String)request.getAttribute("message"); %>
 <% ArrayList<Product> plist = (ArrayList<Product>)request.getAttribute("list");%>
 
@@ -68,8 +68,9 @@
                       	</td>
                         <td><%=c.getForestName()%></td>
                         <td>2500</td>
+                        <td></td>
                         <td>
-                        <button type="button" class="btn btn-outline-dark">삭제</button>
+                       	<a href="del.cart"?cartNo=<%=c.getCartNo() %>>삭제</a>
                         </td>
                     </tr>
                 	<%}%>
@@ -78,6 +79,12 @@
             </table>
         </div>
     </form>
+    <script>
+		function cartDelete(){
+			location.href="<%=request.getContextPath()%>/del.cart";
+			}
+    </script>
+    
 </body>
 </html>
 
