@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.campaign.model.vo.Campaign" %>
+<%
+
+	ArrayList<Campaign> joinList = (ArrayList<Campaign>)request.getAttribute("joinList");
+	String message = (String)request.getAttribute("message");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,17 +42,23 @@
 	<div class="container-fluid">
 
 		<div class="mainSection col-sm-10">
-			<h3>참여 캠패인</h3>
-
+			<h3>참여 캠페인</h3>
 			<hr>
 
-			<h6>강원 산불 피해 복구 숲 조성 캠패인</h6>
-			장소 : <span>강원도 강릉시 옥계면 산불피해지</span> 일시 : <span>2021-08-19</span>
-			<button>신청 취소</button>
-			<hr>
-
-			<h6>미세먼지 방지 실내 숲 조성 캠패인</h6>
-			<hr>
+			<%if(joinList.isEmpty()) {%>
+				<div><%=message%></div>
+				
+			<%}else{%>
+			
+				<%for(Campaign camp : joinList){%>
+				<input type="hidden" value="<%=camp.getCampNO()%>">
+				<h5><%=camp.getCampName() %></h5>
+				장소 : <span><%=camp.getCampLocation() %></span> 일시 : <span><%=camp.getCampDate() %></span>
+				<button id="cancelBtn">신청 취소</button>
+				<hr>
+				<%} %>
+				
+			<%} %>
 			
 		</div>
 
@@ -54,16 +66,23 @@
 
 <script>
 
-<%--!list.isEmpty()--%>
-<%if(true){%>
+
+<%if(!joinList.isEmpty()){%>
 	$(function(){
-		$(".mainSection>h6").click(function(){
-			var campNo = $(this).val();
-			<%--location.href= "<%=request.getContextPath()%>/?campNo="+campNo;--%>
-			location.href="<%=request.getContextPath()%>/views/campaign/campaignDetailView.jsp";
-		})		
+		
+		$(".mainSection > h5").click(function(){
+			var campNo = $(".mainSection > input").val();
+			
+			location.href="<%=request.getContextPath()%>/detail.cam?campNo="+campNo;
+		})
+		
+		$("#cancelBtn").click(function(){
+			var campNo = $(".mainSection > input").val();
+			
+			location.href="<%=request.getContextPath()%>/deleteJoin.cam?campNo="+campNo;
+		})
 	})
-<%}%>
+<%}%> 
 
 </script>
 

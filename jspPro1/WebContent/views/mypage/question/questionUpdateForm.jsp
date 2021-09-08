@@ -78,9 +78,9 @@
 	                    <option value="30" <%= selected[2] %>>주문관련</option>
 	                    <option value="40" <%= selected[3] %>>기타</option>
 	                </select>
-	                <input name="qnaTitle" type="text" value=" <%= qna.getQuesTitle() %>">
+	                <input name="qnaTitle" type="text" value=" <%= qna.getQuesTitle() %>" required>
 	                <div>
-	                    <textarea name="qnaContent" style="resize:none;"><%= qna.getQuesContent() %></textarea>
+	                    <textarea name="qnaContent" style="resize:none;" required><%= qna.getQuesContent() %></textarea>
 	                </div>
 	
 	                <button type="submit">수정</button>

@@ -1,7 +1,7 @@
 package com.kh.campaign.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.campaign.model.service.CampService;
+import com.kh.campaign.model.vo.Campaign;
 import com.kh.member.model.vo.UserVO;
 
 /**
- * Servlet implementation class CampaignJoinServlet
+ * Servlet implementation class CampaignMypageServlet
  */
-@WebServlet("/join.cam")
-public class CampaignJoinServlet extends HttpServlet {
+@WebServlet("/mypage.cam")
+public class CampaignMypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CampaignJoinServlet() {
+    public CampaignMypageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +33,22 @@ public class CampaignJoinServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int campNo = Integer.parseInt(request.getParameter("campNo"));
 		String userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
 		
-		int checkResult = new CampService().checkJoin(campNo, userId);
+		ArrayList<Campaign> joinList = new CampService().selectJoinList(userId);
 		
-		PrintWriter out = response.getWriter();
-		
-		if(checkResult > 0) {
-			out.print("fail");
+		System.out.println(joinList);
+		if(joinList != null) {
+			request.setAttribute("joinList", joinList);
 		}else {
-			int insertResult = new CampService().insertCampJoin(campNo, userId);
-			
-			if(insertResult > 0) {
-				out.print("success");
-			}else {
-				request.setAttribute("msg", "캠페인 참여에 실패했습니다.");
-			}
+			request.setAttribute("msg", "참여 캠페인 리스트를 불러오지 못했습니다.");
 		}
 		
-		out.flush();
-		out.close();
-
+		if(joinList.isEmpty()) {
+			request.setAttribute("message", "참여 캠페인이 존재하지 않습니다.");
+		}
+		
+		request.getRequestDispatcher("views/campaign/campaignMypageView.jsp").forward(request, response);
 	}
 
 	/**

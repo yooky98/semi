@@ -15,6 +15,7 @@ public class QuesService {
 	}
 	
 	public ArrayList<QNA> selectQuesList(String userId) {
+		
 		Connection conn = getConnection();
 		
 		ArrayList<QNA> qnaList = new QuesDao().selectQuesList(conn, userId);
