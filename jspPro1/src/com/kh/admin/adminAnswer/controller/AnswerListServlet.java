@@ -35,7 +35,7 @@ public class AnswerListServlet extends HttpServlet {
 		ArrayList<QNA> list = new AnswerService().selectAnsList();
 		
 		request.setAttribute("list", list);
-		System.out.println("list : " + list);
+		//System.out.println("list : " + list);
 		
 		request.getRequestDispatcher("views/mypage/answer/QNAListView.jsp").forward(request, response);
 	}

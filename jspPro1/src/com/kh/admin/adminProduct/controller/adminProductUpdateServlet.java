@@ -56,7 +56,7 @@ public class adminProductUpdateServlet extends HttpServlet {
 			ap.setProdName(mpr.getParameter("prodName"));
 			ap.setProdPrice(Integer.parseInt(mpr.getParameter("prodPrice")));
 			ap.setProdAmount(Integer.parseInt(mpr.getParameter("prodAmount")));
-			ap.setProdDetail(mpr.getParameter("prodDetail"));
+			ap.setProdDetail((mpr.getParameter("prodDetail")).replaceAll("\n", "<br>"));
 			
 			//2. jsp 파일 정보
 			Attachment at = null;
@@ -76,8 +76,8 @@ public class adminProductUpdateServlet extends HttpServlet {
 			}
 			
 			
-			System.out.println("수정서블릿ap : " + ap);
-			System.out.println("수정서블릿at : " + at);
+			//System.out.println("수정서블릿ap : " + ap);
+			//System.out.println("수정서블릿at : " + at);
 			
 			int result = new adminProductService().updateProduct(ap, at);
 			

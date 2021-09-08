@@ -31,9 +31,9 @@ public class adminProductDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int prodNo = Integer.parseInt(request.getParameter("prodNo"));
-		System.out.println("삭제할 서블릿에서 넘어온 prodNo : " + prodNo);
+		//System.out.println("삭제할 서블릿에서 넘어온 prodNo : " + prodNo);
 		int result = new adminProductService().deleteProduct(prodNo);
-		System.out.println("삭제 result : " + result);
+		//System.out.println("삭제 result : " + result);
 		
 		if(result > 0) {
 			response.sendRedirect("prodList.ad");

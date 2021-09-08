@@ -39,10 +39,10 @@ public class adminProductUpdateFormServlet extends HttpServlet {
 		adminProduct ap = new adminProductService().selectUpdateProduct(prodNo);
 		Attachment at = new adminProductService().selectAttachment(prodNo);
 		
-		System.out.println("서블릿prodNo : " + prodNo);
-		System.out.println("서블릿ap : " + ap);
-		System.out.println("서블릿at : " + at);
-		System.out.println("prodDetail : " + ap.getProdDetail());
+		//System.out.println("서블릿prodNo : " + prodNo);
+		//System.out.println("서블릿ap : " + ap);
+		//System.out.println("서블릿at : " + at);
+		//System.out.println("prodDetail : " + ap.getProdDetail());
 		
 		//전달받은 정보를 수정할 화면으로 넘겨줌
 		if(ap != null && at != null) {

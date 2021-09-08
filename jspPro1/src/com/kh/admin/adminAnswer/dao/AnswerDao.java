@@ -19,7 +19,7 @@ public class AnswerDao {
 	
 	public AnswerDao() {
 		String fileName = AnswerDao.class.getResource("/sql/admin/adminAnswer/answer-query.properties").getPath();
-		System.out.println("fileName : " + fileName);
+		//System.out.println("fileName : " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
@@ -58,7 +58,7 @@ public class AnswerDao {
 				qna.setUserId(rset.getString("USER_ID"));
 				qna.setQuesDate(rset.getDate("QUES_DATE"));
 				
-				System.out.println(rset.getString("ANS_CONTENT"));
+				//System.out.println(rset.getString("ANS_CONTENT"));
 				
 				qna.setAnsContent(rset.getString("ANS_CONTENT")); 
 				
@@ -69,7 +69,7 @@ public class AnswerDao {
 								
 				list.add(qna);
 			}
-			System.out.println("list : " + list);
+			//System.out.println("list : " + list);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -80,6 +80,38 @@ public class AnswerDao {
 		}		
 		
 		return list;
+	}
+
+	public int updateAns(Connection conn, QNA qna) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		//updateAns=UPDATE QNA SET ANS_CONTENT=?, ANS_DATE=SYSDATE WHERE QUES_NO=?
+		
+		String sql = prop.getProperty("updateAns");
+		
+		//System.out.println("다오sql : " + sql);
+		//System.out.println("다오qna1 : " + qna.getAnsContent());
+		//System.out.println("다오qna1 : " + qna.getQuesNo());
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, qna.getAnsContent());
+			pstmt.setInt(2, qna.getQuesNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
 	}
 
 }

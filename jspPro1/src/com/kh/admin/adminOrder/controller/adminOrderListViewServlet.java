@@ -1,4 +1,4 @@
-package com.kh.admin.adminAnswer.controller;
+package com.kh.admin.adminOrder.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
-import com.kh.admin.adminAnswer.service.AnswerService;
-import com.kh.question.model.vo.QNA;
+import com.kh.admin.adminOrder.model.service.adminOrderService;
+import com.kh.admin.adminOrder.model.vo.adminOrderList;
 
 /**
- * Servlet implementation class AnswerFormServlet
+ * Servlet implementation class adminOrderListViewServlet
  */
-@WebServlet("/answerForm.ad")
-public class AnswerFormServlet extends HttpServlet {
+@WebServlet("/orderList.ad")
+public class adminOrderListViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AnswerFormServlet() {
+    public adminOrderListViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,29 +32,11 @@ public class AnswerFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<QNA> list = new AnswerService().selectAnsList();
+		ArrayList<adminOrderList> list = new adminOrderService().selectList();
 		
-		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
-		//System.out.println("qnaNo : " + qnaNo);
-		QNA qna = null;
+		request.setAttribute("list", list);
 		
-		
-		for(int i=0; i<list.size(); i++) {
-			if(list.get(i).getQuesNo() == qnaNo) {
-				qna = list.get(i);			
-				
-			}
-		}		
-	
-		//System.out.println("qna : " + qna);
-		if(qna != null) {
-			request.setAttribute("qna", qna);
-			request.getRequestDispatcher("views/mypage/answer/QNAAnswerForm.jsp").forward(request, response);
-		}
-		//System.out.println("확인");
-		
-		
-		
+		request.getRequestDispatcher("views/admin/adminOrder/adminOrderList.jsp").forward(request, response);
 		
 	}
 

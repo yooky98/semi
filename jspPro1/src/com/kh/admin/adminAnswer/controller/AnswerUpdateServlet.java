@@ -1,7 +1,6 @@
 package com.kh.admin.adminAnswer.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import com.kh.admin.adminAnswer.service.AnswerService;
 import com.kh.question.model.vo.QNA;
 
 /**
- * Servlet implementation class AnswerFormServlet
+ * Servlet implementation class AnswerUpdateServlet
  */
-@WebServlet("/answerForm.ad")
-public class AnswerFormServlet extends HttpServlet {
+@WebServlet("/updateAns.ad")
+public class AnswerUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AnswerFormServlet() {
+    public AnswerUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,28 +31,21 @@ public class AnswerFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<QNA> list = new AnswerService().selectAnsList();
-		
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
-		//System.out.println("qnaNo : " + qnaNo);
-		QNA qna = null;
+		String ansContent = request.getParameter("answer");
 		
+		QNA qna = new QNA();
+		qna.setQuesNo(qnaNo);
+		qna.setAnsContent(ansContent.replaceAll("\n", "<br>"));
 		
-		for(int i=0; i<list.size(); i++) {
-			if(list.get(i).getQuesNo() == qnaNo) {
-				qna = list.get(i);			
-				
-			}
-		}		
-	
-		//System.out.println("qna : " + qna);
-		if(qna != null) {
-			request.setAttribute("qna", qna);
-			request.getRequestDispatcher("views/mypage/answer/QNAAnswerForm.jsp").forward(request, response);
+		int result = new AnswerService().updateAns(qna);
+		if(result > 0) {
+			//request.getSession().setAttribute("msg", "1:1문의 답변 수정 완료");
+			response.sendRedirect("answerList.ad");
+		}else {
+			request.setAttribute("msg", "1:1문의 답변 수정 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		//System.out.println("확인");
-		
-		
 		
 		
 	}

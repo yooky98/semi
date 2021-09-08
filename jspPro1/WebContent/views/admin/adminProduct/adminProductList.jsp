@@ -19,30 +19,9 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>ADMIN PRODUCT LIST</title>
 <style>
-#adminWorkArea {
-	height: 800px;
-}
-
-#adminPageTitle {
-	text-align: center;
-}
-
-aside {
-	padding-top: 100px;
-	background-color: yellowgreen;
-}
-
 section {
 	padding-top: 100px;
 	background-color: skyblue;
-}
-
-#adminWorkArea>aside>div>div>ul>li {
-	background-color: yellowgreen;
-	text-align: left;
-	padding-left: 50px;
-	border: 0;
-	outline: 0;
 }
 
 #productListTable {
@@ -72,23 +51,7 @@ section {
 	<div class="container-fluid">
 		<div class="row" id="adminWorkArea">
 			<%-- 고정 리스트 --%>
-			<aside class="col-lg-3 col-md-3 col-sm-3 col-3 col-xl-3">
-				<div>
-					<br>
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<h3 class="panel-title" id="adminPageTitle">관리자페이지</h3>
-						</div>
-						<br> <br>
-						<ul class="list-group">
-							<li class="list-group-item"><a href="<%=request.getContextPath()%>/prodList.ad">제품 관리</a></li>
-							<li class="list-group-item"><a href="<%=request.getContextPath()%>/answerList.ad">1:1 문의 답변</a></li>
-							<li class="list-group-item"><a href="#">주문내역 관리</a></li>
-						</ul>
-					</div>
-
-				</div>
-			</aside>
+			<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 
 			<%-- 작업 영역 --%>
 			<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9">
@@ -130,7 +93,9 @@ section {
 								<tr>
 									<td id="prodNo<%=i+1%>"><%=list.get(i).getProdNo()%></td>
 									<td><%=list.get(i).getProdCategory()%></td>
-									<td><%=list.get(i).getProdName()%></td>
+									<td><a class="prodName"><%=list.get(i).getProdName()%>
+										<input type="hidden" value="<%=list.get(i).getProdNo()%>">
+									</a></td>
 									<td><%=list.get(i).getProdPrice()%></td>
 									<td><%=list.get(i).getProdAmount()%></td>
 									<td>										
@@ -172,6 +137,16 @@ section {
 				                            
 				                            console.log($("#prodNoInput<%=i+1 %>").val())
 											--%>
+											$(function(){
+												$(".prodName").click(function(){
+													var pNo = $(this).children().val();
+													console.log(pNo)
+													<%-- java.sql.SQLSyntaxErrorException: ORA-00904: "PROD_NO": invalid identifier --%>
+													location.href = "<%=request.getContextPath() %>/detail.pr?pNo=" + pNo;
+												});
+											});
+											
+											
 											
 											function updateProd<%=i+1%>(){
 				                            	

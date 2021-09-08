@@ -9,31 +9,9 @@
 <meta charset="UTF-8">
 <title>QNA Answer Form</title>
 <style>
-aside {
-	padding-top: 100px;
-	writing-mode: horizontal-tb;
-	background-color: yellowgreen;
-}
-
 section {
 	padding-top: 100px;
 	background-color: skyblue;
-}
-
-#adminWorkArea {
-	height: 800px;
-}
-
-#adminWorkArea>aside>div>div>ul>li {
-	background-color: yellowgreen;
-	text-align: left;
-	padding-left: 50px;
-	border: 0;
-	outline: 0;
-}
-
-#adminPageTitle {
-	text-align: center;
 }
 
 #QNAOuter {
@@ -76,32 +54,16 @@ section {
 	<div class="container-fluid">
 		<div class="row" id="adminWorkArea">
 
-			<aside class="col-lg-3 col-md-3 col-sm-3 col-3 col-xl-3">
-				<div>
-					<br>
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<h3 class="panel-title" id="adminPageTitle">관리자페이지</h3>
-						</div>
-						<br> <br>
-						<ul class="list-group">
-							<li class="list-group-item"><a
-								href="<%=request.getContextPath()%>/prodList.ad">제품 관리</a></li>
-							<li class="list-group-item"><a
-								href="<%=request.getContextPath()%>/answerList.ad">1:1 문의 답변</a></li>
-							<li class="list-group-item"><a href="#">주문내역 관리</a></li>
-						</ul>
-					</div>
-				</div>
-			</aside>
+			<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 
 
 			<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9">
 
-				<form action="" method="POST">
+				<form action="updateAns.ad" method="POST">
 					<div id="QNAOuter">
 
 						<div id="QNAAnswerForm">
+							<input type="hidden" name="qnaNo" value="<%=qna.getQuesNo()%>">
 							<h3>1:1문의 답변</h3>
 							<h5>
 								<span>문의유형/</span><span><%=qna.getQuesCategory() %></span>
@@ -123,14 +85,17 @@ section {
 							<br>
 							<br>
 							<h5 style="color: red;">답변</h5>
-
-							<textarea name="answer" id="answer" cols="30" rows="10"></textarea>
+							<% if(qna.getAnsContent() == null){ %>
+								<textarea name="answer" id="answer" cols="30" rows="10"></textarea>
+							<%} else{ %>
+								<textarea name="answer" id="answer" cols="30" rows="10"><%=qna.getAnsContent() %></textarea>
+							<%} %>
 
 						</div>
 
 					</div>
 					<div class="btns" align="center">
-						<button type="button" onclick="" style="margin-right: 100px;">취	소</button>
+						<button type="button" onclick="goList();" style="margin-right: 100px;">취 소</button>
 						<button type="submit" onclick="" style="margin-left: 100px;">확 인</button>
 					</div>
 				</form>
@@ -139,6 +104,12 @@ section {
 
 		</div>
 	</div>
+	
+	<script>
+		function goList(){
+			location.href="<%=request.getContextPath()%>/answerList.ad";
+		}
+	</script>
 
 	<%@ include file="/views/common/footer.jsp"%>
 </body>
