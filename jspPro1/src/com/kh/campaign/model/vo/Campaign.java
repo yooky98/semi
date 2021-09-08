@@ -22,7 +22,14 @@ public class Campaign {
 		this.campDate = campDate;
 		this.campCapa = campCapa;
 	}
-	
+
+	public Campaign(int campNO, String campName, String campLocation, Date campDate) {
+		super();
+		this.campNO = campNO;
+		this.campName = campName;
+		this.campLocation = campLocation;
+		this.campDate = campDate;
+	}
 
 	public Campaign(int campNO, String campName) {
 		super();

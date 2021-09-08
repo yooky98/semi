@@ -55,7 +55,7 @@
 					<li><a href="#">위시 리스트</a></li>
 					<li><a href="<%=request.getContextPath()%>/views/mypage/review/review.jsp">리뷰 관리</a></li>
 					<li><a href="<%=request.getContextPath()%>/list.que">1:1 문의</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/campaign/campaignMypageView.jsp">참여 캠페인</a></li>
+					<li><a href="<%=request.getContextPath()%>/mypage.cam">참여 캠페인</a></li>
 				</ul>
 			</aside>
 

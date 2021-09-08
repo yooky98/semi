@@ -53,18 +53,18 @@
 				<h4>1:1문의</h4>
 				<hr>
 				
-				<form class="qnaEnroll" method="post" action="<%=request.getContextPath()%>/enroll.que">
-	                <select name="qnaCategory">
+				<form class="qnaEnroll" method="post" action="<%=request.getContextPath()%>/enroll.que" onsubmit="return categoryValidate()">
+	                <select id="qnaCategory" name="qnaCategory">
 	                    <option value="" >문의유형</option>
 	                    <option value="10">상품문의</option>
 	                    <option value="20">배송문의</option>
 	                    <option value="30">주문관련</option>
 	                    <option value="40">기타</option>
 	                </select>
-	                <input name="qnaTitle" type="text" placeholder="제목">
+	                <input name="qnaTitle" type="text" placeholder="제목" required>
 	
 	                <div>
-	                    <textarea name="qnaContent" placeholder="내용을 입력해 주세요" style="resize:none;"></textarea>
+	                    <textarea name="qnaContent" placeholder="내용을 입력해 주세요" style="resize:none;" required></textarea>
 	                </div>
 	
 	                <button type="submit">작성</button>
@@ -75,7 +75,19 @@
 			
 		</div>
 	</div>
+	
+<script>
 
+function categoryValidate(){
+	var categoryVal = $("#qnaCategory").val();
+	
+	if(categoryVal == ""){
+		alert("문의 유형을 선택해 주세요");
+		return false;
+	}
+}
+
+</script>
 
 </body>
 </html>

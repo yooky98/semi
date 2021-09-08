@@ -53,7 +53,7 @@
 			<div>
 			<b>장소 :</b> <span><%=camp.getCampLocation() %></span> &nbsp;
 			<b>일시 :</b> <span><%=camp.getCampDate() %></span> &nbsp;
-			<b>참여 가능 인원 :</b> <span><%=camp.getCampCapa() %></span>
+			<b>참여 가능 인원 :</b> <span id="capa"></span>
 			</div>
 			
 			<!-- 가능하면 신청가능한 인원, 정원 표기 해보기 -->
@@ -61,7 +61,7 @@
 			
 			<div><%=camp.getCampContent() %></div>
 			
-			<button onclick="check()">참여하기</button>
+			<button id="joinBtn" onclick="check()">참여하기</button>
 			<!-- 회원만 참여하기 가능 로그인확인-->
 			<hr>
 			
@@ -71,34 +71,69 @@
 	
 <script>
 
-function check(){
-	<%if(loginUser == null){%>
-		alert("로그인이 필요한 서비스입니다.")
-		location.href="<%=contextPath%>/views/member/login.jsp";
-	<%}else{%>
-	
-		var campNo =  <%=camp.getCampNO()%>;
-		$.ajax({
-			url:"join.cam",
-			data: {campNo : campNo},
-			type: "post",
-			success: function(result){
-				if(result == "fail"){
-					alert("이미 참여한 캠페인입니다.")
-				}else{
-					alert("참여가 완료되었습니다.")
+$(function(){
+	capacity();
+})
+
+	function check(){
+		
+		<%if(loginUser == null){%>
+			alert("로그인이 필요한 서비스입니다.")
+			location.href="<%=contextPath%>/views/member/login.jsp";
+		<%}else{%>
+		
+			var campNo =  <%=camp.getCampNO()%>;
+			$.ajax({
+				url:"join.cam",
+				data: {campNo : campNo},
+				type: "post",
+				success: function(result){
+					if(result == "fail"){
+						alert("이미 참여한 캠페인입니다.")
+					}else if(result == "success"){
+						alert("참여가 완료되었습니다. 마이페이지 참여 캠페인에서 확인해 주세요.")
+						capacity();
+					}
+				},
+				error: function(e){
+					console.log(e);
 				}
+			})
+			
+		<%}%>
+		
+	}
+
+	function capacity(){
+		$("#capa").empty();
+		
+		var campCapa = <%=camp.getCampCapa() %>;
+		var campNo =  <%=camp.getCampNO()%>;
+		
+		$.ajax({
+			url:"capa.cam",
+			data:{ campNo : campNo, campCapa : campCapa},
+			type:"post",
+			success: function(capa){
+				if(capa > 0){
+					$("#capa").html(capa);
+				}else{
+					$("#capa").html("신청마감");
+					$("#joinBtn").attr("disabled", "true");
+				}
+				
 			},
 			error: function(e){
 				console.log(e);
 			}
+			
 		})
 		
-	<%}%>
-	
-}
+	}
 
-<%-- 참여가능 인원 : 참여가능인원 - 참여 인원count(campNo), 회원의 해당 캠페인 참여 여부 확인 --%>	
+
+<%-- 참여가능 인원 : 참여가능인원 - 참여 인원count(campNo), 회원의 해당 캠페인 참여 여부 확인 
+신청 인원이 다 찼을 경우 참여하기 버튼 비활성화 하기--%>	
 
 <%--
 $(function(){

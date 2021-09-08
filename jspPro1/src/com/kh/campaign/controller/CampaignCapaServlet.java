@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.campaign.model.service.CampService;
-import com.kh.member.model.vo.UserVO;
 
 /**
- * Servlet implementation class CampaignJoinServlet
+ * Servlet implementation class CampaignCapaServlet
  */
-@WebServlet("/join.cam")
-public class CampaignJoinServlet extends HttpServlet {
+@WebServlet("/capa.cam")
+public class CampaignCapaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CampaignJoinServlet() {
+    public CampaignCapaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,27 +32,16 @@ public class CampaignJoinServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int campNo = Integer.parseInt(request.getParameter("campNo"));
-		String userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
+		int campCapa = Integer.parseInt(request.getParameter("campCapa"));
 		
-		int checkResult = new CampService().checkJoin(campNo, userId);
+		int joinNum = new CampService().selectJoinNum(campNo);
+		
+		int result = campCapa - joinNum;
 		
 		PrintWriter out = response.getWriter();
-		
-		if(checkResult > 0) {
-			out.print("fail");
-		}else {
-			int insertResult = new CampService().insertCampJoin(campNo, userId);
-			
-			if(insertResult > 0) {
-				out.print("success");
-			}else {
-				request.setAttribute("msg", "캠페인 참여에 실패했습니다.");
-			}
-		}
-		
+		out.print(result);
 		out.flush();
 		out.close();
-
 	}
 
 	/**
