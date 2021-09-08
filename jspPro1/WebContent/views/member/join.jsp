@@ -89,13 +89,13 @@
 	<table></table>
 	<form method ="post" action = "<%=request.getContextPath() %>/user?command=join">
 	<table class="usertable" style="border-spacing: 0 5px;">
-	<tr><td><input class="userform" type = "text" name = "user_id" maxlength="20" placeholder="아이디"> 
+	<tr><td><input class="userform" type = "text" name = "user_id" maxlength="10" placeholder="아이디  (최대 10자)"> 
 	<input type="button" class = "btnCheck" onclick="idCheck()" value="중복확인"></td></tr>
-    <tr><td><input class="userform" type = "password" name = "user_pw" maxlength="20" placeholder="비밀번호"></td></tr>
+    <tr><td><input class="userform" type = "password" name = "user_pw" maxlength="20" placeholder="비밀번호 "></td></tr>
  	<tr><td><input class="userform" type = "password" name = "user_pwCheck" maxlength="20" placeholder="비밀번호 확인"></td></tr>
-	<tr><td><input class="userform" type = "text" name = "user_name" maxlength="20" placeholder="이름"></td></tr>
+	<tr><td><input class="userform" type = "text" name = "user_name" maxlength="20" placeholder="이름 "></td></tr>
 	<tr><td><input class="userform" style="width:189px;" type = "text" name = "user_no" maxlength="6" placeholder="주민번호 앞자리"> - 
-	<input class="userform" style="width:189px;" type = "text" name = "user_no1" maxlength="7" placeholder="주민번호 뒷자리"></td></tr>
+	<input class="userform" style="width:189px;" type = "password" name = "user_no1" maxlength="7" placeholder="주민번호 뒷자리"></td></tr>
 	<tr><td><input class="genderradio" style="width:50px;" type='radio' name='gender' value='M' /><span class="gender">남자</span>
 	<input class="genderradio" style="width:50px;" type='radio' name='gender' value='F' /><span class="gender">여자</span></td></tr>
 	<tr><td><input class="userform" type="text" id="sample4_postcode" name="userPost" placeholder="우편번호" readonly></td></tr>
@@ -106,7 +106,7 @@
 	<tr><td><input class="userform" type="text" id="sample4_detailAddress" name="userAddress1" placeholder="상세주소"  size="60" ></td></tr>
 	<tr><td><input class="userform" type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="60" ></td></tr>
 	<tr><td><input class="userform" type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="60" ></td></tr>
-	<tr><td><input class="userform" type = "text" name = "phone" maxlength="13" placeholder="전화번호"></td></tr>
+	<tr><td><input class="userform" type = "text" name = "phone" maxlength="13" placeholder="전화번호  -포함"></td></tr>
 	<tr><td><input class="userform" type = "text" name = "email" maxlength="20" placeholder="이메일"></td></tr>
 	</table>
 	<br>

@@ -29,7 +29,7 @@ public class UserServlet extends HttpServlet {
 
 	protected void processing(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		if (request.getParameter("command").equals("join")) {
 			join(request, response);
 		} else if (request.getParameter("command").equals("login")) {
@@ -44,14 +44,17 @@ public class UserServlet extends HttpServlet {
 			userDelete(request, response);
 		} else if (request.getParameter("command").equals("findPw")) {
 			findPw(request, response);
-		}else if (request.getParameter("command").equals("pwCheck")) {
+		} else if (request.getParameter("command").equals("pwCheck")) {
 			pwCheck(request, response);
+		} else if (request.getParameter("command").equals("findPwUpdate")) {
+			findPwUpdate(request, response);
 		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		processing(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -86,8 +89,8 @@ public class UserServlet extends HttpServlet {
 			if (result == 1) {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-
-				out.println("<script>alert('로그인페이지로 이동합니다');location.href='views/member/login.jsp';</script>");
+				out.println(
+						"<script>alert('회원가입이 정상적으로 처리되었습니다 로그인페이지로 이동합니다');location.href='views/member/login.jsp';</script>");
 				out.flush();
 				out.close();
 
@@ -169,7 +172,7 @@ public class UserServlet extends HttpServlet {
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
 
-					out.println("<script>alert('성공적으로 수정되었습니다!');location.href='index.jsp';</script>");
+					out.println("<script>alert('회원님의 정보가 정상적으로  수정되었습니다!');location.href='index.jsp';</script>");
 					out.flush();
 					out.close();
 
@@ -194,7 +197,7 @@ public class UserServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/member/findIdAction.jsp");
 			view.forward(request, response);
 		} else { // 11 만약 받아온 result(비밀번호가) 일치하지 않다면 아이디는 있고 비밀번호가 틀린것이다
-			request.setAttribute("msg", "아이디와 주민번호가 맞지않습니다 ");
+			request.setAttribute("msg", "아이디와 주민번호가 일치하지 않습니다 ");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
 			view.forward(request, response);
 		}
@@ -225,6 +228,7 @@ public class UserServlet extends HttpServlet {
 				out.println("<script>alert('성공적으로 탈퇴 되었습니다');location.href='index.jsp';</script>");
 				out.flush();
 				out.close();
+
 			} else {
 				out.println("<script>alert('오류 발생');history.back();</script>");
 				out.flush();
@@ -237,44 +241,75 @@ public class UserServlet extends HttpServlet {
 
 	protected void findPw(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String user_name = request.getParameter("user_name");
 		String user_id = request.getParameter("user_id");
 		String user_no = request.getParameter("user_no") + "-" + request.getParameter("user_no1");
 		String findPw = us.findPw(user_name, user_id, user_no);
-		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
 		if (!findPw.equals("")) {
-			
+			request.setAttribute("user_id", user_id);
+		
 			request.setAttribute("findPw", findPw);
+			request.setAttribute("msg", "새로운 비밀번호를 입력해주세요 ");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/findPwAction.jsp");
 			view.forward(request, response);
-		} else { 
+
+		} else {
 			request.setAttribute("msg", "아이디와 주민번호가 맞지않습니다 ");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
 			view.forward(request, response);
 		}
 	}
+
 	protected void pwCheck(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String user_id = request.getParameter("user_id"); 
+		String user_id = request.getParameter("user_id");
 		String user_pw = request.getParameter("user_pw");
-
-		String PwCheck = us.PwCheck(user_id); 
+		String PwCheck = us.PwCheck(user_id);
 		System.out.println(PwCheck + " 333");
 		if (!PwCheck.equals(user_pw)) { // 10 만약 아이디가 존재하지 않을경우 반환된 result(비밀번호)는 ""공백이다 = 존재하지 않는 회원이다
 			request.setAttribute("msg", "비밀번호가 일치하지 않입니다");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
-			view.forward(request, response);					
-		} else { 
+			view.forward(request, response);
+		} else {
 			HttpSession session = request.getSession();
 			UserVO vo = us.getUser(user_id);
 			session.setAttribute("loginUser", vo);
-
 			RequestDispatcher view = request.getRequestDispatcher("views/member/userUpdate1.jsp");
 			view.forward(request, response);
 
 		}
+	}
+
+	protected void findPwUpdate(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String user_pw = request.getParameter("user_pw");
+		String user_pwCheck = request.getParameter("user_pwCheck");
+		String user_id = request.getParameter("user_id");
+		System.out.println(user_id + "12314");
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if (user_pw.equals(user_pwCheck)) {
+			int result = us.findPwUpdate(user_pw, user_id);
+			if (result == 1) {
+				out.println("<script>alert('비밀번호가 정상적으로  수정되었습니다!');window.close();</script>");
+				out.flush();
+				out.close();
+			} else {
+				out.println("<script> alert('오류발생 ');history.back();</script>");
+				out.flush();
+				out.close();
+			}
+		} else {
+			out.println("<script> alert('비밀번호가 일치하지 않습니다 ');history.back();</script>");
+			out.flush();
+			out.close();
+		}
+
 	}
 
 }

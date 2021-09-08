@@ -22,12 +22,12 @@
 <%@ include file="../common/menubar.jsp"%>
 	<div class = "userbox">
 	<span class="usertitle">로그인</span>
-	<form method="post" action="<%=request.getContextPath() %>/user?command=login">
 	
+	<form method="post" action="<%=request.getContextPath() %>/user?command=login">	
 	<table class = "usertable">
 	<tr><td><input type = "text" class = "userform" name = "user_id" maxlength="20" placeholder="아이디"></td></tr>  
 	
-	<tr><td><input type = "password" class = "userform" name = "user_pw" placeholder="비밀번호"></td> </tr>
+	<tr><td><input type = "password" class = "userform" name = "user_pw" placeholder="비밀번호 "></td> </tr>
 					
 		</table>
 		
