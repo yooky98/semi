@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+	<script src="<%=request.getContextPath() %>/resources/js/user.js"></script>
 <script>
  function sample4_execDaumPostcode() {
         new daum.Postcode({
@@ -89,10 +89,11 @@
 	<table></table>
 	<form method ="post" action = "<%=request.getContextPath() %>/user?command=join">
 	<table class="usertable" style="border-spacing: 0 5px;">
-	<tr><td><input class="userform" type = "text" name = "user_id" maxlength="10" placeholder="아이디  (최대 10자)"> 
-	<input type="button" class = "btnCheck" onclick="idCheck()" value="중복확인"></td></tr>
-    <tr><td><input class="userform" type = "password" name = "user_pw" maxlength="20" placeholder="비밀번호 "></td></tr>
- 	<tr><td><input class="userform" type = "password" name = "user_pwCheck" maxlength="20" placeholder="비밀번호 확인"></td></tr>
+	<tr><td><input id = "user_id" class="userform" type = "text" name = "user_id" maxlength="10" placeholder="아이디">
+	<div id = "checkId" style = "font-weight: 700;" ></div></td></tr>
+    <tr><td><input class="userform" type = "password" id = "user_pw" name = "user_pw" 	maxlength="20" placeholder="비밀번호 "> </td></tr>	
+ 	<tr><td><input class="userform" type = "password" id = "user_pwCheck" name = "user_pwCheck" maxlength="20" placeholder="비밀번호 확인">
+ 	<div id = "pwCheck" style = "font-weight: 700;" ></div> </td></tr>	
 	<tr><td><input class="userform" type = "text" name = "user_name" maxlength="20" placeholder="이름 "></td></tr>
 	<tr><td><input class="userform" style="width:189px;" type = "text" name = "user_no" maxlength="6" placeholder="주민번호 앞자리"> - 
 	<input class="userform" style="width:189px;" type = "password" name = "user_no1" maxlength="7" placeholder="주민번호 뒷자리"></td></tr>

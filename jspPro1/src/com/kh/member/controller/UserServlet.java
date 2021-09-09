@@ -48,7 +48,30 @@ public class UserServlet extends HttpServlet {
 			pwCheck(request, response);
 		} else if (request.getParameter("command").equals("findPwUpdate")) {
 			findPwUpdate(request, response);
+		}else if (request.getParameter("command").equals("idCheck")) {
+			idCheck(request, response);
 		}
+	}
+
+	private void idCheck(HttpServletRequest request, HttpServletResponse response) {
+		String user_id = request.getParameter("user_id");
+		UserVO vo = new UserVO(user_id);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			if(us.idCheck(vo)!=0){				
+				
+				out.print("<span style = 'color:red;'> 이미 사용중인 아이디 입니다</span>");		
+			}else {
+				out.print("<span style = 'color:blue;'> 사용 가능한 아이디 입니다"); 
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -103,8 +126,7 @@ public class UserServlet extends HttpServlet {
 	}
 
 	protected void login(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+			throws ServletException, IOException {			
 		String user_id = request.getParameter("user_id"); // 1로그인화면에서 사용자에게 받은 아이디와 비밀번호
 		String user_pw = request.getParameter("user_pw");
 
@@ -122,7 +144,6 @@ public class UserServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			UserVO vo = us.getUser(user_id);
 			session.setAttribute("loginUser", vo);
-
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 			view.forward(request, response);
 
@@ -138,7 +159,7 @@ public class UserServlet extends HttpServlet {
 		view.forward(request, response);
 
 	}
-
+	
 	protected void userUpdate(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -148,10 +169,8 @@ public class UserServlet extends HttpServlet {
 				+ request.getParameter("userAddress1");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
-
 		UserVO vo = new UserVO(user_id, user_pw, address, phone, email);
 		String pw = us.loginCheck(user_id);
-
 		if (!user_pw.equals(pw)) {
 			request.setAttribute("msg", "회원님의 비밀번호가 일치하지 않습니다 ");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
@@ -269,8 +288,7 @@ public class UserServlet extends HttpServlet {
 		String user_id = request.getParameter("user_id");
 		String user_pw = request.getParameter("user_pw");
 		String PwCheck = us.PwCheck(user_id);
-		System.out.println(PwCheck + " 333");
-		if (!PwCheck.equals(user_pw)) { // 10 만약 아이디가 존재하지 않을경우 반환된 result(비밀번호)는 ""공백이다 = 존재하지 않는 회원이다
+		if (!PwCheck.equals(user_pw)) { 
 			request.setAttribute("msg", "비밀번호가 일치하지 않입니다");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
 			view.forward(request, response);
