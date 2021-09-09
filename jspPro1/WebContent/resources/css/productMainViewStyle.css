@@ -467,8 +467,8 @@ html, body, div, span,h1, h2, p, a, form, article, section {
 				display: flex;
 				flex-wrap: wrap;
 				position: relative; 
-				margin: -3.5em 0 0 -7.5em;
-				margin-top: -2em;
+				margin: -7.5em 0 0 -3.5em;
+				margin-top: -1.2em;
 			}
 
 			.tiles article {
@@ -628,6 +628,10 @@ input[type="button"]:hover{
 				body, input, select, textarea {
 					font-size: 14pt;
 				}
+				
+				.tiles{
+					margin-top: -2.2em;
+				}
 
 			}
 
@@ -638,7 +642,7 @@ input[type="button"]:hover{
 				}
 			
 				.tiles {
-					margin: -0.25em 0 0 -1.25em;
+					margin: -1.25em 0 0 -1.25em;
 				}
 
 				.tiles article {
