@@ -33,36 +33,35 @@ public class CartDao {
 		}
 	}
 
-	// 로그인후 장바구니에 있는 전체 리스트
+
 	public ArrayList<Cart> selectCartList(Connection conn, String userId) {
-		ArrayList<Cart> list = new ArrayList<Cart>();
 		
+		ArrayList<Cart> list = new ArrayList<Cart>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		String sql = prop.getProperty("selectCartList");
-//		selectCartList=SELECT * FROM CART WHERE USER_ID = ?	
 //		SELECT A.CART_NO, A.USER_ID, A.PROD_NO , A.CART_AMOUNT, A.FOREST_NAME, B.PROD_NAME , B.PROD_PRICE FROM CART A INNER JOIN PRODUCT B ON (A.PROD_NO = B.PROD_NO) WHERE A.USER_ID = ?;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-
 			rset = pstmt.executeQuery();
-
+			
+		
+			Cart cart = null;
 			while (rset.next()) {
-			
-			//Cart cart = new Cart();
-				int CartNo = rset.getInt("CART_NO");
-				String userId1 = rset.getString("USER_ID");
-				int prodNo = rset.getInt("PROD_NO");
-				int cartAmount = rset.getInt("CART_AMOUNT");
-				String forestName = rset.getString("FOREST_NAME");
-			
-			Product prodList = 	new Product();
-				prodList.setProdName(rset.getString("PROD_NAME"));
-				prodList.setProdPrice(rset.getInt("PROD_PRICE"));
-			
-				list.add(new Cart(CartNo,userId1,prodNo,cartAmount,forestName, prodList));
+				cart = new Cart();
+				
+				cart.setCartNo(rset.getInt("CART_NO"));
+				cart.setUserId(rset.getString("USER_ID"));
+				cart.setProdNo(rset.getInt("PROD_NO"));
+				cart.setCartAmount(rset.getInt("CART_AMOUNT"));
+				cart.setForestName(rset.getString("FOREST_NAME"));
+				cart.setProdName(rset.getString("PROD_NAME"));
+				cart.setProdPrice(rset.getInt("PROD_PRICE"));
+		
+				list.add(cart);
+				
 			}
 
 		} catch (SQLException e) {
@@ -74,8 +73,7 @@ public class CartDao {
 			close(pstmt);
 		}
 		return list;
-		
-		
+
 	}
 
 	public int insertCart(Connection conn, Cart c) {
@@ -84,11 +82,7 @@ public class CartDao {
 
 		String sql = prop.getProperty("insertCart");
 //		insertCart=INSERT INTO CART VALUES(CART_SEQ.NEXTVAL,?,?,?,?)
-//		CART_NO
-//		USER_ID
-//		PROD_NO
-//		CART_AMOUNT
-//		FOREST_NAME
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, c.getUserId());
@@ -108,24 +102,26 @@ public class CartDao {
 		return result;
 
 	}
-/*
-	public ArrayList<Product> selectProductList(Connection conn, String userId) {
-		ArrayList<Product> list = new ArrayList<Product>();
-		
+
+	public int deleteCart(Connection conn, int cartNo) {
+		int result = 0;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+		//deleteCart=DELETE FROM CART WHERE CART_NO = ?
+		String sql = prop.getProperty("deleteCart");
 		
-		String sql = prop.getProperty(key)
-		
-		return null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cartNo );
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
-	public int existCart(Connection conn, String userId, int prodNo) {
-		int existCart = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("");
-		return 0;
-	} */
 }
