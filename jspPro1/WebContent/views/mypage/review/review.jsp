@@ -18,10 +18,6 @@
 		 tot = (Integer)request.getAttribute("tot");
 		 
 	 }
-	 
-	 
-	 
-
 
 %>
 
