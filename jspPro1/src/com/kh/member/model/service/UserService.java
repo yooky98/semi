@@ -66,9 +66,9 @@ public class UserService {
 		close(conn);
 		return result;
 	}
-	public int userDelete(String user_id) {    //3 받아온 아이디와 DB와 연결시켜서 dao 로그인 체크로 넘겨준다
+	public int userDelete(String user_id) {    
 		Connection conn = getConnection();
-		int result = dao.userDelte(conn, user_id);   //9. dao에서 담긴 result가 넘어온다 
+		int result = dao.userDelte(conn, user_id);  
 		if(result > 0) {
 			commit(conn);
 		}else {
