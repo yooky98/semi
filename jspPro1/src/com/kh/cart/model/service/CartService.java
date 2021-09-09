@@ -36,26 +36,18 @@ public class CartService {
 		return result;
 	}
 
-
-/*	public ArrayList<Product> selectProductList(String userId) {
+	public int deleteCart(int cartNo) {
 		Connection conn = getConnection();
-
-		ArrayList<Product> plist = new CartDao().selectProductList(conn, userId);
-		close(conn);
-
-		return plist;
 		
-	}
-
-	// 장바구니 상품 중복체크
-	public int existCart(String userId, int prodNo) {
-		Connection conn = getConnection();
-
-		int existCart = new CartDao().existCart(conn, userId, prodNo);
-
+		int result = new CartDao().deleteCart(conn, cartNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
-
-		return existCart;
+		return result;
 	}
-*/
+
 }

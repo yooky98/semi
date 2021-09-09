@@ -22,7 +22,7 @@ public class QuesDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT * FROM QNA JOIN QNA_CATEGORY USING(QUES_CATEGORY_NO) WHERE USER_ID=?";
+		String sql = "SELECT * FROM QNA JOIN QNA_CATEGORY USING(QUES_CATEGORY_NO) WHERE USER_ID=? ORDER BY QUES_NO DESC";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -42,7 +42,6 @@ public class QuesDao {
 								  rset.getString("ANS_CONTENT")
 								  );
 				qnaList.add(qna);
-				System.out.println("qna" + qna);
 			}
 			
 			
@@ -137,6 +136,7 @@ public class QuesDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		

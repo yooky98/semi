@@ -30,6 +30,9 @@
 	rel="stylesheet">
 <style>
 html {
+	width:80%;
+	height:100vh;
+	background: top right;
 	background-image:
 		url('<%=request.getContextPath()%>/resources/images/<%=p.getTitleImg()%>');
 	background-repeat: no-repeat;
@@ -39,44 +42,6 @@ html {
 #contImg {
 	aspect-ratio: 16/9;
 }
-
-.modal_wrap{
-        display: none;
-        width: 500px;
-        height: 500px;
-        position: absolute;
-        top:50%;
-        left: 50%;
-        margin: -250px 0 0 -250px;
-        background:#eee;
-        z-index: 8889;
-    }
-    .black_bg{
-        display: none;
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color:rgba(0, 0,0, 0.7);
-        top:0;
-        left: 0;
-        z-index: 8888;
-    }
-    .modal_close{
-        width: 26px;
-        height: 26px;
-        position: absolute;
-        top: -30px;
-        right: 0;
-    }
-    .modal_close> a{
-        display: block;
-        width: 100%;
-        height: 100%;
-        background:url(https://img.icons8.com/metro/26/000000/close-window.png);
-        text-indent: -9999px;
-    }
-    
 </style>
 </head>
 <body class="is-preload-0 is-preload-1 is-preload-2">
@@ -90,18 +55,31 @@ html {
 	<!-- 후기 조회시 모달창 -->
 	<div class = "black_bg"></div>
 	<%
+	int i = 1;
 		for (Review r : r_list) {
 	%>
-	<div class = "modal_wrap">
-		<div class = "modal_close"><a href="#">close</a></div>
+	<!-- 각각의 리뷰와 매칭시키기 위해서 i를 통해서 id 부여 -->
+	<div class = "modal_wrap" id = "modal_wrap<%=i%>">
+		<div class = "modal_close">
+			<svg width="48" height="48" viewBox="0 0 172 172">
+			<g fill="#9ea46b"><path d="M30.76239,40.89934l10.13502,-10.13537l100.3402,100.3367l-10.13502,10.13537z"></path><path d="M30.75985,131.08675l100.35246,-100.32444l10.13378,10.13661l-100.35246,100.32444z"></path></g></svg>
+		</div>
 		<div>
-			<h2><%=r.getReview_title()%></h2>
-			<%=r.getReview_content()%><br>
-			<%=r.getUser_id()%><br>
-			<%=r.getReview_star()%>
+			<h1><%=r.getReview_title()%></h1>
+			<h2><%=r.getReview_content()%></h2>
+			<h3>작성자 : <%=r.getUser_id()%></h3>
+			<div id = "star">
+			<%for(int j = 0; j<r.getReview_star(); j++){%>
+				<img src="https://img.icons8.com/fluency/14/000000/star.png"/>
+			<%} %>
+			</div>
 		</div>
 	</div>
-	<%} %>
+	<%	i++;
+	} %>
+	<!-- 모달을 각 후기 갯수만큼 만들고, 번호에 맞게 조회해서 모달을 보여주게끔 함 -->
+	
+	
 	<form id="cartForm" action="insert.cart" method="post"
 		enctype="multipart/form-data">
 		<input type="hidden" name="prodNo" value="<%=p.getProdNo()%>">
@@ -139,17 +117,30 @@ html {
 			<header id="detailHeader">
 				<h1>후기</h1>
 				<%
-					for (Review r : r_list) {
+				if(r_list.size() > 0){
+					int j = 1;
+					for (Review r : r_list) {	
 				%>
 						<section class="reviews">
-							<h2 class = "review_btn"><%=r.getReview_title()%></h2>
-							<%=r.getReview_content()%><br>
-							<%=r.getUser_id()%><br>
-							<%=r.getReview_star()%>
+							<div class = "review_btn">
+							<!-- 인자를 wrap'i' 로 하여 해당 모달과 매칭시킴 -->
+								<span><a href="javascript:openModal('wrap<%=j%>')"><%=r.getReview_title()%></a></span>
+								<span class = "writer"><a>작성자 : <%=r.getUser_id()%></a></span>
+							</div>
+							<div class = "star">
+									<%for(int k = 0; k<r.getReview_star(); k++){%>
+										<img src="https://img.icons8.com/fluency/14/000000/star.png"/>
+									<%} %>
+								</div>
 						</section>
 				<%
+						j++;
 					}
-				%>
+				
+				}else{%>
+					<h5>남겨진 후기가 존재하지 않습니다.</h5>
+					
+				<%}%>
 			</header>
 
 			<hr>
@@ -271,16 +262,16 @@ html {
 			});
 
 			
-			//리뷰 모달 기능
+			//리뷰 모달 기능 
+			function openModal(modalname){
+				$("#modal_"+modalname).fadeIn();
+				$(".black_bg").fadeIn();
+			}
+			
 			$(function(){
 				$(".modal_close").click(function(){
 					$(".modal_wrap").fadeOut();
 					$(".black_bg").fadeOut();
-				});
-				
-				$(".review_btn").click(function(){
-					$(".modal_wrap").fadeIn();
-					$(".black_bg").fadeIn();
 				});
 				
 				$(".black_bg").click(function(){
@@ -290,6 +281,7 @@ html {
 				
 			});
 			
+			 
 			
 			
 			

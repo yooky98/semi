@@ -49,7 +49,6 @@ public class QuestionListServlet extends HttpServlet {
 		}
 		
 		
-		System.out.println(qnaList == null);
 		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
 		
 //		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);

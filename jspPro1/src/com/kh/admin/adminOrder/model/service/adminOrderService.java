@@ -1,5 +1,5 @@
 package com.kh.admin.adminOrder.model.service;
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -19,6 +19,21 @@ public class adminOrderService {
 		close(conn);
 		
 		return list;
+	}
+
+	public int updateOrder(int orderDetailNo, int selectResult) {
+		
+		Connection conn = getConnection();
+		
+		int result = new adminOrderDao().updateOrder(conn, orderDetailNo, selectResult);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
 	}
 
 }

@@ -6,19 +6,13 @@
 
 
 a {
-  /*color: #34b7a7;*/
   color: white;
+  text-decoration: none;
 } 
 
 a:hover {
-  /* color: #51cdbe; */
   text-decoration: none;
 }
-
-/* a:hover::after {
-  text-decoration: none;
-} */
-
 
 #main {
   margin-top: 50px;
@@ -483,14 +477,14 @@ input, select, textarea {
 
 	a {
 		transition: color 0.25s ease, border-bottom-color 0.25s ease;
-		border-bottom: dotted 1px;
 		color: inherit;
 		text-decoration: none;
 	}
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #00D3B7;
+			color: rgb(158, 164, 107);
+			text-decoration: none;
 		}
 
 
@@ -630,7 +624,7 @@ input, select, textarea {
 					top: 0;
 					width: 100%;
 					height: 100%;
-					box-shadow: inset 0 0 0 2px #00D3B7, inset 0 0 0px 3px rgba(0, 0, 0, 0.15);
+					box-shadow: inset 0 0 0 2px rgb(158, 164, 107), inset 0 0 0px 3px rgba(0, 0, 0, 0.15);
 					opacity: 0;
 					z-index: 1;
 				}
@@ -748,17 +742,96 @@ i, .thumbnail{
 
 .reviews {
 	width:100%;
-	appearance: none;
-	transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, color 0.25s ease-in-out;
-	border-radius: 4px;
-	border: solid 1px #ccc;
 	color: #555;
 	display: inline-block;
-	padding: 0.75em 1.5em;
+	vertical-align: baseline;
 }
 
+.reviews > .review_btn{
+	height: 23px;
+	text-align: left;
+	font-size: 1.1em;
+}
 
+.reviews > .review_btn > .writer{
+	float : right;
+	font-size: 0.8em
+}
 
+.modal_wrap{
+	display: none;
+	border: 5px solid;
+	border-left-width:80px;
+	border-color: rgb(158, 164, 107);
+	border-radius: 4px;
+	width: 500px;
+	height: 250px;
+	position: absolute;
+	top:40%;
+	left: 40%;
+	background:#eee;
+	z-index: 8889;
+	padding : 13px;
+}
+
+.modal_wrap h1{
+	font-size: 1.5em;
+	text-decoration: underline;
+	
+}
+
+.modal_wrap h2{
+	font-size:1em;
+}
+
+.modal_wrap h3{
+	font-size: 0.8em;
+	position: absolute;
+	bottom:5%;
+	
+}
+
+.modal_wrap #star{
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
+}
+
+.black_bg{
+	display: none;
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 100%;
+	background-color:rgba(0, 0,0, 0.7);
+	top:0;
+	left: 0;
+	z-index: 8888;
+}
+
+.modal_close{
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: -52px;
+	right: -5px;
+	cursor:pointer;
+}
+
+.modal_close> a{
+	display: block;
+	width: 100%;
+	height: 100%;
+	/* background:url(https://img.icons8.com/material-rounded/24/000000/multiply--v1.png); */
+}
+@media screen and (max-width: 2580px){
+	.reviews > .review_btn{
+		height: 37px;
+		text-align: left;
+		font-size: 1.2em;
+	}
+	
+}
 
 @media screen and (max-width: 1680px) {
 
@@ -770,12 +843,24 @@ i, .thumbnail{
 	input[type="text"]{
 		margin : 9px;
 	}
+	
+	.reviews > .review_btn{
+		height: 25px;
+		text-align: left;
+		font-size: 1em;
+	}
 }
 
 @media screen and (max-width: 1280px) {
 
 	html {
 		font-size: 11pt;
+	}
+	
+	.reviews > .review_btn{
+		height: 25px;
+		text-align: left;
+		font-size: 1.1em;
 	}
 }
 

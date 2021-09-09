@@ -6,17 +6,33 @@
 <meta charset="UTF-8">
 <title>Giftree</title>
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
-<!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- counter -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/counterup.min.js"></script>
 
+<script>
+$(function(){
+	  
+    $('[data-toggle="counter-up"]').counterUp({
+        delay: 10,
+        time: 1000
+      });
+    
+})
+
+</script>
 
 </head>
 <body>
@@ -30,9 +46,6 @@
 			<a href="<%=contextPath%>/list.pr" class="btn-about">반려나무 입양하러 가기</a>
 		</div>
 	</section>
-	<!-- End Hero -->
-
-
 
 	<section id="facts" class="facts">
 		<div class="container" data-aos="fade-up">
@@ -58,7 +71,6 @@
 
 		</div>
 	</section>
-
 
 	<%@ include file="views/common/footer.jsp"%>
 </body>

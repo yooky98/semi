@@ -24,7 +24,7 @@
 	<form method="post" action="<%=request.getContextPath() %>/user?command=findId"> 
 	<input type = "text" style="width: 75%;font-size: 20px;" class = "userform" name = "user_name" maxlength="10" placeholder="이름"> <br><br>
 	<input style="width: 36%;font-size: 20px;" type = "text"  class = "userform" name = "user_no" maxlength="6" placeholder ="주민번호 앞자리" > -
-		<input  style="width: 36%;font-size: 20px;" type = "text" class = "userform" name = "user_no1" maxlength="7" placeholder = "주민번호 뒷자리"><br><br>
+		<input  style="width: 36%;font-size: 20px;" type = "password" class = "userform" name = "user_no1" maxlength="7" placeholder = "주민번호 뒷자리"><br><br>
 		<input type = "submit" style="width:75%;"value = "아이디 찾기" class = "userbtn">
 	</form>
 	</div>

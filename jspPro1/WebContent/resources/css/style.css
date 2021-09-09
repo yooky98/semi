@@ -5,13 +5,7 @@
 --------------------------------------------------------------*/
 
 
-a {
-  /*color: #34b7a7;*/
-  color: white;
-} 
-
 a:hover {
-  /* color: #51cdbe; */
   text-decoration: none;
 }
 
@@ -19,10 +13,10 @@ a:hover {
   text-decoration: none;
 } */
 
-
+/*
 #main {
   margin-top: 50px;
-}
+}*/
 
 @media (max-width: 992px) {
   #main {
@@ -31,56 +25,7 @@ a:hover {
 }
 
 /*--------------------------------------------------------------
-# Preloader
---------------------------------------------------------------*/
-
-/*
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-  overflow: hidden;
-  background: #fff;
-}
-
-#preloader:before {
-  content: "";
-  position: fixed;
-  top: calc(50% - 30px);
-  left: calc(50% - 30px);
-  border: 6px solid #34b7a7;
-  border-top-color: #dcf5f2;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  -webkit-animation: animate-preloader 1s linear infinite;
-  animation: animate-preloader 1s linear infinite;
-}
-
-@-webkit-keyframes animate-preloader {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes animate-preloader {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-*/
-/*--------------------------------------------------------------
-# Header
+# Header 
 --------------------------------------------------------------*/
 #header {
   background: white;
@@ -101,12 +46,8 @@ a:hover {
 
 #header .logo a {
   color: rgb(158, 164, 107);
-  /* color: #222222; */
 }
 
-#header .logo img {
-  max-height: 40px;
-}
 
 @media (max-width: 992px) {
   #header .logo {
@@ -254,6 +195,7 @@ a:hover {
   height: 100vh;
   background: url("../images/main.jpg") top right;
   background-size: cover;
+  padding: 60px 0;
 }
 
 #hero .container {
@@ -300,6 +242,7 @@ a:hover {
 #hero .btn-about:hover {
   background: rgb(158, 164, 107);
   color: white;
+   
 }
 
 @media (min-width: 1024px) {
@@ -333,13 +276,6 @@ a:hover {
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
-section {
-  padding: 60px 0;
-}
-
-.section-bg {
-  background-color: #e7f8f6;
-}
 
 .section-title {
   text-align: center;
@@ -374,6 +310,7 @@ section {
 # Facts
 --------------------------------------------------------------*/
 .facts{
+  padding: 60px 0;
   background-color: rgb(239, 240, 227);
 }
 

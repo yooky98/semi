@@ -2,25 +2,68 @@ package com.kh.cart.model.vo;
 
 import com.kh.product.model.vo.Product;
 
-public class Cart extends Product{
+public class Cart {
 
 	private int cartNo; //장바구니 번호
 	private String userId; //회원 아이디
 	private int prodNo; //상품번호
 	private int cartAmount; //주문개수
 	private String forestName; //숲이름
-	private Product prodList; //제품리스트
-	
+	private String prodName;// 제품이름
+	private int prodPrice; //제품가격
 
-	public Cart(int cartNo, String userId, int prodNo, int cartAmount, String forestName , Product prodList) {
+	public Cart() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Cart(int cartNo, String userId, int prodNo, int cartAmount, String forestName, String prodName,
+			int prodPrice) {
+		
 		super();
 		this.cartNo = cartNo;
 		this.userId = userId;
 		this.prodNo = prodNo;
 		this.cartAmount = cartAmount;
 		this.forestName = forestName;
-		this.prodList =  prodList;
+		this.prodName = prodName;
+		this.prodPrice = prodPrice;
+	
 	}
+
+
+	public Cart(int cartNo, String userId, int prodNo, int cartAmount, String forestName) {
+		super();
+		this.cartNo = cartNo;
+		this.userId = userId;
+		this.prodNo = prodNo;
+		this.cartAmount = cartAmount;
+		this.forestName = forestName;
+
+	}
+
+	public String getProdName() {
+		return prodName;
+	}
+
+
+
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+
+
+
+	public int getProdPrice() {
+		return prodPrice;
+	}
+
+
+
+	public void setProdPrice(int prodPrice) {
+		this.prodPrice = prodPrice;
+	}
+
+
 
 	public int getCartNo() {
 		return cartNo;
@@ -70,14 +113,20 @@ public class Cart extends Product{
 	public void setForestName(String forestName) {
 		this.forestName = forestName;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Cart [cartNo=" + cartNo + ", userId=" + userId + ", prodNo=" + prodNo + ", cartAmount=" + cartAmount
-				+ ", forestName=" + forestName + "]";
+	
+/*	//제품 (null 방지)
+	public Product getProduct() {
+		
+		if(product == null)
+			product = new Product();
+		return product;
+		
 	}
-	
-	
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}*/
+
+
 	
 }

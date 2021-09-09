@@ -21,7 +21,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
+
 
  <!-- Latest compiled and minified CSS -->
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -31,8 +31,9 @@
        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
        <!-- Latest compiled JavaScript -->
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 <style>
-    aside{
+  aside{
         background: rgb(239, 240, 227);
     }
     
@@ -42,6 +43,50 @@
     	padding-left: 20px;
     	padding-right: 20px;
     	
+    }
+    
+    #qnaEnroll{
+    	width: 90%;
+    	margin: auto;
+    
+    }
+    
+    #qnaTitle{
+    	width: 100%;
+    	
+
+    }
+    
+    #qnaContent{
+    	width: 100%;
+    }
+    
+    #inputTitle{
+    	margin-top: 5px;
+    	margin-bottom: 5px;
+    }
+    
+    #submitBtn{
+    	background: rgb(158, 164, 107);
+ 		color: white;
+ 		width: 70px;
+ 		border: none;
+ 		border-radius: 5px;
+ 		float: right;
+		padding: 5px;
+		margin: 5px;
+		font-weight: bolder;
+    }
+    
+    #resetBtn{
+    	color: rgb(158, 164, 107);
+ 		width: 70px;
+ 		border: none;
+ 		border-radius: 5px;
+ 		float: right;
+		padding: 5px;
+		margin: 5px;
+		font-weight: bolder;
     }
     
 </style>
@@ -66,10 +111,11 @@
 			</aside>
 
 			<section class="col-sm-10">
-				<h4>1:1문의</h4>
-				<hr>
-				
-				<form class="qnaEnroll" method="post" action="<%=request.getContextPath()%>/update.que" onsubmit="return categoryValidate()">
+
+				<form id="qnaEnroll" method="post" action="<%=request.getContextPath()%>/update.que" onsubmit="return categoryValidate()">
+					<h4>1:1문의</h4>
+					<hr>
+					
 					<input name="qno" type="hidden" value="<%=qna.getQuesNo()%>">
 	                <select id="qnaCategory" name="qnaCategory">
 	                    <option value="">문의유형</option>
@@ -78,13 +124,18 @@
 	                    <option value="30" <%= selected[2] %>>주문관련</option>
 	                    <option value="40" <%= selected[3] %>>기타</option>
 	                </select>
-	                <input name="qnaTitle" type="text" value=" <%= qna.getQuesTitle() %>" required>
-	                <div>
-	                    <textarea name="qnaContent" style="resize:none;" required><%= qna.getQuesContent() %></textarea>
+	                
+	                <div id="inputTitle">
+	                	<input id="qnaTitle" name="qnaTitle" type="text" value="<%= qna.getQuesTitle() %>" required>
+	               </div>
+	               
+	                <div >
+	                    <textarea id="qnaContent" name="qnaContent" rows="15" style="resize:none;" required><%= qna.getQuesContent() %></textarea>
 	                </div>
-	
-	                <button type="submit">수정</button>
-	                <button type="reset">취소</button>
+	                
+					<button id="submitBtn" type="submit">수정</button>
+	                <button id="resetBtn" type="reset">취소</button>
+	                
             	</form>
 
 			</section>

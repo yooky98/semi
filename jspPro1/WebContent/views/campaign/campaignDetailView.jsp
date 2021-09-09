@@ -11,9 +11,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-
-<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
-
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- jQuery library -->
@@ -22,6 +19,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 </head>
 <style>
  .mainSection{
@@ -32,6 +31,19 @@
     	margin: auto;
     
     }
+    
+    #joinBtn{
+    	background: rgb(158, 164, 107);
+ 		color: white;
+ 		width: 200px;
+ 		border: none;
+ 		border-radius: 5px;
+		padding: 5px;
+		margin-top: 30px;
+		font-weight: bolder;
+    
+    }
+
     
 </style>
 
@@ -47,13 +59,14 @@
 
 			<hr>
 
-			<h6><%=camp.getCampName()%></h6>
+			<h5><%=camp.getCampName()%></h5>
 			<hr>
 
 			<div>
 			<b>장소 :</b> <span><%=camp.getCampLocation() %></span> &nbsp;
 			<b>일시 :</b> <span><%=camp.getCampDate() %></span> &nbsp;
-			<b>참여 가능 인원 :</b> <span id="capa"></span>
+			<b>참여 가능 인원 :</b> <span id="capa"></span> / <%=camp.getCampCapa() %>
+			
 			</div>
 			
 			<!-- 가능하면 신청가능한 인원, 정원 표기 해보기 -->
@@ -61,7 +74,9 @@
 			
 			<div><%=camp.getCampContent() %></div>
 			
-			<button id="joinBtn" onclick="check()">참여하기</button>
+			<div id="jBtn">
+			<button id="joinBtn" onclick="check()">켐페인 참여하기</button>
+			</div>
 			<!-- 회원만 참여하기 가능 로그인확인-->
 			<hr>
 			
