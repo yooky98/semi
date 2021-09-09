@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
+
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -20,6 +20,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 <style>
     
     .mainSection{
@@ -45,9 +47,9 @@
 			<hr>
 
 			<%for(Campaign camp : campList) {%>
-			<input type="hidden" value="<%=camp.getCampNO()%>">
-			<h6><%= camp.getCampName() %></h6>
-			<hr>
+				<input type="hidden" value="<%=camp.getCampNO()%>">
+				<h5><%= camp.getCampName() %></h5>
+				<hr>
 			<%} %>
 		</div>
 
@@ -57,7 +59,7 @@
 
 <%if(!campList.isEmpty()){%>
 	$(function(){
-		$(".mainSection>h6").click(function(){
+		$(".mainSection>h5").click(function(){
 			var campNo = $(".mainSection>input").val();
 			location.href= "<%=request.getContextPath()%>/detail.cam?campNo="+campNo;
 		})		

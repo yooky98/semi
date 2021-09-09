@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
+
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -21,15 +21,35 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
+
 <style>
     
     .mainSection{
-    	padding-top: 90px;
+    	padding-top: 100px;
     	padding-bottom: 90px;
     	padding-left: 20px;
     	padding-right: 20px;
     	margin: auto;
     
+    }
+    
+    #cancelBtn{
+    	background: rgb(158, 164, 107);
+ 		color: white;
+ 		width: 100px;
+ 		border: none;
+ 		border-radius: 5px;
+		padding: 5px;
+		margin: 5px;
+		font-weight: bolder;
+    
+    }
+    
+    #campName:hover{
+    	font-weight: bolder;
+    	
     }
     
 </style>
@@ -51,11 +71,15 @@
 			<%}else{%>
 			
 				<%for(Campaign camp : joinList){%>
-				<input type="hidden" value="<%=camp.getCampNO()%>">
-				<h5><%=camp.getCampName() %></h5>
-				장소 : <span><%=camp.getCampLocation() %></span> 일시 : <span><%=camp.getCampDate() %></span>
-				<button id="cancelBtn">신청 취소</button>
-				<hr>
+					<input type="hidden" value="<%=camp.getCampNO()%>">
+					
+					
+					<h5 id="campName"><%=camp.getCampName() %></h5>
+					<b>장소 : </b><span><%=camp.getCampLocation() %></span> &nbsp;
+					<b>일시 : </b><span><%=camp.getCampDate() %></span> &nbsp; 
+					<button id="cancelBtn">신청 취소</button>
+					
+					<hr>
 				<%} %>
 				
 			<%} %>
@@ -70,7 +94,7 @@
 <%if(!joinList.isEmpty()){%>
 	$(function(){
 		
-		$(".mainSection > h5").click(function(){
+		$(".mainSection > #campName").click(function(){
 			var campNo = $(".mainSection > input").val();
 			
 			location.href="<%=request.getContextPath()%>/detail.cam?campNo="+campNo;
