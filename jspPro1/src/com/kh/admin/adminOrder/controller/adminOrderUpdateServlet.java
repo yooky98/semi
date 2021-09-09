@@ -13,16 +13,16 @@ import com.kh.admin.adminOrder.model.service.adminOrderService;
 import com.kh.admin.adminOrder.model.vo.adminOrderList;
 
 /**
- * Servlet implementation class adminOrderListViewServlet
+ * Servlet implementation class adminOrderUpdateServlet
  */
-@WebServlet("/orderList.ad")
-public class adminOrderListViewServlet extends HttpServlet {
+@WebServlet("/orderUpdate.ad")
+public class adminOrderUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminOrderListViewServlet() {
+    public adminOrderUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +32,23 @@ public class adminOrderListViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<adminOrderList> list = new adminOrderService().selectList();
+		int orderDetailNo = Integer.parseInt(request.getParameter("orderDetailNo"));
+		int selectResult = Integer.parseInt(request.getParameter("selectResult"));
 		
-		request.setAttribute("list", list);
-		//System.out.println("받은list : " + list);
+		//System.out.println("orderDetailNo:"+orderDetailNo);
+		//System.out.println("selectResult:"+selectResult);
 		
-		request.getRequestDispatcher("views/admin/adminOrder/adminOrderList.jsp").forward(request, response);
+		int result = new adminOrderService().updateOrder(orderDetailNo, selectResult);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("msg", "주문내역 수정 성공");
+			response.sendRedirect("orderList.ad");
+		}else {
+			request.getSession().setAttribute("msg", "주문내역 수정 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		
+		
 		
 	}
 
