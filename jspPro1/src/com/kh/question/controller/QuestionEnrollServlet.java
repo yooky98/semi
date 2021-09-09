@@ -8,20 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.UserVO;
 import com.kh.question.model.service.QuesService;
 import com.kh.question.model.vo.QNA;
 
 /**
- * Servlet implementation class QuestionUpdateFormServlet
+ * Servlet implementation class QuestionEnrollServlet
  */
-@WebServlet("/updateForm.que")
-public class QuestionUpdateFormServlet extends HttpServlet {
+@WebServlet("/enroll.que")
+public class QuestionEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionUpdateFormServlet() {
+    public QuestionEnrollServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +32,23 @@ public class QuestionUpdateFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int qno = Integer.parseInt(request.getParameter("qno"));
+		String userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
 		
-		QNA qna = new QuesService().selectQuestion(qno);
+		String qnaTitle = request.getParameter("qnaTitle");
+		String qnaContent = request.getParameter("qnaContent").replaceAll("\n", "<br>");
+		String qnaCategory = request.getParameter("qnaCategory");
 		
-		if(qna != null) {
-			request.setAttribute("qna", qna);
-			request.getRequestDispatcher("views/mypage/question/questionUpdateForm.jsp").forward(request, response);
+		QNA qna = new QNA(qnaTitle, qnaContent, qnaCategory, userId);
+		
+		int result = new QuesService().insertQuestion(qna);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("msg", "문의가 등록되었습니다.");
 		}else {
-			request.getSession().setAttribute("msg", "문의사항 조회에 실패했습니다.");
-			response.sendRedirect("list.que");
+			request.getSession().setAttribute("msg", "문의 등록에 실패하였습니다.");
 		}
 		
-		
+		response.sendRedirect("list.que");
 	}
 
 	/**

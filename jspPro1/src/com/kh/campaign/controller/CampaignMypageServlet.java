@@ -37,7 +37,6 @@ public class CampaignMypageServlet extends HttpServlet {
 		
 		ArrayList<Campaign> joinList = new CampService().selectJoinList(userId);
 		
-		System.out.println(joinList);
 		if(joinList != null) {
 			request.setAttribute("joinList", joinList);
 		}else {

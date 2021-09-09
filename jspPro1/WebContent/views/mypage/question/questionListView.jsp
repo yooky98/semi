@@ -10,7 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
+
+
 
  <!-- Latest compiled and minified CSS -->
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -20,18 +21,39 @@
        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
        <!-- Latest compiled JavaScript -->
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">    
+
 <style>
-    aside{
-        background: rgb(239, 240, 227);
-    }
+
     
     .mainSection{
-    	padding-top: 90px;
-    	padding-bottom: 90px;
+    	padding-top: 100px;
+    	padding-bottom: 30px;
     	padding-left: 20px;
     	padding-right: 20px;
     	
     }
+ 	.qnaContent{
+ 		margin-left: 15%;
+ 		padding-left: 50px;
+ 	}
+ 	
+ 	#qnaBtn{
+ 		width: 100px;
+ 		background: rgb(158, 164, 107);
+ 		color: white;
+ 		border: none;
+ 		border-radius: 5px;
+ 		float: right;
+		padding: 5px;
+		font-weight: bolder; 	
+ 	}
+ 	
+ 	#qnaUpdate, #qnaDelete{
+ 		color: rgb(158, 164, 107);
+ 		font-weight: bolder;
+ 	}
 
     
 </style>
@@ -45,19 +67,10 @@
 	<div class="container-fluid">
 
 		<div class="row mainSection">
-			<aside class="col-sm-2">
-				<ul>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/myPageMain.jsp">내 정보</a></li>
-					<li><a href="#">주문내역 조회</a></li>
-					<li><a href="#">위시 리스트</a></li>
-					<li><a href="#">리뷰 관리</a></li>
-					<li><a href="<%=request.getContextPath()%>/list.qe">1:1 문의</a></li>
-					<li><a href="#">참여 캠페인</a></li>
-				</ul>
-			</aside>
+			<%@ include file="/views/common/mypageAside.jsp" %>
 
 			<section class="qnaContent col-sm-10">
-				<h4>1:1문의</h4>
+				<h4 id="title"><b>1:1문의</b></h4>
 				<hr>
 					<%if(qnaList.isEmpty()) {%>
 						
@@ -66,51 +79,56 @@
 					<%}else{%>
 						<% for(QNA qna : qnaList){ %>
 						
-						<table class="qnaTable">	
-						<tr>
-							<td><%=qna.getUserId() %></td>
-							<td><%=qna.getQuesDate() %> &nbsp;
-
+						<div>
+							<%=qna.getUserId() %> &nbsp;
+							<%=qna.getQuesDate() %> &nbsp;
+							
 							<% if(qna.getAnsDate() == null) {%>
-								<a href="<%=contextPath%>/updateForm.que?qno=<%=qna.getQuesNo()%>">수정</a>/
+								<a id="qnaUpdate" href="<%=contextPath%>/updateForm.que?qno=<%=qna.getQuesNo()%>">수정 </a>/
 							<%}%>
-								<a class="delete" href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a>
-							</td>
-						</tr>
-	
-						<tr>
-							<td style="padding-right:10px"><b><%=qna.getQuesCategory()%></b></td>
-							<td><%=qna.getQuesTitle()%></td>
-						</tr>
-	
-						<tr>
-							<td colspan="2" style="padding-top:10px"><%=qna.getQuesContent()%></td>
-						</tr>
+								<a id="qnaDelete"  href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a>
+						</div>
 						
-						<tr>
-							<td colspan="3" height=10px></td>
-						</tr>
-	
+						<div>
+							<b style="padding-right:10px"><%=qna.getQuesCategory()%></b>
+							<%=qna.getQuesTitle()%>
+						</div>
+						
+						<div>
+							<%=qna.getQuesContent()%>
+						</div>
+						<br>
+						
 						<%if(qna.getAnsDate()!=null){ %>
-							<tr>
-								<td><b>답변</b></td>
-								<td><%=qna.getAnsDate() %></td>
-							</tr>
-		
-							<tr>
-								<td colspan="2"><%=qna.getAnsContent() %></td>
-							</tr>
+							<div>
+								<b style="color:orangered;">답변</b> &nbsp; <%=qna.getAnsDate() %>
+							</div>
+							
+							<div>
+								<%=qna.getAnsContent() %>
+							</div>
 						<%} %>
-						</table>
 						<hr>
+						
 					<%} %>
 				<%} %>
-				<button onclick="location.href='<%=request.getContextPath()%>/views/mypage/question/questionEnrollForm.jsp'">문의 작성</button>
+				<button id="qnaBtn">문의 작성</button>
 			</section>
 			
 		</div>
 	</div>
 	
+<script>
+
+$(function(){
+	$("#qnaBtn").click(function(){
+		location.href="<%=request.getContextPath()%>/views/mypage/question/questionEnrollForm.jsp";
+	})
+	
+})
+
+
+</script>
 <%-- 
 <script>
 	$(function(){
