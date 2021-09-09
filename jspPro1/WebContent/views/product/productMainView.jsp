@@ -41,8 +41,6 @@
 							<span class="image">
 								<img src="<%=request.getContextPath() %>/resources/images/<%=p.getTitleImg() %>" alt="" />
 							</span>
-							<!-- 히든으로 제품번호 넘겨서 해당 제품 띄우기 -->
-							<%-- <a href="<%=request.getContextPath() %>/detail.pr"> --%>
 							<a class="productImg">
 								<input type="hidden" value="<%= p.getProdNo() %>">
 								<h2><%=p.getProdName() %></h2>
