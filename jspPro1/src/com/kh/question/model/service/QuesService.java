@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.kh.question.model.dao.QuesDao;
 import com.kh.question.model.vo.QNA;
+import com.kh.question.model.vo.QnaCategory;
 
 public class QuesService {
 
@@ -15,7 +16,6 @@ public class QuesService {
 	}
 	
 	public ArrayList<QNA> selectQuesList(String userId) {
-		
 		Connection conn = getConnection();
 		
 		ArrayList<QNA> qnaList = new QuesDao().selectQuesList(conn, userId);
@@ -70,6 +70,15 @@ public class QuesService {
 		
 		close(conn);
 		return result;
+	}
+
+	public ArrayList<QnaCategory> selectCategory() {
+		Connection conn = getConnection();
+		
+		ArrayList<QnaCategory> qnaCategory = new QuesDao().selectCategory(conn);
+		
+		close(conn);
+		return qnaCategory;
 	}
 
 }

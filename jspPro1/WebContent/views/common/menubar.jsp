@@ -18,7 +18,8 @@
 
 <!-- icon -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
-
+<!-- font -->
+<link href='https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap' rel="stylesheet">
 
 <script>
 	$(function(){
@@ -49,6 +50,7 @@
 					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
 					<li><a href="<%=request.getContextPath() %>/prodList.ad">adminpage</a></li>
 					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
+					<li><a href="<%=request.getContextPath() %>/list.chart">chart</a></li>
 				</ul>
 			</nav>
 
