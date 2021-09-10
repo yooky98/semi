@@ -21,6 +21,7 @@ import com.kh.product.model.vo.Product;
 @WebServlet("/list.cart")
 public class CartListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,7 +41,13 @@ public class CartListServlet extends HttpServlet {
 		
 		ArrayList<Cart> list = new CartService().selectCartList(userId);			
 		System.out.println("list 확인용 : " + list);
-
+		
+		//상품 전체가격 
+		/*int sum = new CartService().totalCartPrice(list , userId);
+		if(sum > 0) {
+			request.setAttribute("totalCartPrice", sum);
+			System.out.println("sum = " + sum);
+		}*/
 		
 		if(list != null) {
 			request.setAttribute("list", list);
