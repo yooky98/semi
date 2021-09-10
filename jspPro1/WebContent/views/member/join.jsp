@@ -107,7 +107,7 @@
 	<tr><td><input class="userform" type="text" id="sample4_detailAddress" name="userAddress1" placeholder="상세주소"  size="60" ></td></tr>
 	<tr><td><input class="userform" type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="60" ></td></tr>
 	<tr><td><input class="userform" type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="60" ></td></tr>
-	<tr><td><input class="userform" type = "text" name = "phone" maxlength="13" placeholder="전화번호  -포함"></td></tr>
+	<tr><td><input class="userform" type = "text" name = "phone" maxlength="13" placeholder="전화번호  ' - ' 포함"></td></tr>
 	<tr><td><input class="userform" type = "text" name = "email" maxlength="20" placeholder="이메일"></td></tr>
 	</table>
 	<br>

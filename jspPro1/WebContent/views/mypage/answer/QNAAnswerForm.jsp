@@ -4,15 +4,12 @@
 <% QNA qna = (QNA)request.getAttribute("qna"); %>
 <% System.out.println("jsp qna:"+qna); %>
 <!DOCTYPE html>
-<html>
+<html id="htmlAt">
 <head>
 <meta charset="UTF-8">
 <title>QNA Answer Form</title>
 <style>
-section {
-	padding-top: 100px;
-	background-color: skyblue;
-}
+
 
 #QNAOuter {
 	display: flex;
@@ -48,16 +45,17 @@ section {
 }
 </style>
 </head>
-<body>
+<body id="bodyAt">
+<div class="wrapper">
 	<%@ include file="/views/common/menubar.jsp"%>
 
-	<div class="container-fluid">
-		<div class="row" id="adminWorkArea">
+	<div class="container-fluid" id="middleSection">
+		<div class="row">
 
 			<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 
 
-			<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9">
+			<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9" id="adminSection">
 
 				<form action="updateAns.ad" method="POST">
 					<div id="QNAOuter">
@@ -112,5 +110,6 @@ section {
 	</script>
 
 	<%@ include file="/views/common/footer.jsp"%>
+</div>
 </body>
 </html>

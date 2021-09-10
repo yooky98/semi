@@ -112,11 +112,7 @@
 			</div>
 		</div>
 
-				<!-- Footer -->
-					<!-- <footer id="footer">
-				
-					</footer> -->
-
+		<%@ include file="../common/footer.jsp" %>
 	</div>
 </body>
 </html>

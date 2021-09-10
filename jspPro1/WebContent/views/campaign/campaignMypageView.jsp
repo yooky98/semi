@@ -31,7 +31,7 @@
     	padding-bottom: 90px;
     	padding-left: 20px;
     	padding-right: 20px;
-    	margin: auto;
+    	margin-left: 15%;
     
     }
     
@@ -60,8 +60,11 @@
 
 
 	<div class="container-fluid">
-
+	
+	
 		<div class="mainSection col-sm-10">
+		
+		
 			<h3>참여 캠페인</h3>
 			<hr>
 

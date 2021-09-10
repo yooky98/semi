@@ -79,6 +79,7 @@
 					<%}else{%>
 						<% for(QNA qna : qnaList){ %>
 						
+						<input id="quesNo" type="hidden" value="<%=qna.getQuesNo()%>">
 						<div>
 							<%=qna.getUserId() %> &nbsp;
 							<%=qna.getQuesDate() %> &nbsp;
@@ -86,7 +87,7 @@
 							<% if(qna.getAnsDate() == null) {%>
 								<a id="qnaUpdate" href="<%=contextPath%>/updateForm.que?qno=<%=qna.getQuesNo()%>">수정 </a>/
 							<%}%>
-								<a id="qnaDelete"  href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a>
+								<a id="qnaDelete" href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a>
 						</div>
 						
 						<div>
@@ -97,9 +98,9 @@
 						<div>
 							<%=qna.getQuesContent()%>
 						</div>
-						<br>
 						
 						<%if(qna.getAnsDate()!=null){ %>
+							<br>
 							<div>
 								<b style="color:orangered;">답변</b> &nbsp; <%=qna.getAnsDate() %>
 							</div>
@@ -122,26 +123,25 @@
 
 $(function(){
 	$("#qnaBtn").click(function(){
-		location.href="<%=request.getContextPath()%>/views/mypage/question/questionEnrollForm.jsp";
+		location.href="<%=request.getContextPath()%>/enrollForm.que";
 	})
-	
+
 })
 
+<%--
+$("#qnaDelete").click(function(){
+		
+		var quesNo = $("#quesNo").val();
+		var val = confirm("정말 삭제하시겠습니까?");
+			
+		if(val){
+			locaton.href="<%=contextPath%>/delete.que?qno="+quesNo;
+		}
+	})
+--%>
 
 </script>
-<%-- 
-<script>
-	$(function(){
-		$("#delete").click(function(){
-			var val = confirm("정말 삭제하시겠습니까?");
-			
-			if(val){
-				locaton.href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>";
-			}
-		})
-	})
 
-</script> --%>
 
 </body>
 </html>

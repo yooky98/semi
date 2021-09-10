@@ -50,7 +50,17 @@ public class UserServlet extends HttpServlet {
 			findPwUpdate(request, response);
 		}else if (request.getParameter("command").equals("idCheck")) {
 			idCheck(request, response);
+		}else if (request.getParameter("command").equals("confirm")) {
+			confirm(request, response);
 		}
+	}
+
+	private void confirm(HttpServletRequest request, HttpServletResponse response) {
+		String confirm = request.getParameter("confirm");
+		
+		
+		
+		
 	}
 
 	private void idCheck(HttpServletRequest request, HttpServletResponse response) {
@@ -127,20 +137,20 @@ public class UserServlet extends HttpServlet {
 
 	protected void login(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {			
-		String user_id = request.getParameter("user_id"); // 1로그인화면에서 사용자에게 받은 아이디와 비밀번호
+		String user_id = request.getParameter("user_id"); 
 		String user_pw = request.getParameter("user_pw");
 
-		String pw = us.loginCheck(user_id); // 2사용자에게 받은 아이디 유무와 비밀번호 일치를 확인하기 위해 유저서비스 로그인 체크로 값을 담아서 보내준다
+		String pw = us.loginCheck(user_id); 
 
-		if (pw.equals("")) { // 10 만약 아이디가 존재하지 않을경우 반환된 result(비밀번호)는 ""공백이다 = 존재하지 않는 회원이다
+		if (pw.equals("")) { 
 			request.setAttribute("msg", "존재하지 않는 아이디 입니다");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
 			view.forward(request, response);
-		} else if (!user_pw.equals(pw)) { // 11 만약 받아온 result(비밀번호가) 일치하지 않다면 아이디는 있고 비밀번호가 틀린것이다
+		} else if (!user_pw.equals(pw)) { 
 			request.setAttribute("msg", "비밀번호가 틀렸습니다 ");
 			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
 			view.forward(request, response);
-		} else { // 12 위에 조건을 타지 않은경우 로그인에 성공한 것이다 메인으로 보낸다
+		} else { 
 			HttpSession session = request.getSession();
 			UserVO vo = us.getUser(user_id);
 			session.setAttribute("loginUser", vo);
@@ -268,11 +278,9 @@ public class UserServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		if (!findPw.equals("")) {
-			request.setAttribute("user_id", user_id);
-		
+			request.setAttribute("user_id", user_id);		
 			request.setAttribute("findPw", findPw);
-			request.setAttribute("msg", "새로운 비밀번호를 입력해주세요 ");
-			RequestDispatcher view = request.getRequestDispatcher("views/member/findPwAction.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/member/confirm.jsp");
 			view.forward(request, response);
 
 		} else {
@@ -329,5 +337,6 @@ public class UserServlet extends HttpServlet {
 		}
 
 	}
+
 
 }
