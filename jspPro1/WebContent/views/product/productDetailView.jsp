@@ -30,7 +30,7 @@
 	rel="stylesheet">
 <style>
 html {
-	width:80%;
+	width:78%;
 	height:100vh;
 	background: top right;
 	background-image:
