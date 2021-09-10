@@ -13,104 +13,110 @@ import com.kh.member.model.vo.UserVO;
 public class UserService {
 
 	UserDao dao;
-	public  UserService() {
+
+	public UserService() {
 		dao = new UserDao();
-		
+
 	}
+
 	public int join(UserVO vo) {
 		Connection conn = getConnection();
 		int result = dao.join(conn, vo);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
-		
+
 		close(conn);
 		return result;
 	}
-	
+
 	public int idCheck(UserVO vo) {
 		Connection conn = getConnection();
 		int result = dao.idCheck(conn, vo);
 		close(conn);
 		return result;
-		
+
 	}
-	public String loginCheck(String user_id) {    
+
+	public String loginCheck(String user_id) {
 		Connection conn = getConnection();
-		String result = dao.loginCheck(conn,  user_id);   
+		String result = dao.loginCheck(conn, user_id);
 		close(conn);
 		return result;
 	}
-	
-	public UserVO getUser(String user_id) { 
+
+	public UserVO getUser(String user_id) {
 		Connection conn = getConnection();
-		UserVO vo = dao.getUser(conn, user_id); 
+		UserVO vo = dao.getUser(conn, user_id);
 		close(conn);
-		
+
 		return vo;
-	
+
 	}
+
 	public int userUpdate(UserVO vo) {
 		Connection conn = getConnection();
 		int result = dao.userUpdate(conn, vo);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
-		
+
 		close(conn);
 		return result;
 	}
-	public int userDelete(String user_id) {    
+
+	public int userDelete(String user_id) {
 		Connection conn = getConnection();
-		int result = dao.userDelte(conn, user_id);  
-		if(result > 0) {
+		int result = dao.userDelte(conn, user_id);
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
-		
+
 		close(conn);
 		return result;
 	}
+
 	public String findId(String user_name, String user_no) {
-		
-		
+
 		Connection conn = getConnection();
-		String result = dao.findId(conn,  user_name, user_no); 
-		close(conn); 
+		String result = dao.findId(conn, user_name, user_no);
+		close(conn);
 		return result;
 	}
-	
+
 	public String findPw(String user_name, String user_id, String user_no) {
 		Connection conn = getConnection();
-		String result = dao.findPw(conn, user_name, user_id, user_no);  	
+		String result = dao.findPw(conn, user_name, user_id, user_no);
 		close(conn);
 		return result;
 	}
+
 	public String PwCheck(String user_id) {
 		Connection conn = getConnection();
-		String result = dao.pwCheck(conn,  user_id);  
+		String result = dao.pwCheck(conn, user_id);
 		close(conn);
 		return result;
 	}
+
 	public int findPwUpdate(String user_pw, String user_id) {
 		Connection conn = getConnection();
-		int result = dao.findPwUpdate(conn, user_pw, user_id);   
-		if(result > 0) {
+		int result = dao.findPwUpdate(conn, user_pw, user_id);
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
-		
+
 		close(conn);
 		return result;
 	}
-	
-	
+
 }

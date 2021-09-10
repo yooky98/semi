@@ -20,14 +20,10 @@
  
 </head>
 <body class = "tbody">
-	<div class = "userbox" style="margin:auto;text-align:center;padding-top:30px;">
-	<form method="post" action="<%=request.getContextPath() %>/user?command=findPw"> 
-	<input type = "text" style="width: 75%;font-size: 15px;" class = "userform" name = "user_id" maxlength="10" placeholder="아이디"> <br><br>
-	<input type = "text" style="width: 75%;font-size: 15px;" class = "userform" name = "user_name" maxlength="20" placeholder="이름"> <br><br>
-	<input style="width: 36%;font-size: 15px;" type = "text"  class = "userform" name = "user_no" maxlength="6" placeholder =" 주민번호 앞자리" > -
-	<input  style="width: 36%;font-size: 15px;" type = "password" class = "userform" name = "user_no1" maxlength="7" placeholder = " 주민번호 뒷자리"><br><br>		
-		<input type = "submit"  style="width:75%;" value = "비밀번호 찾기" class = "userbtn" onclick = "return confirm('회원가입된 이메일로 인증번호가 전송되었습니다')" >
-	</form>
-	</div>
+<div class = "userbox" style="margin:auto;text-align:center;padding-top:30px;">
+<form method ="post" action = "/user?command=confirm">
+<input style="width: 300px;font-size: 15px;" class = "userform" type = "text" name = "confirm" id = "confirm" placeholder="인증번호">
+</form>
+</div> 
 </body>
 </html>
