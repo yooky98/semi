@@ -124,4 +124,31 @@ public class CartDao {
 		return result;
 	}
 
+/*	public int totalCartPrice(Connection conn, ArrayList<Cart> list , String userId) {
+		int sum = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+//totalCartPrice=SELECT A.CART_AMOUNT FROM PRODUCT B JOIN CART A ON (A.PROD_NO = B.PROD_NO) WHERE A.USER_ID = ?
+		String sql = prop.getProperty("totalCartPrice");
+		try {
+			if(list.size()>0) {
+				for(Cart item:list) {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, userId);
+					rset = pstmt.executeQuery();
+					
+					while(rset.next()) {
+						sum += rset.getInt("CART_AMOUNT")*item.getProdPrice();
+					
+					}
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sum;	
+	}
+*/
 }

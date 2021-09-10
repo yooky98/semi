@@ -6,9 +6,7 @@
 <%
 	String message = (String) request.getAttribute("message");
 %>
-<%
-	ArrayList<Cart> list = (ArrayList) request.getAttribute("list");
-%>
+<%ArrayList<Cart> list = (ArrayList) request.getAttribute("list");%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +81,7 @@ body {
 			<table class="table table-hovar">
 				<thead>
 					<tr>
-						<th><input type="checkbox" id="checkAll" onclick="CheckAll()" />cart</th>
+						<th><input type="checkbox" id="checkAll" onclick="CheckAll()" checked="checked"/>cart</th>
 						<th>상품정보</th>
 						<th>수량</th>
 						<th>숲</th>
@@ -107,21 +105,21 @@ body {
 							for (Cart c : list) {
 						%>
 						<tr>
-							<td><input type="checkbox" name="selectCheck"
-								value="<%=c.getCartNo()%>"></td>
+							<td><input type="checkbox" name="selectCheck[]" value="<%=c.getCartNo()%>" checked="checked"></td>
 							<td><%=c.getProdName()%></td>
-							<td><span> <img
-									src="<%=request.getContextPath()%>/resources/images/plus.png"
-									class="upimg" onclick="upBtn()">
-							</span> <input type="text" class="pAmount"
-								value="<%=c.getCartAmount()%>" readonly /> <span> <img
-									src="<%=request.getContextPath()%>/resources/images/minus.png"
-									class="downimg" onclick="downBtn()">
-							</span></td>
+							<td>
+							<span> 
+								<img src="<%=request.getContextPath()%>/resources/images/plus.png" class="upimg" onclick="upBtn()">
+							</span> 
+							<input type="text" class="pAmount" value="<%=c.getCartAmount()%>" readonly />
+							<span>
+								 <img src="<%=request.getContextPath()%>/resources/images/minus.png" class="downimg" onclick="downBtn()">
+							</span>
+							</td>
 							<td><%=c.getForestName()%></td>
-							<td>2500</td>
-							<td><input type="hidden" name="prodPrice"
-								value="<%=c.getProdPrice()%>"> <%=c.getProdPrice()%></td>
+							<td>2500원</td>
+							<td><input type="hidden" name="prodPrice" id="prodPrice"
+								value="<%=c.getProdPrice() * c.getCartAmount()%>"> <%=c.getProdPrice() * c.getCartAmount()%>원</td>
 							<td>
 								<button type="button"
 									onclick="location.href='<%=contextPath%>/del.cart?cartNo=<%=c.getCartNo()%>'">삭제</button>
@@ -136,7 +134,7 @@ body {
 			<hr>
 			<form class="form-block">
 				<div class="form-block-inner-div">
-					<label class="mb-2 mr-sm-2">상품가격</label> <input type="text" class="prodOrder" value=0 readonly>
+					<label class="mb-2 mr-sm-2">상품가격</label> <input type="text" class="prodOrder" id="prodSum" value="0" readonly>
 				</div>
 				<div class="form-block-inner-div">
 					<label class="mb-2 mr-sm-2">배송비</label> <input type="text" class="prodOrder" value=2500 readonly>
@@ -146,7 +144,7 @@ body {
 					<label class="mb-2 mr-sm-2">결제금액</label> <input type="text" class="prodOrder" value=0 readonly>
 				</div>
 				<div class="form-block-inner-div-btn">
-					<button type="submit" class="btn btn-primary mb-2">쇼핑계속하기</button>
+					<button type="button" class="btn btn-primary mb-2">쇼핑계속하기</button>
 					<button type="submit" class="btn btn-primary mb-2">주문하기</button>
 				</div>
 			</form>
@@ -155,24 +153,43 @@ body {
 	</form>
 	<script>
 		//상품 전체리스트 선택,해제
-		var check = false;
-		function CheckAll() {
-			var chk = document.getElementsByName("selectCheck");
-			if (check == false) {
-				check = true;
-				for (var i = 0; i < chk.length; i++) {
-					chk[i].checked = true;
-				}
-			} else {
-				check = false;
-				for (var i = 0; i < chk.length; i++) {
-					chk[i].checked = false;
+		   $(function(){
+		      //전체선택 체크박스 클릭
+		      $("#checkAll").click(function(){
+
+		         if($("#checkAll").prop("checked")) { 
+		            $("input[type=checkbox]").prop("checked",true);
+		         }else{ 
+		            $("input[type=checkbox]").prop("checked",false);
+		         }
+		      })
+		   })
+	
+	//상품 총 금액 - 이건 지금 체크박스로 가격이 달라지니까 보류
+	<%--$("document").ready(function() {
+				var total=Number(0);
+				  <%
+				  for(int i=0;i<list.size();i++){%>
+					total += Number(document.getElementsByName("prodPrice")[<%=i%>].value);
+				  <%}%>
+				  $('#prodSum').val(total);
+			});--%>
+
+	$(function(){
+		var total=Number(0);
+		var count = $('.selectCheck[]').length;
+		for(var i = 0; i < count ; i++){
+			if($(".selectCheck[]")[i].checked == true){
+				 <%
+				  for(int i=0;i<list.size();i++){%>
+					total += Number(document.getElementsByName("prodPrice")[<%=i%>].value);
+				  <%}%>
+				  $('#prodSum').val(total);
 				}
 			}
 		}
-		
-		//total값 출력
-		
+	});
+
 	</script>
 </body>
 </html>
