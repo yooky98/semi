@@ -5,41 +5,43 @@
 	ArrayList<FAQ> list = (ArrayList<FAQ>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
-<html>
+<html id="htmlAt">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/resources/css/adminAside.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <title>FAQ</title>
 <style>
-/* faq 내용 들어가는 부분 */
-#faqBody {
-	width: 90%;
-	margin: 0 auto;
+/*FAQ에서는 aside와 같은 색상으로 따로 지정*/
+#adminSection{	
+	background-color: rgb(239, 240, 227);
 }
-/* 헤더 부분 */
+/* 타이틀 부분인 h1 태그 들어가는 div */
 .faqHeader {
 	margin-bottom: 20px;
 	text-align: center;
 	font-weight: bolder;
 }
-/* 질문에 해당하는 영역 */
-.card-header {
+/* FAQ 목록이 들어가는 전체 영역 div*/
+#faqBody {
+	width: 80%;
+	margin: 0 auto;/*중앙 정렬*/
+}
+/* 질문 각각을 나타내는 영역 div*/
+#faqBody .card-header {
 	cursor: pointer;
 	background-color: white;
 }
 /* 질문 영역의 h5태그 테두리 제거 */
 #faqTitle{
+	width: 100%;
 	border: none;
     outline: none;
-}
-/* 답변에 해당하는 영역 */
-.card-body {
-	margin: 15px;
 }
 /* category, faqQues : 질문 영역에 들어가는 부분 */
 .faqCategory {
@@ -55,57 +57,67 @@
 	font-weight: bolder;
 	color: green;
 }
+/* 답변에 해당하는 영역 */
+#faqBody .card-body {
+	margin: 15px;
+}
+
 </style>
 </head>
-<body>
-	
-	<%-- <%@ include file="../common/menubar.jsp" %> --%>	
-
-	<section>
-		<div class="container-fluid" id="faqContainer">
-
-		<div class="faqHeader">
-			<h4>FAQ(자주 묻는 질문들)</h4>
-		</div>
-
-		<%
-			for (int i = 0; i < list.size(); i++) {
-		%>
-		<div id="faqBody">
-		<div class="accordion" id="faqList<%=i%>">
-			<div class="card ">
-				<div class="card-header" id="heading<%=i%>">
-					<h5 class="card-header" id="faqTitle" data-toggle="collapse" data-target="#collapse<%=i%>"
-							aria-expanded="true" aria-controls="collapse<%=i%>">
-						
-							<div class="faqCategory">
-								<span style="color: red;"><%=list.get(i).getFAQType()%></span>
-							</div>
-							<div class="faqQues">
-								<span><%=list.get(i).getFAQQues()%></span>
-							</div>
-						
-					</h5>
-				</div>
-				<div class="collapse" id="collapse<%=i%>"
-					aria-labelledby="heading<%=i%>" data-parent="#faqList<%=i%>">
-					<div class="card-body">
-						<div class="faqContents">
-							<p><%=list.get(i).getFAQAns()%></p>
-						</div>
+<body id="bodyAt">
+	<div class="wrapper">
+		<%@ include file="../common/menubar.jsp" %>
+		
+			<div class="container-fluid" id="middleSection">
+				<section id="adminSection">
+					<div class="faqHeader">
+						<h1>FAQ</h1>
+						<br>
+						<h3></h3>
+						<br>
 					</div>
+					<div id="faqBody">
+						<%
+						if(list.isEmpty()){
+						%>
+						<div>
+						<h3>리스트가 존재하지 않습니다.</h3>
+						</div>
+						<%
+						}else{		
+						
+							for (int i = 0; i < list.size(); i++) {
+						%>
+			
+						<div class="accordion" id="faqList<%=i%>">
+							<div class="card ">
+								<div class="card-header" id="heading<%=i%>">
+									<h5 class="card-header" id="faqTitle" data-toggle="collapse" data-target="#collapse<%=i%>"
+											aria-expanded="true" aria-controls="collapse<%=i%>">						
+												<span class="faqCategory"><%=list.get(i).getFAQType()%></span>								
+												<span class="faqQues"><%=list.get(i).getFAQQues()%></span>																	
+									</h5>
+								</div>
+								<div class="collapse" id="collapse<%=i%>"
+									aria-labelledby="heading<%=i%>" data-parent="#faqList<%=i%>">
+									<div class="card-body">
+										<div class="faqContents">
+											<p><%=list.get(i).getFAQAns()%></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<%
+							}
+						}
+						%>
 				</div>
-			</div>
-		</div>
-		</div>
-		<%
-			}
-		%>
-
+			</section>
+		</div>		
+	
+		<%@ include file="../common/footer.jsp" %>
 	</div>
-	</section>	
-
-	<%-- <%@ include file="../common/footer.jsp" %> --%>	
-
 </body>
 </html>
