@@ -25,12 +25,22 @@
 <style>
     
     .mainSection{
-    	padding-top: 90px;
+    	padding-top: 30px;
     	padding-bottom: 90px;
     	padding-left: 20px;
     	padding-right: 20px;
     	margin: auto;
     
+    }
+    
+    .banner{
+    	background: url("resources/images/campaignBanner.jpg");
+  		background-size: cover;
+  		color: white;
+    	width: 100%;
+    	height:300px;
+    	text-align: center;
+    	padding-top: 150px;
     }
     
 </style>
@@ -39,34 +49,20 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-
+	<div class="banner"><h3>Campaign</h3></div>
 	<div class="container-fluid">
 
 		<div class="mainSection col-sm-10">
-			<h3>Campaign</h3>
+			<h4>진행중인 캠페인</h4>
 			<hr>
 
 			<%for(Campaign camp : campList) {%>
-				<input type="hidden" value="<%=camp.getCampNO()%>">
-				<h5><%= camp.getCampName() %></h5>
+				<a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=camp.getCampNO()%>"><%= camp.getCampName() %></a>
 				<hr>
 			<%} %>
 		</div>
 
 	</div>
-
-<script>
-
-<%if(!campList.isEmpty()){%>
-	$(function(){
-		$(".mainSection>h5").click(function(){
-			var campNo = $(".mainSection>input").val();
-			location.href= "<%=request.getContextPath()%>/detail.cam?campNo="+campNo;
-		})		
-	})
-<%}%>
-
-</script>
 
 </body>
 </html>

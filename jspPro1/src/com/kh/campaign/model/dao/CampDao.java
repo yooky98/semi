@@ -1,17 +1,38 @@
 package com.kh.campaign.model.dao;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import com.kh.campaign.model.vo.Campaign;
+
+
 import static com.kh.common.JDBCTemplate.*;
 
 public class CampDao {
 	
-	public CampDao() {}
+	private Properties prop = new Properties();
+	
+	public CampDao() {
+		String fileName = CampDao.class.getResource("/sql/campaign/campaign-query.properties").getPath();
+		
+		try {
+			prop.load(new FileReader(fileName));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	public ArrayList<Campaign> selectCampList(Connection conn) {
 
@@ -19,7 +40,7 @@ public class CampDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql ="SELECT CAMP_NO, CAMP_NAME FROM CAMPAIGN";
+		String sql = prop.getProperty("selectCampList");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -47,7 +68,7 @@ public class CampDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql ="SELECT * FROM CAMPAIGN WHERE CAMP_NO=?";
+		String sql = prop.getProperty("selectCampaign");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -82,7 +103,7 @@ public class CampDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql ="SELECT COUNT(*) FROM CAMPAIGN_JOIN WHERE USER_ID=? AND CAMP_NO=?";
+		String sql = prop.getProperty("checkJoin");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -112,7 +133,7 @@ public class CampDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql ="INSERT INTO CAMPAIGN_JOIN VALUES(?,?)";
+		String sql = prop.getProperty("insertCampJoin");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -138,7 +159,7 @@ public class CampDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql ="SELECT COUNT(*) FROM CAMPAIGN_JOIN WHERE CAMP_NO=?";
+		String sql = prop.getProperty("selectJoinNum");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -168,7 +189,7 @@ public class CampDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT B.CAMP_NO, B.CAMP_NAME, B.CAMP_LOCATION, B.CAMP_DATE FROM CAMPAIGN_JOIN A JOIN CAMPAIGN B ON A.CAMP_NO = B.CAMP_NO WHERE USER_ID =?";
+		String sql = prop.getProperty("selectJoinList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -200,7 +221,7 @@ public class CampDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql ="DELETE FROM CAMPAIGN_JOIN WHERE USER_ID=? AND CAMP_NO=?";
+		String sql = prop.getProperty("deleteJoin");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

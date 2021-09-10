@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.question.model.vo.QnaCategory"%>
+<%
+
+	ArrayList<QnaCategory> cateoryList = (ArrayList<QnaCategory>)request.getAttribute("cateoryList");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,10 +110,10 @@
 					<hr>
 	                <select id="qnaCategory" name="qnaCategory">
 	                    <option value="" >문의유형</option>
-	                    <option value="10">상품문의</option>
-	                    <option value="20">배송문의</option>
-	                    <option value="30">주문관련</option>
-	                    <option value="40">기타</option>
+	                    
+	                    <%for(QnaCategory category : cateoryList) {%>
+	                    	<option value="<%=category.getCategoryNo()%>"><%=category.getCategoryName()%></option>
+	                    <%} %>
 	                </select>
 	                
 	                <div id="inputTitle">

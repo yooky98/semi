@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.question.model.vo.QNA" %>
+    pageEncoding="UTF-8" import="com.kh.question.model.vo.QNA, java.util.ArrayList, com.kh.question.model.vo.QnaCategory" %>
 <% 
 
 	QNA qna = (QNA)request.getAttribute("qna");
+	ArrayList<QnaCategory> cateoryList = (ArrayList<QnaCategory>)request.getAttribute("cateoryList");
 
-	String category = qna.getQuesCategory();
-	String[] selected = new String[4];
+	String selected = qna.getQuesCategory();
 	
-	switch(category){
-	case "상품문의": selected[0] = "selected"; break;
-	case "배송문의": selected[1] = "selected"; break;
-	case "주문관련": selected[2] = "selected"; break;
-	case "기타": selected[3] = "selected"; break;
-	}
 	
 %>   
  
@@ -119,10 +113,15 @@
 					<input name="qno" type="hidden" value="<%=qna.getQuesNo()%>">
 	                <select id="qnaCategory" name="qnaCategory">
 	                    <option value="">문의유형</option>
-	                    <option value="10" <%= selected[0] %>>상품문의</option>
-	                    <option value="20" <%= selected[1] %>>배송문의</option>
-	                    <option value="30" <%= selected[2] %>>주문관련</option>
-	                    <option value="40" <%= selected[3] %>>기타</option>
+	                    
+	                    <%for(QnaCategory category : cateoryList) {%>
+	                    	<%if(selected.equals(category.getCategoryName())) {%>
+	                    		<option value="<%=category.getCategoryNo()%>" selected><%=category.getCategoryName()%></option>
+	                    	<%}else{ %>
+	                    		<option value="<%=category.getCategoryNo()%>"><%=category.getCategoryName()%></option>
+	                    	<%} %>
+	                    <%} %>
+	                    
 	                </select>
 	                
 	                <div id="inputTitle">

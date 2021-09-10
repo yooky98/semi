@@ -24,7 +24,7 @@
 </head>
 <style>
  .mainSection{
-    	padding-top: 90px;
+    	padding-top: 30px;
     	padding-bottom: 90px;
     	padding-left: 20px;
     	padding-right: 20px;
@@ -43,6 +43,16 @@
 		font-weight: bolder;
     
     }
+    
+    .banner{
+    	background: url("resources/images/campaignBanner.jpg");
+  		background-size: cover;
+  		color: white;
+    	width: 100%;
+    	height:300px;
+    	text-align: center;
+    	padding-top: 150px;
+    }
 
     
 </style>
@@ -51,15 +61,12 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-
+	<div class="banner"><h3>Campaign</h3></div>
 	<div class="container-fluid">
 
 		<div class="mainSection col-sm-10">
-			<h3>Campaign</h3>
 
-			<hr>
-
-			<h5><%=camp.getCampName()%></h5>
+			<h4><%=camp.getCampName()%></h4>
 			<hr>
 
 			<div>
@@ -75,7 +82,7 @@
 			<div><%=camp.getCampContent() %></div>
 			
 			<div id="jBtn">
-			<button id="joinBtn" onclick="check()">켐페인 참여하기</button>
+			<button id="joinBtn" onclick="check()">캠페인 참여하기</button>
 			</div>
 			<!-- 회원만 참여하기 가능 로그인확인-->
 			<hr>

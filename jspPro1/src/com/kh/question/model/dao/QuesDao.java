@@ -2,17 +2,36 @@ package com.kh.question.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import com.kh.question.model.vo.QNA;
+import com.kh.question.model.vo.QnaCategory;
 
 public class QuesDao {
 	
+	private Properties prop = new Properties();
+	
 	public QuesDao() {
+		
+		String fileName = QuesDao.class.getResource("/sql/question/question-query.properties").getPath();
+		
+		try {
+			prop.load(new FileReader(fileName));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public ArrayList<QNA> selectQuesList(Connection conn, String userId) {
@@ -22,7 +41,7 @@ public class QuesDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT * FROM QNA JOIN QNA_CATEGORY USING(QUES_CATEGORY_NO) WHERE USER_ID=? ORDER BY QUES_NO DESC";
+		String sql = prop.getProperty("selectQuesList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -61,8 +80,8 @@ public class QuesDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql ="INSERT INTO QNA VALUES(SEQ_QUESNO.NEXTVAL, ?, ?, ?, ?, SYSDATE, NULL, NULL)";
-		
+		String sql = prop.getProperty("insertQuestion");
+		 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -88,7 +107,7 @@ public class QuesDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = "DELETE QNA WHERE QUES_NO=?";
+		String sql = prop.getProperty("deleteQuestion");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -115,7 +134,7 @@ public class QuesDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT QUES_NO, QUES_TITLE, QUES_CONTENT, QUES_CATEGORY_NAME FROM QNA JOIN QNA_CATEGORY USING(QUES_CATEGORY_NO) WHERE QUES_NO=?";
+		String sql = prop.getProperty("selectQuestion");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -148,7 +167,7 @@ public class QuesDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql ="UPDATE QNA SET QUES_CATEGORY_NO=?, QUES_TITLE=?, QUES_CONTENT=?  WHERE QUES_NO=?";
+		String sql = prop.getProperty("updateQuestion");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -168,6 +187,37 @@ public class QuesDao {
 		}
 			
 		return result;
+	}
+
+	public ArrayList<QnaCategory> selectCategory(Connection conn) {
+
+		ArrayList<QnaCategory> list = new ArrayList<QnaCategory>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new QnaCategory(rset.getInt("QUES_CATEGORY_NO"), 
+										 rset.getString("QUES_CATEGORY_NAME")));
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }
