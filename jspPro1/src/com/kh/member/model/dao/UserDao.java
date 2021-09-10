@@ -82,18 +82,18 @@ public class UserDao {
 	
 	
 	public String loginCheck(Connection conn, String user_id) {
-		String result = "";                          // result 초기화
-		String sql = prop.getProperty("loginCheck"); //4쿼리문 작성
+		String result = "";                   
+		String sql = prop.getProperty("loginCheck"); 
 		try {
 			pstmt = conn.prepareStatement(sql);  
 			
-			pstmt.setString(1, user_id);     // 5입력한 id가 쿼리문에 들어가서 작동한다 
+			pstmt.setString(1, user_id);    
 		
 						
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {    //6. DB에 ID가 존재할 경우 실행된다
-				result = rs.getString(1);  //7 DB에 입력한 아이디가 존재하면 비밀번호를 result에 담긴다
+			if(rs.next()) {  
+				result = rs.getString(1);  
 			}
 			
 			
@@ -103,7 +103,7 @@ public class UserDao {
 		}finally {
 			close(pstmt);
 		}
-		return result;   //8. result가 리턴값에 담겨서 다시 돌아간다.  아이디가 없을경우 ""로 처리된다
+		return result;  
 	}
 
 	public UserVO getUser(Connection conn, String user_id) {
@@ -285,5 +285,9 @@ public class UserDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	public String confrim(Connection conn, String confirm) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
