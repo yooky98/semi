@@ -51,6 +51,13 @@ public class InsertCartServlet extends HttpServlet {
 			Cart c = new Cart();
 
 			String userId = ((UserVO) request.getSession().getAttribute("loginUser")).getUser_id();
+			
+		/*	if(userId == null) {
+				request.setAttribute("msg", "회원이 아닙니다.");
+				RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
+				view.forward(request, response);
+			}*/
+			
 
 			c.setUserId(userId);
 			c.setProdNo(Integer.parseInt((mr.getParameter("prodNo"))));
@@ -77,6 +84,7 @@ public class InsertCartServlet extends HttpServlet {
 
 			}
 		}
+
 
 	}
 

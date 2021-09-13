@@ -11,14 +11,15 @@ public class Cart {
 	private String forestName; //숲이름
 	private String prodName;// 제품이름
 	private int prodPrice; //제품가격
+	private String changName; //이미지
 
 	public Cart() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public Cart(int cartNo, String userId, int prodNo, int cartAmount, String forestName, String prodName,
-			int prodPrice) {
-		
+			int prodPrice , String changName) {
+	
 		super();
 		this.cartNo = cartNo;
 		this.userId = userId;
@@ -27,7 +28,8 @@ public class Cart {
 		this.forestName = forestName;
 		this.prodName = prodName;
 		this.prodPrice = prodPrice;
-	
+		this.changName = changName;
+		
 	}
 
 
@@ -39,6 +41,16 @@ public class Cart {
 		this.cartAmount = cartAmount;
 		this.forestName = forestName;
 
+	}
+
+	
+	
+	public String getChangName() {
+		return changName;
+	}
+
+	public void setChangName(String changName) {
+		this.changName = changName;
 	}
 
 	public String getProdName() {
