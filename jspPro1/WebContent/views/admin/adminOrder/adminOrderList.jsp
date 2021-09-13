@@ -8,6 +8,7 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 <html id="htmlAt">
 <head>
 <meta charset="UTF-8">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- bootstrap 5.1 버전 CDN-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" ></script>
@@ -41,14 +42,18 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 	/*overflow-y: auto;*/
 	margin-top: 30px; /*검색 창이랑 거리 조절*/         
 }
-#orderListTable button{
+/* 수정 버튼 */
+#orderListTable td>button{
 	width: 70px;
 	margin: 0 10px 0 10px;
 	background-color: rgb(197, 228, 221);
     border: 2px outset;
     font-weight: bolder;
 }
-
+/* 모달 창의 취소, 삭제 버튼 */
+#orderListTable .modal .modal-footer>button{
+	width:100px;
+}
 </style>
 </head>
 <body id="bodyAt">
@@ -66,7 +71,7 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 				<h1>주문 관리</h1>
 				
 				<div class="input-group" id="searchArea" >
-				  <select class="form-select form-select">
+				  <select class="form-select form-select" id="searchOption">
 				  <option selected>선택</option>
 				  <option value="10">주문상세번호</option>
 				  <option value="20">회원아이디</option>				 
@@ -192,22 +197,26 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
                         		
                         		for(int i=0; i<list.size(); i++){
                         			int dlvStatus = list.get(i).getOrdersStatus();
+                        			String dlvStatusName = "";
                         			
                         			switch(dlvStatus){
                         			case 1 :
                         				selected[0]="selected";
                         				selected[1]="";
                         				selected[2]="";
+                        				dlvStatusName="결제완료";
                         				break;
                         			case 2 :
                         				selected[0]="";
                         				selected[1]="selected";
                         				selected[2]="";
+                        				dlvStatusName="배송중";
                         				break;
                         			case 3 :
                         				selected[0]="";
                         				selected[1]="";
                         				selected[2]="selected";
+                        				dlvStatusName="배송완료";
                         				break;
                         			}
                         %>
@@ -220,45 +229,85 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
                             <td><%=list.get(i).getOrderAmount() %></td>
                             <td>
                               <select class="custom-select" name="delivery" id="delivery<%=i+1%>">
-                                <option value="1" <%=selected[0] %>>배송중</option>
-                                <option value="2" <%=selected[1] %>>배송완료</option>
-                                <option value="3" <%=selected[2] %>>결제완료</option>
+                              	<option value="1" <%=selected[0] %>>결제완료</option>
+                                <option value="2" <%=selected[1] %>>배송중</option>
+                                <option value="3" <%=selected[2] %>>배송완료</option>                                
                               </select>
                             </td>
-                            <td><button class="btn btn-outline-primary" type="button" id="modiDlvStatus<%=i+1%>">
-                            		수정
+                            <td><button class="btn btn-outline-primary" type="button" onclick="currentStatus<%=i+1%>();" data-toggle="modal" data-target="#modiDlvStatus<%=i+1%>">수 정</button>
+                            
+							<div class="modal fade" id="modiDlvStatus<%=i+1%>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+										<h4 class="modal-title">주문상태를 <b>수정</b>하시겠습니까?</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+										</button>
+										</div>
+										<div class="modal-body">
+										<h6 style="text-align:left"><b>주문상세번호 : <%=list.get(i).getOrderDetailNo() %><br><br>변경 전 : <%=dlvStatusName%><br><br>변경 후 : <span id="currentStatus"></span></b></h6>
+										</div>
+										<div class="modal-footer">
+										<button type="button" class="btn btn-outline-secondary" data-dismiss="modal" onclick="cancelModify<%=i+1%>();">취 소</button>
+										<button type="button" class="btn btn-outline-danger" onclick="modifyOrder<%=i+1%>();">수 정</button>
+										</div>
+									</div>
+								</div>
+							</div>	
                             		
-                            		</button>
-                            		
-                            <script type="text/javascript">
-		                    	$(function(){
-		                    		$("#modiDlvStatus<%=i+1%>").click(function(){
-		                    			var orderDetailNo = <%=list.get(i).getOrderDetailNo()%>;
-				                        var selectResult = $("#delivery<%=i+1%>").val();                     
-				                        				                      
-				                        console.log(orderDetailNo) 
-				                        console.log(selectResult)		                    							                        
-				                        
-		                    			location.href = "<%=request.getContextPath() %>/orderUpdate.ad?orderDetailNo=" + orderDetailNo + "&selectResult=" + selectResult;                  			
-				             
-		                    		})
-		                    	})
-                			</script></td>
+                            <script>
+                            <%-- 취소 버튼 누르면 다시 selected한 상태가 보여질 수 있도록 새로고침 --%>
+                            function cancelModify<%=i+1%>(){
+                            	var cancelNum = <%=list.get(i).getOrdersStatus()%>;
+                            	console.log("취소했을 때 : " + cancelNum);
+                            	
+                            	window.location.reload();                            	
+                            }
+                            
+                            function currentStatus<%=i+1%>(){
+                              	var currentStatus = $("#delivery<%=i+1%>").val();
+                              	console.log("바뀐 상태 : " + currentStatus);
+                              	var finalStatus = "";
+                              	
+                              	switch(currentStatus){
+                              	case "1" :
+                              		finalStatus="결제완료";
+                              	break;
+                              	case "2" :
+                              		finalStatus="배송중";
+                                break;
+                              	case "3" :
+                              		finalStatus="배송완료";
+                                break;
+                              	}
+                              	
+                              	$("#currentStatus").html(finalStatus);                              	
+                              
+                            }  
+                            function modifyOrder<%=i+1%>(){
+                            	var orderDetailNo = <%=list.get(i).getOrderDetailNo()%>;
+		                        var selectResult = $("#delivery<%=i+1%>").val();                     
+		                        				                      
+		                        console.log(orderDetailNo);
+		                        console.log(selectResult);                    
+		                      
+		                        location.href = "<%=request.getContextPath() %>/orderUpdate.ad?orderDetailNo=" + orderDetailNo + "&selectResult=" + selectResult;
+                            }
+                			</script>
+                			</td>
                             
                           </tr>
                           
                           	<%} %>
-                          <%} %>
-                        </tbody>
-                        
+                          <%} %>                         
+                        </tbody>                        
                         
                       </table>
                   </div>
 
-                </div>
-                
-				
-			</div>
+                </div>              	
+			</div>			
 			</section>
 		</div>
 	</div>	

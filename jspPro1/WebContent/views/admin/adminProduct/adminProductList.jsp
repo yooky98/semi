@@ -47,6 +47,10 @@
     border: 2px outset;
     font-weight: bolder;
 }
+/* 모달 창의 취소, 삭제 버튼 */
+#productListTable .modal .modal-footer>button{
+	width:100px;
+}
 /* 테이블에 나타나는 상품명 */
 #productListTable .prodName{
 	text-decoration: none;
@@ -118,7 +122,7 @@
 										<td><%=list.get(i).getProdAmount()%></td>
 										<td>										
 											<button class="modifyBtns btn btn-outline-info" id="modiProdBtn<%=i+1 %>" onclick="updateProd<%=i+1%>();">수 정</button>
-											<button class="deleteBtns btn btn-outline-danger" id="delProdBtn<%=i+1 %>" type="button" data-toggle="modal" data-target="#delProdModal<%=i+1 %>">삭 제</button>										
+											<button class="deleteBtns btn btn-outline-danger" type="button" data-toggle="modal" data-target="#delProdModal<%=i+1 %>">삭 제</button>										
 											<form action="" id="postForm<%=i+1 %>" method="post">
 												<input id="prodNoInput<%=i+1 %>" type="hidden" name="prodNo">
 											</form>										
@@ -136,34 +140,13 @@
 											        <h6 style="text-align:left">No.<%=list.get(i).getProdNo()%>&nbsp;&nbsp;&nbsp;<%=list.get(i).getProdName()%></h6>
 											      </div>
 											      <div class="modal-footer">
-											        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">취소</button>
-											        <button type="button" class="btn btn-outline-danger" onclick="deleteProd<%=i+1 %>();">삭제</button>
+											        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">취 소</button>
+											        <button type="button" class="btn btn-outline-danger" onclick="deleteProd<%=i+1%>();">삭 제</button>
 											      </div>
 											    </div>
 											  </div>
 											</div>										
-											
-											<div class="modal" id="delProdModal<%=i+1 %>">
-										        <div class="modal-dialog">
-										            <div class="modal-content">
-										                <div class="modal-header">
-										                    <h4 class="modal-title">정말로 삭제하시겠습니까?</h4>
-										                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-										                </div>
-										
-										                <div class="modal-body"><h6 style="text-align:left">No.<%=list.get(i).getProdNo()%>&nbsp;&nbsp;&nbsp;<%=list.get(i).getProdName()%></h6></div>
-										
-										                <div class="modal-footer">
-										                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">취소</button>
-										                    <button class="btn btn-outline-danger" onclick="deleteProd<%=i+1 %>();">삭제</button>
-										                </div>
-										
-										            </div>
-										        </div>									
-										    </div>
-											
-											
-											
+																					
 											<script>
 												var prodNo = Number($("#prodNo<%=i+1%>").html());
 												$("#prodNoInput<%=i+1 %>").val(prodNo);
