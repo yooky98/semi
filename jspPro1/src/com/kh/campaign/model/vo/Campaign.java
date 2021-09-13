@@ -31,10 +31,12 @@ public class Campaign {
 		this.campDate = campDate;
 	}
 
-	public Campaign(int campNO, String campName) {
+
+	public Campaign(int campNO, String campName, Date campDate) {
 		super();
 		this.campNO = campNO;
 		this.campName = campName;
+		this.campDate = campDate;
 	}
 
 	public int getCampNO() {

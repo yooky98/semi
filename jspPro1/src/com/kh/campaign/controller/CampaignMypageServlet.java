@@ -36,14 +36,17 @@ public class CampaignMypageServlet extends HttpServlet {
 		String userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
 		
 		ArrayList<Campaign> joinList = new CampService().selectJoinList(userId);
+		ArrayList<Campaign> endedJList = new CampService().selectEndedJList(userId);
 		
-		if(joinList != null) {
+		
+		if(joinList != null || endedJList != null) {
 			request.setAttribute("joinList", joinList);
+			request.setAttribute("endedJList", endedJList);
 		}else {
 			request.setAttribute("msg", "참여 캠페인 리스트를 불러오지 못했습니다.");
 		}
 		
-		if(joinList.isEmpty()) {
+		if(joinList.isEmpty() && endedJList.isEmpty()) {
 			request.setAttribute("message", "참여 캠페인이 존재하지 않습니다.");
 		}
 		
