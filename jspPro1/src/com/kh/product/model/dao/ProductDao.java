@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 import static com.kh.common.JDBCTemplate.*;
 
@@ -114,5 +115,49 @@ public class ProductDao {
 		}
 		
 		return p;
+	}
+
+	public HashMap<String,Integer> selectChList(Connection conn) {
+		ArrayList<Product> p_list = new ArrayList<Product>();
+		HashMap<String,Integer> list = new HashMap<String, Integer>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+//		selectChList=SELECT PROD_CATEGORY FROM PRODUCT
+		
+		String sql = prop.getProperty("selectPrList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+						
+			while(rset.next()) {
+				Product p = new Product();
+
+				p.setProdCategory(rset.getString("PROD_CATEGORY"));
+
+				p_list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		if(p_list != null) {
+			for(int i = 0; i < p_list.size() ;i++) {
+				if(list.containsKey(p_list.get(i).getProdCategory())) {
+					list.put(p_list.get(i).getProdCategory(), list.get(p_list.get(i).getProdCategory())+1);
+					
+				}else {
+					list.put(p_list.get(i).getProdCategory(), 1);
+				}
+			}
+		}
+		
+		return list;
 	}
 }
