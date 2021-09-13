@@ -111,7 +111,7 @@ public class UserDao {
 		String sql = prop.getProperty("getUser"); 
 		try {
 			pstmt = conn.prepareStatement(sql);  
-			
+			 
 			pstmt.setString(1, user_id);     
 			
 						
@@ -268,26 +268,17 @@ public class UserDao {
 		String sql = prop.getProperty("findPwUpdate");
 				
 		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			
+			pstmt = conn.prepareStatement(sql);			
 			pstmt.setString(1, user_pw);
 			pstmt.setString(2, user_id);
 			
-			result = pstmt.executeUpdate(); //실패 = 0  성공 = 1
-
-			
-			
+			result = pstmt.executeUpdate(); 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
 		return result;
 	}
-	public String confrim(Connection conn, String confirm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }
