@@ -1,9 +1,6 @@
 package com.kh.cart.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,22 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.cart.model.service.CartService;
-import com.kh.cart.model.vo.Cart;
-import com.kh.member.model.vo.UserVO;
-import com.kh.product.model.vo.Product;
 
 /**
- * Servlet implementation class CartListServlet
+ * Servlet implementation class UpdateCartServlet
  */
-@WebServlet("/list.cart")
-public class CartListServlet extends HttpServlet {
+@WebServlet("/update.cart")
+public class UpdateCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartListServlet() {
+    public UpdateCartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,24 +29,13 @@ public class CartListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
-		System.out.println("user_id = " + userId);
+		int amount = Integer.parseInt(request.getParameter("amount"));
+		int cartNo = Integer.parseInt(request.getParameter("cartNo"));
 		
-		ArrayList<Cart> list = new CartService().selectCartList(userId);			
-		System.out.println("list 확인용 : " + list);
+		System.out.println("amount :" + amount);
+		System.out.println("cartNo :" + cartNo);
 		
-	
-		if(list != null) {
-			request.setAttribute("list", list);
-			RequestDispatcher view = request.getRequestDispatcher("views/cart/cartListView.jsp");
-			view.forward(request, response);
-		}else {
-			request.setAttribute("msg", "아이디에 해당하는 장바구니 제품이 없습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-			
-		}
-		
+		int result = new CartService().updateProdAmount(amount, cartNo);
 		
 		
 	}

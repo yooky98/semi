@@ -6,7 +6,7 @@
 <%
 	String message = (String) request.getAttribute("message");
 %>
-<%ArrayList<Cart> list = (ArrayList) request.getAttribute("list");%>
+<% ArrayList<Cart> list = (ArrayList) request.getAttribute("list");%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,21 +62,18 @@ body {
 	 text-align: center;
 	 
 }
-.prodOrder{
-	text-align: center;
+.prodImg{
+	width: 100px;
+	height: 80px;
 }
 
 </style>
-<body>
+<body onload="updateTotal();">
 
 	<%@ include file="/views/common/menubar.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	<br><br><br><br><br>
 
-	<form class="cart-outerForm" action="">
+	<form class="cartForm" action="<%= contextPath %>/list.order" method="post">
 		<div class="cartList">
 			<table class="table table-hovar">
 				<thead>
@@ -99,58 +96,54 @@ body {
 
 					<%
 						} else {
-					%>
-					<form class="cartTable" id="inner-form" method="post">
-						<%
+					
 							for (Cart c : list) {
 						%>
 						<tr>
-							<td><input type="checkbox" name="selectCheck[]" value="<%=c.getCartNo()%>" checked="checked"></td>
+							<td>
+							<input type="checkbox" class="chk" name="selectCheck[]" value="<%=c.getCartNo()%>" checked="checked" onclick="check()">
+							<img src='<%=request.getContextPath()%>/resources/images/<%=c.getChangName()%>' class="prodImg">
+							</td>
 							<td><%=c.getProdName()%></td>
 							<td>
-							<span> 
-								<img src="<%=request.getContextPath()%>/resources/images/plus.png" class="upimg" onclick="upBtn()">
-							</span> 
-							<input type="text" class="pAmount" value="<%=c.getCartAmount()%>" readonly />
-							<span>
-								 <img src="<%=request.getContextPath()%>/resources/images/minus.png" class="downimg" onclick="downBtn()">
-							</span>
+							<img src="<%=request.getContextPath()%>/resources/images/plus.png"  id="upVal" class="upimg" onclick="upBtn(<%= c.getCartNo() %>)">
+								<input type="text" class="pAmount" name ="Cartamount" id="amount" value="<%=c.getCartAmount()%>" readonly />
+							<img src="<%=request.getContextPath()%>/resources/images/minus.png" class="downimg" onclick="downBtn(<%= c.getCartNo() %>)">
 							</td>
 							<td><%=c.getForestName()%></td>
 							<td>2500원</td>
-							<td><input type="hidden" name="prodPrice" id="prodPrice"
-								value="<%=c.getProdPrice() * c.getCartAmount()%>"> <%=c.getProdPrice() * c.getCartAmount()%>원</td>
+							<td>
+							<input type="text" class="prodPrice" value="<%=c.getProdPrice() * c.getCartAmount()%>">원</td>
 							<td>
 								<button type="button"
 									onclick="location.href='<%=contextPath%>/del.cart?cartNo=<%=c.getCartNo()%>'">삭제</button>
 							</td>
 						</tr>
-					</form>
 					<%}%>
 					<%}%>
 				</tbody>
 			</table>
 				<div class="totalContainer">
 			<hr>
-			<form class="form-block">
+
 				<div class="form-block-inner-div">
-					<label class="mb-2 mr-sm-2">상품가격</label> <input type="text" class="prodOrder" id="prodSum" value="0" readonly>
+					<label class="mb-2 mr-sm-2">상품가격</label> <input type="text" class="prodOrder" id="prodSum" value= 0 readonly>
 				</div>
 				<div class="form-block-inner-div">
-					<label class="mb-2 mr-sm-2">배송비</label> <input type="text" class="prodOrder" value=2500 readonly>
+					<label class="mb-2 mr-sm-2">배송비</label> <input type="text" class="delivery" value=2500 readonly>
 				</div>
 				<hr>
 				<div class="form-block-inner-div">
-					<label class="mb-2 mr-sm-2">결제금액</label> <input type="text" class="prodOrder" value=0 readonly>
+					<label class="mb-2 mr-sm-2">결제금액</label> <input type="text" id="finalPrice" value=0 readonly>
 				</div>
 				<div class="form-block-inner-div-btn">
 					<button type="button" class="btn btn-primary mb-2">쇼핑계속하기</button>
-					<button type="submit" class="btn btn-primary mb-2">주문하기</button>
+					<button type="submit" class="btn btn-primary mb-2" >주문하기</button>
 				</div>
-			</form>
-		</div>
+				</div>
 	</div>
 	</form>
+	
 	<script>
 		//상품 전체리스트 선택,해제
 		   $(function(){
@@ -163,33 +156,124 @@ body {
 		            $("input[type=checkbox]").prop("checked",false);
 		         }
 		      })
-		   })
+		   });
 	
-	//상품 총 금액 - 이건 지금 체크박스로 가격이 달라지니까 보류
-	<%--$("document").ready(function() {
-				var total=Number(0);
-				  <%
-				  for(int i=0;i<list.size();i++){%>
-					total += Number(document.getElementsByName("prodPrice")[<%=i%>].value);
-				  <%}%>
-				  $('#prodSum').val(total);
-			});--%>
+	//체크된값 가격만 출력
+	function updateTotal() {
+			let total = 0;
+		    const listSize = <%= list.size() %>; 
+		    const prodPrice = $('.prodPrice'); 
+		 //   console.log("prodPrice" + prodPrice)
+		 for (let i = 0; i < listSize; i++) {
+				if ($('.chk')[i].checked == true) {
+						 total += Number( $('.prodPrice')[i].value);	
+		        }
+		    }
+		 $('#prodSum').val(total);
+		
+		 
+		 //배송비 70000원이상 무료배송
+		 if( total > 70000){
+			 $('.delivery').val(0);
+			 $('#finalPrice').val(total);
+		 }else{
+			 $('.delivery').val(2500);
+			 $('#finalPrice').val(total+2500);
+		 }
+		
+		 
+	}
+		
+	//체크박스 해지시 가격변동
+	function check(){
+		
+			let total = 0;
+		    const listSize = <%= list.size() %>; 
+		    const prodPrice = $('.prodPrice'); 
 
-	$(function(){
-		var total=Number(0);
-		var count = $('.selectCheck[]').length;
-		for(var i = 0; i < count ; i++){
-			if($(".selectCheck[]")[i].checked == true){
-				 <%
-				  for(int i=0;i<list.size();i++){%>
-					total += Number(document.getElementsByName("prodPrice")[<%=i%>].value);
-				  <%}%>
-				  $('#prodSum').val(total);
+			 for (let i = 0; i < listSize; i++) {
+					if ($('.chk')[i].checked == true) {
+							 total += Number( $('.prodPrice')[i].value);	
+							 
+		       		 }
+	        }
+			 $('#prodSum').val(total);
+			 $('#finalPrice').val(total);
+	    }
+		 
+	//수량 증가
+	function upBtn(cartNo) {
+		const amount = $('.pAmount'); 
+		const listSize = <%= list.size() %>; 
+		const prodPrice = $('.prodPrice');
+		var btns = document.getElementsByClassName("upimg");
+		
+		 for (let i = 0; i < listSize; i++) {
+			if ($('.chk')[i].value == cartNo) {
+				var prevAmount= amount[i].value
+				amount[i].value++;
+//				console.log("no" + $('.chk')[i].value)
+//				console.log(" $('.prodPrice')" +  $('.prodPrice')[i].value);
+				//수량 버튼 클릭시 DB수량 업데이트
+				$.ajax({
+					url : "update.cart",
+					data : {
+						amount:amount[i].value , 
+						cartNo:cartNo
+					},
+					type : "post",
+					
+				})	
+				//수량이 변경되면 자동으로 상품가격 변경
+				$('.prodPrice')[i].value = $('.prodPrice')[i].value/prevAmount*amount[i].value; 
+				updateTotal(); //수량이 변경되면 총 상품가격 업데이트
 				}
-			}
-		}
-	});
+			
+		 }		
+	}
 
+	//수량감소
+	function downBtn(cartNo){
+		
+		const amount = $('.pAmount');
+		const prodPrice = $('.prodPrice');
+		const listSize = <%= list.size() %>; 
+		var btns = document.getElementsByClassName("downimg");
+	 for (let i = 0; i < listSize; i++) {
+			if ($('.chk')[i].value == cartNo) {
+				var prevAmount= amount[i].value
+				amount[i].value--;
+
+				$.ajax({
+					url : "update.cart",
+					data : {
+						amount:amount[i].value , 
+						cartNo:cartNo
+					},
+					type : "post",
+					
+				})
+				$('.prodPrice')[i].value = $('.prodPrice')[i].value/prevAmount*amount[i].value;
+				updateTotal();
+//				console.log("amount" + (amount[i].value))
+//				console.log(" $('.prodPrice')" +  $('.prodPrice')[i].value)
+//				console.log(" -----)" +  $('.prodPrice')[i].value/(amount[i].value+1))
+    		 }
+     	}
+	}
+		
+<%--	function order(){
+		const listSize = <%= list.size()%>; 
+		const arr = [];
+		 for (let i = 0; i < listSize; i++) {
+				if ($('.chk')[i].checked == true) {
+				 	arr.push($('.chk')[i].value);
+		        }
+		    } 	
+			console.log("arr = " + arr)
+		}--%>
+	
+	
 	</script>
 </body>
 </html>

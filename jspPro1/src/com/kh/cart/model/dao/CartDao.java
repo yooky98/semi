@@ -41,7 +41,11 @@ public class CartDao {
 		ResultSet rset = null;
 
 		String sql = prop.getProperty("selectCartList");
-//		SELECT A.CART_NO, A.USER_ID, A.PROD_NO , A.CART_AMOUNT, A.FOREST_NAME, B.PROD_NAME , B.PROD_PRICE FROM CART A INNER JOIN PRODUCT B ON (A.PROD_NO = B.PROD_NO) WHERE A.USER_ID = ?;
+//		SELECT A.CART_NO, A.USER_ID, A.PROD_NO , A.CART_AMOUNT, A.FOREST_NAME, B.PROD_NAME , B.PROD_PRICE , C.CHANGE_NAME
+//		FROM CART A 
+//		INNER JOIN PRODUCT B ON (A.PROD_NO = B.PROD_NO)
+//		INNER JOIN ATTACHMENT C ON (B.PROD_NO = C.REF_PNO)
+//		WHERE A.USER_ID = '?';
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
@@ -59,6 +63,7 @@ public class CartDao {
 				cart.setForestName(rset.getString("FOREST_NAME"));
 				cart.setProdName(rset.getString("PROD_NAME"));
 				cart.setProdPrice(rset.getInt("PROD_PRICE"));
+				cart.setChangName(rset.getString("CHANGE_NAME"));
 		
 				list.add(cart);
 				
@@ -124,31 +129,27 @@ public class CartDao {
 		return result;
 	}
 
-/*	public int totalCartPrice(Connection conn, ArrayList<Cart> list , String userId) {
-		int sum = 0;
+
+	public int updateProdAmount(Connection conn, int amount, int cartNo) {
+		int result = 0;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-//totalCartPrice=SELECT A.CART_AMOUNT FROM PRODUCT B JOIN CART A ON (A.PROD_NO = B.PROD_NO) WHERE A.USER_ID = ?
-		String sql = prop.getProperty("totalCartPrice");
+		String sql = prop.getProperty("updateProdAmount");
+		//updateProdAmount=UPDATE CART SET CART_AMOUNT = ? WHERE CART_NO = ?
 		try {
-			if(list.size()>0) {
-				for(Cart item:list) {
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, userId);
-					rset = pstmt.executeQuery();
-					
-					while(rset.next()) {
-						sum += rset.getInt("CART_AMOUNT")*item.getProdPrice();
-					
-					}
-				}
-			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, amount);
+			pstmt.setInt(2, cartNo);
+			
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
-		return sum;	
+	
+		return result;
 	}
-*/
+
 }

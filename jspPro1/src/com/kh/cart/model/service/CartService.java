@@ -50,14 +50,21 @@ public class CartService {
 		return result;
 	}
 
-	/*public int totalCartPrice(ArrayList<Cart> list , String userId) {
+	public int updateProdAmount(int amount, int cartNo) {
 		Connection conn = getConnection();
 		
-		int sum = new CartDao().totalCartPrice(conn, list ,userId);
+		int result = new CartDao().updateProdAmount(conn, amount,cartNo );
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
+		return result;
+	}
 
-		return sum;
-	}*/
+
 
 
 }
