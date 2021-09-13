@@ -7,47 +7,45 @@
 <title>Insert title here</title>
 </head>
 <style>
-   .aside{
+   .myAside{
         background: rgb(239, 240, 227);
-        height: 85vh;
-        position: fixed;
         width: 15%;
-        min-width: 150px;
-       
-        
+        min-width: 170px;
+        height: 100vh - 40px;
+        margin: 100px 0px 40px 20px;
+        padding: 20px
     }
     
-    .aside > ul{
+    .myAside > ul{
     	margin: 10px;
   		padding: 0;
     	list-style: none;
     }
     
-    .aside > ul > li{
-    	
+    .myAside > ul > li{
     	white-space: nowrap;
   		padding: 5px;
-    	
     }
       
-    .aside a{
-    	
-  		position: relative;
+    .myAside a{
   		color: #888888;
-  		font-size: 16px;
+  		font-size: 18px;
   		font-weight: 600;
+  		font-family: 'Gowun Batang', serif;
     }
     
-    .aside a:hover{
-    	 color: #222222;
+    .myAside a:hover{
+    	font-size: 18px;
+    	color: #222222;
     }
+    
 
 </style>
 <body>
 
-	<aside class="aside col-sm-2">
+	<aside class="myAside col-sm-2">
 		<ul>
-			<li><a href="<%=request.getContextPath()%>/views/mypage/myPageMain.jsp">내 정보</a></li>
+			<li><a href="<%=request.getContextPath()%>/views/mypage/myPageMain.jsp">마이 기프트리</a></li>
 			<li><a href="<%=request.getContextPath()%>/views/mypagebuyList/buyList.jsp"">주문내역 조회</a></li>
 			<li><a href="#">위시 리스트</a></li>
 			<li><a href="<%=request.getContextPath()%>/views/mypage/review/review.jsp">리뷰 관리</a></li>

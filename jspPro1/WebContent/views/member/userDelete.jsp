@@ -27,14 +27,10 @@
 	<table class = "usertable">
 	<tr><td><input type = "text" class = "userform" maxlength="20" value=<%=loginUser.getUser_id()%> disabled></td></tr>  
 	<tr><td><input type="hidden" name="user_id" value=<%=loginUser.getUser_id()%>></td></tr>
-	<tr><td><input type = "password" class = "userform" name = "user_pw" placeholder="비밀번호"></td> </tr>
-					
-		</table>
-		
-		<input type = "submit"  value = "탈퇴하기" class = "userbtn" onclick = "return confirm('정말 탈퇴 하시겠습니까?')" >
-		
+	<tr><td><input type = "password" class = "userform" name = "user_pw" placeholder="비밀번호"></td> </tr>					
+		</table>		
+		<input type = "submit"  value = "탈퇴하기" class = "userbtn" onclick = "return confirm('정말 탈퇴 하시겠습니까?')" >		
 	</form>
-
 	</div>
 </body>
 </html>

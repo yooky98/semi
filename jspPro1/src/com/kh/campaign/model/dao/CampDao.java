@@ -48,7 +48,8 @@ public class CampDao {
 			
 			while(rset.next()) {
 				campList.add(new Campaign(rset.getInt("CAMP_NO"),
-										  rset.getString("CAMP_NAME")));
+										  rset.getString("CAMP_NAME"),
+										  rset.getDate("CAMP_DATE")));
 			}
 			
 		} catch (SQLException e) {
@@ -60,6 +61,35 @@ public class CampDao {
 		}
 		
 		return campList;
+	}
+	
+	public ArrayList<Campaign> selectEndedList(Connection conn) {
+		
+		ArrayList<Campaign> endedList = new ArrayList<Campaign>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectEndedList");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				endedList.add(new Campaign(rset.getInt("CAMP_NO"),
+									       rset.getString("CAMP_NAME"),
+										   rset.getDate("CAMP_DATE")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return endedList;
 	}
 
 	public Campaign selectCampaign(Connection conn, int campNo) {
@@ -216,6 +246,41 @@ public class CampDao {
 		return joinList;
 	}
 
+	public ArrayList<Campaign> selectEndedJList(Connection conn, String userId) {
+		
+		ArrayList<Campaign> endedJList = new ArrayList<Campaign>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectEndedJList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				endedJList.add(new Campaign(rset.getInt("CAMP_NO"),
+							                rset.getString("CAMP_NAME"),
+							                rset.getString("CAMP_LOCATION"),
+							                rset.getDate("CAMP_DATE")));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return endedJList;
+	}
+	
+	
 	public int deleteJoin(Connection conn, int campNo, String userId) {
 		
 		int result = 0;
@@ -240,6 +305,10 @@ public class CampDao {
 
 		return result;
 	}
+
+
+
+
 
 	
 }

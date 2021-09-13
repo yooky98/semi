@@ -45,12 +45,11 @@
 					<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 					<li><a href="<%=contextPath%>/list.pr">shop</a></li>
 					<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
-					<li><a href="#">brand</a></li>
+					<li><a href="<%=contextPath%>/views/brand/brandView.jsp">brand</a></li>
 					<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
-					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
 					<li><a href="<%=request.getContextPath() %>/prodList.ad">adminpage</a></li>
 					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
-					<li><a href="<%=request.getContextPath() %>/list.chart">chart</a></li>
+					
 				</ul>
 			</nav>
 
@@ -65,6 +64,7 @@
 					
 					<li><a href="#"><%=loginUser.getUser_id() %></a></li>
 					<li><a href="<%=request.getContextPath() %>/prodList.ad">adminpage</a></li>
+					<li><a href="<%=request.getContextPath() %>/list.chart">chart</a></li>
 					<li><a href="<%=request.getContextPath() %>/user?command=logout">logout</a></li>
 					
 					<%}else{ %>
@@ -97,7 +97,7 @@
 				<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 				<li><a href="<%=contextPath%>/list.pr">shop</a></li>
 				<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
-				<li><a href="#">brand</a></li>
+				<li><a href="<%=contextPath%>/views/brand/brandView.jsp">brand</a></li>
 				<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
 			</ul>
 		</nav>
