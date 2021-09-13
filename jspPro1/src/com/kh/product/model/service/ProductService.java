@@ -4,6 +4,7 @@ import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.product.model.dao.ProductDao;
 import com.kh.product.model.vo.Product;
@@ -26,6 +27,16 @@ public class ProductService {
 		close(conn);
 		
 		return p;
+	}
+
+	public HashMap<String,Integer> selectChList() {
+		Connection conn = getConnection();
+		
+		HashMap<String,Integer> list = new ProductDao().selectChList(conn);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }
