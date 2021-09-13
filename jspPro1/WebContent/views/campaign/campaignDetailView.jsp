@@ -3,6 +3,7 @@
 <% 
 
 	Campaign camp = (Campaign)request.getAttribute("camp");
+	
 
 %>
 <!DOCTYPE html>
@@ -23,18 +24,26 @@
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 </head>
 <style>
- .mainSection{
+ 	.mainSection{
     	padding-top: 30px;
-    	padding-bottom: 90px;
+    	padding-bottom: 20px;
     	padding-left: 20px;
     	padding-right: 20px;
     	margin: auto;
+    	text-align: center;
+    	
     
+    }
+    
+    .mainSection h4{
+    	font-weight: bolder;
+    	font-family: 'Gowun Batang', serif;
     }
     
     #joinBtn{
     	background: rgb(158, 164, 107);
  		color: white;
+ 		height: 50px;
  		width: 200px;
  		border: none;
  		border-radius: 5px;
@@ -53,7 +62,16 @@
     	text-align: center;
     	padding-top: 150px;
     }
+    
+    .banner > h3{
+    	font-family: 'Gowun Batang', serif;
+    	font-size: 35px;
+  		font-weight: 700;
+    }
 
+	.campMain{
+		background: rgb(239, 240, 227);
+	}
     
 </style>
 
@@ -62,9 +80,9 @@
 <%@ include file="/views/common/menubar.jsp" %>
 
 	<div class="banner"><h3>Campaign</h3></div>
-	<div class="container-fluid">
+	<div class="container-fluid campMain">
 
-		<div class="mainSection col-sm-10">
+		<div class="mainSection col-sm-9">
 
 			<h4><%=camp.getCampName()%></h4>
 			<hr>
@@ -90,11 +108,21 @@
 		</div>
 
 	</div>
+<%@ include file="/views/common/footer.jsp"%>
 	
 <script>
 
 $(function(){
 	capacity();
+	
+	var today = new Date();
+	var campDate = new Date('<%=camp.getCampDate()%>');
+	
+	if(today > campDate){
+		console.log("지난 캠페인")
+		$("#joinBtn").html("완료된 캠페인입니다.").attr('disabled', 'true');
+	}
+	
 })
 
 	function check(){
@@ -141,7 +169,7 @@ $(function(){
 					$("#capa").html(capa);
 				}else{
 					$("#capa").html("신청마감");
-					$("#joinBtn").attr("disabled", "true");
+					$("#joinBtn").attr("disabled", "true").html("캠페인 참여마감");
 				}
 				
 			},

@@ -37,7 +37,7 @@ public class CampaignDeleteJoinServlet extends HttpServlet {
 		int result = new CampService().deleteJoin(campNo, userId);
 		
 		if(result > 0) {
-			request.setAttribute("msg", "캠페인 참여신청이 취소되었습니다.");
+			request.getSession().setAttribute("msg", "캠페인 참여신청이 취소되었습니다.");
 			response.sendRedirect("mypage.cam");
 		}else {
 			request.setAttribute("msg", "캠페인 참여신청 취소에 실패했습니다.");

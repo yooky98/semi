@@ -33,9 +33,12 @@ public class CampaignListViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Campaign> campList = new CampService().selectCampList();
+		ArrayList<Campaign> endedList = new CampService().selectEndedList();
 		
-		if(campList != null) {
+		
+		if(campList != null || endedList != null) {
 			request.setAttribute("campList", campList);
+			request.setAttribute("endedList", endedList);
 			request.getRequestDispatcher("views/campaign/campaignListView.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "캠페인 조회 실패");

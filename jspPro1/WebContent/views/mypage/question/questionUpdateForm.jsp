@@ -27,34 +27,24 @@
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 <style>
-  aside{
-        background: rgb(239, 240, 227);
-    }
     
-    .mainSection{
-    	padding-top: 90px;
-    	padding-bottom: 90px;
-    	padding-left: 20px;
-    	padding-right: 20px;
-    	
-    }
-    
-    #qnaEnroll{
-    	width: 90%;
+    .qnaUpdate{
     	margin: auto;
-    
+ 		margin-bottom: 20px;
+ 		padding: 120px 40px 30px 20px;
+ 		overflow-y: auto;
+ 		height: 100vh;
     }
     
-    #qnaTitle{
+    .qnaUpdate::-webkit-scrollbar { 
+		display: none; 
+	}
+    
+    #qnaTitle, #qnaContent{
     	width: 100%;
-    	
-
     }
     
-    #qnaContent{
-    	width: 100%;
-    }
-    
+ 
     #inputTitle{
     	margin-top: 5px;
     	margin-bottom: 5px;
@@ -83,6 +73,9 @@
 		font-weight: bolder;
     }
     
+    #title{
+ 		font-family: 'Gowun Batang', serif;
+ 	}
 </style>
 
 </head>
@@ -90,24 +83,16 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-	<div class="container-fluid">
+	<section class="updateSection">
 
-		<div class="row mainSection">
-			<aside class="col-sm-2">
-				<ul>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/myPageMain.jsp">내 정보</a></li>
-					<li><a href="#">주문내역 조회</a></li>
-					<li><a href="#">위시 리스트</a></li>
-					<li><a href="#">리뷰 관리</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/question/questionListView.jsp">1:1 문의</a></li>
-					<li><a href="#">참여 캠페인</a></li>
-				</ul>
-			</aside>
+		<div class="row container-fluid">
+		
+		<%@ include file="/views/common/mypageAside.jsp" %>
 
-			<section class="col-sm-10">
+			<div class="qnaUpdate col-sm-9">
 
-				<form id="qnaEnroll" method="post" action="<%=request.getContextPath()%>/update.que" onsubmit="return categoryValidate()">
-					<h4>1:1문의</h4>
+				<form id="qnaUpdate" method="post" action="<%=request.getContextPath()%>/update.que" onsubmit="return categoryValidate()">
+					<h3 id="title"><b>1:1문의</b></h3>
 					<hr>
 					
 					<input name="qno" type="hidden" value="<%=qna.getQuesNo()%>">
@@ -137,10 +122,12 @@
 	                
             	</form>
 
-			</section>
+			</div>
 			
 		</div>
-	</div>
+	</section>
+	
+<%@ include file="/views/common/footer.jsp"%>
 <script>
 
 function categoryValidate(){

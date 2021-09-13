@@ -26,34 +26,57 @@
 
 <style>
 
-    
-    .mainSection{
-    	padding-top: 100px;
-    	padding-bottom: 30px;
-    	padding-left: 20px;
-    	padding-right: 20px;
-    	
-    }
  	.qnaContent{
- 		margin-left: 15%;
- 		padding-left: 50px;
+ 	margin: auto;
+ 		margin-bottom: 20px;
+ 		padding: 120px 40px 30px 20px;
+ 		overflow-y: auto;
+ 		height: 100vh;
+ 		
+ 	}
+ 	
+ 	.qnaContent div{
+ 		margin-top: 5px;
+ 		font-size: 14px;
+ 		
+ 	}
+ 	
+ 	#title{
+ 		font-family: 'Gowun Batang', serif;
  	}
  	
  	#qnaBtn{
  		width: 100px;
  		background: rgb(158, 164, 107);
  		color: white;
+ 		font-weight: bolder; 
  		border: none;
  		border-radius: 5px;
  		float: right;
 		padding: 5px;
-		font-weight: bolder; 	
  	}
  	
  	#qnaUpdate, #qnaDelete{
- 		color: rgb(158, 164, 107);
+ 		color: #b6b3b3;
+ 		font-size: 14px;
  		font-weight: bolder;
  	}
+
+ 	
+ 	#qnaUpdate:hover, #qnaDelete:hover{
+ 		color: black;
+ 	}
+ 	
+ 	
+
+	.qnaContent::-webkit-scrollbar { 
+		display: none; 
+	}
+	
+	#quesTitle{
+		font-size: 15px;
+	}
+
 
     
 </style>
@@ -64,13 +87,17 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-	<div class="container-fluid">
+	<section class="container-fluid">
 
-		<div class="row mainSection">
-			<%@ include file="/views/common/mypageAside.jsp" %>
+		<div class="row flex-nowrap">	
+		<%@ include file="/views/common/mypageAside.jsp" %>
 
-			<section class="qnaContent col-sm-10">
-				<h4 id="title"><b>1:1문의</b></h4>
+
+			<div class="qnaContent col-sm-9" role="main">
+				<h3 id="title"><b>1:1문의</b></h3>
+				<div>Customer Center : 080-1234-5687<br>
+				       평일 10:00 ~ 17:00
+				</div>
 				<hr>
 					<%if(qnaList.isEmpty()) {%>
 						
@@ -85,13 +112,13 @@
 							<%=qna.getQuesDate() %> &nbsp;
 							
 							<% if(qna.getAnsDate() == null) {%>
-								<a id="qnaUpdate" href="<%=contextPath%>/updateForm.que?qno=<%=qna.getQuesNo()%>">수정 </a>/
+								<a id="qnaUpdate" href="<%=contextPath%>/updateForm.que?qno=<%=qna.getQuesNo()%>">수정 </a>| 
 							<%}%>
 								<a id="qnaDelete" href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a>
 						</div>
 						
-						<div>
-							<b style="padding-right:10px"><%=qna.getQuesCategory()%></b>
+						<div id="quesTitle">
+							<b><%=qna.getQuesCategory()%></b>&nbsp;
 							<%=qna.getQuesTitle()%>
 						</div>
 						
@@ -102,7 +129,7 @@
 						<%if(qna.getAnsDate()!=null){ %>
 							<br>
 							<div>
-								<b style="color:orangered;">답변</b> &nbsp; <%=qna.getAnsDate() %>
+								<b style="color:rgb(255, 136, 0);">답변</b> &nbsp; <%=qna.getAnsDate() %>
 							</div>
 							
 							<div>
@@ -114,11 +141,13 @@
 					<%} %>
 				<%} %>
 				<button id="qnaBtn">문의 작성</button>
-			</section>
+			</div>
 			
 		</div>
-	</div>
+		
+	</section>
 	
+<%@ include file="/views/common/footer.jsp"%>	
 <script>
 
 $(function(){

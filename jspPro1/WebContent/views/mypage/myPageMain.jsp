@@ -18,21 +18,14 @@
        
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 <style>
-  
-
-    section{
-    /*background:skyblue;*/
-    text-align:center;
-    margin-left: 15%;
-   
-    
-    }
     
     .mainSection{
-    	padding-top: 100px;
-    	padding-left: 20px;
-    	padding-right: 20px;
-    	
+    	margin: auto;
+ 		margin-bottom: 20px;
+ 		padding: 120px 40px 30px 20px;
+ 		overflow-y: auto;
+ 		height: 100vh;
+ 		text-align: center;
     }
     
     .card{
@@ -40,7 +33,6 @@
         height: 150px;
         padding: 50px;
     }
-    
  
 
 </style>
@@ -50,12 +42,13 @@
 
 <%@ include file="../common/menubar.jsp" %>
 
-	<div class="container-fluid">
-
-		<div class="row mainSection">
-			<%@ include file="../common/mypageAside.jsp" %>
-	
-			<section class="col-sm-10">
+	<section class="container-fluid">
+		
+		<div class="row flex-nowrap">	
+		<%@ include file="../common/mypageAside.jsp" %>
+		
+			<div class="mainSection col-sm-9">
+				<h3>My Giftree</h3>
 				<div class="card col-sm-4 maypageCard">
 					<b>후원한 나무</b>
 					<div class="tree">10 그루</div>
@@ -64,10 +57,10 @@
 					<b>보유 포인트</b>
 					<div class="point"><%=loginUser.getPoint() %>p</div>
 				</div>
-			</section>
+			</div>
 		</div>
-	</div>
-
-
+	</section>
+	
+<%@ include file="/views/common/footer.jsp"%>
 </body>
 </html>

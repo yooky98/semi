@@ -23,6 +23,15 @@ public class CampService {
 		return campList;
 	}
 
+	public ArrayList<Campaign> selectEndedList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Campaign> endedList = new CampDao().selectEndedList(conn);
+		
+		close(conn);
+		return endedList;	
+	}
+	
 
 	public Campaign selectCampaign(int campNo) {
 		
@@ -83,6 +92,17 @@ public class CampService {
 		close(conn);
 		return joinList;
 	}
+	
+
+
+	public ArrayList<Campaign> selectEndedJList(String userId) {
+		Connection conn = getConnection();
+		
+		ArrayList<Campaign> endedJList = new CampDao().selectEndedJList(conn, userId);
+		
+		close(conn);
+		return endedJList;
+	}
 
 
 	public int deleteJoin(int campNo, String userId) {
@@ -100,5 +120,9 @@ public class CampService {
 		close(conn);
 		return result;
 	}
+
+
+
+
 
 }

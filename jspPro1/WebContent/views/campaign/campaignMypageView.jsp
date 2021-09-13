@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.campaign.model.vo.Campaign" %>
+    pageEncoding="UTF-8" import="java.util.ArrayList, java.util.Date, com.kh.campaign.model.vo.Campaign" %>
 <%
 
 	ArrayList<Campaign> joinList = (ArrayList<Campaign>)request.getAttribute("joinList");
+	ArrayList<Campaign> endedJList = (ArrayList<Campaign>)request.getAttribute("endedJList");
 	String message = (String)request.getAttribute("message");
-
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -26,16 +27,20 @@
 
 <style>
     
-    .mainSection{
-    	padding-top: 100px;
-    	padding-bottom: 90px;
-    	padding-left: 20px;
-    	padding-right: 20px;
-    	margin-left: 15%;
+    .mypageCamp{
+   		margin: auto;
+ 		margin-bottom: 20px;
+ 		padding: 120px 40px 30px 20px;
+ 		overflow-y: auto;
+ 		height: 100vh;
     
     }
     
-    #cancelBtn{
+    .mypageCamp::-webkit-scrollbar { 
+		display: none; 
+	}
+    
+    .cancelBtn{
     	background: rgb(158, 164, 107);
  		color: white;
  		width: 100px;
@@ -44,7 +49,25 @@
 		padding: 5px;
 		margin: 5px;
 		font-weight: bolder;
+		
     
+    }
+    
+    .endedBtn{
+    	background: rgb(233, 231, 231);
+ 		color: white;
+ 		width: 100px;
+ 		border: none;
+ 		border-radius: 5px;
+		padding: 5px;
+		margin: 5px;
+		font-weight: bolder;
+		
+    
+    }
+    
+    .mypageCamp h3, h5{
+    	font-family: 'Gowun Batang', serif;
     }
     
     #campName:hover{
@@ -52,66 +75,89 @@
     	
     }
     
+    #campName a{
+    	color: black;
+    }
+    
 </style>
+
 </head>
 <body>
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-
-	<div class="container-fluid">
+	<section class="campSection">
 	
-	
-		<div class="mainSection col-sm-10">
+		<div class="row container-fluid">
+			<%@ include file="/views/common/mypageAside.jsp" %>
 		
-		
-			<h3>참여 캠페인</h3>
-			<hr>
-
-			<%if(joinList.isEmpty()) {%>
-				<div><%=message%></div>
-				
-			<%}else{%>
+			<div class="mypageCamp col-sm-9">
 			
-				<%for(Campaign camp : joinList){%>
-					<input type="hidden" value="<%=camp.getCampNO()%>">
+				<h3><b>참여 캠페인</b></h3>
+				<hr>
+	
+				<%if(joinList.isEmpty()) {%>
+					<div><%=message%></div>
 					
+				<%}else{%>
+				
+					<%for(Campaign camp : joinList){%>
+						
+						<h5 id="campName"><a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=camp.getCampNO()%>"><%=camp.getCampName() %></a></h5>
+						
+						<b>장소 : </b><span><%=camp.getCampLocation() %></span> &nbsp;
+						<b>일시 : </b><span><%=camp.getCampDate() %></span> &nbsp;
+						
+						<button class="cancelBtn" value="<%=camp.getCampNO()%>">신청 취소</button>
+						<%-- 버튼 태그를 id가 아닌 class로 주자 동적으로 여러개 만들 떄, 그래야 함수가 적용 --%>
+						<hr>
+					<%} %>
 					
-					<h5 id="campName"><%=camp.getCampName() %></h5>
-					<b>장소 : </b><span><%=camp.getCampLocation() %></span> &nbsp;
-					<b>일시 : </b><span><%=camp.getCampDate() %></span> &nbsp; 
-					<button id="cancelBtn">신청 취소</button>
+					<%for(Campaign eCamp : endedJList){%>
+						
+						<h5 id="campName"><a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=eCamp.getCampNO()%>"><%=eCamp.getCampName() %></a></h5>
+						
+						<b>장소 : </b><span><%=eCamp.getCampLocation() %></span> &nbsp;
+						<b>일시 : </b><span><%=eCamp.getCampDate() %></span> &nbsp;
+						
+						<button class="endedBtn" disabled>참여 완료</button>
+						<hr>
+					<%} %>
 					
-					<hr>
 				<%} %>
 				
-			<%} %>
-			
+			</div>
 		</div>
+	</section>
 
-	</div>
-
+<%@ include file="/views/common/footer.jsp"%>
 <script>
 
 
 <%if(!joinList.isEmpty()){%>
 	$(function(){
 		
-		$(".mainSection > #campName").click(function(){
-			var campNo = $(".mainSection > input").val();
+		$(".cancelBtn").on('click', function(){
+			var campNo = $(this).val();
+			location.href="<%=request.getContextPath()%>/deleteJoin.cam?campNo="+campNo;
+		})
+		
+		
+	})
+<%}%>
+
+
+</script>
+
+<%--
+$(".mypageCamp > #campName").click(function(){
+			var campNo = $(".mypageCamp > input").val();
 			
 			location.href="<%=request.getContextPath()%>/detail.cam?campNo="+campNo;
 		})
-		
-		$("#cancelBtn").click(function(){
-			var campNo = $(".mainSection > input").val();
-			
-			location.href="<%=request.getContextPath()%>/deleteJoin.cam?campNo="+campNo;
-		})
-	})
-<%}%> 
 
-</script>
+ --%>
+
 
 </body>
 </html>
