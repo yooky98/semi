@@ -233,7 +233,7 @@
 				var file = $("#titleImgFile").val();
 	            //console.log(file)
 	            if(file == ""){
-	                alert("이미지를 등록하세요.")
+	                alert("이미지를 새로 등록하세요.")
 	                return false;
 	            }
 			}

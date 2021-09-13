@@ -6,6 +6,7 @@
 <html id="htmlAt">
 <head>
 <meta charset="UTF-8">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>QNA List</title>
 <style>
 /* section 전체 영역 div */
@@ -13,11 +14,27 @@
 	text-align: center;
 	padding: 0 0 50px 0;
 }
-
+/* 문의답변 리스트가 담긴 table */
 #QNAListTable {
 	width: 100%;
-	height: 600px;
-	overflow: auto;
+	
+}
+/* 문의 제목 css 설정 */
+#QNAListTable .qnaTitle{
+	text-decoration: none;
+	cursor: pointer;	
+	font-weight: bold;
+	color: black;
+}
+/* 상품명에 마우스 올렸을 때 */
+#QNAListTable .qnaTitle:hover{
+	cursor: pointer;
+	font-weight: bolder;
+	color: red;	
+}
+/* 답변 상태가 잘 보이도록 bold로 바꿔줌 */
+.ansStatus{
+	font-weight: bold;
 }
 </style>
 </head>
@@ -34,17 +51,17 @@
 	
 					<div id="QNAListDiv">
 	
-						<h1>1:1문의답변</h1>
-						<br>
+						<h1>1:1 문의 답변</h1>
+						<br><br>						
 						<div id="QNAListTable">
 							<table class="table">
 								<thead class="thead-light">
 									<tr>
-										<th scope="col" style="width: 15%;">문의유형</th>
+										<th scope="col" style="width: 13%;">문의유형</th>
 										<th scope="col" style="width: 50%;">제목</th>
 										<th scope="col" style="width: 15%;">회원 아이디</th>
-										<th scope="col" style="width: 15%;">문의 날짜</th>
-										<th scope="col" style="width: 5%;">상태</th>
+										<th scope="col" style="width: 12%;">문의 날짜</th>
+										<th scope="col" style="width: 10%;">상태</th>
 									</tr>
 	
 								</thead>
@@ -66,9 +83,9 @@
 												}
 												
 									%>
-									<tr>
+									<tr class="QNArow<%=i+1%>">
 										<td><%= list.get(i).getQuesCategory() %></td>
-										<td><a href="#" id="qnaTitle<%=i+1%>"><%= list.get(i).getQuesTitle() %></a>
+										<td><a href="#" class="qnaTitle" id="qnaTitle<%=i+1%>"><%= list.get(i).getQuesTitle() %></a>
 										<form action="" id="qnaNoForm" method="post">
 											<input type="hidden" id="qnaNo" name="qnaNo">
 										</form>
@@ -87,14 +104,23 @@
 													
 												})
 											})
+											/* Status가 Y면 파란색, N이면 빨간색으로 표시 */	
+											$(function(){
+												var ansStatus = $(".QNArow<%=i+1%>").children().eq(4).text();
+												console.log(ansStatus);
 												
-											
+												if(ansStatus === "Y"){
+													$(".QNArow<%=i+1%>").children().eq(4).css("color","blue");
+												}else{
+													$(".QNArow<%=i+1%>").children().eq(4).css("color","red");
+												}
+											})
 										</script>
 										</td>
 										
 										<td><%= list.get(i).getUserId() %></td>
 										<td><%= list.get(i).getQuesDate() %></td>
-										<td><%= answerStatus %></td>
+										<td class="ansStatus"><%= answerStatus %></td>
 									</tr>
 									
 									<% 
