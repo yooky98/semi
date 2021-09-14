@@ -27,7 +27,7 @@
 <style>
 
  	.qnaContent{
- 	margin: auto;
+ 		margin: auto;
  		margin-bottom: 20px;
  		padding: 120px 40px 30px 20px;
  		overflow-y: auto;

@@ -73,11 +73,10 @@
 					<div class="dropdown-menu">
       					<a class="dropdown-item" href="<%=contextPath%>/views/member/userUpdate.jsp">회원정보 수정</a>
       					<a class="dropdown-item" href="<%=contextPath%>/views/member/userDelete.jsp">회원 탈퇴</a>
-     					<a class="dropdown-item" href="<%=request.getContextPath() %>/user?command=logout">로그아웃</a>
     				</div>
 					</li>
 
-					<li><a href="<%=contextPath%>/views/mypage/myPageMain.jsp">mypage</a></li>
+					<li><a href="<%=contextPath%>/forestList.my">mypage</a></li>
 					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
 					<li><a href="<%=request.getContextPath() %>/user?command=logout">logout</a></li>
 					

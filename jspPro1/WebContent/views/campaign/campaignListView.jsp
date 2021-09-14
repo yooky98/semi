@@ -72,6 +72,24 @@
 		color: #888888;
 		font-size: 12px;
 	}
+	
+	#ingBtn, #endedBtn{
+		font-size: 18px;
+		font-family: 'Gowun Batang', serif;
+		font-weight: bolder;
+		color: rgb(158, 164, 107);
+		background: none;
+		width: 200px;
+		height: 50px;
+		border-radius: 5px;
+		border: 2px solid  rgb(158, 164, 107);
+	}
+	
+	#ingBtn:focus, #endedBtn:focus{
+		outline: none;
+		color: white;
+		background: rgb(158, 164, 107);
+	}
     
 </style>
 </head>
@@ -83,7 +101,6 @@
 	<section class="container-fluid campMain">
 
 		<div class="mainSection col-sm-9">
-			<h4></h4>
 			<button id="ingBtn">진행중인 캠페인</button> <button id="endedBtn">지난 캠페인</button>
 			<hr>
 
@@ -114,6 +131,7 @@
 
 $(function(){
 	$("#endedCamp").hide();
+	$("#ingBtn").focus();
 
 	$("#ingBtn").click(function(){
 		$("#endedCamp").hide();
