@@ -86,9 +86,9 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-	<section class="campSection">
+	<section class="campSection container-fluid">
 	
-		<div class="row container-fluid">
+		<div class="row  flex-nowrap">
 			<%@ include file="/views/common/mypageAside.jsp" %>
 		
 			<div class="mypageCamp col-sm-9">
@@ -141,7 +141,6 @@
 			var campNo = $(this).val();
 			location.href="<%=request.getContextPath()%>/deleteJoin.cam?campNo="+campNo;
 		})
-		
 		
 	})
 <%}%>
