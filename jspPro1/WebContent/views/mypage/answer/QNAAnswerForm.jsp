@@ -52,7 +52,7 @@
 
 			<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 
-			<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9" id="adminSection">
+			<section class="col-xl-10 col-lg-10" id="adminSection">
 				<div id="QNAOuter">
 					<form action="updateAns.ad" method="POST">						
 	

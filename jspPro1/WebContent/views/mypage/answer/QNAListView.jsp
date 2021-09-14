@@ -47,13 +47,14 @@
 	
 				<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 	
-				<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9" id="adminSection">
+				<section class="col-xl-10 col-lg-10" id="adminSection">
 	
 					<div id="QNAListDiv">
 	
 						<h1>1:1 문의 답변</h1>
 						<br><br>						
 						<div id="QNAListTable">
+							<h6 style="text-align: right;"><span style="color: green;"><b>Y</b>:답변 완료</span>&nbsp; <span style="color: red;"><b>N</b>:답변 미완료</span></h6>
 							<table class="table">
 								<thead class="thead-light">
 									<tr>
@@ -104,13 +105,13 @@
 													
 												})
 											})
-											/* Status가 Y면 파란색, N이면 빨간색으로 표시 */	
+											/* Status가 Y면 초록색, N이면 빨간색으로 표시 */	
 											$(function(){
 												var ansStatus = $(".QNArow<%=i+1%>").children().eq(4).text();
 												console.log(ansStatus);
 												
 												if(ansStatus === "Y"){
-													$(".QNArow<%=i+1%>").children().eq(4).css("color","blue");
+													$(".QNArow<%=i+1%>").children().eq(4).css("color","green");
 												}else{
 													$(".QNArow<%=i+1%>").children().eq(4).css("color","red");
 												}

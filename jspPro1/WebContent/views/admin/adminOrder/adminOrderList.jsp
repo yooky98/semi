@@ -22,14 +22,17 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 }
 /* 검색창을 포함하고 있는 div */
 #orderListArea > #searchArea{
-	float:right;
-	width:27%;	
+	float: right;
+	width: 25em;	
+}
+/* 검색 카테고리 선택하는 select 태그 */
+#searchArea > #searchOption{
+	width:2.500em;
 }
 /* 검색 내용 입력하는 input[text] 태그 */
 #searchArea > #searchTitle{
-	width:60px;
+	width:3.750em;
 }
-
 /* 주문 내역이 들어가는 테이블 바깥 div */    
 .orderOuter{
  	clear : both;
@@ -52,7 +55,7 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 }
 /* 모달 창의 취소, 삭제 버튼 */
 #orderListTable .modal .modal-footer>button{
-	width:100px;
+	width:80px;
 }
 </style>
 </head>
@@ -66,7 +69,7 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 			<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 
 			<%-- 작업 영역 --%>
-			<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9" id="adminSection">
+			<section class="col-xl-10 col-lg-10" id="adminSection">
 				<div id="orderListArea">
 				<h1>주문 관리</h1>
 				
@@ -190,8 +193,7 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
                         	<td colspan="7">주문 내역이 존재하지 않습니다.</td>
                         </tr>
                         <%
-                        	}else{ 
-                        		
+                        	}else{                        		
                         		
                         		String[] selected = new String[3];
                         		
@@ -246,7 +248,7 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 										</button>
 										</div>
 										<div class="modal-body">
-										<h6 style="text-align:left"><b>주문상세번호 : <%=list.get(i).getOrderDetailNo() %><br><br>변경 전 : <%=dlvStatusName%><br><br>변경 후 : <span id="currentStatus"></span></b></h6>
+										<h6 style="text-align:left"><b>- 주문상세번호 : <%=list.get(i).getOrderDetailNo() %><br><br>- 변경 전 : <%=dlvStatusName%><br><br>- 변경 후 : <span class="currentStatus"></span></b></h6>
 										</div>
 										<div class="modal-footer">
 										<button type="button" class="btn btn-outline-secondary" data-dismiss="modal" onclick="cancelModify<%=i+1%>();">취 소</button>
@@ -257,7 +259,7 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 							</div>	
                             		
                             <script>
-                            <%-- 취소 버튼 누르면 다시 selected한 상태가 보여질 수 있도록 새로고침 --%>
+                            <%-- 취소 버튼 누르면 다시 원래 selected한 상태가 보여질 수 있도록 새로고침 --%>
                             function cancelModify<%=i+1%>(){
                             	var cancelNum = <%=list.get(i).getOrdersStatus()%>;
                             	console.log("취소했을 때 : " + cancelNum);
@@ -282,7 +284,7 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
                                 break;
                               	}
                               	
-                              	$("#currentStatus").html(finalStatus);                              	
+                              	$(".currentStatus").html(finalStatus);                              	
                               
                             }  
                             function modifyOrder<%=i+1%>(){

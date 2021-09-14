@@ -9,6 +9,7 @@
 <html id="htmlAt">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 <title>ADMIN PRODUCT LIST</title>
 <style>
 /* section 전체 영역 div*/
@@ -33,7 +34,7 @@
 }
 /* 수정 버튼 */
 #productListTable .modifyBtns{
-	width: 70px;
+	width: 4.375em;
 	margin: 0 10px 0 10px;
 	background-color: rgb(197, 228, 221);
     border: 2px outset;
@@ -41,7 +42,7 @@
 }
 /* 삭제 버튼 */
 #productListTable .deleteBtns{
-	width: 70px;
+	width: 4.375em;
 	margin: 0 10px 0 10px;
 	background-color: rgb(245, 223, 209);
     border: 2px outset;
@@ -64,7 +65,11 @@
 	font-weight: bolder;
 	color: red;	
 }
-
+@media screen and (max-width:992px){
+	#productListTable .modifyBtns, #productListTable .deleteBtns{
+		width: 5.000em;
+	}
+}
 
 </style>
 </head>
@@ -78,7 +83,7 @@
 				<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 	
 				<%-- 작업 영역 --%>
-				<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9" id="adminSection">
+				<section class="col-xl-10 col-lg-10" id="adminSection">
 					<div id="productList">					
 						<h1>제품 관리</h1>
 						<h6>
@@ -88,12 +93,12 @@
 						<table class="table" id="productListTable">
 							<thead class="thead-dark">
 								<tr>
-									<th scope="col" width="20%">상품 번호</th>
+									<th scope="col" width="12%">상품 번호</th>
 									<th scope="col" width="10%">카테고리</th>
 									<th scope="col" width="29%">상품명</th>
-									<th scope="col" width="15%">가격</th>
-									<th scope="col" width="10%">재고 수량</th>
-									<th scope="col" width="16%">작업</th>
+									<th scope="col" width="15%">가격(원)</th>
+									<th scope="col" width="10%">재고 수량(그루)</th>
+									<th scope="col" width="24%">비 고</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -121,10 +126,10 @@
 										<td><%=list.get(i).getProdPrice()%></td>
 										<td><%=list.get(i).getProdAmount()%></td>
 										<td>										
-											<button class="modifyBtns btn btn-outline-info" id="modiProdBtn<%=i+1 %>" onclick="updateProd<%=i+1%>();">수 정</button>
-											<button class="deleteBtns btn btn-outline-danger" type="button" data-toggle="modal" data-target="#delProdModal<%=i+1 %>">삭 제</button>										
-											<form action="" id="postForm<%=i+1 %>" method="post">
-												<input id="prodNoInput<%=i+1 %>" type="hidden" name="prodNo">
+											<button class="modifyBtns btn btn-outline-info" id="modiProdBtn<%=i+1%>" type="button" onclick="updateProd<%=i+1%>();">수 정</button>
+											<button class="deleteBtns btn btn-outline-danger" type="button" data-toggle="modal" data-target="#delProdModal<%=i+1%>">삭 제</button>										
+											<form action="" id="postForm<%=i+1%>" method="post">
+												<input id="prodNoInput<%=i+1%>" type="hidden" name="prodNo">
 											</form>										
 											
 											<div class="modal fade" id="delProdModal<%=i+1 %>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -160,8 +165,7 @@
 												$(function(){
 													$(".prodName").click(function(){
 														var pNo = $(this).children().val();
-														console.log(pNo)
-														<%-- java.sql.SQLSyntaxErrorException: ORA-00904: "PROD_NO": invalid identifier --%>
+														console.log(pNo);														
 														location.href = "<%=request.getContextPath() %>/detail.pr?pNo=" + pNo;
 													});
 												});
