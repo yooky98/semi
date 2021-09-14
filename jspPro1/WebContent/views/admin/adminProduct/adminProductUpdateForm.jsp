@@ -116,7 +116,7 @@
 				<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
 	
 				<%-- 작업 영역 --%>
-				<section class="col-lg-9 col-md-9 col-sm-9 col-9 col-xl-9" id="adminSection">
+				<section class="col-xl-10 col-lg-10" id="adminSection">
 	
 					<div class="productUpdateArea">
 						<h1 style="text-align: center;">제품 수정</h1>

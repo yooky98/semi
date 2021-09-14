@@ -39,10 +39,10 @@ public class adminOrderDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		//selectList=
+		//selectOrderList=
 		//SELECT A.ORDER_DETAIL_NO, A.ORDER_NO, B.PROD_NAME, A.USER_ID, C.ORDER_DATE, A.ORDERS_AMOUNT, A.ORDERS_STATUS
 		//FROM ORDERS_DETAIL A JOIN PRODUCT B ON A.PROD_NO=B.PROD_NO 
-		//JOIN "ORDER" C ON A.ORDER_NO=C.ORDER_NO
+		//JOIN ORDERS C ON A.ORDER_NO=C.ORDER_NO
 		
 		String sql = prop.getProperty("selectOrderList");
 		
