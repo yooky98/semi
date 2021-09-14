@@ -13,6 +13,7 @@ import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.cart.model.service.CartService;
 import com.kh.cart.model.vo.Cart;
+import com.kh.member.model.vo.UserVO;
 import com.kh.product.model.vo.Product;
 
 public class CartDao {
@@ -152,4 +153,93 @@ public class CartDao {
 		return result;
 	}
 
+	public ArrayList<Cart> selectCartOrder(Connection conn,  String[] cartNo) {
+		ArrayList<Cart> cartOrder = new ArrayList<Cart>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Cart c= new Cart();
+		String sql = prop.getProperty("selectCartOrder");
+		//selectCartOrder=SELECT A.CART_NO , A.PROD_NO , A.CART_AMOUNT , A.FOREST_NAME, B.PROD_NAME , B.PROD_PRICE 
+		//FROM CART A INNER JOIN PRODUCT B ON (A.PROD_NO = B.PROD_NO) WHERE A.CART_NO = ?
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			for(int i = 0 ; i < cartNo.length ; i++) {
+				pstmt.setInt(1, Integer.parseInt(cartNo[i]));
+
+			rset = pstmt.executeQuery();
+			Cart cart = null;
+			
+			while (rset.next()) {
+				cart = new Cart();
+				
+				cart.setProdNo(rset.getInt("PROD_NO"));
+				cart.setCartAmount(rset.getInt("CART_AMOUNT"));
+				cart.setForestName(rset.getString("FOREST_NAME"));
+				cart.setProdName(rset.getString("PROD_NAME"));
+				cart.setProdPrice(rset.getInt("PROD_PRICE"));
+				cart.setChangName(rset.getString("CHANGE_NAME"));
+		
+				cartOrder.add(cart);
+				
+				}
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("cart 리스트야 제발 = " + cartOrder);
+		return cartOrder;
+		
+	}
+
+
+//	public ArrayList<UserVO> selectUserOrder(Connection conn, String[] cartNo) {
+//		ArrayList<UserVO> userOrder = new ArrayList<UserVO>();
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+		
+////	UserVO user = new UserVO();
+//		String sql = prop.getProperty("selectUserOrder");
+////		selectUserOrder=SELECT A.USER_NAME , A.PHONE , A.ADDRESS , A.POINT 
+////		FROM USERS A JOIN CART B ON (A.USER_ID = B.USER_ID) 
+////		WHERE B.CART_NO = ?
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//
+//			for(int i = 0 ; i < cartNo.length ; i++) {
+//				pstmt.setInt(1, Integer.parseInt(cartNo[i]));
+//
+//				rset = pstmt.executeQuery();
+//				UserVO user = null;
+//			
+//			while (rset.next()) {
+//				user = new UserVO();
+//		
+//				user.setUser_name(rset.getString("USER_NAME"));
+//				user.setPhone(rset.getString("PHONE"));
+//				user.setAddress(rset.getString("ADDRESS"));
+//				user.setPoint(rset.getInt("POINT"));
+//				userOrder.add(user);
+//				
+//				}
+//			}
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		System.out.println("userOrder 가져오니?= " + userOrder);
+//		return userOrder;
+//		
+//	}
 }

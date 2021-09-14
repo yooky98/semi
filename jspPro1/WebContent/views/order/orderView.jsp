@@ -6,7 +6,8 @@
 <%
 	String message = (String) request.getAttribute("message");
 %>
-<% ArrayList<Cart> list = (ArrayList) request.getAttribute("list"); %>
+<% ArrayList<Cart> clist = (ArrayList)request.getAttribute("clist");%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,11 +29,17 @@
     <!--주소록-->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
+<style>
+.prodImg{
+	width: 60px;
+	height: 50px;
+}
+</style>
 <body>
 
 	<%@ include file="/views/common/menubar.jsp"%>
 		<br><br><br><br><br><br><br>
-		
+ <form>		
   <div class="container">
     <h1>결제하기</h1>
     <p></p>
@@ -41,12 +48,18 @@
         <p>주문 상품 정보</p>
         <div class="card">
           <div class="card-body">
+      
+          
             <table>
+            <% 
+            	for(Cart c : clist){ %>
               <tr>
-                <td>상품이미지</td>
-                <td>상품이름</td>
-                <td>주문수량</td>
+                <td><img src='<%=request.getContextPath()%>/resources/images/<%=c.getChangName()%>' class="prodImg"></td>
+                <td><input type="text" name= prodName value="<%=c.getProdName()%>"></td>
+                <td><input type="text" name= prodAmount value="<%=c.getCartAmount()%>"></td>
+                <td><input type="hidden" class= prodPrice value="<%=c.getProdPrice() * c.getCartAmount()%>"></td>
               </tr>
+              <%}%>
             </table>
           </div>
         </div>
@@ -57,11 +70,12 @@
           <div class="card-body">
             <form class="orderForm" >
               <label>상품가격:</label> 
-              <input type="text" class="prodPrice" ><br>
-              <label>배송비:</label><input type="text" class="delivery" ><br>
-              <label>포인트 사용:</label><input type="text" class="point" >
+              <input type="text" id="prodSum" value= total><br>
+              <label>배송비:</label><input type="text" id="delivery" value=0><br>
+              <label>보유포인트:</label><input type="text" id="point" value="<%=loginUser.getPoint() %>">
+              <button type="button" onclick="usePoint()">사용</button> 
             <hr>
-            <label>결제 금액:</label><input type="text" class="orderPrice" >
+            <label>결제 금액:</label><input type="text" id="finalPrice" value=0 >
           </div>
         </div>
       </div>
@@ -71,19 +85,19 @@
         <p>배송 정보</p>
         <div class="card">
           <div class="card-body">
-            <form>
             <div>
                <input type="checkbox"> 주문자 정보와 동일<br>
-               <input type="text" placeholder="수령인">
-               <input type="text" placeholder="연락처">
-               <input type="text" id="postcode" placeholder="우편번호">
+               <input type="text" placeholder="수령인" value="<%=loginUser.getUser_name()%>">
+               <input type="text" placeholder="연락처"  value="<%=loginUser.getPhone() %>">
+               <% String[] arr = loginUser.getAddress().replaceAll(" ", "").split("&");%>
+               <input type="text" id="postcode" placeholder="우편번호" value=<%=arr[0]%>>
                <input type="button" onclick="Address()" value="우편번호 찾기"><br>
-               <input type="text" id="postcode_address" placeholder="주소"><br>
-               <input type="text" id="postcode_detailAddress" placeholder="상세주소">
+               <input type="text" id="postcode_address" placeholder="주소" value=<%=arr[1]%>><br>
+               <input type="text" id="postcode_detailAddress" placeholder="상세주소" value=<%=arr[2]%>>  
             </div>
                <br>
             <div>
-              <select>
+              <select name= "deliverOption">
                 <option value="배송시 요청사항을 입력해주세요">배송메모를 선택해주세요</option>
                 <option value="배송전에 미리 연락바랍니다">배송전에 미리 연락바랍니다</option>
                 <option value="부재시 경비실에 맡겨주세요">부재시 경비실에 맡겨주세요</option>
@@ -101,17 +115,17 @@
             <h5 class="card-title">결제방법</h5>
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">신용카드
+                <input type="radio" class="form-check-input" name="optradio" value="신용카드">신용카드
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">실시간 계좌이체
+                <input type="radio" class="form-check-input" name="optradio" value="실시간계좌이체">실시간 계좌이체
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">카카오페이
+                <input type="radio" class="form-check-input" name="optradio" value="카카오페이">카카오페이
               </label>
             </div>
             <hr>
@@ -126,6 +140,39 @@
 </form>
 </body>
 <script>
+
+	$(function(){
+		let total = 0;
+		const prodPrice = $('.prodPrice');
+		const listSize = <%= clist.size() %>;
+		
+		for(let i =0 ; i<listSize ; i++){
+			total += Number($('.prodPrice')[i].value);
+			console.log("총값 = " +$('.prodPrice')[i].value)
+		}
+		$('#prodSum').val(total);
+		
+		if(	total < 70000){
+			$('#delivery').val(2500);
+			$('#finalPrice').val(total+2500);
+		}else{
+			$('#delivery').val(0);
+			$('#finalPrice').val(total);
+		}
+	
+		
+	});
+	
+	function usePoint(){
+		 var point = $('#point').val();
+		console.log("point = " + point)
+		if( point > 0 ){
+			$('#finalPrice').val(($('#finalPrice').val() - point));
+		}
+		
+		
+	}
+	
     function Address() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -157,5 +204,7 @@
             }
         }).open();
     }
+
+      
 </script>
 </html>

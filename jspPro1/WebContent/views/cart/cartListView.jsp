@@ -67,6 +67,7 @@ body {
 	height: 80px;
 }
 
+
 </style>
 <body onload="updateTotal();">
 
@@ -104,13 +105,13 @@ body {
 							<input type="checkbox" class="chk" name="selectCheck[]" value="<%=c.getCartNo()%>" checked="checked" onclick="check()">
 							<img src='<%=request.getContextPath()%>/resources/images/<%=c.getChangName()%>' class="prodImg">
 							</td>
-							<td><%=c.getProdName()%></td>
+							<td><input type="text" name="prodName" value="<%=c.getProdName()%>"></td>
 							<td>
 							<img src="<%=request.getContextPath()%>/resources/images/plus.png"  id="upVal" class="upimg" onclick="upBtn(<%= c.getCartNo() %>)">
 								<input type="text" class="pAmount" name ="Cartamount" id="amount" value="<%=c.getCartAmount()%>" readonly />
 							<img src="<%=request.getContextPath()%>/resources/images/minus.png" class="downimg" onclick="downBtn(<%= c.getCartNo() %>)">
 							</td>
-							<td><%=c.getForestName()%></td>
+							<td><input type="text" name="forestName" value="<%=c.getForestName()%>"></td>
 							<td>2500원</td>
 							<td>
 							<input type="text" class="prodPrice" value="<%=c.getProdPrice() * c.getCartAmount()%>">원</td>
@@ -127,10 +128,10 @@ body {
 			<hr>
 
 				<div class="form-block-inner-div">
-					<label class="mb-2 mr-sm-2">상품가격</label> <input type="text" class="prodOrder" id="prodSum" value= 0 readonly>
+					<label class="mb-2 mr-sm-2">상품가격</label> <input type="text" class="prodOrder" name="prodOrder" id="prodSum" value= 0 readonly>
 				</div>
 				<div class="form-block-inner-div">
-					<label class="mb-2 mr-sm-2">배송비</label> <input type="text" class="delivery" value=2500 readonly>
+					<label class="mb-2 mr-sm-2">배송비</label> <input type="text" id="deliverPrice" value=2500 readonly>
 				</div>
 				<hr>
 				<div class="form-block-inner-div">
@@ -171,13 +172,12 @@ body {
 		    }
 		 $('#prodSum').val(total);
 		
-		 
 		 //배송비 70000원이상 무료배송
 		 if( total > 70000){
-			 $('.delivery').val(0);
+			 $('#deliverPrice').val(0);
 			 $('#finalPrice').val(total);
 		 }else{
-			 $('.delivery').val(2500);
+			 $('#deliverPrice').val(2500);
 			 $('#finalPrice').val(total+2500);
 		 }
 		
@@ -261,19 +261,7 @@ body {
     		 }
      	}
 	}
-		
-<%--	function order(){
-		const listSize = <%= list.size()%>; 
-		const arr = [];
-		 for (let i = 0; i < listSize; i++) {
-				if ($('.chk')[i].checked == true) {
-				 	arr.push($('.chk')[i].value);
-		        }
-		    } 	
-			console.log("arr = " + arr)
-		}--%>
-	
-	
+
 	</script>
 </body>
 </html>

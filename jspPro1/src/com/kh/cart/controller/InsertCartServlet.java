@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
@@ -47,28 +48,29 @@ public class InsertCartServlet extends HttpServlet {
 			int fileSize = 1024 * 1024 * 15;
 
 			MultipartRequest mr = new MultipartRequest(request, savePath, fileSize, "utf-8", new ImgFileRenamePolicy());
-
+			HttpSession session = request.getSession();
+			
 			Cart c = new Cart();
 
 			String userId = ((UserVO) request.getSession().getAttribute("loginUser")).getUser_id();
-			
-		/*	if(userId == null) {
-				request.setAttribute("msg", "회원이 아닙니다.");
+			UserVO loginUser = (UserVO) session.getAttribute("loginUser");
+			  
+			if(loginUser == null) {
+				request.setAttribute("msg", "Giftree회원이 아닙니다.");
 				RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
 				view.forward(request, response);
-			}*/
+			}//뭐여..
 			
-
 			c.setUserId(userId);
 			c.setProdNo(Integer.parseInt((mr.getParameter("prodNo"))));
 			c.setCartAmount(Integer.parseInt((mr.getParameter("count"))));
 			c.setForestName(mr.getParameter("forest"));
+			
 
-			// 잘 넘어온다
-			System.out.println("user_id = " + userId);
-			System.out.println("prodNo =" + c.getProdNo());
-			System.out.println("prodNo =" + c.getCartAmount());
-			System.out.println("prodNo =" + c.getForestName());
+//			System.out.println("user_id = " + userId);
+//			System.out.println("prodNo =" + c.getProdNo());
+//			System.out.println("prodNo =" + c.getCartAmount());
+//			System.out.println("prodNo =" + c.getForestName());
 
 			int result = new CartService().insertCart(c);
 
@@ -85,7 +87,7 @@ public class InsertCartServlet extends HttpServlet {
 			}
 		}
 
-
+		
 	}
 
 	/**
