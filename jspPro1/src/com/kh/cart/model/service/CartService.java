@@ -6,6 +6,7 @@ import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.cart.model.dao.CartDao;
 import com.kh.cart.model.vo.Cart;
+import com.kh.member.model.vo.UserVO;
 import com.kh.product.model.vo.Product;
 
 public class CartService {
@@ -65,6 +66,25 @@ public class CartService {
 	}
 
 
+	//장바구니에 담은 값 상품 찾기
+	public ArrayList<Cart> selectCartOrder(String[] cartNo) {
+		Connection conn = getConnection( );
+	
+		ArrayList<Cart> cartOrder = new CartDao().selectCartOrder(conn, cartNo);
+		close(conn);
+		
+		return cartOrder;
+	}
+
+//	//장바구니 담은 유저 데이터
+//	public ArrayList<UserVO> selectUserOrder(String[] cartNo) {
+//		Connection conn = getConnection( );
+//		
+//		ArrayList<UserVO> userOrder = new CartDao().selectUserOrder(conn, cartNo);
+//		close(conn);
+//		
+//		return userOrder;
+//	}
 
 
 }

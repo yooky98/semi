@@ -17,6 +17,8 @@ public class Cart {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+
 	public Cart(int cartNo, String userId, int prodNo, int cartAmount, String forestName, String prodName,
 			int prodPrice , String changName) {
 	
@@ -43,8 +45,26 @@ public class Cart {
 
 	}
 
-	
-	
+
+	public Cart(int prodNo, int cartAmount, String forestName, String prodName, int prodPrice , String changName) {
+		super();
+		this.prodNo = prodNo;
+		this.cartAmount = cartAmount;
+		this.forestName = forestName;
+		this.prodName = prodName;
+		this.prodPrice = prodPrice;
+		this.changName = changName;
+	}
+
+
+
+	public Cart(int cartNo) {
+		super();
+		this.cartNo = cartNo;
+	}
+
+
+
 	public String getChangName() {
 		return changName;
 	}

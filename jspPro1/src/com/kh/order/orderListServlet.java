@@ -1,6 +1,7 @@
 package com.kh.order;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.cart.model.service.CartService;
 import com.kh.cart.model.vo.Cart;
+import com.kh.member.model.vo.UserVO;
 
 /**
  * Servlet implementation class orderListServlet
@@ -32,15 +34,25 @@ public class orderListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String[] cartNo = request.getParameterValues("selectCheck[]");
-	//	Cart OrderNo = new CartService().selectCartNo();
-		
-		for(int i=0 ; i<cartNo.length ; i++) {
-			System.out.println("cartNo출력 = " + cartNo[i]);
-		}
-		request.getRequestDispatcher("views/order/orderView.jsp").forward(request, response);
-	}
+		String[] cartNo = request.getParameterValues("selectCheck[]");//장바구니 체크박스 번호  가져오기
 
+		ArrayList<Cart> cartOrder = new CartService().selectCartOrder(cartNo); //db로 보내기
+		//ArrayList<UserVO> userOrder = new CartService().selectUserOrder(cartNo);
+		
+		if(cartOrder != null) {
+			request.setAttribute("clist", cartOrder);
+		//	request.setAttribute("orderUser", userOrder);
+			RequestDispatcher view = request.getRequestDispatcher("views/order/orderView.jsp");
+			view.forward(request, response);
+		}else {
+			request.setAttribute("msg", "장바구니 상품을 불러오지 못했습니다.");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
+
+
+	
+}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
