@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.review.model.vo.Review;
+
 /**
  * Servlet implementation class review_delete
  */
@@ -36,7 +38,7 @@ public class review_delete extends HttpServlet {
 		System.out.println("review_delete.credu 요청");
 
 		// 파라미터 한글처리
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
 
 		// 파라미터값 추출
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
@@ -47,11 +49,11 @@ public class review_delete extends HttpServlet {
 			review_DAO.review_delete(review_num);
 
 			// 어떤 형태로 데이터를 받는지 정의해줘야함.
-			// response.setContentType("text/plain; charset=utf-8");
+			// response.setContentType("text/plain; charset=UTF-8");
 
 			// 응답 결과를 출력할 스트림 생성
 			// PrintWriter pw = response.getWriter();
-			// pw.print(bean.getReview_content());
+			// pw.print(Review.getReview_content());
 			
 			//페이지 이동
 			//String site = "review.credu";

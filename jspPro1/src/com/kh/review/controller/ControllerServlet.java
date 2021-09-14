@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.review.*;
+import com.kh.common.JDBCTemplate;
+
 
 
 
@@ -37,25 +40,26 @@ public class ControllerServlet extends HttpServlet {
 		System.out.println("ControllerServlet");
 		
 		//파라미터 한글처리.
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		
 		String url = request.getRequestURI();
 		
-		System.out.println(url);
+		System.out.println(url+"1");
 		// SHOP/폴더명/요청서블릿.credu
 		
-		String serv[] = url.split("/	"); 
+		String serv[] = url.split("/"); 
 		
 		url = serv[serv.length - 1];
 		
-		System.out.println(url);
+		System.out.println(url+"2");
 		
 		// ;sessionid 값이 있을수 있으므로 한번더 반복작업.
 		
 		String serv2[] = url.split(";");
 		
 		url = serv2[0];
+		System.out.println(url+"3");
 		
 		
 		String site = null;
@@ -81,12 +85,13 @@ public class ControllerServlet extends HttpServlet {
 			site = "review_delete";
 			
 		}
-		
+		System.out.println(site);
 		
 				
 		// 이동(forward)
 		RequestDispatcher dis = request.getRequestDispatcher(site);
 		dis.forward(request, response);
+		//response.sendRedirect(site);
 		
 		
 	}

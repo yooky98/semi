@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.review.*;
 import com.kh.review.model.vo.Review;
+import com.kh.common.JDBCTemplate;
+
 
 
 
@@ -87,38 +90,7 @@ public class review_write extends HttpServlet {
 		response.sendRedirect(site);
 		
 		
-		
-		// DB 처리
-		/*
-		 * 
-		 * INSERT INTO REVIEW_TABLE(review_num, user_id, prod_num, review_title, review_content, review_cnt, review_star, review_buy_opt, review_regdate)
-		   VALUES (review_num.nextval, 'zzzz2222', '이동기', '이동기 구매', '이동기 완전 좋아요!', 0, 4, 1, sysdate);
-		 * 
-		 */
-		
-		/*
-		Connection conn = DBConnector.getConnection();
-		
-		String sql = "INSERT INTO REVIEW_TABLE(review_num, user_id, prod_num, review_title, review_content, review_cnt, review_star, review_buy_opt, review_regdate)"
-				   + " VALUES(review_num.nextval, ?, ?, ?, ?, 0, ?, ?, sysdate)";
-		
-		PreparedStatement psmt = conn.prepareStatement(sql);
-		
-		psmt.setString(1, user_id);
-		psmt.setString(2, prod_num);
-		psmt.setString(3, review_title);
-		psmt.setString(4, review_content);
-		psmt.setInt(5, review_star);
-		psmt.setInt(6, review_buy_opt);
-		
-		//SQL 실행
-		psmt.execute();
-								
-		//DB 연결 종료
-		conn.close();
-		*/
-			
-			
+
 				
 		
 		

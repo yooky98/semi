@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.review.model.vo.Review;
-
+import com.kh.common.JDBCTemplate;
 
 
 /**
@@ -39,7 +39,7 @@ public class review extends HttpServlet {
 		// response.getWriter().append("Served at:
 		// ").append(request.getContextPath());
 
-		System.out.println("review.credu");
+		System.out.println("리뷰왔어");
 
 		int pagenum = 1; // 페이지 번호
 		if (request.getParameter("Page_num") != null) {
@@ -90,7 +90,7 @@ public class review extends HttpServlet {
 				
 
 		// review.jsp로 이동
-		String site = "../views/mypage/review/review.jsp";
+		String site = "views/mypage/review/review.jsp";
 
 		RequestDispatcher dis = request.getRequestDispatcher(site);
 		dis.forward(request, response);

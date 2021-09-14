@@ -28,6 +28,8 @@
        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
        <!-- Latest compiled JavaScript -->
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
+       
 <style>
     aside{
         background: rgb(239, 240, 227);
@@ -51,16 +53,8 @@
 	<div class="container-fluid">
 
 		<div class="row mainSection">
-			<aside class="col-sm-2">
-				<ul>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/myPageMain.jsp">내 정보</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/buylist/gumeList.jsp">주문내역 조회</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/wish/wishList.jsp">위시 리스트</a></li>
-					<li><a href="#">리뷰 관리</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/question/questionListView.jsp">1:1 문의</a></li>
-					<li><a href="#">참여 캠페인</a></li>
-				</ul>
-			</aside>
+				<%@ include file="/views/common/mypageAside.jsp" %>
+
 
 			<form method="post" name="detailFrm">
 

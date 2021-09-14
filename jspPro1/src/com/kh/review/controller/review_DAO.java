@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.kh.common.JDBCTemplate;
 import com.kh.review.model.vo.Review;
+import com.kh.common.JDBCTemplate;
+
+
 
 
 
@@ -21,12 +23,11 @@ public class review_DAO {
 		try {
 
 			// DB연결
-			Connection conn = JDBCTemplate.getConnection();
+			Connection conn = JDBCTemplate.getConnection();		
 			System.out.println("연결성공");
-
 			// SQL 문
 			String sql = "INSERT INTO REVIEW(REVIEW_NUM, USER_ID, PROD_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CNT, REVIEW_STAR, REVIEW_BUY_OPT, REVIEW_REGDATE)"
-					+ " VALUES(REVIEW_NUM_NEXTVAL, ?, ?, ?, ?, 0, ?, ?, SYSDATE)";
+					+ " VALUES(REVIEW_NUM.NEXTVAL, ?, ?, ?, ?, 0, ?, ?, SYSDATE)";
 
 			PreparedStatement psmt = conn.prepareStatement(sql);
 
@@ -39,10 +40,10 @@ public class review_DAO {
 
 			// SQL 실행
 			psmt.execute();
-
+			
 			// DB 연결 종료
 			conn.close();
-
+			System.out.println("DB종료");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -60,14 +61,14 @@ public class review_DAO {
 
 		
 			// DB연결
-			Connection conn = JDBCTemplate.getConnection();
+			Connection conn = JDBCTemplate.getConnection();		
 
 			// SQL
 			// 리뷰게시판에 모든 데이터를 불러온다.
 			String sql =  "SELECT * FROM "
 						 + "(SELECT ROWNUM AS RNUM, A1.* FROM "
-					     + "(SELECT REVIEW_NUM, USER_ID, PROD_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CNT, REVIEW_STAR, REVIEW_BUY_OPT, REVIEW_REGDATE FROM REVIEW ORDER BY REVIEW_NUM DESC) A1) A2 "
-						 + "WHERE A2.RNUM >= ? and A2.RNUM <=?";
+					     + "(SELECT REVIEW_NUM, USER_ID, PROD_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CNT, REVIEW_STAR, REVIEW_BUY_OPT, REVIEW_REGDATE FROM REVIEW ORDER BY REVIEW_NUM ) A1) A2 "
+						 + "WHERE A2.RNUM >= ? AND A2.RNUM <=?";
 
 			//Statement stmt = conn.createStatement();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -82,7 +83,7 @@ public class review_DAO {
 
 				int review_num = rs.getInt("REVIEW_NUM"); // 글 번호
 				String user_id = rs.getString("USER_ID"); // 작성자 ID
-				String prod_no = rs.getString("PROD_NO"); // 상품명
+				String prod_no = rs.getString("PROD_NO"); // 상품번호
 				String review_title = rs.getString("REVIEW_TITLE"); // 리뷰 제목
 				String review_content = rs.getString("REVIEW_CONTENT"); // 리뷰 내용
 				int review_cnt = rs.getInt("REVIEW_CNT"); // 조회수
@@ -122,7 +123,7 @@ public class review_DAO {
 	// 총 레코드수(게시글 수)를 구함.
 	public static int review_getPageCount() throws Exception {
 
-		Connection conn = JDBCTemplate.getConnection();
+		Connection conn = JDBCTemplate.getConnection();		
 
 		// 쿼리문
 		String sql = "SELECT COUNT(*) FROM " + "REVIEW";
@@ -149,7 +150,7 @@ public class review_DAO {
 		Review review = new Review();
 
 		// DB 연결
-		Connection conn = JDBCTemplate.getConnection();
+		Connection conn = JDBCTemplate.getConnection();		
 
 		// SQL
 		String sql = "SELECT * FROM REVIEW WHERE REVIEW_NUM=" + num;
@@ -192,7 +193,7 @@ public class review_DAO {
 	
 	public static void review_delete(int num) throws Exception{
 		
-		Connection conn = JDBCTemplate.getConnection();
+		Connection conn = JDBCTemplate.getConnection();		
 
 		// SQL
 		String sql = "DELETE FROM REVIEW WHERE REVIEW_NUM=" + num;

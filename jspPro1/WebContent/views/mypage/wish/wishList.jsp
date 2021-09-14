@@ -1,24 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="java.util.ArrayList, com.kh.wish.model.vo.*"%>
+ 
+  
+<%
+	ArrayList<Wish> w_list = (ArrayList<Wish>) request.getAttribute("w_list");
+
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>위시리스트</title>
+
+<%-- jQuery CDN --%>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+
+<%-- BootStrap CDN --%>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
- <!-- Latest compiled and minified CSS -->
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-       <!-- jQuery library -->
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-       <!-- Popper JS -->
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-       <!-- Latest compiled JavaScript -->
-       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
-    aside{
-        background: rgb(239, 240, 227);
-    }
+
     
     .mainSection{
     	padding-top: 90px;
@@ -35,67 +51,88 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-	<div class="container-fluid">
 
-		<div class="row mainSection">
-			<aside class="col-sm-2">
-				<ul>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/myPageMain.jsp">내 정보</a></li>
-					<li><a href="#">주문내역 조회</a></li>
-					<li><a href="#">위시 리스트</a></li>
-					<li><a href="#">리뷰 관리</a></li>
-					<li><a href="<%=request.getContextPath()%>/views/mypage/question/questionListView.jsp">1:1 문의</a></li>
-					<li><a href="#">참여 캠페인</a></li>
-				</ul>
-			</aside>
 
-			<section class="col-sm-10">
-				<h4>찜한 상품</h4>
-				<hr>
+		<%@ include file="/views/common/mypageAside.jsp" %>
 
-	    <table class="gume">
-	        <tr>
-	            <th>
-	                사진
-	            </th>
-	
-	            <th>
-	                상품명
-	            </th>
-	
-	            <th>
-	                가격
-	            </th>
-	
-	      
-	
-	        </tr>
-	        <tr>
-	
-	            <td>
-	                <input type="text" name="name" value="">
-	            </td>
-	
-	            <td>
-	                <input type="text" name="name" value="">
-	            </td>
-	            <td>
-	                <input type="text" name="name" value="">
-	            </td>
 
-	        </tr>
-	    </table>
-				<hr>
-				
-				
-				<button name="WishDelete" onclick="location.href='<%=request.getContextPath() %>/wishDelete.me'">삭제</button>
-				
-			</section>
-			
+	<div class="container">
+		<div class="jumbotron">
+			<h2>위시 리스트 </h2>
 		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Title</th>
+					<th>ID</th>
+					<th>상품번호</th>
+					<th>구매여부</th>
+					<th>별점</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				
+				<c:forEach var="Review" items="${requestScope.list}">
+				
+				<tr class="info">
+					<td>${Review.review_num}</td>
+					<td>${Review.user_id}</td>
+					<td><a data-toggle="modal" data-target="#myModal2" onclick="review_read(${Review.review_num})">${Review.review_title}</a></td>
+					<td>${Review.prod_no}</td>
+					
+					<%-- 구매여부 1 : 구매O  0 : 구매X --%>
+					<c:choose>
+						
+						<%-- if(a == 1){ --%>
+						<c:when test="${Review.review_buy_opt == 1}">
+							<td>O</td>
+						</c:when>
+						<%-- } else if(a == 0){ --%>
+						<c:when test="${Review.review_buy_opt == 0}">
+							<td>X</td>
+						</c:when>
+						
+					</c:choose>
+					
+					<%-- 별점 --%>
+					<c:choose>
+						
+						<%-- if(a == 1){ --%>
+						<c:when test="${Review.review_star == 1}">
+							<td>★☆☆☆☆</td>
+						</c:when>
+						<%-- if(a == 2){ --%>
+						<c:when test="${Review.review_star == 2}">
+							<td>★★☆☆☆</td>
+						</c:when>
+						<%-- if(a == 3){ --%>
+						<c:when test="${Review.review_star == 3}">
+							<td>★★★☆☆</td>
+						</c:when>
+						<%-- if(a == 4){ --%>
+						<c:when test="${Review.review_star == 4}">
+							<td>★★★★☆</td>
+						</c:when>
+						<%-- if(a == 5){ --%>
+						<c:when test="${Review.review_star == 5}">
+							<td>★★★★★</td>
+						</c:when>
+						
+						
+					</c:choose>
+					
+					<td>${Review.review_regdate}</td>
+				</tr>
+				
+				</c:forEach>
+			
+			</tbody>
+		</table>
 	</div>
-
-
 
 </body>
 </html>

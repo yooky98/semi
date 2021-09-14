@@ -41,7 +41,7 @@ public class review_read extends HttpServlet {
 	
 		
 		//파라미터 한글처리
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		//파라미터값 추출
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
@@ -55,7 +55,7 @@ public class review_read extends HttpServlet {
 			// System.out.println(bean.getReview_num());
 			
 			// 어떤 형태로 데이터를 받는지 정의해줘야함.
-			response.setContentType("text/plain; charset=utf-8");
+			response.setContentType("text/plain; charset=UTF-8");
 			
 			// 응답 결과를 출력할 스트림 생성
 			PrintWriter pw = response.getWriter();

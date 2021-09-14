@@ -1,13 +1,15 @@
 
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.kh.common.JDBCTemplate.*"%>
+<%@ page import="com.kh.review.*"%>
 
 
 <% 
 	//파라미터 한글처리
-	request.setCharacterEncoding("utf-8"); 
+	request.setCharacterEncoding("UTF-8"); 
 
 
 		 
@@ -31,6 +33,7 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
+
 <%-- BootStrap CDN --%>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -42,6 +45,8 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" >
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
 <%-- JavaScript review_read 이벤트 처리 --%>
 <script type="text/javascript">
@@ -119,9 +124,11 @@
 	<%-- review 리스트 서블릿 호출 --%>
 	<c:url var="review_list" value="review_list.credu"></c:url>
 	<%-- review 작성 서블릿 호출 --%>
-	<c:url var="review_write" value="review_write.credu"></c:url>
+	<c:url var="review_write" value="/review_write"></c:url>
 	<%-- review 삭제 서블릿 호출 --%>
 	<c:url var="review_delete" value="review_delete.credu"></c:url>
+	<%@ include file="/views/common/menubar.jsp" %>
+	<%@ include file="/views/common/mypageAside.jsp" %>
 	
 	
 	
@@ -155,7 +162,7 @@
 					<td>${Review.review_num}</td>
 					<td>${Review.user_id}</td>
 					<td><a data-toggle="modal" data-target="#myModal2" onclick="review_read(${Review.review_num})">${Review.review_title}</a></td>
-					<td>${Review.prod_num}</td>
+					<td>${Review.prod_no}</td>
 					
 					<%-- 구매여부 1 : 구매O  0 : 구매X --%>
 					<c:choose>
@@ -268,8 +275,8 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="prod_num"
-									name="prod_num" placeholder="상품번호">
+								<input type="text" class="form-control" id="prod_no"
+									name="prod_no" placeholder="상품번호">
 							</div>
 						</div>
 						<div class="form-group">
@@ -351,6 +358,7 @@
 		
 	</div>
 
+<%@ include file="/views/common/footer.jsp"%>	
 
 </body>
 </html>
