@@ -20,10 +20,10 @@
 	<script src="<%=request.getContextPath() %>/resources/js/user.js"></script>
 </head>
 <body class = "tbody">
-<% String findPw=(String)request.getAttribute("findPw");
+<% 
  String user_id = (String)request.getAttribute("user_id");%>
 	<div class = "userbox" style="margin:auto;text-align:center;padding-top:30px;">
-	<form method ="post" action ="<%=request.getContextPath() %>/user?command=findPwUpdate">	
+	<form method ="post" action ="<%=request.getContextPath() %>/user?command=userPwUpdateAction">	
  <b>새로운 비밀번호를 입력해주세요</b>
  <br><br>
 <input type= "hidden" name= "user_id" value ="<%=user_id%>"> 

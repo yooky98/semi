@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.kh.member.model.vo.UserVO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,24 +20,21 @@
  
 </head>
 <body class = tbody>
-<%@ include file="../common/menubar.jsp"%>
-	<div class = "userbox">
-	<span class="usertitle">정보 보호를 위해 비밀번호를 입력해 주세요</span>
-	<form method="post" action="<%=request.getContextPath() %>/user?command=pwCheck">
+<%	UserVO loginUser = (UserVO)session.getAttribute("loginUser"); %>
+	<div class = "userbox" style="margin:auto;text-align:center;padding-top:50px;" >
+	<b>정보 보호를 위해 비밀번호를 입력해주세요 </b>
+	<form method="post" action="<%=request.getContextPath() %>/user?command=userPwUpdate">
 	
 	<table class = "usertable">
 	<tr><td><input class="userform" type = "text" maxlength="20" placeholder="아이디" value ="<%=loginUser.getUser_id() %>" disabled >
 	<input type="hidden" name="user_id" value ="<%=loginUser.getUser_id() %>">
-	<tr><td><input type = "password" class = "userform" name = "user_pw" placeholder="비밀번호"></td> </tr>
-					
-		</table>
-		
+	<tr><td><input type = "password" class = "userform" name = "user_pw" placeholder="비밀번호"></td> </tr>					
+		</table>		
 		<input type = "submit" value = "확인" class = "userbtn">
 	</form>
-		<br>
-		<input type="button" class="userbtn"
-	 onclick="window.open('<%=contextPath%>/views/member/userPwUpdate.jsp', name,'width = 500, height = 300, top = 300, left = 700, location = no')" value="비밀번호변경"><br><br>
-
+		
+	
+	<br>
 	
 	</div>
 </body>

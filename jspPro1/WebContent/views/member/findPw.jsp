@@ -18,7 +18,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
  
-</head>
+</head>	
 <body class = "tbody">
 	<div class = "userbox" style="margin:auto;text-align:center;padding-top:30px;">
 	<form method="post" action="<%=request.getContextPath() %>/user?command=findPw"> 

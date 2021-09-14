@@ -50,6 +50,10 @@ public class UserServlet extends HttpServlet {
 			findPwUpdate(request, response);
 		} else if (request.getParameter("command").equals("idCheck")) {
 			idCheck(request, response);
+		} else if (request.getParameter("command").equals("userPwUpdate")) {
+			userPwUpdate(request, response);
+		} else if (request.getParameter("command").equals("userPwUpdateAction")) {
+			userPwUpdateAction(request, response);
 
 		}
 	}
@@ -95,7 +99,6 @@ public class UserServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("userPost") + "&" + request.getParameter("userAddress") + "&"
 				+ request.getParameter("userAddress1");
-
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 
@@ -298,6 +301,24 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 
+	protected void userPwUpdate(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String user_id = request.getParameter("user_id");
+		String user_pw = request.getParameter("user_pw");
+		String PwCheck = us.PwCheck(user_id);
+		if (!PwCheck.equals(user_pw)) {
+			request.setAttribute("msg", "비밀번호가 일치하지 않입니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/member/error.jsp");
+			view.forward(request, response);
+		} else {
+			request.setAttribute("user_id", user_id);
+			RequestDispatcher view = request.getRequestDispatcher("views/member/userPwUpdateAction.jsp");
+			view.forward(request, response);
+
+		}
+	}
+
 	protected void findPwUpdate(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -309,6 +330,34 @@ public class UserServlet extends HttpServlet {
 		if (user_pw.equals(user_pwCheck)) {
 			int result = us.findPwUpdate(user_pw, user_id);
 			if (result == 1) {
+				out.println("<script>alert('비밀번호가 정상적으로  수정되었습니다!');window.close();</script>");
+				out.flush();
+				out.close();
+			} else {
+				out.println("<script> alert('오류발생 ');history.back();</script>");
+				out.flush();
+				out.close();
+			}
+		} else {
+			out.println("<script> alert('비밀번호가 일치하지 않습니다 ');history.back();</script>");
+			out.flush();
+			out.close();
+		}
+
+	}
+
+	protected void userPwUpdateAction(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String user_pw = request.getParameter("user_pw");
+		String user_pwCheck = request.getParameter("user_pwCheck");
+		String user_id = request.getParameter("user_id");
+		System.out.println(user_pw + user_pwCheck + user_id +  "333");
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if (user_pw.equals(user_pwCheck)) {
+			int result = us.findPwUpdate(user_pw, user_id);
+			if (result == 1) {				
 				out.println("<script>alert('비밀번호가 정상적으로  수정되었습니다!');window.close();</script>");
 				out.flush();
 				out.close();

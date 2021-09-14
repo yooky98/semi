@@ -155,7 +155,7 @@ public class UserDao {
 			pstmt.setString(2, vo.getPhone());
 			pstmt.setString(3, vo.getEmail());
 			pstmt.setString(4, vo.getUser_id());
-			result = pstmt.executeUpdate(); //실패 = 0  성공 = 1
+			result = pstmt.executeUpdate(); 
 
 			
 			
@@ -240,18 +240,18 @@ public class UserDao {
 		return result;   
 	}
 	public String pwCheck(Connection conn, String user_id) {
-		String result = "";                          // result 초기화
-		String sql = prop.getProperty("loginCheck"); //4쿼리문 작성
+		String result = "";         
+		String sql = prop.getProperty("loginCheck"); 
 		try {
 			pstmt = conn.prepareStatement(sql);  
 			
-			pstmt.setString(1, user_id);     // 5입력한 id가 쿼리문에 들어가서 작동한다 
+			pstmt.setString(1, user_id);    
 		
 						
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {    //6. DB에 ID가 존재할 경우 실행된다
-				result = rs.getString(1);  //7 DB에 입력한 아이디가 존재하면 비밀번호를 result에 담긴다
+			if(rs.next()) { 
+				result = rs.getString(1); 
 			}
 			
 			
