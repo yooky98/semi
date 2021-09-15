@@ -541,6 +541,23 @@ input[type="button"]:hover {
 	background: rgb(98, 104, 47);
 }
 
+html{
+	overflow-y: scroll;
+}
+html::-webkit-scrollbar{/*스크롤바의 너비*/
+    width: 18px;
+}
+html::-webkit-scrollbar-thumb {/*스크롤바의 색상*/
+    background-color: rgb(163, 163, 158);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 10px;
+}
+html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
+    background-color: rgb(239, 240, 227);    
+}
+
+
 /* 반응형 */
 @media screen and (max-width: 1680px) {
 	body, input, select, textarea {
