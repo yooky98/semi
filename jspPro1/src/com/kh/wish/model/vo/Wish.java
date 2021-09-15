@@ -4,6 +4,9 @@ public class Wish {
 	private int wishNo;
 	private String userID;
 	private int prodNo;
+	private int prodPrice;
+	private String prodName;
+	private String changeName;
 	
 	public Wish() {
 		// TODO Auto-generated constructor stub
@@ -14,6 +17,41 @@ public class Wish {
 		this.wishNo = wishNo;
 		this.userID = userID;
 		this.prodNo = prodNo;
+	}
+
+
+
+	public Wish(int wishNo, int prodNo,  String prodName, int prodPrice ,String changeName ) {
+		super();
+		this.wishNo = wishNo;
+		this.prodNo = prodNo;
+		this.prodPrice = prodPrice;
+		this.prodName = prodName;
+		this.changeName = changeName;
+	}
+
+	public int getProdPrice() {
+		return prodPrice;
+	}
+
+	public void setProdPrice(int prodPrice) {
+		this.prodPrice = prodPrice;
+	}
+
+	public String getProdName() {
+		return prodName;
+	}
+
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
 	}
 
 	public int getWishNo() {

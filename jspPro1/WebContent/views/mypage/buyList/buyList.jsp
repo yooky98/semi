@@ -6,7 +6,7 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
-	Product p = (Product) request.getAttribute("p");
+
 	ArrayList<Orders_detail> od_list = (ArrayList<Orders_detail>) request.getAttribute("od_list");
 	Orders_detail od = (Orders_detail) request.getAttribute("od");
 
@@ -84,7 +84,7 @@
 
 				<td colspan="4">
 
-					총 결제 금액 : <%=Integer.parseInt(od.getOrdersAmount()) * p.getProdPrice() %>
+					총 결제 금액 : <%=Integer.parseInt(od.getOrdersAmount()) * od.getProdPrice() %>
 
 				</td>
 

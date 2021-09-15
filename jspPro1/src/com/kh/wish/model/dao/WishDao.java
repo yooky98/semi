@@ -84,4 +84,39 @@ public class WishDao {
 		return w_list;
 	}
 
+	public ArrayList<Wish> selectWList2(Connection conn, String userId) {
+		ArrayList<Wish> w_list = new ArrayList<Wish>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+//		selectWList2=SELECT A.WISH_NO, A.PROD_NO, B.PROD_NAME, B.PROD_PRICE, C.CHANGE_NAME FROM WISH A INNER JOIN PRODUCT B ON (A.PROD_NO = B.PROD_NO) INNER JOIN ATTACHMENT C ON (B.PROD_NO = C.REF_PNO) WHERE A.USER_ID = ?		
+		String sql = prop.getProperty("selectWList2");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			Wish w = null;
+
+			while(rset.next()) {
+				w = new Wish();
+				w.setWishNo(rset.getInt("WISH_NO"));
+				w.setProdNo(rset.getInt("PROD_NO"));
+				w.setProdName(rset.getString("PROD_NAME"));
+				w.setProdPrice(rset.getInt("PROD_PRICE"));
+				w.setChangeName(rset.getString("CHANGE_NAME"));
+
+				w_list.add(w);
+				System.out.println(w);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return w_list;
+	}
+
 }

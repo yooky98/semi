@@ -135,7 +135,7 @@
 	  
 
 
-	<div class="container">
+	<div class="container-fluid">
 		<div class="jumbotron">
 			<h2>상품 Review</h2>
 			<p>* 별점 및 리뷰 작성 후 작성하기 버튼을 클릭해 주세요.</p>
@@ -145,8 +145,8 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Title</th>
 					<th>ID</th>
+					<th>TITLE</th>
 					<th>상품번호</th>
 					<th>구매여부</th>
 					<th>별점</th>

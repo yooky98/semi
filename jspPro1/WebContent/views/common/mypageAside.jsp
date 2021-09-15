@@ -48,7 +48,7 @@
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/views/mypage/myPageMain.jsp">마이 기프트리</a></li>
 			<li><a href="<%=request.getContextPath()%>/views/mypage/buyList/buyList.jsp">주문내역 조회</a></li>
-			<li><a href="<%=request.getContextPath()%>/views/mypage/wish/wishList.jsp">위시 리스트</a></li>
+			<li><a href="<%=request.getContextPath()%>/list.ws">위시 리스트</a></li>
 			<li><a href="<%=request.getContextPath()%>/review.credu">리뷰 관리</a></li>
 			<li><a href="<%=request.getContextPath()%>/list.que">1:1 문의</a></li>
 			<li><a href="<%=request.getContextPath()%>/mypage.cam">참여 캠페인</a></li>

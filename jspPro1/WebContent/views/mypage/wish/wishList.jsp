@@ -43,6 +43,11 @@
     	padding-right: 20px;
     	
     }
+    .prodImg{
+	width: 100px;
+	height: 80px;
+}
+    
     
 </style>
 
@@ -53,86 +58,61 @@
 
 
 
-		<%@ include file="/views/common/mypageAside.jsp" %>
 
 
-	<div class="container">
+	<div class="container-fluid">
+			<%@ include file="/views/common/mypageAside.jsp" %>
+	
 		<div class="jumbotron">
-			<h2>위시 리스트 </h2>
+			<h2>찜한 상품 </h2>
 		</div>
 
 		<table class="table">
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Title</th>
-					<th>ID</th>
+					<th>image</th>
 					<th>상품번호</th>
-					<th>구매여부</th>
-					<th>별점</th>
-					<th>작성일</th>
+					<th>상품명</th>
+					<th>가격</th>
+
 				</tr>
 			</thead>
 
 			<tbody>
-				
-				<c:forEach var="Review" items="${requestScope.list}">
-				
-				<tr class="info">
-					<td>${Review.review_num}</td>
-					<td>${Review.user_id}</td>
-					<td><a data-toggle="modal" data-target="#myModal2" onclick="review_read(${Review.review_num})">${Review.review_title}</a></td>
-					<td>${Review.prod_no}</td>
-					
-					<%-- 구매여부 1 : 구매O  0 : 구매X --%>
-					<c:choose>
-						
-						<%-- if(a == 1){ --%>
-						<c:when test="${Review.review_buy_opt == 1}">
-							<td>O</td>
-						</c:when>
-						<%-- } else if(a == 0){ --%>
-						<c:when test="${Review.review_buy_opt == 0}">
-							<td>X</td>
-						</c:when>
-						
-					</c:choose>
-					
-					<%-- 별점 --%>
-					<c:choose>
-						
-						<%-- if(a == 1){ --%>
-						<c:when test="${Review.review_star == 1}">
-							<td>★☆☆☆☆</td>
-						</c:when>
-						<%-- if(a == 2){ --%>
-						<c:when test="${Review.review_star == 2}">
-							<td>★★☆☆☆</td>
-						</c:when>
-						<%-- if(a == 3){ --%>
-						<c:when test="${Review.review_star == 3}">
-							<td>★★★☆☆</td>
-						</c:when>
-						<%-- if(a == 4){ --%>
-						<c:when test="${Review.review_star == 4}">
-							<td>★★★★☆</td>
-						</c:when>
-						<%-- if(a == 5){ --%>
-						<c:when test="${Review.review_star == 5}">
-							<td>★★★★★</td>
-						</c:when>
-						
-						
-					</c:choose>
-					
-					<td>${Review.review_regdate}</td>
-				</tr>
-				
-				</c:forEach>
 			
+			<%
+				if(w_list.isEmpty()){ 
+			%>
+			<tr>
+				<td colspan="5" align="center">찜한 상품이 존재하지 않습니다.</td>
+			</tr>
+			<%
+				} else {
+				for(Wish wish : w_list){
+			%>
+			<tr>
+			<td><input id="wishNo" type="hidden" value="<%=wish.getWishNo() %>"></td>
+			<td><img src="<%=request.getContextPath()%>/resources/images/<%=wish.getChangeName()%>" class="prodImg"></td>
+			<td><%=wish.getProdNo() %></td>
+			<td><%=wish.getProdName() %></td>
+			<td><%=wish.getProdPrice() %></td>
+			
+				<%} %>
+			<%} %>
 			</tbody>
+			</tr>
 		</table>
 	</div>
-
+	<script>
+	$(function(){
+	$(".prodImg").click(function(){
+		var pNo = $(this).children().eq(0).val();
+		console.log(pNo);
+		location.href= "<%=request.getContextPath() %>/detail.pr?pNo=" + pNo;
+		});
+	});
+	</script>
+	
 </body>
 </html>
