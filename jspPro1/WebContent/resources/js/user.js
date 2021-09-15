@@ -1,6 +1,6 @@
-$(document).ready(function() {
+ $(document).ready(function() {
 
-$('#user_id').keyup(function(){
+ $('#user_id').keyup(function(){
         var user_id = $('#user_id').val();
         $.ajax({
             url:"http://localhost:9090/Giftree/user?command=idCheck", 

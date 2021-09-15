@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 확인</title>
 <link href="<%=request.getContextPath() %>/resources/css/user.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
