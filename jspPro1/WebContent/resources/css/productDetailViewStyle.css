@@ -821,6 +821,23 @@ i, .thumbnail{
 	height: 100%;
 	/* background:url(https://img.icons8.com/material-rounded/24/000000/multiply--v1.png); */
 }
+
+#detailMain{
+	overflow-y: scroll;
+}
+#detailMain::-webkit-scrollbar{/*스크롤바의 너비*/
+    width: 18px;
+}
+#detailMain::-webkit-scrollbar-thumb {/*스크롤바의 색상*/
+    background-color: rgb(163, 163, 158);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 10px;
+}
+#detailMain::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
+    background-color: rgb(239, 240, 227);    
+}
+
 @media screen and (max-width: 2580px){
 	.reviews > .review_btn{
 		height: 37px;
