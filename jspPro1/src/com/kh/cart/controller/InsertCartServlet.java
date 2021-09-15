@@ -1,6 +1,7 @@
 package com.kh.cart.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,42 +53,68 @@ public class InsertCartServlet extends HttpServlet {
 			
 			Cart c = new Cart();
 
-			String userId = ((UserVO) request.getSession().getAttribute("loginUser")).getUser_id();
-			UserVO loginUser = (UserVO) session.getAttribute("loginUser");
-			  
+			UserVO loginUser = (UserVO) session.getAttribute("loginUser");		
+//			 System.out.println("loginUser =" + loginUser); null확인
+			
+			//로그인 안했을때
 			if(loginUser == null) {
-				request.setAttribute("msg", "Giftree회원이 아닙니다.");
+				request.getSession().setAttribute("msg", "로그인후 이용 가능합니다.");
 				RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
 				view.forward(request, response);
-			}//뭐여..
+			}
+			
+			//로그인 했을때
+			String userId = ((UserVO) request.getSession().getAttribute("loginUser")).getUser_id();
+			
+			//내가 담고싶은 상품의 번호
+			int ProdNo = (Integer.parseInt((mr.getParameter("prodNo"))));
+			System.out.println("ProdNo ==>" + ProdNo);
 			
 			c.setUserId(userId);
 			c.setProdNo(Integer.parseInt((mr.getParameter("prodNo"))));
 			c.setCartAmount(Integer.parseInt((mr.getParameter("count"))));
 			c.setForestName(mr.getParameter("forest"));
 			
+			
+			//내 db에 상품번호를 전부 가져오기
+			ArrayList<Cart> prodNoList = new CartService().selectPordNo(userId); //상품번호 가져옴
+			int a = 0;
+			for(int i =0; i < prodNoList.size() ; i++) {
+				
+				System.out.println("장바구니 안에 들어있는 상품들 ==" + prodNoList.get(i).getProdNo());
+				
+				if(prodNoList.get(i).getProdNo() == ProdNo) {
+					System.out.println("담을 상품 뭐니? ==" + ProdNo);
+					a =1;
+					
+					break;
+				}	
+			}
+			if(a == 1) {
 
-//			System.out.println("user_id = " + userId);
-//			System.out.println("prodNo =" + c.getProdNo());
-//			System.out.println("prodNo =" + c.getCartAmount());
-//			System.out.println("prodNo =" + c.getForestName());
-
+			request.getSession().setAttribute("msg", "장바구니에  상품이 존재합니다.");
+			RequestDispatcher view = request.getRequestDispatcher("/list.cart");
+			view.forward(request, response);
+			
+			}else {
+			System.out.println("insert시작");
+			//상품 insert
 			int result = new CartService().insertCart(c);
-
+			
 			if (result > 0) {
-				request.getSession().setAttribute("msg", "장바구니 담기 성공");
-				response.sendRedirect("list.pr");
-
-			} else {
-				request.setAttribute("msg", "장바구니 상품담기 실패");
-
-				RequestDispatcher view = request.getRequestDispatcher("views/member/errorPage.jsp");
+				request.getSession().setAttribute("msg", "장바구니에  담았습니다.");
+				
+				RequestDispatcher view = request.getRequestDispatcher("/list.pr");
+				view.forward(request, response);
+		
+			}else {
+				request.getSession().setAttribute("msg", "에러.");
+				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);
 
+				}
 			}
 		}
-
-		
 	}
 
 	/**

@@ -82,6 +82,41 @@ public class CartDao {
 
 	}
 
+	
+	public ArrayList<Cart> selectPordNo(Connection conn, String userId) {
+		ArrayList<Cart> prodNoList = new ArrayList<Cart>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectPordNo");
+		// selectPordNo= SELECT PROD_NO FROM CART WHERE USER_ID = ?
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			Cart cart = null;
+			while (rset.next()) {
+				
+				cart = new Cart();
+				cart.setProdNo(rset.getInt("PROD_NO"));
+				prodNoList.add(cart);
+				
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();		
+		}finally{
+			
+		}
+		//prodNo가져옴 확인
+		System.out.println("prodNoList --->>> " + prodNoList);
+		return prodNoList;
+	}
+	
 	public int insertCart(Connection conn, Cart c) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -90,12 +125,14 @@ public class CartDao {
 //		insertCart=INSERT INTO CART VALUES(CART_SEQ.NEXTVAL,?,?,?,?)
 
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(1, c.getUserId());
 			pstmt.setInt(2, c.getProdNo());
 			pstmt.setInt(3, c.getCartAmount());
 			pstmt.setString(4, c.getForestName());
-
+			
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -104,11 +141,11 @@ public class CartDao {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("result = " + result);
 		return result;
-
+		
 	}
 
+	
 	public int deleteCart(Connection conn, int cartNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -200,46 +237,6 @@ public class CartDao {
 	}
 
 
-//	public ArrayList<UserVO> selectUserOrder(Connection conn, String[] cartNo) {
-//		ArrayList<UserVO> userOrder = new ArrayList<UserVO>();
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-		
-////	UserVO user = new UserVO();
-//		String sql = prop.getProperty("selectUserOrder");
-////		selectUserOrder=SELECT A.USER_NAME , A.PHONE , A.ADDRESS , A.POINT 
-////		FROM USERS A JOIN CART B ON (A.USER_ID = B.USER_ID) 
-////		WHERE B.CART_NO = ?
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//
-//			for(int i = 0 ; i < cartNo.length ; i++) {
-//				pstmt.setInt(1, Integer.parseInt(cartNo[i]));
-//
-//				rset = pstmt.executeQuery();
-//				UserVO user = null;
-//			
-//			while (rset.next()) {
-//				user = new UserVO();
-//		
-//				user.setUser_name(rset.getString("USER_NAME"));
-//				user.setPhone(rset.getString("PHONE"));
-//				user.setAddress(rset.getString("ADDRESS"));
-//				user.setPoint(rset.getInt("POINT"));
-//				userOrder.add(user);
-//				
-//				}
-//			}
-//
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		System.out.println("userOrder 가져오니?= " + userOrder);
-//		return userOrder;
-//		
-//	}
+	
+
 }

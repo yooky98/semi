@@ -138,11 +138,13 @@ body {
 					<label class="mb-2 mr-sm-2">결제금액</label> <input type="text" id="finalPrice" value=0 readonly>
 				</div>
 				<div class="form-block-inner-div-btn">
-					<button type="button" class="btn btn-primary mb-2">쇼핑계속하기</button>
+					<button type="button" class="btn btn-primary mb-2" onclick="location.href='<%=contextPath %>/list.pr'">쇼핑계속하기</button>
 					<button type="submit" class="btn btn-primary mb-2" >주문하기</button>
 				</div>
 				</div>
-	</div>
+		</div>
+	<br><br>
+		<%@ include file="../common/footer.jsp" %>
 	</form>
 	
 	<script>
@@ -153,8 +155,10 @@ body {
 
 		         if($("#checkAll").prop("checked")) { 
 		            $("input[type=checkbox]").prop("checked",true);
+		            updateTotal()
 		         }else{ 
 		            $("input[type=checkbox]").prop("checked",false);
+		            updateTotal()
 		         }
 		      })
 		   });
@@ -167,7 +171,7 @@ body {
 		 //   console.log("prodPrice" + prodPrice)
 		 for (let i = 0; i < listSize; i++) {
 				if ($('.chk')[i].checked == true) {
-						 total += Number( $('.prodPrice')[i].value);	
+						total += Number( $('.prodPrice')[i].value);	
 		        }
 		    }
 		 $('#prodSum').val(total);
@@ -198,8 +202,16 @@ body {
 		       		 }
 	        }
 			 $('#prodSum').val(total);
-			 $('#finalPrice').val(total);
+			 //배송비 70000원이상 무료배송
+			 if( total > 70000){
+				 $('#deliverPrice').val(0);
+				 $('#finalPrice').val(total);
+			 }else{
+				 $('#deliverPrice').val(2500);
+				 $('#finalPrice').val(total+2500);
+			 }
 	    }
+	
 		 
 	//수량 증가
 	function upBtn(cartNo) {
@@ -222,7 +234,6 @@ body {
 						cartNo:cartNo
 					},
 					type : "post",
-					
 				})	
 				//수량이 변경되면 자동으로 상품가격 변경
 				$('.prodPrice')[i].value = $('.prodPrice')[i].value/prevAmount*amount[i].value; 
@@ -242,8 +253,15 @@ body {
 	 for (let i = 0; i < listSize; i++) {
 			if ($('.chk')[i].value == cartNo) {
 				var prevAmount= amount[i].value
-				amount[i].value--;
-
+				//최소수량이 0개이하로 내려가면 안된다
+				if(prevAmount > 1){
+					amount[i].value--;
+				}else{
+					alert('최소수량은 1개 이상입니다.')
+					amount[i].value = 1;
+				}
+				
+				
 				$.ajax({
 					url : "update.cart",
 					data : {
@@ -261,6 +279,9 @@ body {
     		 }
      	}
 	}
+
+
+
 
 	</script>
 </body>

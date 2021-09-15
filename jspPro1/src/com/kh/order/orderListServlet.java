@@ -50,9 +50,8 @@ public class orderListServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 
+	}
 
-	
-}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
