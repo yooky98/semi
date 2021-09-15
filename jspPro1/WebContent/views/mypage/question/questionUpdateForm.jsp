@@ -83,6 +83,7 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
+
 	<section class="updateSection">
 
 		<div class="row container-fluid">

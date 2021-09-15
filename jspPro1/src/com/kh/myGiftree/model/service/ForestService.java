@@ -31,8 +31,35 @@ public class ForestService {
 		close(conn);
 		return count;
 	}
-	
-	
-	
+
+	public ArrayList<Forest> selectForestList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Forest> forestList = new ForestDao().selectForestList(conn);
+		
+		close(conn);
+		return forestList;
+	}
+
+	public int forestCount() {
+		
+		Connection conn = getConnection();
+		
+		int count = new ForestDao().forestCount(conn);
+		
+		close(conn);
+		return count;
+	}
+
+	public int totalTreeCount() {
+
+		Connection conn = getConnection();
+		
+		int count = new ForestDao().totalTreeCount(conn);
+		
+		close(conn);
+		return count;
+	}
 
 }

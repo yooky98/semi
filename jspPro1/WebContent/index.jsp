@@ -14,14 +14,45 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+<!-- counter -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/counterup.min.js"></script> 
     
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
-<!-- counter -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
-<script src="<%=request.getContextPath() %>/resources/js/counterup.min.js"></script>
+</head>
+<body>
+	<%@ include file="views/common/menubar.jsp"%>
+	<%@ include file="/views/admin/adminNotice/noticeView.jsp"%>
+	
 
+	<section id="hero" class="d-flex align-items-center">
+	
+		<div class="container d-flex flex-column align-items-center" data-aos="zoom-in" data-aos-delay="100">
+			<h1>Giftree</h1>
+			<h2>나에게 주는, 지구에게 주는 선물</h2>
+			<p>기프트리는 여러분이 입양한 나무 수 만큼 숲에 나무를 심습니다.</p>
+			
+			<div class="row counters countMain">
+
+				<div class="card countContent col-6 text-center">
+					<p>조성한 숲</p><span class="counter" data-toggle="counter-up">20</span>
+				</div>
+
+				<div class="card countContent col-6 text-center ">
+					<p>심은 나무 수</p><span class="counter" data-toggle="counter-up">1251</span>
+					
+				</div>
+
+			</div>
+			
+			<a href="<%=contextPath%>/list.pr" class="btn-about">반려나무 입양하러 가기</a>
+		</div>
+	</section>
+	
+
+	<%@ include file="views/common/footer.jsp"%>
+	
 <script>
 $(function(){
 	  
@@ -30,48 +61,10 @@ $(function(){
         time: 1000
       });
     
+    
 })
 
 </script>
-
-</head>
-<body>
-	<%@ include file="views/common/menubar.jsp"%>
-
-	<section id="hero" class="d-flex align-items-center">
-		<div class="container d-flex flex-column align-items-center"
-			data-aos="zoom-in" data-aos-delay="100">
-			<h1>Giftree</h1>
-			<h2>나에게 주는, 지구에게 주는 선물</h2>
-			<a href="<%=contextPath%>/list.pr" class="btn-about">반려나무 입양하러 가기</a>
-		</div>
-	</section>
-
-	<section id="facts" class="facts">
-		<div class="container" data-aos="fade-up">
-
-			<div class="section-title">
-				<h2>기프트리 임팩트</h2>
-				<p>기프트리는 여러분이 입양한 나무 수 만큼 숲에 나무를 심습니다.</p>
-			</div>
-
-			<div class="row counters">
-
-				<div class="col-6 text-center">
-					<span class="counter" data-toggle="counter-up">20</span>
-					<p>조성한 숲</p>
-				</div>
-
-				<div class="col-6 text-center ">
-					<span class="counter" data-toggle="counter-up">1251</span>
-					<p>심은 나무 수</p>
-				</div>
-
-			</div>
-
-		</div>
-	</section>
-
-	<%@ include file="views/common/footer.jsp"%>
+	
 </body>
 </html>
