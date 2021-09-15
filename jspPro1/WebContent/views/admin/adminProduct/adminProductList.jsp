@@ -10,23 +10,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
-<title>ADMIN PRODUCT LIST</title>
+<title>제품 관리</title>
 <style>
 /* section 전체 영역 div*/
-#productList {
+#productListArea {
 	text-align: center;
 	padding: 0 0 50px 0;
 }
 /* 등록하기 버튼 위치 조정 */
-#productList h6{
+#productListArea h6{
 	text-align: right;
 	padding-right: 20px;
 }
 /* 등록하기 버튼 */
-#productList #enrollBtn{
+#productListArea #enrollBtn{
 	/*border: 5px double;*/
 	border-radius: 20px;
-	width: 130px;	
+	width: 130px;
 }
 /* section에 들어가는 테이블 */
 #productListTable {
@@ -55,7 +55,7 @@
 /* 테이블에 나타나는 상품명 */
 #productListTable .prodName{
 	text-decoration: none;
-	cursor: pointer;	
+	cursor: pointer;
 	font-weight: bold;
 	color: rgb(62, 165, 62);
 }
@@ -63,29 +63,27 @@
 #productListTable .prodName:hover{
 	cursor: pointer;
 	font-weight: bolder;
-	color: red;	
+	color: red;
 }
 @media screen and (max-width:992px){
 	#productListTable .modifyBtns, #productListTable .deleteBtns{
 		width: 5.000em;
 	}
 }
-
 </style>
 </head>
 <body id="bodyAt">
 	<div class="wrapper">
 		<%@ include file="/views/common/menubar.jsp"%>
-	
 		<div class="container-fluid" id="middleSection">
 			<div class="row">
-				<%-- 고정 리스트 --%>
+				<%-- 관리자 페이지 메뉴바 --%>
 				<%@ include file="/views/admin/adminCommon/adminAside.jsp" %>
-	
-				<%-- 작업 영역 --%>
+				<%-- 관리자 페이지 작업 영역 --%>
 				<section class="col-xl-10 col-lg-10" id="adminSection">
-					<div id="productList">					
+					<div id="productListArea">
 						<h1>제품 관리</h1>
+						<br>
 						<h6>
 							<button class="btn btn-primary" id="enrollBtn" onclick="location.href='<%=request.getContextPath()%>/enrollProductForm.ad'">등록하기</button>
 						</h6>
@@ -103,34 +101,27 @@
 							</thead>
 							<tbody>
 								<%
-									if (list.isEmpty()) {
+								if (list.isEmpty()) {
 								%>
-								<tr>
-									<td colspan="6">상품이 존재하지 않습니다.</td>
-								</tr>
+									<tr><td colspan="6">상품이 존재하지 않습니다.</td></tr>
 								<%
-									} else {
-										
+								} else {
+									for (int i = 0; i < list.size(); i++) {
 								%>
-									<%
-										for (int i = 0; i < list.size(); i++) {
-										
-										
-									%>
 									<tr>
 										<td id="prodNo<%=i+1%>"><%=list.get(i).getProdNo()%></td>
 										<td><%=list.get(i).getProdCategory()%></td>
-										<td><a class="prodName"><%=list.get(i).getProdName()%>
-											<input type="hidden" value="<%=list.get(i).getProdNo()%>">
-										</a></td>
+										<td>
+											<a class="prodName"><%=list.get(i).getProdName()%><input type="hidden" value="<%=list.get(i).getProdNo()%>"></a>
+										</td>
 										<td><%=list.get(i).getProdPrice()%></td>
 										<td><%=list.get(i).getProdAmount()%></td>
-										<td>										
-											<button class="modifyBtns btn btn-outline-info" id="modiProdBtn<%=i+1%>" type="button" onclick="updateProd<%=i+1%>();">수 정</button>
-											<button class="deleteBtns btn btn-outline-danger" type="button" data-toggle="modal" data-target="#delProdModal<%=i+1%>">삭 제</button>										
+										<td>
+											<button class="modifyBtns btn btn-outline-info" id="modiProdBtn<%=i+1%>" type="button" onclick="updateProd<%=i+1%>();" >수 정</button>
+											<button class="deleteBtns btn btn-outline-danger" type="button" data-toggle="modal" data-target="#delProdModal<%=i+1%>" >삭 제</button>
 											<form action="" id="postForm<%=i+1%>" method="post">
 												<input id="prodNoInput<%=i+1%>" type="hidden" name="prodNo">
-											</form>										
+											</form>
 											
 											<div class="modal fade" id="delProdModal<%=i+1 %>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
 											  <div class="modal-dialog">
@@ -150,30 +141,24 @@
 											      </div>
 											    </div>
 											  </div>
-											</div>										
+											</div>
 																					
 											<script>
 												var prodNo = Number($("#prodNo<%=i+1%>").html());
-												$("#prodNoInput<%=i+1 %>").val(prodNo);
-					                            
+												$("#prodNoInput<%=i+1 %>").val(prodNo);					                            
 												<%-- 
 					                            console.log($("#prodNo<%=i+1%>").html())
-					                            console.log(prodNo)
-					                            
+					                            console.log(prodNo)					                            
 					                            console.log($("#prodNoInput<%=i+1 %>").val())
 												--%>
 												$(function(){
 													$(".prodName").click(function(){
-														var pNo = $(this).children().val();
-														console.log(pNo);														
+														var pNo = $(this).children().val();														
 														location.href = "<%=request.getContextPath() %>/detail.pr?pNo=" + pNo;
 													});
 												});
 												
-												
-												
-												function updateProd<%=i+1%>(){
-					                            	
+												function updateProd<%=i+1%>(){					                            	
 													$("#postForm<%=i+1 %>").attr("action", "<%=request.getContextPath()%>/updateProdForm.ad");
 													$("#postForm<%=i+1 %>").submit();
 												}
@@ -182,25 +167,16 @@
 													$("#postForm<%=i+1 %>").attr("action", "<%=request.getContextPath()%>/deleteProd.ad");
 													$("#postForm<%=i+1 %>").submit();
 												}
-											</script>
-													
-										</td>
-										
+											</script>													
+										</td>										
 									</tr>
-									<%
-										
-										}
-									%>
-									
-								<%
-								
+								<%										
 									}
+								}
 								%>
-								
 							</tbody>
 						</table>
-					</div>
-	
+					</div>	
 				</section>
 			</div>
 		</div>

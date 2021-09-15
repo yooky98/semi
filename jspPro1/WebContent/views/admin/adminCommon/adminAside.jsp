@@ -16,23 +16,20 @@
 <title>admin aside</title>
 </head>
 <body id="bodyAt">
-	
-                       
-	<aside class="col-xl-2 col-lg-2" id="adminAside">	
+	<aside class="col-xl-2 col-lg-2" id="adminAside">
 		<nav class="navbar navbar-expand-lg p-0">
 			<br>
 			<div class="collapse navbar-collapse" id="adminToggleBar">
 				<ul class="list-group">
 					<li class="list-group-item"><a href="<%=request.getContextPath()%>/prodList.ad">제품 관리</a></li>
 					<li class="list-group-item"><a href="<%=request.getContextPath()%>/orderList.ad">주문내역 관리</a></li>
-					<li class="list-group-item"><a href="<%=request.getContextPath()%>/answerList.ad">1:1 문의 답변</a></li>						
-				</ul>				
+					<li class="list-group-item"><a href="<%=request.getContextPath()%>/answerList.ad">1:1 문의 답변</a></li>
+				</ul>
 			</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#adminToggleBar">
                 <h4><i class="fa fa-sort-desc" aria-hidden="true"></i></h4>
-            </button>
-                      
-		</nav>              		
+            </button>                      
+		</nav>
 	</aside>
 </body>
 </html>
