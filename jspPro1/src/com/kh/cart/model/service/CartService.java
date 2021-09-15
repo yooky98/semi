@@ -20,6 +20,7 @@ public class CartService {
 
 		return list;
 	}
+	
 
 	// 장바구니 추가
 	public int insertCart(Cart c) {
@@ -76,15 +77,17 @@ public class CartService {
 		return cartOrder;
 	}
 
-//	//장바구니 담은 유저 데이터
-//	public ArrayList<UserVO> selectUserOrder(String[] cartNo) {
-//		Connection conn = getConnection( );
-//		
-//		ArrayList<UserVO> userOrder = new CartDao().selectUserOrder(conn, cartNo);
-//		close(conn);
-//		
-//		return userOrder;
-//	}
+
+
+	public ArrayList<Cart> selectPordNo(String userId) {
+		Connection conn = getConnection( );
+		
+		ArrayList<Cart> prodNoList = new CartDao().selectPordNo(conn, userId);
+		
+		close(conn);
+		return prodNoList;
+	}
+
 
 
 }

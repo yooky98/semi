@@ -48,7 +48,7 @@ public class CartListServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("views/cart/cartListView.jsp");
 			view.forward(request, response);
 		}else {
-			request.setAttribute("msg", "아이디에 해당하는 장바구니 제품이 없습니다.");
+			request.getSession().setAttribute("msg", "아이디에 해당하는 장바구니 제품이 없습니다.");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 			

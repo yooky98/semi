@@ -58,11 +58,10 @@ public class Cart {
 
 
 
-	public Cart(int cartNo) {
+	public Cart(int prodNo) {
 		super();
-		this.cartNo = cartNo;
+		this.prodNo = prodNo;
 	}
-
 
 
 	public String getChangName() {
