@@ -1,0 +1,56 @@
+@charset "UTF-8";
+/* 공지 창 전체 div*/
+  #noticePopup{
+    position: fixed;
+    z-index: 1000;
+    top: 6rem;
+    left: 6rem;
+
+    width: 500px;
+    height: 583px;    
+        
+    box-shadow: 0 7px 7px 0 black;
+    border: 1px solid grey;
+
+    font-size:10px;
+    
+  }
+  /* 우측 상단 닫기(x) 아이콘 버튼*/
+  #xBtn{
+    position: absolute;
+    z-index: 1001;
+    top: 0;
+    right: 0;
+    padding: 0;
+    border: 0;
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: x-large;
+    background-color: white;
+  }
+  /* 닫기(x) 아이콘 */
+  #xBtn>i{
+    vertical-align: text-top;
+  }
+
+  /* 공지 이미지와 닫기 버튼을 담고있는 div */
+  #noticeContent{
+    width: 100%;
+    height: 560px;
+  }
+  /* 오늘 하루 그만 보기 label이 들어가는 부분 */
+  .noticeFooter{
+    width: 100%;
+    height: 23px;    
+    text-align: right;
+    background-color: white;
+  }
+  .noticeFooter>label{
+  	cursor: pointer;
+  }
+  /* 공지 이미지가 들어가는 부분 */
+  #noticePanel{    
+    background-image: url("../images/noticeImg.png");    
+    width: 100%;
+    height: 100%;    
+  }
