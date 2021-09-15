@@ -33,6 +33,13 @@ public class Validation {
 			msg = "비밀번호가 일치하지 않습니다";
 			return msg;
 		}
+		
+		String userPwCheck = "(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+		regCheck = Pattern.matches(userPwCheck, vo.getUser_pw());
+		if(regCheck == false) {
+			msg = "비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다";
+			return msg;
+		}
 		String user_noCheck = "(\\d{6}[ ,-]-?[1-4]\\d{6})|(\\d{6}[ ,-]?[1-4])";
 		regCheck = Pattern.matches(user_noCheck, vo.getUser_no());
 		if (regCheck == false) {

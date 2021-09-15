@@ -35,6 +35,7 @@ public class UserVO {
 	public UserVO(String user_id) {
 		this.user_id = user_id;
 	}
+
 	public UserVO(String user_id, String user_pw,
 			String address, String phone, String email) {
 		

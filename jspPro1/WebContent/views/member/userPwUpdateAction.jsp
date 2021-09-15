@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width-device-width,initial-scale=1">
-<title>Insert title here</title>
+<title>비밀번호 변경</title>
 <link href="<%=request.getContextPath() %>/resources/css/user.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 

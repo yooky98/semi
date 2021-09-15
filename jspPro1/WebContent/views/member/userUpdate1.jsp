@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>정보 수정</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 

@@ -2,6 +2,7 @@ package com.kh.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserService us;
 	Validation vd;
-
+	boolean regCheck = false;
 	public UserServlet() {
 		super();
 		us = new UserService();
@@ -327,6 +328,13 @@ public class UserServlet extends HttpServlet {
 		String user_id = request.getParameter("user_id");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		String userPwCheck = "(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+		regCheck = Pattern.matches(userPwCheck, user_pw);
+		if(regCheck == false) {
+			out.println("<script>alert('비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다');history.back();</script>");
+			out.flush();
+			out.close();
+		}
 		if (user_pw.equals(user_pwCheck)) {
 			int result = us.findPwUpdate(user_pw, user_id);
 			if (result == 1) {
@@ -354,7 +362,15 @@ public class UserServlet extends HttpServlet {
 		String user_id = request.getParameter("user_id");
 		System.out.println(user_pw + user_pwCheck + user_id +  "333");
 		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter();		
+		
+		String userPwCheck = "(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+		regCheck = Pattern.matches(userPwCheck, user_pw);
+		if(regCheck == false) {
+			out.println("<script>alert('비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다');history.back();</script>");
+			out.flush();
+			out.close();
+		}
 		if (user_pw.equals(user_pwCheck)) {
 			int result = us.findPwUpdate(user_pw, user_id);
 			if (result == 1) {				
