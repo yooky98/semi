@@ -45,7 +45,7 @@
 					<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 					<li><a href="<%=contextPath%>/list.pr">shop</a></li>
 					<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
-					<li><a href="<%=contextPath%>/views/brand/brandView.jsp">brand</a></li>
+					<li><a href="<%=contextPath%>/forest.br">brand</a></li>
 					<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
 					<li><a href="<%=request.getContextPath() %>/prodList.ad">adminpage</a></li>
 					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
@@ -96,7 +96,7 @@
 				<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 				<li><a href="<%=contextPath%>/list.pr">shop</a></li>
 				<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
-				<li><a href="<%=contextPath%>/views/brand/brandView.jsp">brand</a></li>
+				<li><a href="<%=contextPath%>/forest.br">brand</a></li>
 				<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
 			</ul>
 		</nav>

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.myGiftree.model.vo.Forest"%>
+<%
+	ArrayList<Forest> forestList = (ArrayList<Forest>)request.getAttribute("forestList");
+	int forestCount = (Integer)request.getAttribute("forestCount");
+	int treeCount = (Integer)request.getAttribute("treeCount");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +20,29 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- 카카오 지도 -->      
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=06eb71c1421813889ecc4fbc8655acb0"></script>
+
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
+<!-- counter -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/counterup.min.js"></script>
+
+<script>
+$(function(){
+	  
+    $('[data-toggle="counter-up"]').counterUp({
+        delay: 10,
+        time: 1000
+      });
+    
+})
+
+</script>
 <style>
     
-    .mainSection{
+    .mainSection, .forestMap{
     	
     	padding-top: 30px;
     	padding-bottom: 30px;
@@ -27,6 +50,13 @@
     	padding-right: 20px;
     	margin: auto;
     	text-align: center;
+    
+    }
+    
+    .mainSection h4{
+    	font-family: 'Gowun Batang', serif;
+    	font-size: 27px;
+    	font-weight: 600;
     
     }
     
@@ -38,12 +68,22 @@
     	width: 100%;
     	height: 500px;
     	padding-top: 250px;
-    	
+    	font-family: 'Gowun Batang', serif;
     	font-size: 30px;
     	font-weight: 600;
     }
     
+    .forestTable{
+    	
+    	font-size: 13px;
+    	overflow-y: auto;
+    }
     
+    .forestTable::-webkit-scrollbar { 
+		display: none; 
+	}
+    
+  
 </style>
 
 </head>
@@ -82,12 +122,12 @@
 			<div class="row counters">
 
 				<div class="col-6 text-center">
-					<span class="counter" data-toggle="counter-up">20</span>
+					<span class="counter" data-toggle="counter-up"><%=forestCount %></span>
 					<p>조성한 숲</p>
 				</div>
 
 				<div class="col-6 text-center ">
-					<span class="counter" data-toggle="counter-up">1251</span>
+					<span class="counter" data-toggle="counter-up"><%=treeCount %></span>
 					<p>심은 나무 수</p>
 				</div>
 
@@ -95,6 +135,90 @@
 
 		</div>
 	</section>
+	
+	<section id="forestMap" class="forestMap">
+		<div class="container-fluid">
+
+			<div class="section-title">
+				<h2>숲 지도</h2>
+			</div>
+
+			<div class="row counters">
+
+				<div class="forestTable col-5 ">
+				<table class="table">
+		      		<thead class="thead-light">
+		      		<tr>
+		      			<th>숲 이름</th><th>위치</th><th>나무 수</th>
+		      		</tr>
+		      		</thead>
+		      		
+		      		<%for(Forest forest : forestList) {%>
+		      			<tr>
+		      				<td><%=forest.getForestName() %></td>
+		      				<td><%=forest.getForestLocation() %></td>
+		      				<td><%=forest.getTreeQuantity() %></td>
+		      			</tr>
+		      		
+		      		<%} %>
+		      	</table>
+		      	</div>
+
+				<div class="map col-7">
+					<div id="map" style="width:800px;height:400px;"></div>
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+	
+<script>
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+mapOption = { 
+    center: new kakao.maps.LatLng(37.550473, 126.990182), // 지도의 중심좌표
+    level: 13 // 지도의 확대 레벨
+};
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+//마커를 표시할 위치와 title 객체 배열입니다 
+var positions = [
+
+	<%for(Forest forest : forestList){%>
+	{
+    	title:'<%=forest.getForestName()%>',
+    	latlng: new kakao.maps.LatLng(<%=forest.getForestSite()%>)
+	},
+	<%}%>
+
+];
+
+//마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+
+for (var i = 0; i < positions.length; i ++) {
+
+// 마커 이미지의 이미지 크기 입니다
+var imageSize = new kakao.maps.Size(24, 35); 
+
+// 마커 이미지를 생성합니다    
+var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    map: map, // 마커를 표시할 지도
+    position: positions[i].latlng, // 마커를 표시할 위치
+    title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+    image : markerImage // 마커 이미지 
+});
+}
+
+
+</script>
+
+	
 <%@ include file="/views/common/footer.jsp"%>
 </body>
 </html>

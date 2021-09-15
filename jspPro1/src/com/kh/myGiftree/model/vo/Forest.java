@@ -16,6 +16,14 @@ public class Forest {
 		this.forestSite = forestSite;
 		this.treeQuantity = treeQuantity;
 	}
+	
+
+	public Forest(String forestName, String forestLocation, int treeQuantity) {
+		super();
+		this.forestName = forestName;
+		this.forestLocation = forestLocation;
+		this.treeQuantity = treeQuantity;
+	}
 
 	public String getForestName() {
 		return forestName;
