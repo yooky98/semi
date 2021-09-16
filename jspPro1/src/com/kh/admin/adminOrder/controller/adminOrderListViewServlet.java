@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.adminOrder.model.service.adminOrderService;
+import com.kh.admin.adminOrder.model.vo.adminOrder;
 import com.kh.admin.adminOrder.model.vo.adminOrderList;
 
 /**
@@ -33,8 +34,11 @@ public class adminOrderListViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<adminOrderList> list = new adminOrderService().selectList();
+		ArrayList<adminOrder> orderList = new adminOrderService().selectOrderList();
 		
+		request.setAttribute("orderList", orderList);
 		request.setAttribute("list", list);
+		//System.out.println("받은orderList : " + orderList);
 		//System.out.println("받은list : " + list);
 		
 		request.getRequestDispatcher("views/admin/adminOrder/adminOrderList.jsp").forward(request, response);

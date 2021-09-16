@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.admin.adminOrder.model.vo.adminOrder;
 import com.kh.admin.adminOrder.model.vo.adminOrderList;
 public class adminOrderDao {
 	
@@ -39,12 +40,13 @@ public class adminOrderDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		//selectOrderList=
-		//SELECT A.ORDER_DETAIL_NO, A.ORDER_NO, B.PROD_NAME, A.USER_ID, C.ORDER_DATE, A.ORDERS_AMOUNT, A.ORDERS_STATUS
+		//selectDetailList=
+		//SELECT A.ORDER_DETAIL_NO, A.ORDER_NO, B.PROD_NAME, A.USER_ID, C.ORDER_DATE
+		//, A.ORDERS_AMOUNT, A.ORDERS_STATUS, A.PROD_NO, A.ORDERS_PRICE, A.FOREST_NAME
 		//FROM ORDERS_DETAIL A JOIN PRODUCT B ON A.PROD_NO=B.PROD_NO 
 		//JOIN ORDERS C ON A.ORDER_NO=C.ORDER_NO
 		
-		String sql = prop.getProperty("selectOrderList");
+		String sql = prop.getProperty("selectDetailList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -61,6 +63,9 @@ public class adminOrderDao {
 				aol.setOrdersStatus(rset.getInt("ORDERS_STATUS"));
 				
 				aol.setOrderNo(rset.getInt("ORDER_NO"));
+				aol.setProdNo(rset.getInt("PROD_NO"));
+				aol.setOrdersPrice(rset.getInt("ORDERS_PRICE"));
+				aol.setForestName(rset.getString("FOREST_NAME"));
 				
 				list.add(aol);
 				
@@ -78,6 +83,49 @@ public class adminOrderDao {
 		return list;
 	}
 
+	public ArrayList<adminOrder> selectOrderList(Connection conn) {
+
+		ArrayList<adminOrder> orderList = new ArrayList<adminOrder>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		//selectOrderList=SELECT * FROM ORDERS
+		
+		String sql = prop.getProperty("selectOrderList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				adminOrder ao = new adminOrder();
+				
+				ao.setOrderNo(rset.getInt("ORDER_NO"));
+				ao.setUserId(rset.getString("USER_ID"));
+				ao.setOrderName(rset.getString("ORDER_NAME"));
+				ao.setOrderPhone(rset.getString("ORDER_PHONE"));
+				ao.setOrderAddress(rset.getString("ORDER_ADDRESS"));
+				ao.setOrderMessage(rset.getString("ORDER_MESSAGE"));
+				ao.setOrderTotalPrice(rset.getInt("ORDER_TOTAL_PRICE"));				
+				ao.setOrderDate(rset.getDate("ORDER_DATE"));				
+				
+				orderList.add(ao);
+				
+			}
+			//System.out.println("주문다오list : " + orderList);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}		
+		
+		return orderList;
+	}
+	
 	public int updateOrder(Connection conn, int orderDetailNo, int selectResult) {
 		
 		int result = 0;
@@ -103,6 +151,5 @@ public class adminOrderDao {
 		
 		return result;
 	}
-	
 
 }

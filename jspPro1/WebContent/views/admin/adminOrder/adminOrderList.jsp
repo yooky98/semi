@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList, com.kh.admin.adminOrder.model.vo.*" %>
 <% 
 ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute("list");
+ArrayList<adminOrder> orderList = (ArrayList<adminOrder>)request.getAttribute("orderList");
 %>
 <!DOCTYPE html>
 <html id="htmlAt">
@@ -55,6 +56,58 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 /* 모달 창의 취소, 삭제 버튼 */
 #orderListTable .modal .modal-footer>button{
 	width:80px;
+}
+
+/* 주문 상세정보 modal 관련 스타일 */
+#orderModal{
+	height: 700px;
+}                
+#orderDetailInfo{
+	width: 100%;
+	height: 42%;
+	padding: 0;
+	border: 2px solid gray;
+	margin-bottom: 10px;
+	text-align: center;
+	display: table;
+}
+#orderTotalInfo{
+	width: 100%;
+	height: 58%;
+	padding: 0;
+	border: 2px solid gray;
+	border-radius: 20px;
+	margin-top: 10px;
+	display: table;
+}
+.orderInfo{
+	display: table-cell;
+	width: 33%;
+	height: 100%;
+	padding: 12px;
+	
+	text-align: left;
+}
+.orderInfo>h6{
+	padding-bottom: 10px;
+	border-bottom: 1px solid gray;
+}
+#orderInfo1, #orderInfo2{
+	padding-left: 14px;
+	border-left: 2px solid gray;
+}
+.callOrderInfo{
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+}
+.callOrderInfo:hover{
+	text-decoration: none;
+	font-weight: bolder;
+	color:red;
+}
+#orderModal span{
+	font-weight: bold;
 }
 </style>
 </head>
@@ -175,6 +228,7 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
 	                        	<td colspan="7">주문 내역이 존재하지 않습니다.</td>
 	                        </tr>
                         	<%}else{
+                        		ArrayList<adminOrder> newList = new ArrayList<adminOrder>();
                         		String[] selected = new String[3];
                         		
                         		for(int i=0; i<list.size(); i++){
@@ -201,9 +255,72 @@ ArrayList<adminOrderList> list = (ArrayList<adminOrderList>)request.getAttribute
                         				orderStatusName="배송완료";
                         				break;
                         			}
+                        			
+                        			int orderNo = list.get(i).getOrderNo();                        			
+                        			
+                        			for(int j=0; j<orderList.size(); j++){
+                        				if(orderNo == orderList.get(j).getOrderNo()){
+                        					newList.add(orderList.get(j));
+                        					break;
+                        				}
+                        			}
+                        			
                         	%>                        
 	                          <tr>
-	                            <td id="orderDetailNo<%=i+1%>"><%=list.get(i).getOrderDetailNo()%></td>
+	                            <td id="orderDetailNo<%=i+1%>">
+	                            	<a class="callOrderInfo" type="button" data-toggle="modal" data-target="#orderInfoModal<%=i%>"><%=list.get(i).getOrderDetailNo()%></a>
+	                            	<%-- 주문 상세번호 클릭 시 주문 정보(상세정보+전체정보)를 담은 modal을 불러온다. --%>
+	                            	<div class="modal fade" id="orderInfoModal<%=i%>" tabindex="-1" aria-hidden="true">
+					                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+					                      <div class="modal-content">
+					                        <div class="modal-header">
+					                          <h5 class="modal-title">주문 정보</h5>
+					                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					                            <span aria-hidden="true">&times;</span>
+					                          </button>
+					                        </div>
+					                        <div id="orderModal" class="modal-body">
+					                            <%-- 주문 상세정보 --%>
+					                            <h5><b>주문 상세정보</b></h5>
+					                            <div id="orderDetailInfo">
+					                                <div class="orderInfo">
+					                                <h6>주문 상세번호 : <span><%=list.get(i).getOrderDetailNo() %></span></h6><br>
+					                                <h6>주문 번호 : <span><%=list.get(i).getOrderNo() %></span></h6><br>
+					                                <h6>상품 번호(상품명) : <span><%=list.get(i).getProdNo() %>(<%=list.get(i).getProdName() %>)</span></h6><br>
+					                                <h6>회원 아이디 : <span><%=list.get(i).getUserId() %></span></h6><br>
+					                                </div>
+					                                <div class="orderInfo" id="orderInfo1">
+					                                <h6>주문 수량 : <span><%=list.get(i).getOrderAmount() %></span></h6><br>
+					                                <h6>주문 금액 : <span><%=list.get(i).getOrdersPrice() %></span> 원</h6><br>
+					                                <h6>주문 상태 : <span><%=orderStatusName %></span></h6><br>
+					                                <h6>숲 이름 : <span><%=list.get(i).getForestName() %></span></h6><br>
+					                                </div>
+					                            </div>
+					                            <br><hr><br>
+					                            <%-- 주문 전체 정보 --%>
+					                            <h5><b>주문 전체정보</b></h5>
+					                            <div id="orderTotalInfo">
+					                                <div class="orderInfo">
+					                                    <h6>주문번호 : <span><%=newList.get(i).getOrderNo() %></span></h6><br>
+					                                    <h6>회원 아이디 : <span><%=newList.get(i).getUserId() %></span></h6><br>
+					                                    <h6>회원명 : <span><%=newList.get(i).getOrderName() %></span></h6><br>
+					                                    <h6>전화번호 : <span><%=newList.get(i).getOrderPhone() %></span></h6><br>
+					                                    <h6>주문날짜 : <span><%=newList.get(i).getOrderDate() %></span></h6><br>                                    
+					                                </div>
+					                                <div class="orderInfo" id="orderInfo2">
+					                                    <h6>배송주소 : <span><%=newList.get(i).getOrderAddress() %></span></h6><br>
+					                                    <h6>배송메시지 : <span><%=newList.get(i).getOrderMessage() %></span></h6><br>					                                    
+					                                    <h6>총 결제금액 : <span><%=newList.get(i).getOrderTotalPrice() %></span> 원</h6><br>
+					                                </div>
+					                            </div>
+					                        </div>
+					                        <div class="modal-footer">
+					                          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫 기</button>
+					                        </div>
+					                      </div>
+					                    </div>
+					                  </div>
+	                            </td>
 	                            <td><%=list.get(i).getProdName() %></td>
 	                            <td id="userId<%=i+1%>"><%=list.get(i).getUserId() %></td>
 	                            <td><%=list.get(i).getOrderDate() %></td>

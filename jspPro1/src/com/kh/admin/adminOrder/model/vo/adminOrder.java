@@ -6,31 +6,28 @@ public class adminOrder {
 
 	private int orderNo;
 	private String userId;
-	private int prodNo;
 	private String orderName;
 	private String orderPhone;
 	private String orderAddress;
 	private String orderMessage;
 	private int orderTotalPrice;
-	private String orderPay;
+	
 	private Date orderDate;
 	
 	public adminOrder() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public adminOrder(int orderNo, String userId, int prodNo, String orderName, String orderPhone, String orderAddress,
-			String orderMessage, int orderTotalPrice, String orderPay, Date orderDate) {
+	public adminOrder(int orderNo, String userId, String orderName, String orderPhone, String orderAddress,
+			String orderMessage, int orderTotalPrice, Date orderDate) {
 		super();
 		this.orderNo = orderNo;
-		this.userId = userId;
-		this.prodNo = prodNo;
+		this.userId = userId;		
 		this.orderName = orderName;
 		this.orderPhone = orderPhone;
 		this.orderAddress = orderAddress;
 		this.orderMessage = orderMessage;
-		this.orderTotalPrice = orderTotalPrice;
-		this.orderPay = orderPay;
+		this.orderTotalPrice = orderTotalPrice;		
 		this.orderDate = orderDate;
 	}
 
@@ -48,14 +45,6 @@ public class adminOrder {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public int getProdNo() {
-		return prodNo;
-	}
-
-	public void setProdNo(int prodNo) {
-		this.prodNo = prodNo;
 	}
 
 	public String getOrderName() {
@@ -98,14 +87,6 @@ public class adminOrder {
 		this.orderTotalPrice = orderTotalPrice;
 	}
 
-	public String getOrderPay() {
-		return orderPay;
-	}
-
-	public void setOrderPay(String orderPay) {
-		this.orderPay = orderPay;
-	}
-
 	public Date getOrderDate() {
 		return orderDate;
 	}
@@ -118,10 +99,10 @@ public class adminOrder {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "adminOrder -> [orderNo : " + orderNo + ", userId : " + userId
-				+ ", prodNo : " + prodNo + ", orderName : " + orderName
+				+ ", orderName : " + orderName
 				+ ", orderPhone : " + orderPhone + ", orderAddress : " + orderAddress
 				+ ", orderMessage : " + orderMessage + ", orderTotalPrice : " + orderTotalPrice
-				+ ", orderPay : " + orderPay + ", orderDate : " + orderDate + " ]";
+				+ ", orderDate : " + orderDate + " ]";
 	}
 	
 	
