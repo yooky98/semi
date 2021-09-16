@@ -54,7 +54,7 @@ public class InsertCartServlet extends HttpServlet {
 			Cart c = new Cart();
 
 			UserVO loginUser = (UserVO) session.getAttribute("loginUser");		
-//			 System.out.println("loginUser =" + loginUser); null확인
+
 			
 			//로그인 안했을때
 			if(loginUser == null) {
@@ -81,10 +81,10 @@ public class InsertCartServlet extends HttpServlet {
 			int a = 0;
 			for(int i =0; i < prodNoList.size() ; i++) {
 				
-				System.out.println("장바구니 안에 들어있는 상품들 ==" + prodNoList.get(i).getProdNo());
+				//System.out.println("장바구니 안에 들어있는 상품들 ==" + prodNoList.get(i).getProdNo());
 				
 				if(prodNoList.get(i).getProdNo() == ProdNo) {
-					System.out.println("담을 상품 뭐니? ==" + ProdNo);
+					//System.out.println("담을 상품 뭐니? ==" + ProdNo);
 					a =1;
 					
 					break;
@@ -108,7 +108,7 @@ public class InsertCartServlet extends HttpServlet {
 				view.forward(request, response);
 		
 			}else {
-				request.getSession().setAttribute("msg", "에러.");
+				request.getSession().setAttribute("msg", "장바구니에 상품을 담지 못했습니다.");
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);
 
