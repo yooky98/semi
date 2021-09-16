@@ -46,10 +46,7 @@
 					<li><a href="<%=contextPath%>/list.pr">shop</a></li>
 					<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
 					<li><a href="<%=contextPath%>/forest.br">brand</a></li>
-					<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
-					<li><a href="<%=request.getContextPath() %>/prodList.ad">adminpage</a></li>
-					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
-					
+					<li><a href="<%=contextPath%>/faqList">faq</a></li>
 				</ul>
 			</nav>
 
@@ -62,7 +59,7 @@
 					
 					<%}else if(loginUser.getUser_id().equals("admin")){ %>
 					
-					<li><a href="#"><%=loginUser.getUser_id() %></a></li>
+					<li><a><%=loginUser.getUser_id() %></a></li>
 					<li><a href="<%=request.getContextPath() %>/prodList.ad">adminpage</a></li>
 					<li><a href="<%=request.getContextPath() %>/list.chart">chart</a></li>
 					<li><a href="<%=request.getContextPath() %>/user?command=logout">logout</a></li>
@@ -77,8 +74,8 @@
 					</li>
 
 					<li><a href="<%=contextPath%>/forestList.my">mypage</a></li>
-					<li><a href="<%=request.getContextPath() %>/list.cart">cart</a></li>
-					<li><a href="<%=request.getContextPath() %>/user?command=logout">logout</a></li>
+					<li><a href="<%=contextPath%>/list.cart">cart</a></li>
+					<li><a href="<%=contextPath%>/user?command=logout">logout</a></li>
 					
 					<%} %>
 				</ul>
@@ -86,7 +83,7 @@
 
 			
 			 <button type="button" class="navbar-toggle d-lg-none" data-toggle="collapse" data-target="#navbar-menu-2">
-                <i class="fas fa-bars"></i>
+                <i class="fas fa-bars navIcon" aria-hidden="true"></i>
               </button>
 
 		</div>
@@ -97,7 +94,7 @@
 				<li><a href="<%=contextPath%>/list.pr">shop</a></li>
 				<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
 				<li><a href="<%=contextPath%>/forest.br">brand</a></li>
-				<li><a href="<%=request.getContextPath() %>/faqList">faq</a></li>
+				<li><a href="<%=contextPath%>/faqList">faq</a></li>
 			</ul>
 		</nav>
 

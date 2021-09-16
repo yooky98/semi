@@ -11,8 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>Mypage Campaign</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -33,50 +32,46 @@
  		padding: 120px 40px 30px 20px;
  		overflow-y: auto;
  		height: 100vh;
-    
     }
     
     .mypageCamp::-webkit-scrollbar { 
 		display: none; 
 	}
-    
-    .cancelBtn{
-    	background: rgb(158, 164, 107);
- 		color: white;
- 		width: 100px;
- 		border: none;
- 		border-radius: 5px;
-		padding: 5px;
-		margin: 5px;
-		font-weight: bolder;
-		
-    
+	
+	.mypageCamp h3, h5{
+    	font-family: 'Gowun Batang', serif;
     }
     
-    .endedBtn{
-    	background: rgb(233, 231, 231);
- 		color: white;
- 		width: 100px;
- 		border: none;
- 		border-radius: 5px;
-		padding: 5px;
-		margin: 5px;
-		font-weight: bolder;
-		
-    
+    .mypageCamp th{
+    	width: 130px;
     }
-    
-    .mypageCamp h3, h5{
+
+    #campName{
+    	color: black;
+    	font-size: 20px;
     	font-family: 'Gowun Batang', serif;
     }
     
     #campName:hover{
     	font-weight: bolder;
-    	
     }
     
-    #campName a{
-    	color: black;
+    .mypageCamp button{
+    	font-weight: bolder;
+ 		color: white;
+ 		width: 100px;
+ 		border: none;
+ 		border-radius: 5px;
+		padding: 5px;
+		margin: 5px;
+    }
+    
+    .cancelBtn{
+    	background: rgb(158, 164, 107);
+    }
+    
+    .doneBtn{
+    	background: rgb(206, 205, 205);
     }
     
 </style>
@@ -102,25 +97,37 @@
 				<%}else{%>
 				
 					<%for(Campaign camp : joinList){%>
+						<table>
+							<tr>
+								<%-- 버튼 태그를 id가 아닌 class로 주자 동적으로 여러개 만들 떄, 그래야 함수가 적용 --%>
+								<th rowspan="2"><button class="cancelBtn" value="<%=camp.getCampNO()%>">신청 취소</button></th>
+								<td><a id="campName" href="<%=request.getContextPath()%>/detail.cam?campNo=<%=camp.getCampNO()%>"><%=camp.getCampName() %></a></td>
+							</tr>
 						
-						<h5 id="campName"><a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=camp.getCampNO()%>"><%=camp.getCampName() %></a></h5>
-						
-						<b>장소 : </b><span><%=camp.getCampLocation() %></span> &nbsp;
-						<b>일시 : </b><span><%=camp.getCampDate() %></span> &nbsp;
-						
-						<button class="cancelBtn" value="<%=camp.getCampNO()%>">신청 취소</button>
-						<%-- 버튼 태그를 id가 아닌 class로 주자 동적으로 여러개 만들 떄, 그래야 함수가 적용 --%>
+							<tr>
+								<td>
+								<b>장소 : </b><span><%=camp.getCampLocation() %></span> &nbsp;
+								<b>날짜 : </b><span><%=camp.getCampDate() %></span> &nbsp;
+								</td>
+							</tr>
+						</table>
 						<hr>
 					<%} %>
 					
 					<%for(Campaign eCamp : endedJList){%>
+						<table>
+							<tr>
+								<th rowspan="2"><button class="doneBtn" disabled>참여 완료</button></th>
+								<td><a id="campName" href="<%=request.getContextPath()%>/detail.cam?campNo=<%=eCamp.getCampNO()%>"><%=eCamp.getCampName() %></a></td>
+							</tr>
 						
-						<h5 id="campName"><a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=eCamp.getCampNO()%>"><%=eCamp.getCampName() %></a></h5>
-						
-						<b>장소 : </b><span><%=eCamp.getCampLocation() %></span> &nbsp;
-						<b>일시 : </b><span><%=eCamp.getCampDate() %></span> &nbsp;
-						
-						<button class="endedBtn" disabled>참여 완료</button>
+							<tr>
+								<td>
+								<b>장소 : </b><span><%=eCamp.getCampLocation() %></span> &nbsp;
+								<b>날짜 : </b><span><%=eCamp.getCampDate() %></span> &nbsp;
+								</td>
+							</tr>
+						</table>
 						<hr>
 					<%} %>
 					
@@ -131,8 +138,8 @@
 	</section>
 
 <%@ include file="/views/common/footer.jsp"%>
-<script>
 
+<script>
 
 <%if(!joinList.isEmpty()){%>
 	$(function(){
@@ -145,18 +152,7 @@
 	})
 <%}%>
 
-
 </script>
-
-<%--
-$(".mypageCamp > #campName").click(function(){
-			var campNo = $(".mypageCamp > input").val();
-			
-			location.href="<%=request.getContextPath()%>/detail.cam?campNo="+campNo;
-		})
-
- --%>
-
 
 </body>
 </html>
