@@ -59,9 +59,9 @@
 
 
 
-
-	<div class="container-fluid">
 			<%@ include file="/views/common/mypageAside.jsp" %>
+
+	<div class="container">
 	
 		<div class="jumbotron">
 			<h2>찜한 상품 </h2>
@@ -92,12 +92,15 @@
 				for(Wish wish : w_list){
 			%>
 			<tr>
-			<td><input id="wishNo" type="hidden" value="<%=wish.getWishNo() %>"></td>
+			<td><input id="wishNo" type="text" value="<%=wish.getWishNo() %>"></td>
 			<td><img src="<%=request.getContextPath()%>/resources/images/<%=wish.getChangeName()%>" class="prodImg"></td>
-			<td><%=wish.getProdNo() %></td>
+			<td><input id="prodNo" type="text" value="<%=wish.getProdNo() %>"></td>
 			<td><%=wish.getProdName() %></td>
 			<td><%=wish.getProdPrice() %></td>
-			
+			<td>
+				<button type="button"
+				onclick="location.href='<%=contextPath%>/delete.ws?wishNo=<%=wish.getWishNo()%>'">삭제</button>
+			</td>
 				<%} %>
 			<%} %>
 			</tbody>
@@ -107,7 +110,7 @@
 	<script>
 	$(function(){
 	$(".prodImg").click(function(){
-		var pNo = $(this).children().eq(0).val();
+		var pNo = $("#prodNo").val();
 		console.log(pNo);
 		location.href= "<%=request.getContextPath() %>/detail.pr?pNo=" + pNo;
 		});

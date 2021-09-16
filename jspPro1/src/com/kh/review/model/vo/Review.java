@@ -93,6 +93,6 @@ public class Review {
 				+ ", review_title=" + review_title + ", review_content=" + review_content
 				+ ", review_star=" + review_star + "]";
 	}
-	
+		
 	
 }
