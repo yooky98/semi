@@ -30,8 +30,18 @@ public class ChartListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HashMap<String,Integer> list = new ProductService().selectChList();
-		request.setAttribute("list", list);
+//		카테고리별 차트
+		HashMap<String,Integer> ca_list = new ProductService().selectChList();
+		
+//		판매 제품별 차트
+		HashMap<String,Integer> pd_list = new ProductService().selectPdChList();
+		
+//		숲 별 차트
+		HashMap<String,Integer> fr_list = new ProductService().selectFrList();
+		
+		request.setAttribute("ca_list", ca_list);
+		request.setAttribute("pd_list", pd_list);
+		request.setAttribute("fr_list", fr_list);
 		
 		request.getRequestDispatcher("views/chart/chartListView.jsp").forward(request, response);
 	}
