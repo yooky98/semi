@@ -1,4 +1,4 @@
-package com.kh.order;
+package com.kh.order.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
