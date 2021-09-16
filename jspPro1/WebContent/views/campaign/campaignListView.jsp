@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Campaign</title>
 
 
 <!-- Latest compiled and minified CSS -->
@@ -25,34 +25,7 @@
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 <style>
 
-	.campMain{
-		background: rgb(239, 240, 227);
-	}
-    
-    .mainSection{
-    	padding-top: 30px;
-    	padding-bottom: 90px;
-    	padding-left: 20px;
-    	padding-right: 20px;
-    	margin: auto;
-    	text-align: center;
-    
-    }
-    
-    .mainSection h4{
-    	font-weight: bolder;
-    	font-family: 'Gowun Batang', serif;
-    }
-    
-    .mainSection a{
-    	color: #888888;
-    }
-    
-    .mainSection a:hover{
-    	color: black;
-    }
-    
-    .banner{
+ 	.campBanner{
     	background: url("resources/images/campaignBanner.jpg");
   		background-size: cover;
   		color: white;
@@ -62,10 +35,27 @@
     	padding-top: 150px;
     }
     
-    .banner > h3{
+    .campBanner > h1{
     	font-family: 'Gowun Batang', serif;
-    	font-size: 35px;
   		font-weight: 700;
+    }
+    
+	.campMain{
+		background: rgb(239, 240, 227);
+	}
+    
+    .campMain .mainSection{
+    	padding: 30px 20px 90px 20px;
+    	margin: auto;
+    	text-align: center;
+    }
+    
+    .campMain .mainSection a{
+    	color: #888888;
+    }
+    
+    .campMain .mainSection a:hover{
+    	color: black;
     }
 
 	#campDate{
@@ -97,28 +87,28 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-	<section class="banner"><h3>Campaign</h3></section>
-	<section class="container-fluid campMain">
+	<section class="campBanner"><h1>Campaign</h1></section>
+	<section class="campMain container-fluid">
 
 		<div class="mainSection col-sm-9">
+		
 			<button id="ingBtn">진행중인 캠페인</button> <button id="endedBtn">지난 캠페인</button>
 			<hr>
 
 			<div id="ingCamp">
-			<%for(Campaign camp : campList) {%>
-				<div id="campDate"><%=camp.getCampDate() %></div> &nbsp;
-				<a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=camp.getCampNO()%>"><%= camp.getCampName() %></a>
-				<hr>
-			<%} %>
+				<%for(Campaign camp : campList) {%>
+					<div id="campDate"><%=camp.getCampDate() %></div> &nbsp;
+					<a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=camp.getCampNO()%>"><%= camp.getCampName() %></a>
+					<hr>
+				<%} %>
 			</div>
 			
-			
 			<div id="endedCamp">
-			<%for(Campaign eCamp : endedList) {%>
-				<div id="campDate"><%=eCamp.getCampDate() %></div> &nbsp;
-				<a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=eCamp.getCampNO()%>"><%= eCamp.getCampName() %></a>
-				<hr>
-			<%} %>
+				<%for(Campaign eCamp : endedList) {%>
+					<div id="campDate"><%=eCamp.getCampDate() %></div> &nbsp;
+					<a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=eCamp.getCampNO()%>"><%= eCamp.getCampName() %></a>
+					<hr>
+				<%} %>
 			</div>
 			
 		</div>
@@ -133,11 +123,13 @@ $(function(){
 	$("#endedCamp").hide();
 	$("#ingBtn").focus();
 
+	//진행중인 캠페인
 	$("#ingBtn").click(function(){
 		$("#endedCamp").hide();
 		$("#ingCamp").show();
 	})
 	
+	//지난 캠페인
 	$("#endedBtn").click(function(){
 		$("#ingCamp").hide();
 		$("#endedCamp").show();
