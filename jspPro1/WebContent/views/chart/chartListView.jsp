@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.HashMap, java.util.Map.Entry, com.kh.product.model.vo.*" %>
 <%
-	HashMap<String,Integer> list = (HashMap<String,Integer>)request.getAttribute("list");
+	HashMap<String,Integer> ca_list = (HashMap<String,Integer>)request.getAttribute("ca_list");
+	HashMap<String,Integer> pd_list = (HashMap<String,Integer>)request.getAttribute("pd_list");
+	HashMap<String,Integer> fr_list = (HashMap<String,Integer>)request.getAttribute("fr_list");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,23 +22,78 @@
       google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawChart_category);
+      google.charts.setOnLoadCallback(drawChart_sell);
+      google.charts.setOnLoadCallback(drawChart_forest);
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
-      function drawChart() {
+      function drawChart_forest(){
+    	  var data = new google.visualization.DataTable();
+    	  data.addColumn('string', 'Forest');
+          data.addColumn('number', 'Amount');
+          
+          var dataRow = [];
+          
+          <%System.out.print(fr_list);%>
+  		
+          <% for(Entry<String, Integer>ls : fr_list.entrySet()){ %>
+          	
+    		    dataRow = ['<%=ls.getKey()%>', <%=ls.getValue()%>];
+          		data.addRow(dataRow);
+        	
+          <% } %>
+          
+          var options = {'title':'어느 숲에 얼마의 나무가 심겼나요?',
+                  'width':500,
+                  'height':400,
+                  backgroundColor: 'rgb(239, 240, 227)',
+                  };
+
+   		var chart = new google.visualization.PieChart(document.getElementById('chart_forest'));
+   		chart.draw(data, options);
+      }
+      
+      
+      function drawChart_sell(){
+    	  var data = new google.visualization.DataTable();
+    	  data.addColumn('string', 'Product');
+          data.addColumn('number', 'Amount');
+          
+          var dataRow = [];
+          
+          <%System.out.print(pd_list);%>
+  		
+          <% for(Entry<String, Integer>ls : pd_list.entrySet()){ %>
+          	
+    		    dataRow = ['<%=ls.getKey()%>', <%=ls.getValue()%>];
+          		data.addRow(dataRow);
+        	
+          <% } %>
+          
+          var options = {'title':'어느 상품이 팔렸을까요?',
+                  'width':500,
+                  'height':400,
+                  backgroundColor: 'rgb(239, 240, 227)',
+                  };
+
+   		var chart = new google.visualization.PieChart(document.getElementById('chart_sell'));
+   		chart.draw(data, options);
+      }
+      
+      function drawChart_category() {
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        data.addColumn('string', 'Category');
+        data.addColumn('number', 'Amount');
         
         var dataRow = [];
        
-       <%System.out.print(list);%>
+       <%System.out.print(ca_list);%>
 		
-       <% for(Entry<String, Integer>ls : list.entrySet()){ %>
+       <% for(Entry<String, Integer>ls : ca_list.entrySet()){ %>
        	
  		    dataRow = ['<%=ls.getKey()%>', <%=ls.getValue()%>];
        		data.addRow(dataRow);
@@ -45,18 +102,32 @@
 
         // Set chart options
         var options = {'title':'어느 카테고리의 제품이 등록되어 있습니까?',
-                       'width':400,
-                       'height':300};
+                       'width':500,
+                       'height':400,
+                       backgroundColor: 'rgb(239, 240, 227)',
+                       };
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.PieChart(document.getElementById('chart_category'));
         chart.draw(data, options);
       }
 </script>
 <style>
-	#chart_div{
+	#chart_category{
 		position:absolute;
 		top:100px;
+	}
+	
+	#chart_sell{
+		position:absolute;
+		top:100px;
+		left : 500px;
+	}
+	
+	#chart_forest{
+		position:absolute;
+		top:100px;
+		left : 1000px;
 	}
 </style>
 </head>
@@ -64,7 +135,11 @@
 	<%@ include file="../common/menubar.jsp" %>
 	<body>
     <!--Div that will hold the pie chart-->
-    <div id="chart_div" style = "background-color: rgb(239, 240, 227)"></div>
+    <div id="chart_category"></div>
+    
+    <div id="chart_sell"></div>
+    
+    <div id="chart_forest"></div>
   </body>
 </body>
 </html>
