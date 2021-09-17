@@ -2,6 +2,7 @@ package com.kh.campaign.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,17 +37,15 @@ public class CampaignMypageServlet extends HttpServlet {
 		String userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
 		
 		ArrayList<Campaign> joinList = new CampService().selectJoinList(userId);
-		ArrayList<Campaign> endedJList = new CampService().selectEndedJList(userId);
+
 		
-		
-		if(joinList != null || endedJList != null) {
+		if(joinList != null) {
 			request.setAttribute("joinList", joinList);
-			request.setAttribute("endedJList", endedJList);
 		}else {
 			request.setAttribute("msg", "참여 캠페인 리스트를 불러오지 못했습니다.");
 		}
 		
-		if(joinList.isEmpty() && endedJList.isEmpty()) {
+		if(joinList.isEmpty()) {
 			request.setAttribute("message", "참여 캠페인이 존재하지 않습니다.");
 		}
 		

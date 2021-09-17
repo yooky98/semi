@@ -3,9 +3,9 @@
 <%
 
 	ArrayList<Campaign> joinList = (ArrayList<Campaign>)request.getAttribute("joinList");
-	ArrayList<Campaign> endedJList = (ArrayList<Campaign>)request.getAttribute("endedJList");
 	String message = (String)request.getAttribute("message");
 	
+	Date today = new Date();
 %>
 <!DOCTYPE html>
 <html>
@@ -70,6 +70,11 @@
     	background: rgb(158, 164, 107);
     }
     
+    .cancelBtn:hover{
+ 		background: rgb(239, 240, 227);
+ 		color: rgb(158, 164, 107);
+ 	}
+    
     .doneBtn{
     	background: rgb(206, 205, 205);
     }
@@ -99,32 +104,21 @@
 					<%for(Campaign camp : joinList){%>
 						<table>
 							<tr>
-								<%-- 버튼 태그를 id가 아닌 class로 주자 동적으로 여러개 만들 떄, 그래야 함수가 적용 --%>
-								<th rowspan="2"><button class="cancelBtn" value="<%=camp.getCampNO()%>">신청 취소</button></th>
+								<th rowspan="2">
+									<%if(today.before(camp.getCampDate())) {%>
+										<%-- 버튼 태그를 id가 아닌 class로 주자 동적으로 여러개 만들 떄, 그래야 함수가 적용 --%>
+										<button class="cancelBtn" value="<%=camp.getCampNO()%>">신청 취소</button>
+									<%}else{ %>
+										<button class="doneBtn" disabled>참여 완료</button>
+									<%} %>
+								</th>
 								<td><a id="campName" href="<%=request.getContextPath()%>/detail.cam?campNo=<%=camp.getCampNO()%>"><%=camp.getCampName() %></a></td>
 							</tr>
 						
 							<tr>
 								<td>
-								<b>장소 : </b><span><%=camp.getCampLocation() %></span> &nbsp;
-								<b>날짜 : </b><span><%=camp.getCampDate() %></span> &nbsp;
-								</td>
-							</tr>
-						</table>
-						<hr>
-					<%} %>
-					
-					<%for(Campaign eCamp : endedJList){%>
-						<table>
-							<tr>
-								<th rowspan="2"><button class="doneBtn" disabled>참여 완료</button></th>
-								<td><a id="campName" href="<%=request.getContextPath()%>/detail.cam?campNo=<%=eCamp.getCampNO()%>"><%=eCamp.getCampName() %></a></td>
-							</tr>
-						
-							<tr>
-								<td>
-								<b>장소 : </b><span><%=eCamp.getCampLocation() %></span> &nbsp;
-								<b>날짜 : </b><span><%=eCamp.getCampDate() %></span> &nbsp;
+									<b>장소 : </b><span><%=camp.getCampLocation() %></span> &nbsp;
+									<b>날짜 : </b><span><%=camp.getCampDate() %></span> &nbsp;
 								</td>
 							</tr>
 						</table>

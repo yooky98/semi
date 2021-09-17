@@ -245,40 +245,6 @@ public class CampDao {
 
 		return joinList;
 	}
-
-	public ArrayList<Campaign> selectEndedJList(Connection conn, String userId) {
-		
-		ArrayList<Campaign> endedJList = new ArrayList<Campaign>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectEndedJList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				endedJList.add(new Campaign(rset.getInt("CAMP_NO"),
-							                rset.getString("CAMP_NAME"),
-							                rset.getString("CAMP_LOCATION"),
-							                rset.getDate("CAMP_DATE")));
-			}
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-
-		return endedJList;
-	}
 	
 	
 	public int deleteJoin(Connection conn, int campNo, String userId) {

@@ -23,8 +23,7 @@
 </head>
 <body>
 	<%@ include file="views/common/menubar.jsp"%>
-	<%-- <%@ include file="/views/admin/adminNotice/noticeView.jsp"%>--%>
-	
+	<%@ include file="/views/admin/adminNotice/noticeView.jsp"%>
 
 	<section id="hero" class="d-flex align-items-center">
 	

@@ -86,7 +86,7 @@ public class Campaign {
 	public void setCampCapa(int campCapa) {
 		this.campCapa = campCapa;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Campaign [campNO=" + campNO + ", campName=" + campName + ", campContent=" + campContent
