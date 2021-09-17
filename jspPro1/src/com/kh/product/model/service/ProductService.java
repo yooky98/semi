@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.order.model.vo.Order;
 import com.kh.product.model.dao.ProductDao;
 import com.kh.product.model.vo.Product;
 
@@ -53,6 +54,16 @@ public class ProductService {
 		Connection conn = getConnection();
 		
 		HashMap<String,Integer> list = new ProductDao().selectFrList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Order> selectPriceList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Order> list = new ProductDao().selectPriceList(conn);
 		
 		close(conn);
 		
