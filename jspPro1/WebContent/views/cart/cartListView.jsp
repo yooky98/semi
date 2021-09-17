@@ -42,33 +42,34 @@ body {
 	text-align: center;
 }
 
+
 .upimg {
 	width: 15px;
 	height: 15px;
 }
+
 
 .downimg {
 	width: 15px;
 	height: 15px;
 }
 
-.totalContainer{
-    float: center;
-    text-align: right;
-    margin-right : 15%;
- }
+#cartPriceForm{
+	text-align: center;
+}
 .form-block-inner-div{
-      display: block;
+	display: block;
+	margin-left: 1000px
 }
 .form-block-inner-div-btn{
-	 text-align: center;
-	 
+	 text-align: center;	 
 }
-.prodImg{
+
+
+#prodImg{
 	width: 100px;
 	height: 80px;
 }
-
 
 </style>
 <body onload="updateTotal();">
@@ -94,7 +95,10 @@ body {
 						if (list.isEmpty()) {
 					%>
 					<div calss="emptyList">
-					<td colspan="6" id="emptyCart" value=0;><h2>장바구니가 비어있습니다.</h2></td> 
+					<td></td>
+					<td></td>
+					<td></td>
+					<td colspan="6" id="emptyCart" value=0;><h2>장바구니가 비어있습니다.</h2><br><h4>상품을 추가해주세요</h4></td> 
 			
 					</div>
 
@@ -106,12 +110,12 @@ body {
 						
 							<td>
 							<input type="checkbox" class="chk" name="selectCheck[]" value="<%=c.getCartNo()%>" checked="checked" onclick="check()">
-							<img src='<%=request.getContextPath()%>/resources/images/<%=c.getChangName()%>' class="prodImg">
+							<img src='<%=request.getContextPath()%>/resources/images/<%=c.getChangName()%>' id="prodImg">
 							</td>
 							<td><input type="text" name="prodName" value="<%=c.getProdName()%>"></td>
 							<td>
 							<img src="<%=request.getContextPath()%>/resources/images/plus.png"  id="upVal" class="upimg" onclick="upBtn(<%= c.getCartNo() %>)">
-								<input type="text" class="pAmount" name ="Cartamount" id="amount" value="<%=c.getCartAmount()%>" readonly />
+								<input type="text" class="pAmount"  id="amount" value="<%=c.getCartAmount()%>" readonly />
 							<img src="<%=request.getContextPath()%>/resources/images/minus.png" class="downimg" onclick= "downBtn(<%= c.getCartNo() %>)">
 							</td>
 							<td><input type="text" name="forestName" value="<%=c.getForestName()%>"></td>
@@ -129,22 +133,24 @@ body {
 			</table>
 				<div class="totalContainer">
 			<hr>
-
+			<div id="cartPriceForm">
 				<div class="form-block-inner-div">
-					<label class="mb-2 mr-sm-2">상품가격</label> <input type="text" class="prodOrder" name="prodOrder" id="prodSum" value= 0 readonly>
+					<label class="mb-2 mr-sm-2" name="paytext">상품가격</label> <input type="text" class="prodOrder" name="prodOrder" id="prodSum" value= 0 readonly>
 				</div>
 				<div class="form-block-inner-div">
-					<label class="mb-2 mr-sm-2">배송비</label> <input type="text" id="deliverPrice" value=2500 readonly>
+					<label class="mb-2 mr-sm-2" name="paytext">배송비</label> <input type="text" id="deliverPrice" value=2500 readonly>
 				</div>
 				<hr>
 				<div class="form-block-inner-div">
-					<label class="mb-2 mr-sm-2">결제금액</label> <input type="text" id="finalPrice" value=0 readonly>
+					<label class="mb-2 mr-sm-2" name="paytext" >결제금액</label> <input type="text" id="finalPrice" value=0 readonly>
 				</div>
+			</div>
 				<div class="form-block-inner-div-btn">
 					<button type="button" class="btn btn-primary mb-2" onclick="location.href='<%=contextPath %>/list.pr'">쇼핑계속하기</button>
 					<button type="submit" class="btn btn-primary mb-2">주문하기</button>
 				</div>
-				</div>
+				
+			</div>
 		</div>
 	<br><br>
 		<%@ include file="../common/footer.jsp" %>

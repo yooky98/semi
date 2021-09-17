@@ -337,14 +337,12 @@
 														orderAmountList : orderAmountList,
 														orderPriceList : orderPriceList
 													
-		
 													},
 													type : "post",
 													success : function(){
 														 window.location.href="detail.order";                  
 													}
-													
-													
+														
 												});
 												
 										   	},
