@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@page import="com.kh.orders_detail.model.vo.*"%>
+<%@page import="com.kh.order.model.vo.OrderDetail"%>
 <%@page import="com.kh.product.model.vo.*"%>
 <%@page import="java.util.ArrayList"%>
 
 <%
 
-	ArrayList<Orders_detail> od_list = (ArrayList<Orders_detail>) request.getAttribute("od_list");
-	Orders_detail od = (Orders_detail) request.getAttribute("od");
-
+	ArrayList<OrderDetail> od_list = (ArrayList<OrderDetail>) request.getAttribute("od_list");
+	OrderDetail od = (OrderDetail) request.getAttribute("od");
 
 %>
 
@@ -73,7 +72,7 @@
                             <td><%=od_list.get(i).getOrderDetailNo() %></td>
                             <td><%=od_list.get(i).getProdName() %></td>
                             <td><%=od_list.get(i).getUserId() %></td>
-                            <td><%=od_list.get(i).getOrderDate() %></td>
+                            <td><%=od_list.get(i).getOrdersDate() %></td>
                             <td><%=od_list.get(i).getOrderAmount() %></td>
                            
                           </tr>
@@ -84,7 +83,7 @@
 
 				<td colspan="4">
 
-					총 결제 금액 : <%=Integer.parseInt(od.getOrdersAmount()) * od.getProdPrice() %>
+					총 결제 금액 : <%=(od.getOrdersAmount()) * od.getProdPrice() %>
 
 				</td>
 
