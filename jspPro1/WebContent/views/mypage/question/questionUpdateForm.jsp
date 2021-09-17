@@ -7,24 +7,23 @@
 
 	String selected = qna.getQuesCategory();
 	
-	
 %>   
  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QNA</title>
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
- <!-- Latest compiled and minified CSS -->
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-       <!-- jQuery library -->
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-       <!-- Popper JS -->
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-       <!-- Latest compiled JavaScript -->
-       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 <style>
     
@@ -62,6 +61,11 @@
 		font-weight: bolder;
     }
     
+    #submitBtn:hover{
+ 		background: rgb(239, 240, 227);
+ 		color: rgb(158, 164, 107);
+ 	}
+    
     #resetBtn{
     	color: rgb(158, 164, 107);
  		width: 70px;
@@ -73,6 +77,11 @@
 		font-weight: bolder;
     }
     
+    #resetBtn:hover{
+ 		background: #b6b3b3;
+ 		color: white;
+ 	}
+    
     #title{
  		font-family: 'Gowun Batang', serif;
  	}
@@ -83,7 +92,6 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-
 	<section class="updateSection">
 
 		<div class="row container-fluid">
@@ -92,14 +100,14 @@
 
 			<div class="qnaUpdate col-sm-9">
 
-				<form id="qnaUpdate" method="post" action="<%=request.getContextPath()%>/update.que" onsubmit="return categoryValidate()">
+				<form method="post" action="<%=request.getContextPath()%>/update.que" onsubmit="return categoryValidate()">
 					<h3 id="title"><b>1:1문의</b></h3>
 					<hr>
 					
 					<input name="qno" type="hidden" value="<%=qna.getQuesNo()%>">
 	                <select id="qnaCategory" name="qnaCategory">
+	                
 	                    <option value="">문의유형</option>
-	                    
 	                    <%for(QnaCategory category : cateoryList) {%>
 	                    	<%if(selected.equals(category.getCategoryName())) {%>
 	                    		<option value="<%=category.getCategoryNo()%>" selected><%=category.getCategoryName()%></option>
@@ -119,7 +127,7 @@
 	                </div>
 	                
 					<button id="submitBtn" type="submit">수정</button>
-	                <button id="resetBtn" type="reset">취소</button>
+	                <button id="resetBtn" type="button" onclick="location.href='<%=contextPath%>/list.que'">취소</button>
 	                
             	</form>
 

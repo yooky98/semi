@@ -9,18 +9,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QNA</title>
 
-
-
- <!-- Latest compiled and minified CSS -->
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-       <!-- jQuery library -->
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-       <!-- Popper JS -->
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-       <!-- Latest compiled JavaScript -->
-       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">    
 
@@ -38,10 +36,17 @@
  	.qnaContent div{
  		margin-top: 5px;
  		font-size: 14px;
- 		
  	}
  	
- 	#title{
+	.qnaContent::-webkit-scrollbar { 
+		display: none; 
+	}
+	
+ 	#quesTitle{
+		font-size: 15px;
+	}
+ 	
+ 	.qnaList #title{
  		font-family: 'Gowun Batang', serif;
  	}
  	
@@ -56,6 +61,11 @@
 		padding: 5px;
  	}
  	
+ 	#qnaBtn:hover{
+ 		background: rgb(239, 240, 227);
+ 		color: rgb(158, 164, 107);
+ 	}
+ 	
  	#qnaUpdate, #qnaDelete{
  		color: #b6b3b3;
  		font-size: 14px;
@@ -66,19 +76,11 @@
  	#qnaUpdate:hover, #qnaDelete:hover{
  		color: black;
  	}
- 	
- 	
 
-	.qnaContent::-webkit-scrollbar { 
-		display: none; 
-	}
-	
-	#quesTitle{
-		font-size: 15px;
+	#answer{
+		color:rgb(255, 136, 0);
 	}
 
-
-    
 </style>
 
 
@@ -87,16 +89,18 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-	<section class="container-fluid">
+	<section class="qnaList">
 
-		<div class="row flex-nowrap">	
+		<div class="row flex-nowrap container-fluid">	
+		
 		<%@ include file="/views/common/mypageAside.jsp" %>
 
-
 			<div class="qnaContent col-sm-9" role="main">
-				<h3 id="title"><b>1:1문의</b></h3>
-				<div>Customer Center : 080-1234-5687<br>
-				       평일 10:00 ~ 17:00
+				
+				<div id="title">
+					<h3><b>1:1문의</b></h3>
+				    Customer Center : 080-1234-5687<br>
+				        평일 10:00 ~ 17:00
 				</div>
 				<hr>
 					<%if(qnaList.isEmpty()) {%>
@@ -122,19 +126,12 @@
 							<%=qna.getQuesTitle()%>
 						</div>
 						
-						<div>
-							<%=qna.getQuesContent()%>
-						</div>
+						<div><%=qna.getQuesContent()%></div>
 						
 						<%if(qna.getAnsDate()!=null){ %>
 							<br>
-							<div>
-								<b style="color:rgb(255, 136, 0);">답변</b> &nbsp; <%=qna.getAnsDate() %>
-							</div>
-							
-							<div>
-								<%=qna.getAnsContent() %>
-							</div>
+							<div><b id="answer">답변</b> &nbsp; <%=qna.getAnsDate() %></div>
+							<div><%=qna.getAnsContent() %></div>
 						<%} %>
 						<hr>
 						
@@ -156,18 +153,6 @@ $(function(){
 	})
 
 })
-
-<%--
-$("#qnaDelete").click(function(){
-		
-		var quesNo = $("#quesNo").val();
-		var val = confirm("정말 삭제하시겠습니까?");
-			
-		if(val){
-			locaton.href="<%=contextPath%>/delete.que?qno="+quesNo;
-		}
-	})
---%>
 
 </script>
 

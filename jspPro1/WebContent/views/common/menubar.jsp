@@ -83,7 +83,7 @@
 
 			
 			 <button type="button" class="navbar-toggle d-lg-none" data-toggle="collapse" data-target="#navbar-menu-2">
-                <i class="fas fa-bars navIcon" aria-hidden="true"></i>
+                <i class="fas fa-bars navIcon"></i>
               </button>
 
 		</div>
