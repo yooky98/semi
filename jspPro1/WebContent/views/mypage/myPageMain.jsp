@@ -39,19 +39,14 @@
     	margin-bottom: 30px;
     }
     
-    .myGiftree h3{
+    .myGiftree h3, h5, p, #forestListModalTitle{
     	font-family: 'Gowun Batang', serif;
-  		font-weight: 700;
+  		font-weight: bolder;
     }
     
-    .card{
+    .myGiftree .card{
 		width: 20rem;
 		height: 10rem;
-    }
-    
-    .card-title, #forestListModalTitle{
-    	font-family: 'Gowun Batang', serif;
-    	font-weight: bolder;
     }
     
     .treeBtn{
@@ -81,17 +76,19 @@
 </head>
 <body>
 
-<%@ include file="../common/menubar.jsp" %>
+<%@ include file="/views/common/menubar.jsp" %>
 
 	<section class="myGiftree container-fluid">
 		
 		<div class="row flex-nowrap">	
 		<%@ include file="../common/mypageAside.jsp" %>
 			
-			
 			<div class="mainSection col-sm-7 ">
 				
-				<div class="title col-sm-12"><h3>My Giftree</h3></div>
+				<div class="title col-sm-12">
+					<h3><%=loginUser.getUser_name()%>님의 Giftree</h3>
+					<p>입양한 나무 수 만큼 나무가 후원 됩니다.</p>
+				</div>
 				
 				<div class="row cardSection">
 					<div class="card col-sm-6 maypageCard ">
@@ -108,45 +105,47 @@
 							<div class="point"><%=loginUser.getPoint() %>p</div>
 						</div> 
 					</div>
+					
 				</div>
+				
 			</div>
 		</div>
 	</section>
 	
-<!-- Modal -->
-<div class="modal fade" id="forestListModal" tabindex="-1" role="dialog" aria-labelledby="forestListModalTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="forestListModalTitle">후원한 숲 리스트</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      	<table class="table">
-      		<thead class="thead-light">
-	      		<tr>
-	      			<th>숲 이름</th><th>위치</th><th>나무 수</th>
-	      		</tr>
-      		</thead>
-      		
-      		<%for(Forest forest : fList) {%>
-      			<tr>
-      				<td><%=forest.getForestName() %></td>
-      				<td><a href="https://map.kakao.com/link/map/<%=forest.getForestSite()%>"><%=forest.getForestLocation() %></a></td>
-      				<td><%=forest.getTreeQuantity() %></td>
-      			</tr>
-      		<%} %>
-      	</table>
-      
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<!-- Modal -->
+	<div class="modal fade" id="forestListModal" tabindex="-1" role="dialog" aria-labelledby="forestListModalTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="forestListModalTitle">후원한 숲 리스트</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<table class="table">
+	      		<thead class="thead-light">
+		      		<tr>
+		      			<th>숲 이름</th><th>위치</th><th>나무 수</th>
+		      		</tr>
+	      		</thead>
+	      		
+	      		<%for(Forest forest : fList) {%>
+	      			<tr>
+	      				<td><%=forest.getForestName() %></td>
+	      				<td><a href="https://map.kakao.com/link/map/<%=forest.getForestSite()%>"><%=forest.getForestLocation() %></a></td>
+	      				<td><%=forest.getTreeQuantity() %></td>
+	      			</tr>
+	      		<%} %>
+	      	</table>
+	      
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 <%@ include file="/views/common/footer.jsp"%>
 

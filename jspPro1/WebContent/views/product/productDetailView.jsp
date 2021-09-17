@@ -39,9 +39,9 @@ html {
 	background-size: cover;
 }
 
-/* #contImg {
-	aspect-ratio: 16/9;
-} */
+#contImg {
+	aspect-ratio: 3/4;
+} 
 </style>
 </head>
 <body class="is-preload-0 is-preload-1 is-preload-2">

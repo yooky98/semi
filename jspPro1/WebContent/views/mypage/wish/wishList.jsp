@@ -58,8 +58,8 @@
 
 
 
+<%@ include file="/views/common/mypageAside.jsp" %>
 
-			<%@ include file="/views/common/mypageAside.jsp" %>
 
 	<div class="container">
 	

@@ -67,27 +67,7 @@ public class PayServlet extends HttpServlet {
 		response.getWriter().print(ordersNo);
 		System.out.println("ordersNo = " + ordersNo);
 		
-//	int orderNoData = new OrderService().orderNoData() 
-		
-//		if(result > 0 ) {
-//			request.getSession().setAttribute("msg", "주문이 성공적으로 완료되었습니다.");
-//			RequestDispatcher view = request.getRequestDispatcher("views/order/orderViewDetail.jsp");
-//			view.forward(request, response);
-//			
-//		}else {
-//			request.getSession().setAttribute("msg", "결제 실패");
-//			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-//			view.forward(request, response);
-//		}
-		
-	
-//		System.out.println("postcode_detailAddress = " + postcode_detailAddress); 
-//		System.out.println("point= " + point);
-//		System.out.println("address = " + address);
-//		System.out.println("postcode = " + postcode);
-//		System.out.println("orderMsg = " + orderMsg);
-//		System.out.println("orderTotalPrice = " + orderTotalPrice);
-//		System.out.println("merchant_uid = " + merchant_uid);
+
 		
 	}
 

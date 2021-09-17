@@ -49,6 +49,10 @@
 		font-weight: bolder;
     }
     
+    #joinBtn:hover{
+    	background: rgb(143, 148, 96);
+    }
+    
     .campBanner{
     	background: url("resources/images/campaignBanner.jpg");
   		background-size: cover;
@@ -79,9 +83,9 @@
 			<hr>
 
 			<div>
-			<b>장소 :</b> <span><%=camp.getCampLocation() %></span> &nbsp;
-			<b>날짜 :</b> <span><%=camp.getCampDate() %></span> &nbsp;
-			<b>참여 가능 인원 :</b> <span id="capa"></span> / <%=camp.getCampCapa() %>
+				<b>장소 :</b> <span><%=camp.getCampLocation() %></span> &nbsp;
+				<b>날짜 :</b> <span><%=camp.getCampDate() %></span> &nbsp;
+				<b>참여 가능 인원 :</b> <span id="capa"></span> / <%=camp.getCampCapa() %>
 			
 			</div>
 			
