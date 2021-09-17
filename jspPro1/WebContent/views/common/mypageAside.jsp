@@ -47,7 +47,7 @@
 	<aside class="myAside col-sm-2" >
 		<ul>
 			<li><a href="<%=request.getContextPath()%>/forestList.my">마이 기프트리</a></li>
-			<li><a href="<%=request.getContextPath()%>/views/mypage/buyList/buyList.jsp">주문내역 조회</a></li>
+			<li><a href="<%=request.getContextPath()%>/list.buy">주문내역 조회</a></li>
 			<li><a href="<%=request.getContextPath()%>/list.ws">위시 리스트</a></li>
 			<li><a href="<%=request.getContextPath()%>/review.credu">리뷰 관리</a></li>
 			<li><a href="<%=request.getContextPath()%>/list.que">1:1 문의</a></li>
