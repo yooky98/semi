@@ -57,4 +57,35 @@ public class OrderService {
 
 
 
+	public int insertOrderDetail(String userId, String ordersNo, String[] prodNo, String[] forestNameList, String[] orderAmountList, String[] orderPriceList) {
+		
+		Connection conn = getConnection();
+		int result = new OrderDao().insertOrderDetail(conn, userId, ordersNo ,prodNo , forestNameList ,orderAmountList , orderPriceList );
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result;
+	}
+
+	public int deleteCartOrderList(String userId, String[] prodNo) {
+		Connection conn = getConnection();
+		int result1 = new OrderDao().deleteCartOrderList(conn ,userId, prodNo);
+		
+		if (result1 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result1;
+	}
+
 }

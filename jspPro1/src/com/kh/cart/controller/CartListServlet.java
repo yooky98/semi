@@ -40,7 +40,7 @@ public class CartListServlet extends HttpServlet {
 		System.out.println("user_id = " + userId);
 		
 		ArrayList<Cart> list = new CartService().selectCartList(userId);			
-		System.out.println("list 확인용 : " + list);
+//		System.out.println("list 확인용 : " + list);
 		
 	
 		if(list != null) {

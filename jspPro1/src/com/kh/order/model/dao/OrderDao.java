@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.cart.model.dao.CartDao;
@@ -106,5 +107,72 @@ public class OrderDao {
 
 		return ordersNo;
 	}
+
+
+	public int insertOrderDetail(Connection conn, String userId, String ordersNo, String[] prodNo, String[] forestNameList, String[] orderAmountList, String[] orderPriceList) {
+//		ORDER_DETAIL_NO
+//		ORDER_NO
+//		PROD_NO
+//		USER_ID
+//		ORDERS_AMOUNT
+//		ORDERS_PRICE
+//		ORDERS_STATUS
+//		FOREST_NAME
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertOrderDetail");
+		//insertOrderDetail=INSERT INTO ORDERS_DETAIL
+		//VALUES ( ORDERSDT_SEQ.NEXTVAL , ?, ? , ? , ?, ? ,DEFAULT ,?)
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			for (int i = 0 ; i <prodNo.length ; i++) {
+				pstmt.setInt(1, Integer.parseInt(ordersNo));
+				pstmt.setInt(2, Integer.parseInt(prodNo[i]));
+				pstmt.setString(3, userId);
+				pstmt.setInt(4, Integer.parseInt(orderAmountList[i]));
+				pstmt.setInt(5, Integer.parseInt(orderPriceList[i]));
+				pstmt.setString(6, forestNameList[i]);
+				
+				result = pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteCartOrderList(Connection conn, String userId, String[] prodNo) {
+	
+		int result1 = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteCartOrderList");
+		//DELETE FROM CART WHERE USER_ID = ? AND PROD_NO = ?
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			for(int i =0 ; i<prodNo.length ; i++) {
+				pstmt.setString(1, userId);
+				pstmt.setInt(2, Integer.parseInt(prodNo[i]));
+				
+				result1 = pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result1;
+	}
+
+
 
 }

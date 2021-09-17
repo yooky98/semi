@@ -31,9 +31,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <style>
+
 body {
 	background-color: rgb(239, 240, 227);
 }
+
 
 .pAmount {
 	width: 40px;
@@ -74,7 +76,7 @@ body {
 	<%@ include file="/views/common/menubar.jsp"%>
 	<br><br><br><br><br>
 
-	<form class="cartForm" action="<%= contextPath %>/list.order" method="post">
+	<form class="cartForm"  name ="cartForm1" action="<%= contextPath %>/list.order" method="post"  onSubmit="oderValidation(); return false" >
 		<div class="cartList">
 			<table class="table table-hovar">
 				<thead>
@@ -92,7 +94,8 @@ body {
 						if (list.isEmpty()) {
 					%>
 					<div calss="emptyList">
-						<h2>장바구니가 비어있습니다.</h2>
+					<td colspan="6" id="emptyCart" value=0;><h2>장바구니가 비어있습니다.</h2></td> 
+			
 					</div>
 
 					<%
@@ -100,7 +103,7 @@ body {
 					
 							for (Cart c : list) {
 						%>
-						<tr>
+						
 							<td>
 							<input type="checkbox" class="chk" name="selectCheck[]" value="<%=c.getCartNo()%>" checked="checked" onclick="check()">
 							<img src='<%=request.getContextPath()%>/resources/images/<%=c.getChangName()%>' class="prodImg">
@@ -109,7 +112,7 @@ body {
 							<td>
 							<img src="<%=request.getContextPath()%>/resources/images/plus.png"  id="upVal" class="upimg" onclick="upBtn(<%= c.getCartNo() %>)">
 								<input type="text" class="pAmount" name ="Cartamount" id="amount" value="<%=c.getCartAmount()%>" readonly />
-							<img src="<%=request.getContextPath()%>/resources/images/minus.png" class="downimg" onclick="downBtn(<%= c.getCartNo() %>)">
+							<img src="<%=request.getContextPath()%>/resources/images/minus.png" class="downimg" onclick= "downBtn(<%= c.getCartNo() %>)">
 							</td>
 							<td><input type="text" name="forestName" value="<%=c.getForestName()%>"></td>
 							<td>2500원</td>
@@ -139,7 +142,7 @@ body {
 				</div>
 				<div class="form-block-inner-div-btn">
 					<button type="button" class="btn btn-primary mb-2" onclick="location.href='<%=contextPath %>/list.pr'">쇼핑계속하기</button>
-					<button type="submit" class="btn btn-primary mb-2" >주문하기</button>
+					<button type="submit" class="btn btn-primary mb-2">주문하기</button>
 				</div>
 				</div>
 		</div>
@@ -150,15 +153,17 @@ body {
 	<script>
 		//상품 전체리스트 선택,해제
 		   $(function(){
+			   let total = 0;
 		      //전체선택 체크박스 클릭
 		      $("#checkAll").click(function(){
-
 		         if($("#checkAll").prop("checked")) { 
 		            $("input[type=checkbox]").prop("checked",true);
 		            updateTotal()
 		         }else{ 
 		            $("input[type=checkbox]").prop("checked",false);
-		            updateTotal()
+		            $('#prodSum').val(0);
+		            $('#deliverPrice').val(0);
+					$('#finalPrice').val(0);
 		         }
 		      })
 		   });
@@ -184,8 +189,7 @@ body {
 			 $('#deliverPrice').val(2500);
 			 $('#finalPrice').val(total+2500);
 		 }
-		
-		 
+			 
 	}
 		
 	//체크박스 해지시 가격변동
@@ -280,7 +284,28 @@ body {
      	}
 	}
 
-
+	//주문개수 확인
+	function oderValidation(){
+			if(	$('#prodSum').val() == 0){
+				alert('주문하실 상품을 선택해주세요')
+				
+			}else{
+				document.cartForm1.submit();
+				return true;
+				
+			}
+			
+	}
+	
+	//장바구니 비어있을때
+	$(function(){
+		if($('#emptyCart').val() == 0){
+			$('#prodSum').val(0);
+	        $('#deliverPrice').val(0);
+			$('#finalPrice').val(0);
+		} 
+		
+	})
 
 
 	</script>

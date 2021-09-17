@@ -218,6 +218,7 @@ public class CartDao {
 				cart.setProdName(rset.getString("PROD_NAME"));
 				cart.setProdPrice(rset.getInt("PROD_PRICE"));
 				cart.setChangName(rset.getString("CHANGE_NAME"));
+				
 		
 				cartOrder.add(cart);
 				
