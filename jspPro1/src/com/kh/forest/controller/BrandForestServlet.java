@@ -1,4 +1,4 @@
-package com.kh.myGiftree.controller;
+package com.kh.forest.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.myGiftree.model.service.ForestService;
-import com.kh.myGiftree.model.vo.Forest;
+import com.kh.forest.model.service.ForestService;
+import com.kh.forest.model.vo.Forest;
 
 /**
  * Servlet implementation class BrandForestServlet
@@ -41,6 +41,9 @@ public class BrandForestServlet extends HttpServlet {
 			request.setAttribute("forestCount", forestCount);
 			request.setAttribute("treeCount", treeCount);
 			request.getRequestDispatcher("views/brand/brandView.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "숲리스트 조회에 실패했습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}

@@ -41,7 +41,8 @@ public class CampaignListViewServlet extends HttpServlet {
 			request.setAttribute("endedList", endedList);
 			request.getRequestDispatcher("views/campaign/campaignListView.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "캠페인 조회 실패");
+			request.setAttribute("msg", "캠페인 조회에 실패하였습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}

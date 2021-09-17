@@ -1,17 +1,37 @@
-package com.kh.myGiftree.model.dao;
+package com.kh.forest.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 
-import com.kh.myGiftree.model.vo.Forest;
-import static com.kh.common.JDBCTemplate.*;
+import com.kh.forest.model.vo.Forest;
 
 public class ForestDao {
 	
+	Properties prop = new Properties();
+	
 	public ForestDao() {
+		
+		String fileName = ForestDao.class.getResource("/sql/forest/forest-query.properties").getPath();
+		
+		try {
+			prop.load(new FileReader(fileName));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public ArrayList<Forest> selectFList(Connection conn, String userId) {
@@ -20,9 +40,7 @@ public class ForestDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT B.FOREST_NAME, A.FOREST_LOCATION, A.FOREST_SITE, SUM(B.ORDERS_AMOUNT) AMOUNT\n" + 
-				"FROM FOREST A JOIN ORDERS_DETAIL B ON A.FOREST_NAME = B.FOREST_NAME\n" + 
-				"WHERE USER_ID=? GROUP BY B.FOREST_NAME, A.FOREST_LOCATION, A.FOREST_SITE";
+		String sql = prop.getProperty("selectFList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -55,7 +73,7 @@ public class ForestDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql ="SELECT SUM(ORDERS_AMOUNT) FROM ORDERS_DETAIL WHERE USER_ID=?";
+		String sql = prop.getProperty("treeCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -84,9 +102,7 @@ public class ForestDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT B.FOREST_NAME, A.FOREST_LOCATION, A.FOREST_SITE, SUM(B.ORDERS_AMOUNT) AMOUNT\n" + 
-				"FROM FOREST A JOIN ORDERS_DETAIL B ON A.FOREST_NAME = B.FOREST_NAME\n" + 
-				"GROUP BY B.FOREST_NAME, A.FOREST_LOCATION, A.FOREST_SITE";
+		String sql = prop.getProperty("selectForestList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -117,7 +133,7 @@ public class ForestDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql ="SELECT COUNT(DISTINCT FOREST_NAME) FROM ORDERS_DETAIL";
+		String sql =  prop.getProperty("forestCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -144,8 +160,7 @@ public class ForestDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql ="SELECT SUM(ORDERS_AMOUNT) FROM ORDERS_DETAIL";
-		
+		String sql = prop.getProperty("totalTreeCount");		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();

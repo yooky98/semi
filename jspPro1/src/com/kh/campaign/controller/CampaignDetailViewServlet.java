@@ -40,6 +40,7 @@ public class CampaignDetailViewServlet extends HttpServlet {
 			request.getRequestDispatcher("views/campaign/campaignDetailView.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "캠페인 조회를 실패했습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}

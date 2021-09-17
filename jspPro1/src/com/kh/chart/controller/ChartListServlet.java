@@ -1,6 +1,7 @@
 package com.kh.chart.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.order.model.vo.Order;
 import com.kh.product.model.service.ProductService;
 
 /**
@@ -39,10 +41,13 @@ public class ChartListServlet extends HttpServlet {
 //		숲 별 차트
 		HashMap<String,Integer> fr_list = new ProductService().selectFrList();
 		
+//		수익 차트
+		ArrayList<Order> pr_list = new ProductService().selectPriceList();
+		
 		request.setAttribute("ca_list", ca_list);
 		request.setAttribute("pd_list", pd_list);
 		request.setAttribute("fr_list", fr_list);
-		
+		request.setAttribute("pr_list", pr_list);
 		request.getRequestDispatcher("views/chart/chartListView.jsp").forward(request, response);
 	}
 

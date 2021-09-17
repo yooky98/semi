@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.myGiftree.model.vo.Forest"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.forest.model.vo.Forest"%>
 <%
 	ArrayList<Forest> forestList = (ArrayList<Forest>)request.getAttribute("forestList");
 	int forestCount = (Integer)request.getAttribute("forestCount");

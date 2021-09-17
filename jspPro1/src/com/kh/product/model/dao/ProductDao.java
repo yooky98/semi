@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import com.kh.cart.model.vo.Cart;
+import com.kh.order.model.vo.Order;
 import com.kh.product.model.vo.Product;
 
 public class ProductDao {
@@ -215,7 +216,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-//		selectFrList=SELECT FOREST_NAME FROM ORDERS_DETAIL
+//		selectFrList=SELECT FOREST_NAME, ORDERS_AMOUNT FROM ORDERS_DETAIL
 		
 		String sql = prop.getProperty("selectFrList");
 		try {
@@ -226,7 +227,7 @@ public class ProductDao {
 				Cart c = new Cart();
 
 				c.setForestName(rset.getString("FOREST_NAME"));
-
+				c.setCartAmount(rset.getInt("ORDERS_AMOUNT"));
 				c_list.add(c);
 			}
 			
@@ -241,14 +242,48 @@ public class ProductDao {
 		if(c_list != null) {
 			for(int i = 0; i < c_list.size() ;i++) {
 				if(list.containsKey(c_list.get(i).getForestName())) {
-					list.put(c_list.get(i).getForestName(), list.get(c_list.get(i).getForestName())+1);
+					list.put(c_list.get(i).getForestName(), list.get(c_list.get(i).getForestName())+c_list.get(i).getCartAmount());
 					
 				}else {
-					list.put(c_list.get(i).getForestName(), 1);
+					list.put(c_list.get(i).getForestName(), c_list.get(i).getCartAmount());
 				}
 			}
 		}
 		System.out.println(list);
 		return list;
+	}
+
+	public ArrayList<Order> selectPriceList(Connection conn) {
+		ArrayList<Order> o_list = new ArrayList<Order>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+//		selectPriceList=SELECT TO_CHAR(ORDER_DATE,'YYYY-MM-DD'), SUM(ORDER_TOTAL_PRICE) FROM ORDERS GROUP BY TO_CHAR(ORDER_DATE,'YYYY-MM-DD')
+		
+		String sql = prop.getProperty("selectPriceList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				
+				Order o = new Order();
+
+				o.setOrderDate(rset.getString("TO_CHAR(ORDER_DATE,'YYYY-MM-DD')"));
+				o.setTotalprice(rset.getInt("SUM(ORDER_TOTAL_PRICE)"));
+
+				o_list.add(o);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		System.out.println(o_list);
+		return o_list;
 	}
 }

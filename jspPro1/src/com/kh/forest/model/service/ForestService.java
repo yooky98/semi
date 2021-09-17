@@ -1,12 +1,13 @@
-package com.kh.myGiftree.model.service;
+package com.kh.forest.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.myGiftree.model.dao.ForestDao;
-import com.kh.myGiftree.model.vo.Forest;
+import com.kh.forest.model.dao.ForestDao;
+import com.kh.forest.model.vo.Forest;
 
 public class ForestService {
 	

@@ -9,7 +9,7 @@ public class Order {
 	private String orderAddress;
 	private String ordermsg;
 	private int totalprice;
-	
+	private String orderDate;
 	
 	public Order() {
 		// TODO Auto-generated constructor stub
@@ -96,6 +96,17 @@ public class Order {
 
 	public void setTotalprice(int totalprice) {
 		this.totalprice = totalprice;
+	}
+
+	
+
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
 	}
 
 

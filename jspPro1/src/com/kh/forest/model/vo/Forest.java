@@ -1,4 +1,4 @@
-package com.kh.myGiftree.model.vo;
+package com.kh.forest.model.vo;
 
 public class Forest {
 
