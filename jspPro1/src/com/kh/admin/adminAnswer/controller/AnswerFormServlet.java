@@ -43,7 +43,12 @@ public class AnswerFormServlet extends HttpServlet {
 		
 		for(int i=0; i<list.size(); i++) {
 			if(list.get(i).getQuesNo() == qnaNo) {
-				qna = list.get(i);			
+				if(list.get(i).getAnsContent() == null) {
+					qna = list.get(i);
+				}else {
+					list.get(i).setAnsContent((list.get(i).getAnsContent()).replaceAll("<br>", "\n"));
+					qna = list.get(i);
+				}						
 				
 			}
 		}		

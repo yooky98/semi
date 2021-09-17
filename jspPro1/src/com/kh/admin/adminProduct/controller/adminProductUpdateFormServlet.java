@@ -39,6 +39,10 @@ public class adminProductUpdateFormServlet extends HttpServlet {
 		adminProduct ap = new adminProductService().selectUpdateProduct(prodNo);
 		Attachment at = new adminProductService().selectAttachment(prodNo);
 		
+		if(ap.getProdDetail() != null) {
+			ap.setProdDetail((ap.getProdDetail()).replaceAll("<br>", "\n"));
+		}
+		
 		//System.out.println("서블릿prodNo : " + prodNo);
 		//System.out.println("서블릿ap : " + ap);
 		//System.out.println("서블릿at : " + at);
