@@ -119,4 +119,25 @@ public class WishDao {
 		return w_list;
 	}
 
+	public int deleteWish(Connection conn, int wishNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		//deleteWish=DELETE FROM WISH WHERE WISH_NO = ?
+		String sql = prop.getProperty("deleteWish");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, wishNo );
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

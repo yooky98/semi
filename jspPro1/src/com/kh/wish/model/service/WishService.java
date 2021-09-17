@@ -1,13 +1,11 @@
 package com.kh.wish.model.service;
 
 import static com.kh.common.JDBCTemplate.*;
-import static com.kh.common.JDBCTemplate.commit;
-import static com.kh.common.JDBCTemplate.getConnection;
-import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.cart.model.dao.CartDao;
 import com.kh.wish.model.dao.WishDao;
 import com.kh.wish.model.vo.Wish;
 
@@ -45,6 +43,20 @@ public class WishService {
 		close(conn);
 		
 		return w_list;
+	}
+
+	public int deleteWish(int wishNo) {
+		Connection conn = getConnection();
+		
+		int result = new WishDao().deleteWish(conn, wishNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 }
