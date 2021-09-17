@@ -1,4 +1,4 @@
-package com.kh.myGiftree.controller;
+package com.kh.forest.controller;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.kh.myGiftree.model.service.ForestService;
+import com.kh.forest.model.service.ForestService;
 
 /**
  * Servlet implementation class MainForestServlet

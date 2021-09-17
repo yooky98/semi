@@ -48,6 +48,7 @@ public class CampaignJoinServlet extends HttpServlet {
 				out.print("success");
 			}else {
 				request.setAttribute("msg", "캠페인 참여에 실패했습니다.");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
 		}
 		

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.myGiftree.model.vo.Forest"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.forest.model.vo.Forest"%>
 <%
 	int count = (Integer)request.getAttribute("count");
 	ArrayList<Forest> fList = (ArrayList<Forest>)request.getAttribute("forestList");
@@ -102,7 +102,7 @@
 					<div class="card col-sm-6 maypageCard ">
 						<div class="card-body">
 							<h5 class="card-title">보유포인트</h5>
-							<div class="point"><%=loginUser.getPoint() %>p</div>
+							<div class="point"></div>
 						</div> 
 					</div>
 					
@@ -148,6 +148,27 @@
 	</div>
 
 <%@ include file="/views/common/footer.jsp"%>
+
+<script>
+
+$(function(){
+
+	$.ajax({
+		url:"point.my",
+		type:"get",
+		success: function(point){
+			
+			$('.point').html(point + 'p');
+		},
+		error: function(e){
+			console.log(e);
+		}
+	})
+	
+})
+
+
+</script>
 
 </body>
 </html>
