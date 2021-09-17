@@ -1,4 +1,4 @@
-package com.kh.question.controller;
+package com.kh.forest.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.question.model.service.QuesService;
-import com.kh.question.model.vo.QnaCategory;
+import com.kh.forest.model.service.ForestService;
+import com.kh.forest.model.vo.Forest;
+import com.kh.member.model.vo.UserVO;
 
 /**
- * Servlet implementation class QuestionEnrollFormServlet
+ * Servlet implementation class MypageForestListServlet
  */
-@WebServlet("/enrollForm.que")
-public class QuestionEnrollFormServlet extends HttpServlet {
+@WebServlet("/forestList.my")
+public class MypageForestListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionEnrollFormServlet() {
+    public MypageForestListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +33,19 @@ public class QuestionEnrollFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<QnaCategory> cateoryList = new QuesService().selectCategory();
+		String userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
 		
-		if(cateoryList != null) {
-			request.setAttribute("cateoryList", cateoryList);
-			request.getRequestDispatcher("views/mypage/question/questionEnrollForm.jsp").forward(request, response);
+		ArrayList<Forest> forestList = new ForestService().selectFList(userId);
+		int count = new ForestService().treeCount(userId);
+		
+		if(forestList != null) {
+			request.setAttribute("forestList", forestList);
+			request.setAttribute("count", count);
+			request.getRequestDispatcher("views/mypage/myPageMain.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "카테고리 불러오기에 실패했습니다.");
+			request.setAttribute("msg", "숲 리스트 조회에 실패했습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
 	}
 
 	/**

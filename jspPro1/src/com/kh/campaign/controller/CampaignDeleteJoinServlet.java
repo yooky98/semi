@@ -41,6 +41,7 @@ public class CampaignDeleteJoinServlet extends HttpServlet {
 			response.sendRedirect("mypage.cam");
 		}else {
 			request.setAttribute("msg", "캠페인 참여신청 취소에 실패했습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}

@@ -43,10 +43,11 @@ public class CampaignMypageServlet extends HttpServlet {
 			request.setAttribute("joinList", joinList);
 		}else {
 			request.setAttribute("msg", "참여 캠페인 리스트를 불러오지 못했습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 		if(joinList.isEmpty()) {
-			request.setAttribute("message", "참여 캠페인이 존재하지 않습니다.");
+			request.setAttribute("message", "참여 캠페인이 없습니다.");
 		}
 		
 		request.getRequestDispatcher("views/campaign/campaignMypageView.jsp").forward(request, response);

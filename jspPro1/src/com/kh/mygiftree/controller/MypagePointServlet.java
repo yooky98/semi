@@ -1,7 +1,7 @@
-package com.kh.myGiftree.controller;
+package com.kh.mygiftree.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.member.model.vo.UserVO;
-import com.kh.myGiftree.model.service.ForestService;
-import com.kh.myGiftree.model.vo.Forest;
+import com.kh.mygiftree.model.service.PointService;
 
 /**
- * Servlet implementation class MypageForestListServlet
+ * Servlet implementation class MypagePointServlet
  */
-@WebServlet("/forestList.my")
-public class MypageForestListServlet extends HttpServlet {
+@WebServlet("/point.my")
+public class MypagePointServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageForestListServlet() {
+    public MypagePointServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,15 +34,18 @@ public class MypageForestListServlet extends HttpServlet {
 		
 		String userId = ((UserVO)request.getSession().getAttribute("loginUser")).getUser_id();
 		
-		ArrayList<Forest> forestList = new ForestService().selectFList(userId);
-		int count = new ForestService().treeCount(userId);
+		int point = new PointService().selectPoint(userId);
 		
-		if(forestList != null) {
-			request.setAttribute("forestList", forestList);
-			request.setAttribute("count", count);
-			request.getRequestDispatcher("views/mypage/myPageMain.jsp").forward(request, response);
-		}else {
+		if(point != -1) {
 			
+			PrintWriter out = response.getWriter();
+			out.print(point);
+			out.flush();
+			out.close();
+			
+		}else {
+			request.setAttribute("msg", "포인트 조회에 실패하였습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}
 

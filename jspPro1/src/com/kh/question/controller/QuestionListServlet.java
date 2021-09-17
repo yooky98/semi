@@ -41,17 +41,15 @@ public class QuestionListServlet extends HttpServlet {
 		if(qnaList != null) {
 			request.setAttribute("qnaList", qnaList);
 		}else {
-			request.setAttribute("message", "문의사항이 없습니다.");
+			request.setAttribute("message", "문의사항을 불러오지 못했습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 		if(qnaList.isEmpty()) {
 			request.setAttribute("message", "문의사항이 없습니다.");
 		}
 		
-		
 		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
-		
-//		request.getRequestDispatcher("views/mypage/question/questionListView.jsp").forward(request, response);
 		
 	}
 
