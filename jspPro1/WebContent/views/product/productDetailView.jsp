@@ -30,8 +30,10 @@
 	rel="stylesheet">
 <style>
 html {
-	width:78%;
-	height:100vh;
+	width:700px;
+	margin-left:400px;
+	margin-top:45px;
+	height:97%;
 	background: top right;
 	background-image:
 		url('<%=request.getContextPath()%>/resources/images/<%=p.getTitleImg()%>');
@@ -40,7 +42,7 @@ html {
 }
 
 #contImg {
-	aspect-ratio: 3/4;
+	aspect-ratio: 14/16;
 } 
 </style>
 </head>
