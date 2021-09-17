@@ -15,6 +15,7 @@
 /* section 전체 영역 div */
 #QNAOuter {
 	padding: 0 0 50px 0;
+	background-color: white;
 }
 /* 1:1문의 답변 전체 영역 */
 #QNAAnswerForm {
@@ -25,7 +26,6 @@
 #QNAAnswerForm input, #QNAAnswerForm textArea{
 	font-weight: bold;
 	background-color: white;
-	border:0;
 }
 /* 답변을 입력하는 영역 textarea */
 #answer {

@@ -94,9 +94,16 @@ html {
 				<!-- select 숲 선택하기  -->
 				<select name="forest" required>
 					<option value="">원조할 숲을 선택해주세요</option>
-					<option value="숲1">숲1</option>
-					<option value="숲2">숲2</option>
-					<option value="숲3">숲3</option>
+					<option value="강원도 삼척 재난복구 숲">강원도 삼척 재난복구 숲</option>
+					<option value="강원도 강릉 재난복구 숲">강원도 강릉 재난복구 숲</option>
+					<option value="대관령 치유의 숲">대관령 치유의 숲</option>
+					<option value="도곡초 교실 숲">도곡초 교실 숲</option>
+					<option value="우신초 교실 숲">우신초 교실 숲</option>
+					<option value="서울로 도시공원 숲">서울로 도시공원 숲</option>
+					<option value="백두대간 반려나무 숲">백두대간 반려나무 숲</option>
+					<option value="선유도 아름다운 숲">선유도 아름다운 숲</option>
+					<option value="미세먼지 방지숲">미세먼지 방지숲</option>
+					
 				</select>
 				<div class="updown">
 					<h2><%=p.getProdPrice()%>원 &emsp; 

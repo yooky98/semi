@@ -19,6 +19,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>FAQ</title>
 <style>
+/* FAQ에서는 padding 다시 설정(좌,우) */
+#middleSection{
+	padding-left:0;
+	padding-right:0;
+}
 /*FAQ에서는 aside와 같은 색상으로 따로 지정*/
 #adminSection{
 	background-color: rgb(239, 240, 227);
@@ -32,44 +37,80 @@
 /* FAQ 목록이 들어가는 전체 영역 div*/
 #faqBody {
 	width: 80%;
-	padding-bottom: 100px;
+	padding-bottom: 120px;
 	margin: 0 auto;/*중앙 정렬*/
 }
 /* 질문 각각을 나타내는 영역 div*/
-#faqBody .card-header {
-	cursor: pointer;
-	background-color: white;
+#faqBody>.accordion>.card>.card-header{
+	padding: 8px 11px 8px 11px;
+ 	background: linear-gradient(to bottom, white, #eaeaea);
+ 	/*background: white;*/
 }
 /* 질문 영역의 h5태그 테두리 제거 */
 #faqBody h5{
 	width: 100%;
+	height:100%;
 	border: none;
     outline: none;
+    display:table;
+    font-size: 1rem;
+    background: none;
+    padding-right:0;
+    cursor: pointer;
 }
-/* category, faqQues : 질문 영역에 들어가는 부분 */
+/* FAQ 각 항목 영역 */
+#faqBody .card{
+	/*border: 2px solid #dbdbdb;*/
+	border-radius:0;
+}
+/* FAQ 카테고리 부분 */
 .faqCategory {
-	display: inline-block;
+	display: table-cell;
 	width: 22%;
-	font-size: medium;
+	color: rgb(8, 132, 235);
+	font-weight: bolder;	
+}
+/* FAQ 질문 부분 */
+.faqQues {
+	display: table-cell;
+	width:78%;
+	padding-right:20px;
 	font-weight: bolder;
 }
-
-.faqQues {
-	display: inline-block;
-	width:75%;
-	font-size: medium;
-	font-weight: bolder;
-	color: green;
+/* FAQ 아이콘 부분 */
+.faqIcon{
+	display: inline-block;	
 }
 /* 답변에 해당하는 영역 */
 #faqBody .card-body {
 	margin: 15px;
 }
+/* FAQ 소개 문구 폰트 변경 */
 .faqTop{
 	font-family: 'Jua', sans-serif;
 }
+/* 화면 크기에 따라 FAQ 타이틀, 각 항목들의 폰트 크기 변경 */
 @media screen and (max-width:992px){
-	
+	.faqHeader h1{
+		font-size: 1.8rem;
+	}
+	.faqHeader h3{
+		font-size: 1.2rem;
+	}
+	.faqCategory, .faqQues{
+		font-size: 0.9rem;
+	}
+}
+@media screen and (max-width:768px){
+	.faqHeader h1{
+		font-size: 2rem;
+	}
+	.faqHeader h3{
+		font-size: 1.3rem;
+	}
+	.faqCategory, .faqQues{
+		font-size: 1rem;
+	}
 }
 </style>
 </head>
@@ -85,17 +126,17 @@
 						<br>
 					</div>
 					<div id="faqBody">
-						<%
-						if(list.isEmpty()){
-						%>
+					<%
+					if(list.isEmpty()){
+					%>
 						<div>
 						<h3>리스트가 존재하지 않습니다.</h3>
 						</div>
-						<%
-						}else{		
-						
-							for (int i = 0; i < list.size(); i++) {
-						%>
+					<%
+					}else{		
+					
+						for (int i = 0; i < list.size(); i++) {
+					%>
 			
 						<div class="accordion" id="faqList<%=i%>">
 							<div class="card ">
@@ -104,7 +145,7 @@
 											aria-expanded="false" aria-controls="collapse<%=i%>">						
 												<span class="faqCategory"><%=list.get(i).getFAQType()%></span>								
 												<span class="faqQues"><%=list.get(i).getFAQQues()%></span>
-												<span><i id="icon<%=i%>" class="fa fa-caret-down" aria-hidden="true"></i></span>
+												<span class="faqIcon"><i id="icon<%=i%>" class="fa fa-caret-down" aria-hidden="true"></i></span>
 									</h5>
 								</div>
 								<div class="collapse" id="collapse<%=i%>"
@@ -114,7 +155,7 @@
 											<p><%=list.get(i).getFAQAns()%></p>
 										</div>
 									</div>
-								</div>
+								</div>								
 							</div>
 						</div>
 						<script>
@@ -128,10 +169,10 @@
 		                        }
 		                    });
 						</script>
-						<%
-							}
+					<%
 						}
-						%>
+					}
+					%>
 				</div>
 			</section>
 		</div>		

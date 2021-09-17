@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.campaign.model.vo.Campaign"%>
 <% 
-
 	Campaign camp = (Campaign)request.getAttribute("camp");
-	
-
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Campaign</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -24,18 +21,18 @@
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 </head>
 <style>
- 	.mainSection{
-    	padding-top: 30px;
-    	padding-bottom: 20px;
-    	padding-left: 20px;
-    	padding-right: 20px;
+
+	.campDetail{
+		background: rgb(239, 240, 227);
+	}
+	
+ 	.campDetail .mainSection{
+    	padding: 30px 20px 20px 20px;
     	margin: auto;
     	text-align: center;
-    	
-    
     }
     
-    .mainSection h4{
+    .campDetail .mainSection h4{
     	font-weight: bolder;
     	font-family: 'Gowun Batang', serif;
     }
@@ -50,10 +47,9 @@
 		padding: 5px;
 		margin-top: 30px;
 		font-weight: bolder;
-    
     }
     
-    .banner{
+    .campBanner{
     	background: url("resources/images/campaignBanner.jpg");
   		background-size: cover;
   		color: white;
@@ -63,15 +59,10 @@
     	padding-top: 150px;
     }
     
-    .banner > h3{
+    .campBanner > h1{
     	font-family: 'Gowun Batang', serif;
-    	font-size: 35px;
   		font-weight: 700;
     }
-
-	.campMain{
-		background: rgb(239, 240, 227);
-	}
     
 </style>
 
@@ -79,8 +70,8 @@
 
 <%@ include file="/views/common/menubar.jsp" %>
 
-	<div class="banner"><h3>Campaign</h3></div>
-	<div class="container-fluid campMain">
+	<div class="campBanner"><h1>Campaign</h1></div>
+	<section class="campDetail container-fluid">
 
 		<div class="mainSection col-sm-9">
 
@@ -89,28 +80,28 @@
 
 			<div>
 			<b>장소 :</b> <span><%=camp.getCampLocation() %></span> &nbsp;
-			<b>일시 :</b> <span><%=camp.getCampDate() %></span> &nbsp;
+			<b>날짜 :</b> <span><%=camp.getCampDate() %></span> &nbsp;
 			<b>참여 가능 인원 :</b> <span id="capa"></span> / <%=camp.getCampCapa() %>
 			
 			</div>
 			
-			<!-- 가능하면 신청가능한 인원, 정원 표기 해보기 -->
 			<hr>
 			
 			<div><%=camp.getCampContent() %></div>
 			
 			<div id="jBtn">
-			<button id="joinBtn" onclick="check()">캠페인 참여하기</button>
+				<button id="joinBtn" onclick="joinCheck()">캠페인 참여하기</button>
 			</div>
-			<!-- 회원만 참여하기 가능 로그인확인-->
 			<hr>
 			
 		</div>
 
-	</div>
+	</section>
 <%@ include file="/views/common/footer.jsp"%>
 	
 <script>
+<%-- 회원만 참여가능, 참여가능 인원 : 참여가능인원 - 참여 인원count(campNo), 회원의 해당 캠페인 참여 여부 확인 
+신청 인원이 다 찼을 경우 참여하기 버튼 비활성화 하기--%>	
 
 $(function(){
 	capacity();
@@ -119,13 +110,12 @@ $(function(){
 	var campDate = new Date('<%=camp.getCampDate()%>');
 	
 	if(today > campDate){
-		console.log("지난 캠페인")
-		$("#joinBtn").html("완료된 캠페인입니다.").attr('disabled', 'true');
+		$("#joinBtn").html("완료된 캠페인입니다.").attr('disabled', 'true').css("background", "rgb(206, 205, 205)");
 	}
 	
 })
 
-	function check(){
+	function joinCheck(){
 		
 		<%if(loginUser == null){%>
 			alert("로그인이 필요한 서비스입니다.")
@@ -169,7 +159,7 @@ $(function(){
 					$("#capa").html(capa);
 				}else{
 					$("#capa").html("신청마감");
-					$("#joinBtn").attr("disabled", "true").html("캠페인 참여마감");
+					$("#joinBtn").attr("disabled", "true").html("캠페인 참여마감").css("background", "rgb(206, 205, 205)");
 				}
 				
 			},
@@ -180,44 +170,6 @@ $(function(){
 		})
 		
 	}
-
-
-<%-- 참여가능 인원 : 참여가능인원 - 참여 인원count(campNo), 회원의 해당 캠페인 참여 여부 확인 
-신청 인원이 다 찼을 경우 참여하기 버튼 비활성화 하기--%>	
-
-<%--
-$(function(){
-	$("#joinBtn").click(function(){
-		
-		<%if(loginUser == null){%>
-		alert("로그인이 필요한 서비스입니다.")
-		location.href="<%=contextPath%>/views/member/login.jsp";
-		<%}else{%>
-	
-		var campNo =  <%=camp.getCampNO()%>;
-		$.ajax({
-			url:"join.cam",
-			data: {campNo : campNo},
-			type: "post",
-			success: function(result){
-				if(result == "success"){
-					alert("참여가 완료되었습니다.")
-				}else{
-					alert("이미 참여한 캠페인입니다.")
-				}
-			},
-			error: function(e){
-				console.log(e);
-			}
-		})
-		
-		location.href="<%=contextPath%>/join.cam?campNo="+<%=camp.getCampNO()%>;
-		<%}%>
-		
-		
-	})
-})
---%>
 
 </script>
 

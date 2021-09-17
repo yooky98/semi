@@ -17,18 +17,18 @@
 <!-- counter -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/counterup.min.js"></script> 
-    
+
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
 
 </head>
 <body>
 	<%@ include file="views/common/menubar.jsp"%>
-	<%@ include file="/views/admin/adminNotice/noticeView.jsp"%>
+	<%-- <%@ include file="/views/admin/adminNotice/noticeView.jsp"%>--%>
 	
 
 	<section id="hero" class="d-flex align-items-center">
 	
-		<div class="container d-flex flex-column align-items-center" data-aos="zoom-in" data-aos-delay="100">
+		<div class="container d-flex flex-column align-items-center">
 			<h1>Giftree</h1>
 			<h2>나에게 주는, 지구에게 주는 선물</h2>
 			<p>기프트리는 여러분이 입양한 나무 수 만큼 숲에 나무를 심습니다.</p>
@@ -36,31 +36,46 @@
 			<div class="row counters countMain">
 
 				<div class="card countContent col-6 text-center">
-					<p>조성한 숲</p><span class="counter" data-toggle="counter-up">20</span>
+					<p>조성한 숲</p><span class="counter" id="fNum" data-toggle="counter-up"></span>
 				</div>
 
 				<div class="card countContent col-6 text-center ">
-					<p>심은 나무 수</p><span class="counter" data-toggle="counter-up">1251</span>
-					
+					<p>심은 나무 수</p><span class="counter" id="tNum" data-toggle="counter-up"></span>
 				</div>
 
 			</div>
 			
 			<a href="<%=contextPath%>/list.pr" class="btn-about">반려나무 입양하러 가기</a>
 		</div>
+		
 	</section>
-	
 
 	<%@ include file="views/common/footer.jsp"%>
-	
+
+<script type="text/javascript"></script>
+
 <script>
 $(function(){
 	  
-    $('[data-toggle="counter-up"]').counterUp({
-        delay: 10,
-        time: 1000
-      });
-    
+    $.ajax({
+    	
+    	url:"forest.ma",
+    	type: "get",
+    	success: function(result){
+    			
+			$('#fNum').html(result[0]);
+			$('#tNum').html(result[1]);
+				
+			$('[data-toggle="counter-up"]').counterUp({
+				delay: 10,
+				time: 1000
+			});
+				
+		},
+		error: function(e){
+			console.log(e);
+		}
+    })
     
 })
 

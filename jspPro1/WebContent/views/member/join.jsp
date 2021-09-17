@@ -63,10 +63,7 @@
                     guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
                     guideTextBox.style.display = 'block';
 
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
+             
                 } else {
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';
@@ -115,7 +112,5 @@
 <input type = "submit" value = "회원가입" class = "userbtn">
 </form>
 </div>
-
-
 </body>
 </html>

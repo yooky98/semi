@@ -39,4 +39,24 @@ public class ProductService {
 		return list;
 	}
 
+	public HashMap<String, Integer> selectPdChList() {
+		Connection conn = getConnection();
+		
+		HashMap<String,Integer> list = new ProductDao().selectPdChList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public HashMap<String, Integer> selectFrList() {
+		Connection conn = getConnection();
+		
+		HashMap<String,Integer> list = new ProductDao().selectFrList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+
 }

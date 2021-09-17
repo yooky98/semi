@@ -28,11 +28,6 @@ html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
     background-color: rgb(239, 240, 227);    
 }
 
-@media (max-width: 992px) {
-  #main {
-    margin-top: 30px;
-  }
-}
 
 /*--------------------------------------------------------------
 # Header 
@@ -97,7 +92,6 @@ html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
   font-weight: 600;
 }
 
-
 .nav-menu > ul > li > a:before {
   content: "";
   position: absolute;
@@ -121,84 +115,10 @@ html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
   text-decoration: none;
 }
 
-/*
-.nav-menu .drop-down ul {
-  display: block;
-  position: absolute;
-  left: 28px;
-  top: calc(100% + 30px);
-  z-index: 99;
-  opacity: 0;
-  visibility: hidden;
-  padding: 10px 0;
-  background: #fff;
-  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-  transition: 0.3s;
-}
-
-.nav-menu .drop-down:hover > ul {
-  opacity: 1;
-  top: 100%;
-  visibility: visible;
-}
-
-.nav-menu .drop-down li {
-  min-width: 180px;
-  position: relative;
-}
-
-.nav-menu .drop-down ul a {
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: none;
-  color: #222222;
-}
-
-.nav-menu .drop-down ul a:hover, .nav-menu .drop-down ul .active > a, .nav-menu .drop-down ul li:hover > a {
+.navIcon{
   color: rgb(158, 164, 107);
 }
 
-.nav-menu .drop-down > a:after {
-  content: "\ea99";
-  font-family: IcoFont;
-  padding-left: 5px;
-}
-
-.nav-menu .drop-down .drop-down ul {
-  top: 0;
-  left: calc(100% - 30px);
-}
-
-.nav-menu .drop-down .drop-down:hover > ul {
-  opacity: 1;
-  top: 0;
-  left: 100%;
-}
-
-.nav-menu .drop-down .drop-down > a {
-  padding-right: 35px;
-}
-
-.nav-menu .drop-down .drop-down > a:after {
-  content: "\eaa0";
-  font-family: IcoFont;
-  position: absolute;
-  right: 15px;
-}
-
-@media (max-width: 1366px) {
-  .nav-menu .drop-down .drop-down ul {
-    left: -90%;
-  }
-  .nav-menu .drop-down .drop-down:hover > ul {
-    left: -100%;
-  }
-  .nav-menu .drop-down .drop-down > a:after {
-    content: "\ea9d";
-  }
-}
-*/
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -278,9 +198,6 @@ html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
    
 }
 
-
-
-
 @media (min-width: 1024px) {
   #hero {
     background-attachment: fixed;
@@ -308,9 +225,9 @@ html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
     color: black;
   }
   
-  #hero p {
+  #hero p, span {
     color: black;
-    font-size: 15px;
+    font-size: 17px;
   }
 }
 
@@ -323,25 +240,11 @@ html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
   padding-bottom: 30px;
 }
 
-.section-title h2 {
+.section-title h3 {
   font-family: 'Gowun Batang', serif;
-  font-size: 32px;
   font-weight: bold;
-  text-transform: uppercase;
   margin-bottom: 20px;
-  padding-bottom: 20px;
   position: relative;
-}
-
-.section-title h2::after {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 50px;
-  height: 3px;
-  background: #34b7a7;
-  bottom: 0;
-  left: calc(50% - 25px);
 }
 
 .section-title p {
@@ -359,7 +262,7 @@ html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
 .facts .counters span {
   font-size: 48px;
   display: block;
-  color: #34b7a7;
+  color: rgb(158, 164, 107);
 }
 
 .facts .counters p {
@@ -367,6 +270,10 @@ html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
   margin: 0 0 20px 0;
   font-family: "Raleway", sans-serif;
   font-size: 14px;
+}
+
+.factsCounter{
+	margin: auto;
 }
 
 /*--------------------------------------------------------------
@@ -377,15 +284,7 @@ html::-webkit-scrollbar-track {/*스크롤바의 트랙 색상*/
   background: white;
   padding: 30px 0;
   color: #222222;
+  font-family: 'Gowun Batang', serif;
   font-size: 14px;
   text-align: center;
-}
-
-#footer .credits {
-  padding-top: 5px;
-  font-size: 13px;
-}
-
-#footer .credits a {
-  color: #34b7a7;
 }

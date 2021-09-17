@@ -1,7 +1,6 @@
-package com.kh.chart.controller;
+package com.kh.myGiftree.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.product.model.service.ProductService;
+import com.google.gson.Gson;
+import com.kh.myGiftree.model.service.ForestService;
 
 /**
- * Servlet implementation class ChartListServlet
+ * Servlet implementation class MainForestServlet
  */
-@WebServlet("/list.chart")
-public class ChartListServlet extends HttpServlet {
+@WebServlet("/forest.ma")
+public class MainForestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChartListServlet() {
+    public MainForestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +30,19 @@ public class ChartListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		카테고리별 차트
-		HashMap<String,Integer> ca_list = new ProductService().selectChList();
 		
-//		판매 제품별 차트
-		HashMap<String,Integer> pd_list = new ProductService().selectPdChList();
+		int forestCount = new ForestService().forestCount();
+		int treeCount = new ForestService().totalTreeCount();
 		
-//		숲 별 차트
-		HashMap<String,Integer> fr_list = new ProductService().selectFrList();
+		int[] countArr = new int[2];
 		
-		request.setAttribute("ca_list", ca_list);
-		request.setAttribute("pd_list", pd_list);
-		request.setAttribute("fr_list", fr_list);
+		countArr[0] = forestCount;
+		countArr[1] = treeCount;
 		
-		request.getRequestDispatcher("views/chart/chartListView.jsp").forward(request, response);
+		response.setContentType("applicatoin/json; charset=utf-8");
+		
+		new Gson().toJson(countArr, response.getWriter());
+
 	}
 
 	/**

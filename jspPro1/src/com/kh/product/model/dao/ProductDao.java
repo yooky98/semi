@@ -1,5 +1,7 @@
 package com.kh.product.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,8 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
-import static com.kh.common.JDBCTemplate.*;
 
+import com.kh.cart.model.vo.Cart;
 import com.kh.product.model.vo.Product;
 
 public class ProductDao {
@@ -124,9 +126,9 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-//		selectChList=SELECT PROD_CATEGORY FROM PRODUCT
+//		selectChList=SELECT PROD_CATEGORY FROM PRODUCT WHERE PROD_STATUS = 'Y'
 		
-		String sql = prop.getProperty("selectPrList");
+		String sql = prop.getProperty("selectChList");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
@@ -157,7 +159,96 @@ public class ProductDao {
 				}
 			}
 		}
+		System.out.println(list);
+		return list;
+	}
+
+	public HashMap<String, Integer> selectPdChList(Connection conn) {
+		ArrayList<Product> p_list = new ArrayList<Product>();
+		HashMap<String,Integer> list = new HashMap<String, Integer>();
 		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+//		selectPdChList=SELECT PROD_NAME, SUM(ORDERS_AMOUNT) FROM ORDERS_DETAIL JOIN PRODUCT USING (PROD_NO) GROUP BY PROD_NAME
+		
+		String sql = prop.getProperty("selectPdChList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				
+				Product p = new Product();
+
+				p.setProdName(rset.getString("PROD_NAME"));
+				p.setProdAmount(rset.getInt("SUM(ORDERS_AMOUNT)"));
+
+				p_list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		if(p_list != null) {
+			for(int i = 0; i < p_list.size() ;i++) {
+				if(list.containsKey(p_list.get(i).getProdName())) {
+					list.put(p_list.get(i).getProdName(), list.get(p_list.get(i).getProdName())+p_list.get(i).getProdAmount());
+					
+				}else {
+					list.put(p_list.get(i).getProdName(), p_list.get(i).getProdAmount());
+				}
+			}
+		}
+		System.out.println(list);
+		return list;
+	}
+
+	public HashMap<String, Integer> selectFrList(Connection conn) {
+		ArrayList<Cart> c_list = new ArrayList<Cart>();
+		HashMap<String,Integer> list = new HashMap<String, Integer>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+//		selectFrList=SELECT FOREST_NAME FROM ORDERS_DETAIL
+		
+		String sql = prop.getProperty("selectFrList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				
+				Cart c = new Cart();
+
+				c.setForestName(rset.getString("FOREST_NAME"));
+
+				c_list.add(c);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		if(c_list != null) {
+			for(int i = 0; i < c_list.size() ;i++) {
+				if(list.containsKey(c_list.get(i).getForestName())) {
+					list.put(c_list.get(i).getForestName(), list.get(c_list.get(i).getForestName())+1);
+					
+				}else {
+					list.put(c_list.get(i).getForestName(), 1);
+				}
+			}
+		}
+		System.out.println(list);
 		return list;
 	}
 }
