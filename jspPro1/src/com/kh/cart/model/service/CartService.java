@@ -7,6 +7,8 @@ import static com.kh.common.JDBCTemplate.*;
 import com.kh.cart.model.dao.CartDao;
 import com.kh.cart.model.vo.Cart;
 import com.kh.member.model.vo.UserVO;
+import com.kh.order.model.dao.OrderDao;
+import com.kh.order.model.vo.Order;
 import com.kh.product.model.vo.Product;
 
 public class CartService {
@@ -87,6 +89,8 @@ public class CartService {
 		close(conn);
 		return prodNoList;
 	}
+
+
 
 
 

@@ -45,7 +45,7 @@
 
 	<%@ include file="/views/common/menubar.jsp"%>
 		<br><br><br><br><br><br><br>
- <form>		
+ <form action="orderPay.del" name="payOrder" method="post">		
   <div class="container">
     <h1>결제하기</h1>
     <p></p>
@@ -61,12 +61,13 @@
             	for(Cart c : clist){ %>
               <tr>
                 <td><img src='<%=request.getContextPath()%>/resources/images/<%=c.getChangName()%>' class="prodImg"></td>
-                <td><input type="text" name= prodName value="<%=c.getProdName()%>" readonly></td>
+                <td><input type="text" class="orderProdName" name= prodName value="<%=c.getProdName()%>" readonly></td>
                 <td><input type="text" id= "prodAmount" name= prodAmount value="<%=c.getCartAmount()%>" readonly></td>
                 <td><input type="hidden" class= prodPrice value="<%=c.getProdPrice() * c.getCartAmount()%>"></td>
                 <td><input type="hidden" class= orderProdNo value="<%=c.getProdNo()%>"></td> <!-- 상품번호 -->
-                <td><input type="hidden" id= orderForestName value="<%=c.getForestName()%>"></td> <!-- 숲 여러개-->
-                 <td><input type="hidden" id= orderCartNo value="<%=c.getCartNo()%>"></td> 
+                <td><input type="hidden" class= orderForestName value="<%=c.getForestName()%>"></td> <!-- 숲 여러개-->
+                <td><input type="hidden" class= orderAmount value="<%=c.getCartAmount()%>"></td> 
+                <td><input type="hidden" class= orderPrice value="<%=c.getProdPrice()%>"></td> 
               </tr>
               <%}%>
             </table>
@@ -126,7 +127,7 @@
             <div class="form-check">
             <input type="radio" id="payCard" value="신용카드">신용카드 
             	 <hr>
-			  <input type="checkbox">구매 조건 전체 동의<br>
+			  <input type="checkbox" id= "orderAgree">구매 조건 전체 동의<br>
           	  <button type="button" id="check_module" onclick="iport()" >주문하기</button>	
           </div>
         </div>
@@ -136,6 +137,8 @@
   <br><br>
 </form>
 </body>
+<%@ include file="../common/footer.jsp" %>
+
 <script>
 	
 	//결제 가격
@@ -236,9 +239,15 @@
         }).open();
     }
 	
-	var ordersNo;
+	var ordersNo; //전역변수
+	
 	//결제
 	function iport(){
+		
+		if($('#ordreAgree').checked == false){
+			alert('개인정보처리방침에 동의하셔야 합니다.')
+			$('#ordreAgree').focus(); 	
+		}
 		   var IMP = window.IMP; // 생략가능
 			    IMP.init('imp97085825');
 
@@ -254,7 +263,7 @@
 		
 			    name: '주문명:Giftree',
 			    //결제창에서 보여질 이름
-			    //$('#finalPrice').val()
+			    //$('#finalPrice').val() 테스트시 100
 			    amount:	$('#finalPrice').val(),
 			    //가격
 			    buyer_email: 'chltjsghtjsgh12@naver.com',
@@ -298,38 +307,55 @@
 											point : $('#point').val()   
 										},
 									   type : "post",
+									   
 									   success: function (result){//ordersNo = result
-										   var listSize = <%= clist.size() %>
-										   var prodNoList = [];	
-										   for(let i =0 ; i < listSize ; i++ ){
-											   prodNoList.push($('.orderProdNo')[i].value);
-											   console.log("ss=" + prodNoList.push($('.orderProdNo')[i].value))
-										   }
-											$.ajax({
-												url : "pay.del",
-												data : {
-													ordersNo : result, 
-													prodNo : prodNoList
-													
-												},
-												type : "post",
-												
-								
-											});
 											
-									   	},
+											   var prodNoList = [];
+											   var ForestNameList = [];
+											   var orderAmountList = [];
+											   var orderPriceList = [];
+											  
 									
-											 
-						  		 	});
-				  		 	 }
-			    });
+											   for(let i =0 ; i < $('.orderProdNo').length ; i++ ){
+												   prodNoList.push($('.orderProdNo')[i].value);
+												   ForestNameList.push($('.orderForestName')[i].value);
+												   orderAmountList.push($('.orderAmount')[i].value);
+												   orderPriceList.push($('.orderPrice')[i].value); 
+												   
+												}
+										
+											//   console.log("ss=" + delCartList)
+											   
+												$.ajax({
+													url : "orderPay.del",
+													traditional: true, 
+													data : {
+														
+														ordersNo : result, 
+														prodNo : prodNoList,
+														ForestNameList : ForestNameList,
+														orderAmountList : orderAmountList,
+														orderPriceList : orderPriceList
+													
+		
+													},
+													type : "post",
+													success : function(){
+														 window.location.href="detail.order";                  
+													}
+													
+													
+												});
+												
+										   	},
+										
+												 
+							  		 	});
+					  		 	
+				    			}
+				    });
 	}
 	
-<%--function orderDetail(){
-		alert("성공")
-	} --%>
-	
-
-
     </script>
+    
 </html>
