@@ -141,15 +141,13 @@
 						<div class="accordion" id="faqList<%=i%>">
 							<div class="card ">
 								<div class="card-header" id="heading<%=i%>">
-									<h5 class="card-header" id="faqTitle<%=i%>" data-toggle="collapse" data-target="#collapse<%=i%>"
-											aria-expanded="false" aria-controls="collapse<%=i%>">						
-												<span class="faqCategory"><%=list.get(i).getFAQType()%></span>								
-												<span class="faqQues"><%=list.get(i).getFAQQues()%></span>
-												<span class="faqIcon"><i id="icon<%=i%>" class="fa fa-caret-down" aria-hidden="true"></i></span>
+									<h5 class="card-header" id="faqTitle<%=i%>" data-toggle="collapse" data-target="#collapse<%=i%>" aria-expanded="false" aria-controls="collapse<%=i%>">						
+										<span class="faqCategory"><%=list.get(i).getFAQType()%></span>
+										<span class="faqQues"><%=list.get(i).getFAQQues()%></span>
+										<span class="faqIcon"><i id="icon<%=i%>" class="fa fa-caret-down" aria-hidden="true"></i></span>
 									</h5>
 								</div>
-								<div class="collapse" id="collapse<%=i%>"
-									aria-labelledby="heading<%=i%>" data-parent="#faqList<%=i%>">
+								<div class="collapse" id="collapse<%=i%>" aria-labelledby="heading<%=i%>" data-parent="#faqList<%=i%>">
 									<div class="card-body">
 										<div class="faqContents">
 											<p><%=list.get(i).getFAQAns()%></p>

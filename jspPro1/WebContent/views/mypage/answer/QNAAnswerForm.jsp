@@ -77,7 +77,7 @@
 							<% if(qna.getAnsContent() == null){ %>
 								<textarea class="form-control" name="answer" id="answer" cols="30" rows="10" required></textarea>
 							<%} else{ %>
-								<textarea class="form-control" name="answer" id="answer" cols="30" rows="10"><%=qna.getAnsContent() %></textarea>
+								<textarea class="form-control" name="answer" id="answer" cols="30" rows="10" required><%=qna.getAnsContent() %></textarea>
 							<%} %>
 						</div>	
 						<br>
