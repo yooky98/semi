@@ -15,35 +15,38 @@ import com.kh.cart.model.service.CartService;
 @WebServlet("/update.cart")
 public class UpdateCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateCartServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int amount = Integer.parseInt(request.getParameter("amount"));
-		int cartNo = Integer.parseInt(request.getParameter("cartNo"));
-		
-		System.out.println("amount :" + amount);
-		System.out.println("cartNo :" + cartNo);
-		
-		int result = new CartService().updateProdAmount(amount, cartNo);
-		
-		
+	public UpdateCartServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		int amount = Integer.parseInt(request.getParameter("amount"));
+		int cartNo = Integer.parseInt(request.getParameter("cartNo"));
+
+		System.out.println("amount :" + amount);
+		System.out.println("cartNo :" + cartNo);
+
+		int result = new CartService().updateProdAmount(amount, cartNo);
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
