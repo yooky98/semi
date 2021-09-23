@@ -163,7 +163,7 @@
 													$("#postForm<%=i+1 %>").submit();
 												}
 												
-												function deleteProd<%=i+1 %>(){
+												function deleteProd<%=i+1%>(){
 													$("#postForm<%=i+1 %>").attr("action", "<%=request.getContextPath()%>/deleteProd.ad");
 													$("#postForm<%=i+1 %>").submit();
 												}

@@ -167,23 +167,23 @@ ArrayList<adminOrder> orderList = (ArrayList<adminOrder>)request.getAttribute("o
 						                break;
 						            }				              
 								case 20 :
-								if(searchTitle != ""){
-									searchId(searchTitle);					            
-						            break;
-								}else{
-									$("tbody tr").show();
-									break;
-								}								
+									if(searchTitle != ""){
+										searchId(searchTitle);					            
+							            break;
+									}else{
+										$("tbody tr").show();
+										break;
+									}								
 								default :
-								if(searchTitle == ""){								
-									$("tbody tr").show();
-									break;
-								}else{
-									alert("카테고리를 선택해주세요.");
-									$("#searchTitle").val("");
-									$("tbody tr").show();
-									break;
-								}
+									if(searchTitle == ""){								
+										$("tbody tr").show();
+										break;
+									}else{
+										alert("카테고리를 선택해주세요.");
+										$("#searchTitle").val("");
+										$("tbody tr").show();
+										break;
+									}
 							}
 						}
 						
@@ -380,9 +380,14 @@ ArrayList<adminOrder> orderList = (ArrayList<adminOrder>)request.getAttribute("o
 		                            
 		                            function modifyOrder<%=i+1%>(){
 		                            	var orderDetailNo = <%=list.get(i).getOrderDetailNo()%>;
-				                        var selectResult = $("#delivery<%=i+1%>").val();
-	
-				                        location.href = "<%=request.getContextPath() %>/orderUpdate.ad?orderDetailNo=" + orderDetailNo + "&selectResult=" + selectResult;
+				                        var selectResult = $("#delivery<%=i+1%>").val();				                        
+				                        
+				                        if(<%=orderStatus%> == selectResult){
+				                        	alert("동일한 주문상태로 변경할 수 없습니다.");
+				                        	return false;
+				                        }else{
+				                        	location.href = "<%=request.getContextPath() %>/orderUpdate.ad?orderDetailNo=" + orderDetailNo + "&selectResult=" + selectResult;
+				                        }			                        
 		                            }
 		                			</script>
 	                			</td>

@@ -113,15 +113,15 @@
 								</tr>
 								<tr>
 									<th scope="row"><label for="prodName">상품명</label></th>
-									<td><input class="form-control" id="prodName" type="text" name="prodName" placeholder="ex) 천연 가습기, 아디안텀" required></td>									
+									<td><input class="form-control" id="prodName" type="text" name="prodName" placeholder="ex) 몬스테라" required></td>									
 								</tr>
 								<tr>
 									<th scope="row"><label for="prodPrice">상품 가격</label></th>
-									<td><input class="form-control" id="prodPrice" type="text" name="prodPrice"	placeholder="ex) 120000" required numberOnly></td>
+									<td><input class="form-control" id="prodPrice" type="text" name="prodPrice"	placeholder="ex) 38000" required numberOnly></td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="prodAmount">재고 수량</label></th>
-									<td><input class="form-control" id="prodAmount" type="text" name="prodAmount" placeholder="ex) 30" required numberOnly></td>
+									<td><input class="form-control" id="prodAmount" type="text" name="prodAmount" placeholder="ex) 20" required numberOnly></td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="prodDetail">상세 정보</label></th>

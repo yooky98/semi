@@ -142,19 +142,19 @@
 								<tr>
 									<th scope="row"><label for="prodName">상품명 : </label></th>
 									<td>
-										<input class="form-control" id="prodName" type="text" name="prodName" value="<%=ap.getProdName() %>" onfocus="this.select()" placeholder="ex) 천연 가습기, 아디안텀" required>
+										<input class="form-control" id="prodName" type="text" name="prodName" value="<%=ap.getProdName() %>" onfocus="this.select()" placeholder="ex) 몬스테라" required>
 									</td>									
 								</tr>
 								<tr>
 									<th scope="row"><label for="prodPrice">상품 가격 : </label></th>
 									<td>
-										<input class="form-control" id="prodPrice" type="text" name="prodPrice" value="<%=ap.getProdPrice() %>"	placeholder="ex) 120000" onfocus="this.select()" required numberOnly>
+										<input class="form-control" id="prodPrice" type="text" name="prodPrice" value="<%=ap.getProdPrice() %>"	placeholder="ex) 38000" onfocus="this.select()" required numberOnly>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="prodAmount">재고 수량 : </label></th>
 									<td>
-										<input class="form-control" id="prodAmount" type="text" name="prodAmount" value="<%=ap.getProdAmount() %>" placeholder="ex) 30" onfocus="this.select()" required numberOnly>
+										<input class="form-control" id="prodAmount" type="text" name="prodAmount" value="<%=ap.getProdAmount() %>" placeholder="ex) 20" onfocus="this.select()" required numberOnly>
 									</td>
 								</tr>
 								<tr>
