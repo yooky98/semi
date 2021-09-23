@@ -109,7 +109,7 @@ html {
 				</select>
 				<div class="updown">
 					<h2><%=p.getProdPrice()%>원 &emsp; 
-						<input type="text" name="count" id="num" size="2"maxlength="2" value="1"> 
+						<input type="text" name="count" id="num" size="2"maxlength="2" value="1" readonly> 
 						<span><i class="fas fa-arrow-alt-circle-up up" onclick="countUp()"></i></span> 
 						<span><i class="fas fa-arrow-alt-circle-down down" onclick="countDown()"></i></span>
 					</h2>
@@ -213,10 +213,9 @@ html {
 						
 			function countDown(){
 				var num = Number($("#num").val());
-				if(num>0){
+				if(num>1){
 					$("#num").val(num-1);	
 				}
-				// 총액 관련한 부분 추가해야함.
 			};					
 					
 		</script>
@@ -242,7 +241,6 @@ html {
 								$(".heart").toggleClass("on_heart");
 							} else if (status == "fail") {
 								alert("찜 목록에 이미 추가되어 있는 상품입니다.");
-								// 삭제는 추후 추가
 							}
 						},
 
@@ -290,27 +288,7 @@ html {
 				
 			});
 			
-			 
-			
-			
-			
-			/* 
-			window.onload = function() {
-				 
-			    function onClick() {
-			        document.querySelector('.modal_wrap').style.display ='block';
-			        document.querySelector('.black_bg').style.display ='block';
-			    }   
-			    function offClick() {
-			        document.querySelector('.modal_wrap').style.display ='none';
-			        document.querySelector('.black_bg').style.display ='none';
-			    }
-			 
-				document.getElementById('review_btn').addEventListener('click', onClick);
-			    document.querySelector('.modal_close').addEventListener('click', offClick);
-			 
-			};
- */
+
 	</script>
 
 </body>
