@@ -15,11 +15,13 @@
 	function setCookie(key, value, expiredays) {
 	    var todayDate = new Date();
 	    
+	    //todayDate.setSeconds(todayDate.getSeconds()+expiredays);
 	    todayDate.setDate(todayDate.getDate() + expiredays);
 	    document.cookie = key + "=" + escape(value) + "; path=/; expires=" + todayDate.toUTCString() + ";";
 	}
 	
-	function closePopForaDay() {	    
+	function closePopForaDay() {
+		//setCookie("notice", "showView", 5);
 	    setCookie("notice", "showView", 1);
 	    document.getElementById("noticePopup").style.visibility = "hidden";
 	}
