@@ -62,35 +62,6 @@ public class CampDao {
 		
 		return campList;
 	}
-	
-	public ArrayList<Campaign> selectEndedList(Connection conn) {
-		
-		ArrayList<Campaign> endedList = new ArrayList<Campaign>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectEndedList");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				endedList.add(new Campaign(rset.getInt("CAMP_NO"),
-									       rset.getString("CAMP_NAME"),
-										   rset.getDate("CAMP_DATE")));
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return endedList;
-	}
 
 	public Campaign selectCampaign(Connection conn, int campNo) {
 		

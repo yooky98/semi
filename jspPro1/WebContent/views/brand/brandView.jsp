@@ -55,6 +55,7 @@
     
     .forestTable{
     	font-size: 13px;
+    	height: 400px;
     	overflow-y: auto;
     }
     

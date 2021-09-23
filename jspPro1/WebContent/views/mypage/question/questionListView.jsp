@@ -115,7 +115,7 @@
 							<%=qna.getUserId() %> &nbsp;
 							<%=qna.getQuesDate() %> &nbsp;
 							
-							<% if(qna.getAnsDate() == null) {%>
+							<% if(qna.getAnsContent() == null) {%>
 								<a id="qnaUpdate" href="<%=contextPath%>/updateForm.que?qno=<%=qna.getQuesNo()%>">수정 </a>| 
 							<%}%>
 								<a id="qnaDelete" href="<%=contextPath%>/delete.que?qno=<%=qna.getQuesNo()%>">삭제</a>
@@ -128,15 +128,15 @@
 						
 						<div><%=qna.getQuesContent()%></div>
 						
-						<%if(qna.getAnsDate()!=null){ %>
+						<%if(qna.getAnsContent()!=null){ %>
 							<br>
 							<div><b id="answer">답변</b> &nbsp; <%=qna.getAnsDate() %></div>
 							<div><%=qna.getAnsContent() %></div>
 						<%} %>
 						<hr>
 						
+						<%} %>
 					<%} %>
-				<%} %>
 				<button id="qnaBtn">문의 작성</button>
 			</div>
 			
