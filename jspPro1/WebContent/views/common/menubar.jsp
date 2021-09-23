@@ -44,7 +44,7 @@
 				<ul class="nav">
 					<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 					<li><a href="<%=contextPath%>/list.pr">shop</a></li>
-					<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
+					<li><a href="<%=contextPath%>/list.cam">campaign</a></li>
 					<li><a href="<%=contextPath%>/forest.br">brand</a></li>
 					<li><a href="<%=contextPath%>/faqList">faq</a></li>
 				</ul>
@@ -92,7 +92,7 @@
 			<ul class="nav">
 				<li class="active"><a href="<%=contextPath%>/index.jsp">Home</a></li>
 				<li><a href="<%=contextPath%>/list.pr">shop</a></li>
-				<li><a href="<%=contextPath%>/list.cam">compaign</a></li>
+				<li><a href="<%=contextPath%>/list.cam">campaign</a></li>
 				<li><a href="<%=contextPath%>/forest.br">brand</a></li>
 				<li><a href="<%=contextPath%>/faqList">faq</a></li>
 			</ul>

@@ -23,16 +23,6 @@ public class CampService {
 		return campList;
 	}
 
-	public ArrayList<Campaign> selectEndedList() {
-		Connection conn = getConnection();
-		
-		ArrayList<Campaign> endedList = new CampDao().selectEndedList(conn);
-		
-		close(conn);
-		return endedList;	
-	}
-	
-
 	public Campaign selectCampaign(int campNo) {
 		
 		Connection conn = getConnection();

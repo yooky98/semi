@@ -3,7 +3,6 @@
 <%
 
 	ArrayList<Campaign> campList = (ArrayList<Campaign>)request.getAttribute("campList");
-	ArrayList<Campaign> endedList = (ArrayList<Campaign>)request.getAttribute("endedList");
 
 %>    
 <!DOCTYPE html>
@@ -95,21 +94,8 @@
 			<button id="ingBtn">진행중인 캠페인</button> <button id="endedBtn">지난 캠페인</button>
 			<hr>
 
-			<div id="ingCamp">
-				<%for(Campaign camp : campList) {%>
-					<div id="campDate"><%=camp.getCampDate() %></div> &nbsp;
-					<a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=camp.getCampNO()%>"><%= camp.getCampName() %></a>
-					<hr>
-				<%} %>
-			</div>
-			
-			<div id="endedCamp">
-				<%for(Campaign eCamp : endedList) {%>
-					<div id="campDate"><%=eCamp.getCampDate() %></div> &nbsp;
-					<a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=eCamp.getCampNO()%>"><%= eCamp.getCampName() %></a>
-					<hr>
-				<%} %>
-			</div>
+			<div id="ingCamp"></div>
+			<div id="endedCamp"></div>
 			
 		</div>
 
@@ -120,6 +106,25 @@
 <script>
 
 $(function(){
+	
+	var today = new Date();
+	
+	<%for(Campaign camp : campList) {%>
+		
+		var campDate = new Date('<%=camp.getCampDate()%>');
+		
+		var content = '<div id="campDate"><%=camp.getCampDate() %></div> &nbsp;' + 
+		              '<a href="<%=request.getContextPath()%>/detail.cam?campNo=<%=camp.getCampNO()%>"><%= camp.getCampName() %></a>' + 
+                      '<hr>';
+		
+		if(today > campDate){
+			$('#endedCamp').append(content);
+		}else{
+			$('#ingCamp').append(content);
+		}
+
+	<%} %>
+	
 	$("#endedCamp").hide();
 	$("#ingBtn").focus();
 
