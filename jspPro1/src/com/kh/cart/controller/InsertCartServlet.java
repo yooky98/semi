@@ -50,67 +50,63 @@ public class InsertCartServlet extends HttpServlet {
 
 			MultipartRequest mr = new MultipartRequest(request, savePath, fileSize, "utf-8", new ImgFileRenamePolicy());
 			HttpSession session = request.getSession();
-			
+
 			Cart c = new Cart();
 
-			UserVO loginUser = (UserVO) session.getAttribute("loginUser");		
+			UserVO loginUser = (UserVO) session.getAttribute("loginUser");
 
-			
-			//로그인 안했을때
-			if(loginUser == null) {
+			// 로그인 안했을때
+			if (loginUser == null) {
 				request.getSession().setAttribute("msg", "로그인후 이용 가능합니다.");
 				RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
 				view.forward(request, response);
 			}
-			
-			//로그인 했을때
+
+			// 로그인 했을때
 			String userId = ((UserVO) request.getSession().getAttribute("loginUser")).getUser_id();
-			
-			//내가 담고싶은 상품의 번호
+
+			// 내가 담고싶은 상품의 번호
 			int ProdNo = (Integer.parseInt((mr.getParameter("prodNo"))));
 			System.out.println("ProdNo ==>" + ProdNo);
-			
+
 			c.setUserId(userId);
 			c.setProdNo(Integer.parseInt((mr.getParameter("prodNo"))));
 			c.setCartAmount(Integer.parseInt((mr.getParameter("count"))));
 			c.setForestName(mr.getParameter("forest"));
-			
-			
-			//내 db에 상품번호를 전부 가져오기
-			ArrayList<Cart> prodNoList = new CartService().selectPordNo(userId); //상품번호 가져옴
-			int a = 0;
-			for(int i =0; i < prodNoList.size() ; i++) {
-				
-				//System.out.println("장바구니 안에 들어있는 상품들 ==" + prodNoList.get(i).getProdNo());
-				
-				if(prodNoList.get(i).getProdNo() == ProdNo) {
-					//System.out.println("담을 상품 뭐니? ==" + ProdNo);
-					a =1;
-					
-					break;
-				}	
-			}
-			if(a == 1) {
 
-			request.getSession().setAttribute("msg", "장바구니에  상품이 존재합니다.");
-			RequestDispatcher view = request.getRequestDispatcher("/list.cart");
-			view.forward(request, response);
-			
-			}else {
-			System.out.println("insert시작");
-			//상품 insert
-			int result = new CartService().insertCart(c);
-			
-			if (result > 0) {
-				request.getSession().setAttribute("msg", "장바구니에  담았습니다.");
-				
-				RequestDispatcher view = request.getRequestDispatcher("/list.pr");
+			// 내 db에 상품번호를 전부 가져오기
+			ArrayList<Cart> prodNoList = new CartService().selectPordNo(userId); // 상품번호 가져옴
+			int a = 0;
+			for (int i = 0; i < prodNoList.size(); i++) {
+
+				if (prodNoList.get(i).getProdNo() == ProdNo) {
+
+					a = 1;
+
+					break;
+				}
+			}
+			if (a == 1) {
+
+				request.getSession().setAttribute("msg", "장바구니에  상품이 존재합니다.");
+				RequestDispatcher view = request.getRequestDispatcher("/list.cart");
 				view.forward(request, response);
-		
-			}else {
-				request.getSession().setAttribute("msg", "장바구니에 상품을 담지 못했습니다.");
-				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-				view.forward(request, response);
+
+			} else {
+
+				// 상품 insert
+				int result = new CartService().insertCart(c);
+
+				if (result > 0) {
+					request.getSession().setAttribute("msg", "장바구니에  담았습니다.");
+
+					RequestDispatcher view = request.getRequestDispatcher("/list.pr");
+					view.forward(request, response);
+
+				} else {
+					request.getSession().setAttribute("msg", "장바구니에 상품을 담지 못했습니다.");
+					RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+					view.forward(request, response);
 
 				}
 			}

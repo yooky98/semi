@@ -110,14 +110,7 @@ public class OrderDao {
 
 
 	public int insertOrderDetail(Connection conn, String userId, String ordersNo, String[] prodNo, String[] forestNameList, String[] orderAmountList, String[] orderPriceList) {
-//		ORDER_DETAIL_NO
-//		ORDER_NO
-//		PROD_NO
-//		USER_ID
-//		ORDERS_AMOUNT
-//		ORDERS_PRICE
-//		ORDERS_STATUS
-//		FOREST_NAME
+
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertOrderDetail");

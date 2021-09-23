@@ -16,13 +16,12 @@ public class CartService {
 	// 저장된 장바구니 품목
 	public ArrayList<Cart> selectCartList(String userId) {
 		Connection conn = getConnection();
-	
+
 		ArrayList<Cart> list = new CartDao().selectCartList(conn, userId);
 		close(conn);
 
 		return list;
 	}
-	
 
 	// 장바구니 추가
 	public int insertCart(Cart c) {
@@ -42,12 +41,12 @@ public class CartService {
 
 	public int deleteCart(int cartNo) {
 		Connection conn = getConnection();
-		
+
 		int result = new CartDao().deleteCart(conn, cartNo);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
 		close(conn);
@@ -56,42 +55,35 @@ public class CartService {
 
 	public int updateProdAmount(int amount, int cartNo) {
 		Connection conn = getConnection();
-		
-		int result = new CartDao().updateProdAmount(conn, amount,cartNo );
-		
-		if(result > 0) {
+
+		int result = new CartDao().updateProdAmount(conn, amount, cartNo);
+
+		if (result > 0) {
 			commit(conn);
-		}else {
+		} else {
 			rollback(conn);
 		}
 		close(conn);
 		return result;
 	}
 
-
-	//장바구니에 담은 값 상품 찾기
+	// 장바구니에 담은 값 상품 찾기
 	public ArrayList<Cart> selectCartOrder(String[] cartNo) {
-		Connection conn = getConnection( );
-	
+		Connection conn = getConnection();
+
 		ArrayList<Cart> cartOrder = new CartDao().selectCartOrder(conn, cartNo);
 		close(conn);
-		
+
 		return cartOrder;
 	}
 
-
-
 	public ArrayList<Cart> selectPordNo(String userId) {
-		Connection conn = getConnection( );
-		
+		Connection conn = getConnection();
+
 		ArrayList<Cart> prodNoList = new CartDao().selectPordNo(conn, userId);
-		
+
 		close(conn);
 		return prodNoList;
 	}
-
-
-
-
 
 }
