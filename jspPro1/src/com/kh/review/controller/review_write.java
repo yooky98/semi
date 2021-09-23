@@ -43,7 +43,6 @@ public class review_write extends HttpServlet {
 		System.out.println("review_write 서블릿 요청");
 		
 		//파라미터 추출
-		
 		String user_id = request.getParameter("user_id");
 		String review_title = request.getParameter("review_title");
 		String prod_no = request.getParameter("prod_no");

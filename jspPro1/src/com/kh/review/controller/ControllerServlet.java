@@ -46,7 +46,7 @@ public class ControllerServlet extends HttpServlet {
 		String url = request.getRequestURI();
 		
 		System.out.println(url+"1");
-		// SHOP/폴더명/요청서블릿.credu
+		// Giftree/폴더명/요청서블릿.credu
 		
 		String serv[] = url.split("/"); 
 		

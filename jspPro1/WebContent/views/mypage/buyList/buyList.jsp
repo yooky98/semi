@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@page import="com.kh.orderDetail.model.vo.OrderDetail"%>
 <%@page import="com.kh.product.model.vo.*"%>
@@ -192,6 +193,7 @@ table tr:hover td {
 
 <%@ include file="/views/common/menubar.jsp" %>
 <%@ include file="/views/common/mypageAside.jsp" %>
+<c:url var="review_write" value="/review_write"></c:url>
 
 
 	<div class="container">
@@ -243,41 +245,123 @@ table tr:hover td {
 					<%} else{ %>
 					<td>결제완료</td>
 					<%} %>
-
-
-
-				</td>
                           </tr>
                           <tr>
-
 				<td colspan="3" align="center">
-
 					총 결제 금액 : <%=od_list.get(i).getOrdersPrice() * od_list.get(i).getOrdersAmount() %>
-
-				</td>
-					
+				</td>				
 				<td colspan="2">
-				<button type="button" class="treeBtn"
-				onclick="location.href='<%=contextPath%>/review.credu'">리뷰 작성</button>
+				<button type="button" class="treeBtn" data-toggle="modal" data-target="#myModal">리뷰 작성</button>
 				</td>
 				<td>
 				<button type="button" class="treeBtn"
 				onclick="location.href='<%=contextPath%>/delete.buy?orderDetailNo=<%=od_list.get(i).getOrderDetailNo()%>'">삭제</button>
 				</td>
-
 			</tr>	
-                          	<%} %>
-                          <%} %>
+		
 
-			
 
-			<tr>
+
+		
+
+
 	</tbody>
 		</table>
+				 <!-- Modal -->
+  	<div class="modal fade" id="myModal" role="dialog">
+    	<div class="modal-dialog modal-lg">
+    
+      	<!-- Modal content-->
+      	<div class="modal-content">
+	        <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+        
+        <div class="modal-body">
+          
+			<div class="panel-group">
+			<div class="panel panel-success" style="margin-top: 10px;">
+				<div class="panel-heading">Goods Review</div>
+				<div class="panel-body">
+					<%-- form --%>
 
+					<form class="form-horizontal" role="form" action="${review_write}" method="post">
+						<div class="form-group">
+							<label class="control-label col-sm-2">작성자(ID):</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="user_id"
+									name="user_id" placeholder="ID" value="<%=od_list.get(i).getUserId() %>" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">제목:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="review_title"
+									name="review_title" placeholder="Title">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="prod_no"
+									name="prod_no" placeholder="상품번호" value="<%=od_list.get(i).getProdNo() %>">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">내용:</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="5"	placeholder="review_content" name="review_content" id="review_content"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="checkbox">
+									<label><input type="checkbox" value="1"
+										id="review_buy_opt" name="review_buy_opt" checked="checked">구매
+										여부</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="radio">
+								
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="1" checked="checked">★☆☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="2">★★☆☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="3">★★★☆☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="4">★★★★☆</label>
+									<label class="radio-inline"> <input type="radio" name="review_star" id="review_star" value="5">★★★★★</label>
+									
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-success">작 성</button>
+								<button type="reset" class="btn btn-danger">초기화</button>
+							</div>
+						</div>
+					</form>
+
+
+				</div>
+
+			</div>
 		</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 
-
+  
+			
+                          	<%} %>
+                          <%} %>
+                          </div>
 </body>
 </html>

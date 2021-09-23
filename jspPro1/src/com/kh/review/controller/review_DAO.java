@@ -30,13 +30,14 @@ public class review_DAO {
 					+ " VALUES(REVIEW_NUM.NEXTVAL, ?, ?, ?, ?, 0, ?, ?, SYSDATE)";
 
 			PreparedStatement psmt = conn.prepareStatement(sql);
-
+			
 			psmt.setString(1, review.getUser_id());
 			psmt.setString(2, review.getProd_no());
 			psmt.setString(3, review.getReview_title());
 			psmt.setString(4, review.getReview_content());
 			psmt.setInt(5, review.getReview_star());
 			psmt.setInt(6, review.getReview_buy_opt());
+
 
 			// SQL 실행
 			psmt.execute();

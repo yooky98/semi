@@ -118,13 +118,13 @@
 
 </script>
 
-
 </head>
 <body>
 	<%-- review 리스트 서블릿 호출 --%>
 	<c:url var="review_list" value="review_list.credu"></c:url>
 	<%-- review 작성 서블릿 호출 --%>
 	<c:url var="review_write" value="/review_write"></c:url>
+	
 	<%-- review 삭제 서블릿 호출 --%>
 	<c:url var="review_delete" value="review_delete.credu"></c:url>
 	<%@ include file="/views/common/menubar.jsp" %>
@@ -256,13 +256,16 @@
 			<div class="panel panel-success" style="margin-top: 10px;">
 				<div class="panel-heading">Goods Review</div>
 				<div class="panel-body">
+
 					<%-- form --%>
+					
 					<form class="form-horizontal" role="form" action="${review_write}" method="post">
+
 						<div class="form-group">
 							<label class="control-label col-sm-2">작성자(ID):</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="user_id"
-									name="user_id" placeholder="ID">
+									name="user_id" placeholder="ID" >
 							</div>
 						</div>
 						<div class="form-group">
@@ -276,7 +279,7 @@
 							<label class="control-label col-sm-2" for="pwd">상품번호:</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="prod_no"
-									name="prod_no" placeholder="상품번호">
+									name="prod_no" placeholder="상품번호" >
 							</div>
 						</div>
 						<div class="form-group">

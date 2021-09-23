@@ -54,6 +54,7 @@ private Properties prop = new Properties();
 				od.setOrdersPrice(rset.getInt("ORDERS_PRICE"));
 				od.setOrdersStatus(rset.getInt("ORDERS_STATUS"));
 				od.setChangeName(rset.getString("CHANGE_NAME"));
+				od.setProdNo(rset.getInt("PROD_NO"));
 				od_list.add(od);
 			}
 			

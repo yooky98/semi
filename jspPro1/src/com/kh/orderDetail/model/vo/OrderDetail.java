@@ -23,7 +23,7 @@ public class OrderDetail {
 
 
 	public OrderDetail(int orderDetailNo, String prodName, String userId, Date ordersDate, int ordersAmount,  int ordersPrice, int ordersStatus 
-		, String changeName	) {
+		, String changeName, int prodNo	) {
 		super();
 		this.orderDetailNo = orderDetailNo;
 		this.userId = userId;
@@ -33,6 +33,7 @@ public class OrderDetail {
 		this.ordersDate = ordersDate;
 		this.ordersPrice = ordersPrice;
 		this.changeName = changeName;
+		this.prodNo = prodNo;
 
 	}
 
